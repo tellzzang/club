@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>2025 운양고 동아리 발표회 디지털 가이드북</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0b0f19; color: #f8fafc; overflow-x: hidden; }
+    .glass { background: rgba(17, 24, 39, 0.78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.85)); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card:hover { border-color: rgba(99, 102, 241, 0.45); transform: translateY(-2px); }
+    .gradient-text { background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #f472b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.35); }
+      50% { box-shadow: 0 0 28px rgba(236, 72, 153, 0.55); }
+    }
+    .glow-badge { animation: pulseGlow 3s infinite; }
+    .room-box { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .room-box:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="pb-24">
+
+  <!-- 상단 헤더 & 히어로 배너 -->
+  <header class="relative overflow-hidden pt-8 pb-6 px-5 border-b border-slate-800/80 bg-gradient-to-b from-indigo-950/60 via-slate-950 to-slate-950">
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-pink-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="flex items-center justify-between mb-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 glow-badge">
+          ✨ 2025 운양고등학교 축제 가이드
+        </span>
+        <span class="text-xs font-semibold text-slate-400 bg-slate-900/90 px-3 py-1 rounded-full border border-slate-800">
+          📅 2025. 12. 24.(수) 1~4교시
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl font-black tracking-tight gradient-text leading-tight">
+        2025 운양 동아리 발표회
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm mt-1.5 leading-relaxed">
+        총 30개 동아리 부스 소개 · 1~5층 인터랙티브 지도 · 실시간 일정 &amp; <strong class="text-amber-300">Hi-Five 스탬프 투어</strong>
+      </p>
+
+      <!-- 상단 요약 대시보드 & 내 스탬프 현황 -->
+      <div class="grid grid-cols-3 gap-2.5 mt-5">
+        <div onclick="switchTab('booths')" class="cursor-pointer glass-card rounded-2xl p-3 text-center transition">
+          <div class="text-xs text-slate-400">운영 부스</div>
+          <div class="text-lg sm:text-xl font-extrabold text-white mt-0.5">30<span class="text-xs font-normal text-indigo-400 ml-0.5">개</span></div>
+        </div>
+        <div onclick="switchTab('map')" class="cursor-pointer glass-card rounded-2xl p-3 text-center transition">
+          <div class="text-xs text-slate-400">층별 안내도</div>
+          <div class="text-lg sm:text-xl font-extrabold text-emerald-400 mt-0.5">1~5<span class="text-xs font-normal text-slate-300 ml-0.5">층</span></div>
+        </div>
+        <div onclick="switchTab('stamp')" class="cursor-pointer glass-card rounded-2xl p-3 text-center transition border-amber-500/30">
+          <div class="text-xs text-amber-300 font-semibold">내 체험 도장</div>
+          <div class="text-lg sm:text-xl font-extrabold text-amber-400 mt-0.5"><span id="headerStampCount">0</span><span class="text-xs font-normal text-slate-400"> / 5</span></div>
+        </div>
+      </div>
+
+      <!-- 실시간 긴급 공지 티커 -->
+      <div onclick="switchTab('notice')" class="mt-4 cursor-pointer flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-900/50 via-purple-900/40 to-pink-900/40 border border-indigo-500/30 text-xs">
+        <span class="px-2 py-0.5 rounded bg-pink-500 text-white font-bold shrink-0">필독 알림</span>
+        <span id="tickerText" class="text-slate-200 truncate font-medium">🎁 [운양 Hi Five!] 도장 5개 모으면 2층 홈베이스에서 뽑기판 선물 증정! (09:30~12:00 선착순)</span>
+        <span class="ml-auto text-indigo-300 shrink-0 font-semibold">더보기 →</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 컨텐츠 영역 -->
+  <main class="max-w-4xl mx-auto px-4 pt-5">
+
+    <!-- ================= 탭 1: 동아리 부스 탐색 ================= -->
+    <section id="tab-booths" class="space-y-4">
+      <!-- 검색 및 필터 바 -->
+      <div class="sticky top-2 z-20 glass rounded-2xl p-3 shadow-xl space-y-2.5">
+        <div class="relative">
+          <input
+            id="searchInput"
+            type="text"
+            oninput="renderBooths()"
+            placeholder="동아리명, 체험 내용(방탈출, 크로플, 공연), 교실(화학실, 2-5) 검색..."
+            class="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500"
+          />
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+          </svg>
+          <button onclick="clearSearch()" id="clearBtn" class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-white text-xs bg-slate-800 px-1.5 py-0.5 rounded">✕</button>
+        </div>
+
+        <!-- 유형별 카테고리 버튼 -->
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5" id="categoryButtons">
+          <button onclick="setCategory('ALL')" data-cat="ALL" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white">전체 (30)</button>
+          <button onclick="setCategory('체험/실습형')" data-cat="체험/실습형" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">🧪 체험·실습 (16)</button>
+          <button onclick="setCategory('방탈출/추리')" data-cat="방탈출/추리" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">🕵️ 방탈출·공포·추리 (5)</button>
+          <button onclick="setCategory('문화예술형')" data-cat="문화예술형" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">🎨 문화·포토·영화 (3)</button>
+          <button onclick="setCategory('공연형')" data-cat="공연형" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">🎸 무대공연 (3)</button>
+          <button onclick="setCategory('체육활동형')" data-cat="체육활동형" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">🏀 체육·대결 (3)</button>
+          <button onclick="setCategory('FAV')" data-cat="FAV" class="cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-pink-300">❤️ 찜한 부스</button>
+        </div>
+      </div>
+
+      <!-- 부스 카드 그리드 -->
+      <div id="boothGrid" class="grid gap-3 sm:grid-cols-2"></div>
+    </section>
+
+    <!-- ================= 탭 2: 층별 교실 지도 ================= -->
+    <section id="tab-map" class="hidden space-y-4">
+      <div class="glass-card rounded-2xl p-4">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="text-base font-bold text-white">🗺️ 운양고 층별 부스 배치도</h2>
+            <p class="text-xs text-slate-400">층을 선택하고 교실을 누르면 동아리 상세 정보가 열립니다.</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">
+            🎁 선물교환: 2층 홈베이스
+          </span>
+        </div>
+
+        <!-- 층 선택 버튼 -->
+        <div class="grid grid-cols-5 gap-1.5 mb-4" id="floorTabs">
+          <button onclick="selectFloor(1)" data-floor="1" class="floor-btn py-2.5 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow">1층·야외</button>
+          <button onclick="selectFloor(2)" data-floor="2" class="floor-btn py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">2층</button>
+          <button onclick="selectFloor(3)" data-floor="3" class="floor-btn py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">3층·강당</button>
+          <button onclick="selectFloor(4)" data-floor="4" class="floor-btn py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">4층</button>
+          <button onclick="selectFloor(5)" data-floor="5" class="floor-btn py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">5층</button>
+        </div>
+
+        <!-- 층별 시각적 배치도 -->
+        <div id="floorMapContainer" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ================= 탭 3: 시간표 & 일정 ================= -->
+    <section id="tab-schedule" class="hidden space-y-4">
+      <!-- A/B팀 교차 운영 핵심 안내 -->
+      <div class="glass-card rounded-2xl p-5 border-indigo-500/30">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300">2025. 12. 24.(수) 1~4교시</span>
+          <span class="text-xs text-rose-400 font-bold">⏰ 08:50 지각 처리 엄수!</span>
+        </div>
+        <h2 class="text-lg font-extrabold text-white">⏱️ 동아리 발표회 시간표 (A·B팀 교차제)</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          모든 동아리는 자체적으로 <strong>A팀</strong>과 <strong>B팀</strong>으로 나누어 90분씩 부스 운영과 타 동아리 체험을 교대로 진행합니다.
+        </p>
+
+        <!-- 타임라인 -->
+        <div class="mt-5 space-y-3 relative before:absolute before:left-3.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-800">
+          <div class="relative pl-9">
+            <div class="w-4 h-4 rounded-full bg-rose-500 border-4 border-slate-950 absolute left-1.5 top-1"></div>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-rose-500/30">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-extrabold text-rose-400">조회 및 점검 · 08:50 ~ 09:00 (10분)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">필수 출석</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1">각 동아리 발표 장소로 집합 &amp; 출석 확인</div>
+              <p class="text-xs text-slate-400 mt-0.5">교실이 아닌 <strong>본인의 동아리 발표회 장소</strong>에서 담당 선생님이 출석을 확인합니다. (08:50 기준 지각 처리)</p>
+            </div>
+          </div>
+
+          <div class="relative pl-9">
+            <div class="w-4 h-4 rounded-full bg-indigo-500 border-4 border-slate-950 absolute left-1.5 top-1"></div>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-indigo-500/30">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-extrabold text-indigo-400">1부 운영 · 09:00 ~ 10:30 (90분)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold">교차 1회차</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mt-2">
+                <div class="p-2.5 rounded-lg bg-indigo-950/60 border border-indigo-500/30">
+                  <div class="text-[11px] text-indigo-300 font-bold">🏃 A팀 학생</div>
+                  <div class="text-xs font-bold text-white mt-0.5">타 동아리 부스 체험</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30">
+                  <div class="text-[11px] text-emerald-300 font-bold">🏪 B팀 학생</div>
+                  <div class="text-xs font-bold text-white mt-0.5">우리 동아리 부스 운영</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative pl-9">
+            <div class="w-4 h-4 rounded-full bg-amber-400 border-4 border-slate-950 absolute left-1.5 top-1"></div>
+            <div class="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-extrabold text-amber-300">🎁 선물 교환소 오픈 · 09:30 ~ 12:00</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">선착순 조기종료</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1">[운양 Hi Five!] 2층 홈베이스 선물 뽑기 대잔치</div>
+              <p class="text-xs text-slate-300 mt-0.5">체험 확인 도장 5개를 모을 때마다 <strong>2층 홈베이스</strong>에서 뽑기판 도전 및 선물 증정!</p>
+            </div>
+          </div>
+
+          <div class="relative pl-9">
+            <div class="w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-950 absolute left-1.5 top-1"></div>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-purple-500/30">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-extrabold text-purple-400">2부 운영 · 10:30 ~ 12:00 (90분)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold">교차 2회차</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mt-2">
+                <div class="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-500/30">
+                  <div class="text-[11px] text-emerald-300 font-bold">🏪 A팀 학생</div>
+                  <div class="text-xs font-bold text-white mt-0.5">우리 동아리 부스 운영</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-indigo-950/60 border border-indigo-500/30">
+                  <div class="text-[11px] text-indigo-300 font-bold">🏃 B팀 학생</div>
+                  <div class="text-xs font-bold text-white mt-0.5">타 동아리 부스 체험</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative pl-9">
+            <div class="w-4 h-4 rounded-full bg-teal-400 border-4 border-slate-950 absolute left-1.5 top-1"></div>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-teal-500/30">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-extrabold text-teal-400">환경정화 &amp; 정리 · 12:00 ~ 12:40 (40분)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-semibold">봉사활동 1시간</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1">전시장 및 체험장 철거 · 환경정화활동</div>
+              <p class="text-xs text-slate-400 mt-0.5">부스 철거 및 교실 원상복구 철저! 참여 학생 전원 환경정화 봉사활동 1시간 인정.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 공연/체육 특별 무대 안내 -->
+      <div class="glass-card rounded-2xl p-5">
+        <h3 class="text-base font-bold text-white mb-3">🎤 공연 &amp; 체육 대결 특별 프로그램</h3>
+        <div class="grid gap-2.5 sm:grid-cols-2">
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-pink-400 font-bold">🎸 음악실 (1층)</span>
+              <div class="text-sm font-bold text-white">밴드부 — 청춘 테마 밴드 라이브 공연</div>
+            </div>
+            <button onclick="openBoothModal(28)" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200">상세</button>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-pink-400 font-bold">🎬 시청각실 (1층)</span>
+              <div class="text-sm font-bold text-white">시퀀스 — 연극 〈20세기 소녀〉 공연</div>
+            </div>
+            <button onclick="openBoothModal(29)" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200">상세</button>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-pink-400 font-bold">💃 강당 (3층)</span>
+              <div class="text-sm font-bold text-white">러쉬온미 — 댄스 리믹스 무대 공연</div>
+            </div>
+            <button onclick="openBoothModal(27)" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200">상세</button>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-emerald-400 font-bold">🏸 강당 &amp; 농구장</span>
+              <div class="text-sm font-bold text-white">체대입시부 · 플라잉셔틀즈 · 슬램덩크 대결</div>
+            </div>
+            <button onclick="setCategory('체육활동형'); switchTab('booths');" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200">보기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 탭 4: Hi-Five 스탬프 & 공지 ================= -->
+    <section id="tab-stamp" class="hidden space-y-4">
+      <!-- 스탬프 보드 -->
+      <div class="glass-card rounded-2xl p-5 border-amber-500/40">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            🎁 운양 Hi-Five! 이벤트
+          </span>
+          <button onclick="resetStamps()" class="text-xs text-slate-400 hover:text-rose-400">초기화</button>
+        </div>
+        <h2 class="text-lg font-extrabold text-white mt-2">내 디지털 체험 스탬프 북</h2>
+        <p class="text-xs text-slate-300 mt-1">
+          부스를 체험할 때마다 카드에서 <strong>[도장 찍기]</strong>를 눌러 내가 방문한 부스를 기록해 보세요! 실제 종이 안내자료에 도장 5개를 모으면 <strong>2층 홈베이스(09:30~12:00)</strong>에서 뽑기판 선물을 드립니다!
+        </p>
+
+        <!-- 5칸 스탬프 슬롯 -->
+        <div id="stampSlots" class="grid grid-cols-5 gap-2.5 my-5"></div>
+
+        <div id="stampStatusBanner" class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 text-center text-xs text-slate-300"></div>
+
+        <div class="mt-4">
+          <div class="text-xs font-bold text-slate-400 mb-2">내가 체험 완료한 동아리 목록</div>
+          <div id="visitedList" class="space-y-2"></div>
+        </div>
+      </div>
+
+      <!-- 우수 동아리 시상 및 심사 안내 -->
+      <div id="noticeSection" class="glass-card rounded-2xl p-5 space-y-3">
+        <h3 class="text-base font-extrabold text-white">🏆 우수 동아리 시상 &amp; 학생 투표 안내</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          전교생 온라인 설문조사 결과를 바탕으로 <strong>최우수상 1팀, 우수상 1팀, 장려상 3팀 (총 5팀)</strong>을 선발하여 <strong>매점이용권(10만 원 상당)</strong>을 시상합니다!
+        </p>
+        <div class="grid grid-cols-5 gap-1.5 text-center pt-1">
+          <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[11px] text-slate-400">관련성</div>
+            <div class="text-sm font-extrabold text-indigo-400">20점</div>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[11px] text-slate-400">완성도</div>
+            <div class="text-sm font-extrabold text-indigo-400">20점</div>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[11px] text-slate-400">참여도</div>
+            <div class="text-sm font-extrabold text-indigo-400">20점</div>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[11px] text-slate-400">지속성</div>
+            <div class="text-sm font-extrabold text-indigo-400">20점</div>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-[11px] text-slate-400">호응도</div>
+            <div class="text-sm font-extrabold text-indigo-400">20점</div>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-800/80 space-y-1.5 text-xs text-slate-300">
+          <div class="font-bold text-rose-400">⚠️ 학생 유의사항</div>
+          <p>• 08시 50분까지 반드시 <strong>본인의 동아리 발표회 장소</strong>로 입실하여 담당 선생님의 출석 확인을 받아야 합니다.</p>
+          <p>• 체험 부스 이용 시 복도 질서와 안전 수칙을 꼭 지켜주세요.</p>
+          <p>• 12:00~12:40 전시장 철거 및 환경정화까지 마쳐야 봉사활동 1시간이 인정됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 부스 상세 모달 -->
+  <div id="boothModal" onclick="if(event.target===this) closeBoothModal()" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="glass-card w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 border border-slate-700 shadow-2xl animate-fadeIn">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span id="modalCatBadge" class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold mb-2"></span>
+          <h3 id="modalTitle" class="text-xl font-black text-white"></h3>
+        </div>
+        <button onclick="closeBoothModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+
+      <p id="modalDesc" class="mt-3 text-sm text-slate-200 leading-relaxed bg-slate-900/90 p-3.5 rounded-2xl border border-slate-800"></p>
+
+      <div class="grid grid-cols-2 gap-2.5 mt-4 text-xs">
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-slate-400">📍 부스 장소</div>
+          <div id="modalRoom" class="text-sm font-extrabold text-emerald-400 mt-0.5"></div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-slate-400">🏢 위치 층수</div>
+          <div id="modalFloor" class="text-sm font-extrabold text-indigo-400 mt-0.5"></div>
+        </div>
+      </div>
+
+      <div class="mt-5 flex gap-2.5">
+        <button id="modalStampBtn" class="flex-1 py-3 rounded-xl font-bold text-sm transition"></button>
+        <button id="modalMapBtn" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition">
+          🗺️ 지도에서 보기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 고정 네비게이션 탭바 -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 glass border-t border-slate-800/90 px-2 py-1.5">
+    <div class="max-w-md mx-auto grid grid-cols-4 gap-1">
+      <button onclick="switchTab('booths')" id="nav-booths" class="nav-item flex flex-col items-center py-1.5 rounded-xl text-indigo-400 font-bold">
+        <span class="text-lg">🎪</span>
+        <span class="text-[11px] mt-0.5">부스 탐색</span>
+      </button>
+      <button onclick="switchTab('map')" id="nav-map" class="nav-item flex flex-col items-center py-1.5 rounded-xl text-slate-400 font-medium">
+        <span class="text-lg">🗺️</span>
+        <span class="text-[11px] mt-0.5">층별 지도</span>
+      </button>
+      <button onclick="switchTab('schedule')" id="nav-schedule" class="nav-item flex flex-col items-center py-1.5 rounded-xl text-slate-400 font-medium">
+        <span class="text-lg">⏰</span>
+        <span class="text-[11px] mt-0.5">시간표</span>
+      </button>
+      <button onclick="switchTab('stamp')" id="nav-stamp" class="nav-item flex flex-col items-center py-1.5 rounded-xl text-slate-400 font-medium relative">
+        <span class="text-lg">🎁</span>
+        <span class="text-[11px] mt-0.5">스탬프·공지</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    // 2025 운양고등학교 동아리 발표회 30개 공식 부스 데이터
+    const BOOTHS = [
+      // 체험/실습형 (16개)
+      { id: 1, name: "스파크", cat: "체험/실습형", emoji: "🍹", room: "물리실", floor: 4, desc: "과학으로 만드는 칵테일 바 (밀도 차이와 pH 지시약 색 변화를 이용한 무알콜 음료 제작 체험)", teacher: "전유진, 김은선" },
+      { id: 2, name: "시너지", cat: "체험/실습형", emoji: "🧋", room: "화학실", floor: 5, desc: "겔화 반응을 활용한 톡톡 터지는 팝핑보바 만들기 체험 후 시원한 음료 시식", teacher: "조자경" },
+      { id: 3, name: "아스클", cat: "체험/실습형", emoji: "🐟", room: "생물실", floor: 5, desc: "달콤 바삭 달고나 & 겨울 간식 붕어빵 만들기 체험 및 추억의 포토부스 운영", teacher: "김정현" },
+      { id: 4, name: "생명보험", cat: "체험/실습형", emoji: "🌌", room: "화학실", floor: 5, desc: "산·염기 반응을 이용한 영롱한 빛깔의 은하수 에이드 만들기 실험", teacher: "최화선" },
+      { id: 5, name: "멘날바", cat: "체험/실습형", emoji: "🌭", room: "지구과학실", floor: 4, desc: "실생활 속 과학 원리 이해 (마시멜로 융해 과정, 핫도그 가열·해동 과정 관찰 및 체험)", teacher: "김희규, 이재권" },
+      { id: 6, name: "화생방", cat: "체험/실습형", emoji: "🧼", room: "생물실", floor: 5, desc: "나만의 향기와 색을 담은 수제 비누 만들기 DIY 공방 체험", teacher: "민선기" },
+      { id: 7, name: "소프라테스", cat: "체험/실습형", emoji: "💘", room: "2-5 교실", floor: 4, desc: "개인의 철학적 성향과 상호 이해의 상관성 탐구 — 〈운명적 철학 소개팅〉", teacher: "장윤일, 하예원" },
+      { id: 8, name: "베이킹메이킹", cat: "체험/실습형", emoji: "🧇", room: "기술가정실", floor: 3, desc: "갓 구운 바삭한 크로플 제작 및 나만의 달콤 토핑 데코레이션 체험", teacher: "오한석" },
+      { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9 교실", floor: 3, desc: "축구부의 반전 매력! 이색 컨셉 메이드 카페 운영", teacher: "최은아, 장용훈" },
+      { id: 10, name: "또래상담부", cat: "체험/실습형", emoji: "💌", room: "1-10 교실", floor: 2, desc: "추리력과 기대심리를 활용한 두근두근 커플 매칭 & 심리 체험", teacher: "정희진" },
+      { id: 11, name: "창연회", cat: "체험/실습형", emoji: "🙈", room: "1-4 교실", floor: 3, desc: "선입견 없이 대화로만 통하는 설렘 가득 〈블라인드 소개팅〉", teacher: "이명신, 김유은" },
+      { id: 12, name: "에끌라", cat: "체험/실습형", emoji: "💅", room: "2-7 교실", floor: 3, desc: "블링블링 네일아트 & 리얼한 특수분장 뷰티 체험 부스", teacher: "신나라, 서성미" },
+      { id: 13, name: "교집합", cat: "체험/실습형", emoji: "🎁", room: "2-3 교실", floor: 4, desc: "도전! 흥미진진 퀴즈 게임 대결 및 푸짐한 상품 증정", teacher: "김미정" },
+      { id: 14, name: "알고리즘", cat: "체험/실습형", emoji: "🏎️", room: "컴퓨터실", floor: 2, desc: "학생들이 직접 개발한 코딩 기반 미니게임 3종 & 스릴 만점 레이싱 체험", teacher: "강지숙, 박소영" },
+      { id: 15, name: "도서관사람들", cat: "체험/실습형", emoji: "🎰", room: "도서관", floor: 2, desc: "잭팟이 터지는 〈책팟(Book-Pot)〉! 슬롯머신, 주사위, 미니볼링 등 북카페 게임존", teacher: "신보아" },
+      { id: 16, name: "글로톡", cat: "체험/실습형", emoji: "🍪", room: "2-8 교실", floor: 3, desc: "개성 만점 타투 스티커 체험 및 나만의 아이싱 쿠키 꾸미기", teacher: "주혜리" },
+
+      // 문화예술형 (3개)
+      { id: 17, name: "필름메이커스", cat: "문화예술형", emoji: "🍿", room: "1-8 교실", floor: 3, desc: "운양 시네마 클럽! 단편 영화 상영관 및 영화 퀴즈 이벤트", teacher: "이숙연" },
+      { id: 18, name: "잡지식", cat: "문화예술형", emoji: "🪄", room: "1-5 교실", floor: 3, desc: "해리포터 & 겨울왕국 테마 포토존, 손편지 작성, 동아리 자체 제작 잡지 전시", teacher: "이하나, 전수경" },
+      { id: 19, name: "애그부", cat: "문화예술형", emoji: "🏮", room: "2-1 · 2-2 교실", floor: 4, desc: "일러스트·창작품 전시회 및 일본 여름 축제(마츠리)풍 감성 포토부스", teacher: "김예린, 정지혜" },
+
+      // 방탈출/추리, 테마형 (5개)
+      { id: 20, name: "경영위키", cat: "방탈출/추리", emoji: "👻", room: "1-1 교실", floor: 4, desc: "심장 쫄깃! 공포의 귀신의 집 & 단서를 찾아 탈출하는 방탈출 체험", teacher: "여인우, 이영탁" },
+      { id: 21, name: "블루라인", cat: "방탈출/추리", emoji: "🕵️", room: "2-4 교실", floor: 4, desc: "크리스마스 살인사건의 진범을 찾아라! 과학수사 & 범인 검거 추리 체험", teacher: "신동빈" },
+      { id: 22, name: "유아트", cat: "방탈출/추리", emoji: "⛩️", room: "1-6 · 1-7 교실", floor: 3, desc: "미술 동아리가 직접 세팅한 고퀄리티 공포 테마 — 〈무당집 괴담 방탈출 체험〉", teacher: "김민희, 홍정화, 임선아" },
+      { id: 23, name: "소나기(방송부)", cat: "방탈출/추리", emoji: "🎤", room: "방송실", floor: 2, desc: "방송실 특수 음향·조명으로 꾸민 오싹한 귀신의 집 & 신나는 노래방 체험", teacher: "김송현" },
+      { id: 24, name: "교지편집부", cat: "방탈출/추리", emoji: "🏺", room: "1-3 교실", floor: 4, desc: "박물관 유물 도난 사건! 남겨진 단서를 조합해 범인을 찾는 추리 수사 게임", teacher: "윤혜민" },
+
+      // 공연형 (3개)
+      { id: 27, name: "러쉬온미", cat: "공연형", emoji: "💃", room: "강당", floor: 3, desc: "무대를 뒤집어 놓는 파워풀 K-POP & 스트릿 댄스 리믹스 공연", teacher: "유보경" },
+      { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 공연", teacher: "안효주" },
+      { id: 29, name: "시퀀스", cat: "공연형", emoji: "🎭", room: "시청각실", floor: 1, desc: "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연", teacher: "강남희, 임채영" },
+
+      // 체육활동형 (3개)
+      { id: 25, name: "체대입시부", cat: "체육활동형", emoji: "🏋️", room: "강당", floor: 3, desc: "체대입시부에 도전하라! 제자리멀리뛰기, 농구 챌린지 및 줄다리기 한판 승부", teacher: "최효득" },
+      { id: 26, name: "플라잉셔틀즈", cat: "체육활동형", emoji: "🏸", room: "강당", floor: 3, desc: "배드민턴부를 이겨라! 스매싱 타겟 챌린지 & 배드민턴 미니 대결", teacher: "이정훈" },
+      { id: 30, name: "슬램덩크(농구부)", cat: "체육활동형", emoji: "🏀", room: "농구장 (우천시 2-10)", floor: 1, desc: "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결", teacher: "한경훈" }
+    ];
+
+    // 층별 설명 메타데이터 (실제 2025 운양고 배치도 반영)
+    const FLOOR_INFO = {
+      1: {
+        title: "1층 & 야외 코트 (공연 · 스포츠 존)",
+        subtitle: "음악실, 시청각실 대형 공연장 및 야외 농구장 대결 부스가 위치합니다.",
+        highlights: ["🎸 음악실: 밴드부 공연", "🎭 시청각실: 시퀀스 연극", "🏀 농구장: 슬램덩크 대결", "🏪 매점(운수대통) & 북카페"]
+      },
+      2: {
+        title: "2층 (IT · 미디어 · 북카페 & 🎁선물교환소)",
+        subtitle: "★ 도장 5개를 모으면 2층 홈베이스에서 뽑기판 선물을 받을 수 있습니다!",
+        highlights: ["🎁 2층 홈베이스: Hi-Five 선물 교환소 (09:30~12:00)", "🏎️ 컴퓨터실: 알고리즘", "🎰 도서관: 도서관사람들", "🎤 방송실: 소나기", "💌 1-10: 또래상담부"]
+      },
+      3: {
+        title: "3층 & 강당 (테마 · 뷰티 · 베이킹 · 댄스 & 체육)",
+        subtitle: "1학년(1-4~1-8), 2학년(2-6~2-9) 교실 부스와 강당, 기술가정실이 모여 있는 핵심 층입니다!",
+        highlights: ["🧇 기술가정실: 베이킹메이킹(크로플)", "💃 강당: 러쉬온미 공연 / 체대입시부 / 플라잉셔틀즈", "⛩️ 1-6·1-7: 유아트 방탈출"]
+      },
+      4: {
+        title: "4층 (과학 실험실 · 추리 방탈출 · 인문 부스)",
+        subtitle: "물리실, 지구과학실 및 1-1~1-3, 2-1~2-5 교실의 인기 방탈출·소개팅·전시 부스가 있습니다.",
+        highlights: ["🍹 물리실: 스파크 칵테일바", "🌭 지구과학실: 멘날바", "👻 1-1: 경영위키 방탈출", "🕵️ 2-4: 블루라인 추리"]
+      },
+      5: {
+        title: "5층 (화학실 · 생물실 쿠킹 & 과학 공방)",
+        subtitle: "화학실과 생물실에서 달고나, 붕어빵, 팝핑보바, 은하수에이드, 수제비누 체험이 열립니다!",
+        highlights: ["🧋 화학실: 시너지(팝핑보바) & 생명보험(은하수에이드)", "🐟 생물실: 아스클(달고나·붕어빵) & 화생방(비누)"]
+      }
+    };
+
+    let currentCategory = "ALL";
+    let currentFloor = 3;
+    let stampedIds = JSON.parse(localStorage.getItem("unyang_stamps_2025") || "[]");
+    let favIds = JSON.parse(localStorage.getItem("unyang_favs_2025") || "[]");
+
+    const CAT_STYLE = {
+      "체험/실습형": "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
+      "방탈출/추리": "bg-rose-500/20 text-rose-300 border border-rose-500/30",
+      "문화예술형": "bg-amber-500/20 text-amber-300 border border-amber-500/30",
+      "공연형": "bg-pink-500/20 text-pink-300 border border-pink-500/30",
+      "체육활동형": "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+    };
+
+    function saveState() {
+      localStorage.setItem("unyang_stamps_2025", JSON.stringify(stampedIds));
+      localStorage.setItem("unyang_favs_2025", JSON.stringify(favIds));
+      document.getElementById("headerStampCount").textContent = stampedIds.length;
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll(".cat-btn").forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow";
+        } else {
+          btn.className = "cat-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+      renderBooths();
+    }
+
+    function clearSearch() {
+      document.getElementById("searchInput").value = "";
+      renderBooths();
+    }
+
+    function toggleFav(id, e) {
+      if (e) e.stopPropagation();
+      if (favIds.includes(id)) favIds = favIds.filter(x => x !== id);
+      else favIds.push(id);
+      saveState();
+      renderBooths();
+    }
+
+    function toggleStamp(id, e) {
+      if (e) e.stopPropagation();
+      if (stampedIds.includes(id)) stampedIds = stampedIds.filter(x => x !== id);
+      else stampedIds.push(id);
+      saveState();
+      renderBooths();
+      renderStamps();
+      if (currentModalId === id) openBoothModal(id);
+    }
+
+    function renderBooths() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      document.getElementById("clearBtn").classList.toggle("hidden", !q);
+
+      const filtered = BOOTHS.filter(b => {
+        if (currentCategory === "FAV" && !favIds.includes(b.id)) return false;
+        if (currentCategory !== "ALL" && currentCategory !== "FAV" && b.cat !== currentCategory) return false;
+        if (q) {
+          const hay = `${b.name} ${b.cat} ${b.room} ${b.desc} ${b.floor}층`.toLowerCase();
+          return hay.includes(q);
+        }
+        return true;
+      });
+
+      const grid = document.getElementById("boothGrid");
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full glass-card rounded-2xl p-8 text-center text-slate-400 text-sm">조건에 맞는 동아리 부스가 없습니다.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(b => {
+        const isFav = favIds.includes(b.id);
+        const isStamped = stampedIds.includes(b.id);
+        return `
+          <div onclick="openBoothModal(${b.id})" class="cursor-pointer glass-card rounded-2xl p-4 flex flex-col justify-between transition duration-200">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${CAT_STYLE[b.cat]}">${b.cat}</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="px-2 py-0.5 rounded-lg bg-slate-900 text-emerald-400 text-xs font-bold border border-slate-800">📍 ${b.room} (${b.floor}층)</span>
+                  <button onclick="toggleFav(${b.id}, event)" class="w-7 h-7 rounded-full bg-slate-900/90 flex items-center justify-center text-sm border border-slate-800">
+                    ${isFav ? "❤️" : "🤍"}
+                  </button>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5 mt-1">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-xl shrink-0">${b.emoji}</div>
+                <div>
+                  <h3 class="text-base font-extrabold text-white leading-snug">${b.name}</h3>
+                  <p class="text-xs text-slate-300 line-clamp-2 mt-0.5 leading-relaxed">${b.desc}</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3.5 pt-2.5 border-t border-slate-800/80 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400">터치하여 자세히 보기</span>
+              <button onclick="toggleStamp(${b.id}, event)" class="px-3 py-1 rounded-lg text-xs font-bold transition ${isStamped ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
+                ${isStamped ? '✅ 체험 도장 완료' : '💮 도장 찍기'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // 층별 지도 렌더링
+    function selectFloor(floor) {
+      currentFloor = floor;
+      document.querySelectorAll(".floor-btn").forEach(btn => {
+        if (Number(btn.dataset.floor) === floor) {
+          btn.className = "floor-btn py-2.5 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow";
+        } else {
+          btn.className = "floor-btn py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+
+      const info = FLOOR_INFO[floor];
+      const floorBooths = BOOTHS.filter(b => b.floor === floor);
+
+      const container = document.getElementById("floorMapContainer");
+      container.innerHTML = `
+        <div class="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
+          <div class="text-sm font-extrabold text-indigo-200">${info.title}</div>
+          <div class="text-xs text-slate-300 mt-0.5">${info.subtitle}</div>
+          <div class="flex flex-wrap gap-1.5 mt-2.5">
+            ${info.highlights.map(h => `<span class="px-2 py-0.5 rounded-md bg-slate-900/90 text-[11px] text-slate-200 border border-slate-700/70">${h}</span>`).join("")}
+          </div>
+        </div>
+
+        ${floor === 2 ? `
+          <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-pink-500/20 border border-amber-400/50 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-extrabold text-amber-300">🎁 2층 중앙 홈베이스 — [운양 Hi Five!] 선물 교환소</div>
+              <div class="text-[11px] text-slate-200 mt-0.5">운영시간: 09:30 ~ 12:00 (도장 5개당 뽑기판 1회 도전! 선착순 조기 종료)</div>
+            </div>
+            <span class="text-2xl">🎯</span>
+          </div>
+        ` : ""}
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          ${floorBooths.map(b => {
+            const isStamped = stampedIds.includes(b.id);
+            return `
+              <div onclick="openBoothModal(${b.id})" class="room-box cursor-pointer p-3.5 rounded-2xl bg-slate-900/95 border ${isStamped ? 'border-amber-500/60' : 'border-slate-800 hover:border-indigo-500/60'} flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-emerald-400">📍 ${b.room}</span>
+                    <span class="text-base">${b.emoji}</span>
+                  </div>
+                  <div class="text-sm font-black text-white mt-1">${b.name}</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 line-clamp-2">${b.desc}</div>
+                </div>
+                <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                  <span class="text-[10px] px-1.5 py-0.5 rounded ${CAT_STYLE[b.cat]}">${b.cat}</span>
+                  ${isStamped ? '<span class="text-[11px] text-amber-400 font-bold">✅ 완료</span>' : '<span class="text-[11px] text-indigo-400 font-semibold">상세 →</span>'}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    // 스탬프 북 렌더링
+    function renderStamps() {
+      const slots = document.getElementById("stampSlots");
+      const count = stampedIds.length;
+      const cycleCount = count % 5 === 0 && count > 0 ? 5 : count % 5;
+      const completedSets = Math.floor(count / 5);
+
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        const active = i <= cycleCount;
+        html += `
+          <div class="aspect-square rounded-2xl border-2 flex flex-col items-center justify-center p-2 transition ${active ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-lg shadow-amber-500/10' : 'bg-slate-900/80 border-dashed border-slate-700 text-slate-600'}">
+            <span class="text-2xl">${active ? '💮' : i}</span>
+            <span class="text-[10px] font-bold mt-1">${active ? '도장 완료' : '미획득'}</span>
+          </div>
+        `;
+      }
+      slots.innerHTML = html;
+
+      const banner = document.getElementById("stampStatusBanner");
+      if (count >= 5) {
+        banner.className = "p-3.5 rounded-xl bg-amber-500/20 border border-amber-400 text-center text-xs font-bold text-amber-200";
+        banner.innerHTML = `🎉 축하합니다! 총 <strong>${count}개</strong> 부스 체험 완료! (뽑기판 도전권 <strong>${completedSets}회</strong> 달성 — 2층 홈베이스로 가세요!)`;
+      } else {
+        banner.className = "p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 text-center text-xs text-slate-300";
+        banner.innerHTML = `현재 <strong>${count}개</strong> 도장 획득! <strong>${5 - cycleCount}개</strong>만 더 모으면 2층 홈베이스 뽑기판 선물을 받을 수 있어요!`;
+      }
+
+      const visitedList = document.getElementById("visitedList");
+      if (count === 0) {
+        visitedList.innerHTML = `<div class="text-xs text-slate-500 py-3 text-center">아직 도장을 찍은 부스가 없습니다. 부스 탐색 탭에서 [도장 찍기]를 눌러보세요!</div>`;
+      } else {
+        visitedList.innerHTML = stampedIds.map(id => {
+          const b = BOOTHS.find(x => x.id === id);
+          if (!b) return "";
+          return `
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+              <div class="flex items-center gap-2">
+                <span>${b.emoji}</span>
+                <span class="font-bold text-white">${b.name}</span>
+                <span class="text-slate-400">(${b.room})</span>
+              </div>
+              <button onclick="toggleStamp(${b.id})" class="text-slate-400 hover:text-rose-400">취소</button>
+            </div>
+          `;
+        }).join("");
+      }
+    }
+
+    function resetStamps() {
+      if (confirm("찍은 체험 도장 기록을 초기화할까요?")) {
+        stampedIds = [];
+        saveState();
+        renderBooths();
+        renderStamps();
+      }
+    }
+
+    // 모달 제어
+    let currentModalId = null;
+    function openBoothModal(id) {
+      const b = BOOTHS.find(x => x.id === id);
+      if (!b) return;
+      currentModalId = id;
+      const isStamped = stampedIds.includes(id);
+
+      const badge = document.getElementById("modalCatBadge");
+      badge.className = `inline-block px-2.5 py-0.5 rounded-full text-xs font-bold mb-2 ${CAT_STYLE[b.cat]}`;
+      badge.textContent = b.cat;
+
+      document.getElementById("modalTitle").textContent = `${b.emoji} ${b.name}`;
+      document.getElementById("modalDesc").textContent = b.desc;
+      document.getElementById("modalRoom").textContent = b.room;
+      document.getElementById("modalFloor").textContent = `${b.floor}층`;
+
+      const stampBtn = document.getElementById("modalStampBtn");
+      if (isStamped) {
+        stampBtn.className = "flex-1 py-3 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition";
+        stampBtn.textContent = "✅ 체험 도장 완료 (취소하려면 터치)";
+      } else {
+        stampBtn.className = "flex-1 py-3 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white transition";
+        stampBtn.textContent = "💮 이 부스 체험 도장 찍기";
+      }
+      stampBtn.onclick = () => toggleStamp(id);
+
+      document.getElementById("modalMapBtn").onclick = () => {
+        closeBoothModal();
+        switchTab("map");
+        selectFloor(b.floor);
+      };
+
+      document.getElementById("boothModal").classList.remove("hidden");
+    }
+
+    function closeBoothModal() {
+      document.getElementById("boothModal").classList.add("hidden");
+      currentModalId = null;
+    }
+
+    // 탭 전환
+    function switchTab(tab) {
+      const targetTab = tab === "notice" ? "stamp" : tab;
+      ["booths", "map", "schedule", "stamp"].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle("hidden", t !== targetTab);
+        const nav = document.getElementById(`nav-${t}`);
+        if (t === targetTab) {
+          nav.className = "nav-item flex flex-col items-center py-1.5 rounded-xl text-indigo-400 font-bold bg-indigo-500/10";
+        } else {
+          nav.className = "nav-item flex flex-col items-center py-1.5 rounded-xl text-slate-400 font-medium";
+        }
+      });
+
+      if (targetTab === "map") selectFloor(currentFloor);
+      if (targetTab === "stamp") renderStamps();
+      if (tab === "notice") {
+        setTimeout(() => document.getElementById("noticeSection").scrollIntoView({ behavior: "smooth" }), 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    // 상단 공지 티커 자동 롤링
+    const NOTICES = [
+      "🎁 [운양 Hi Five!] 도장 5개 모으면 2층 홈베이스에서 뽑기판 선물 증정! (09:30~12:00 선착순)",
+      "⏰ 08:50까지 각 동아리 발표회 장소에서 담당 선생님께 출석 체크 필수! (지각 처리 주의)",
+      "🔄 1부(09:00~10:30) A팀 체험·B팀 운영 / 2부(10:30~12:00) B팀 체험·A팀 운영 교차 진행!",
+      "🏆 전교생 온라인 설문투표로 우수 동아리 5팀 선발 (매점이용권 10만원 시상!)"
+    ];
+    let noticeIdx = 0;
+    setInterval(() => {
+      noticeIdx = (noticeIdx + 1) % NOTICES.length;
+      document.getElementById("tickerText").textContent = NOTICES[noticeIdx];
+    }, 4500);
+
+    // 초기 실행
+    saveState();
+    renderBooths();
+    selectFloor(3);
+    renderStamps();
+  </script>
+</body>
+</html>
