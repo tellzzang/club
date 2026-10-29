@@ -16,15 +16,16 @@
       color: #1e293b;
       min-height: 100vh;
       overflow-x: hidden;
+      font-size: 16px;
     }
 
     /* 소프트 글래스모피즘 */
     .fest-card {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.08), 0 8px 10px -6px rgba(99, 102, 241, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.09), 0 8px 10px -6px rgba(99, 102, 241, 0.06);
     }
 
     /* 통통 튀는 애니메이션 */
@@ -49,7 +50,7 @@
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .press-effect:active {
-      transform: scale(0.94);
+      transform: scale(0.95);
     }
 
     /* 모달 등장 애니메이션 */
@@ -65,38 +66,38 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="pb-20 select-none">
+<body class="pb-24 select-none">
 
   <!-- 배경 플로팅 장식들 -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute top-4 left-6 text-3xl opacity-30 animate-float" style="animation-delay: 0s;">🎈</div>
-    <div class="absolute top-16 right-8 text-2xl opacity-35 animate-float" style="animation-delay: 1.2s;">✨</div>
-    <div class="absolute top-1/3 left-2 text-2xl opacity-25 animate-float" style="animation-delay: 2s;">🎉</div>
-    <div class="absolute top-2/3 right-4 text-3xl opacity-30 animate-float" style="animation-delay: 0.8s;">🎪</div>
+    <div class="absolute top-4 left-6 text-4xl opacity-30 animate-float" style="animation-delay: 0s;">🎈</div>
+    <div class="absolute top-16 right-8 text-3xl opacity-35 animate-float" style="animation-delay: 1.2s;">✨</div>
+    <div class="absolute top-1/3 left-2 text-3xl opacity-25 animate-float" style="animation-delay: 2s;">🎉</div>
+    <div class="absolute top-2/3 right-4 text-4xl opacity-30 animate-float" style="animation-delay: 0.8s;">🎪</div>
   </div>
 
   <!-- 상단 화사한 축제 헤더 -->
-  <header class="relative z-10 pt-5 pb-3 px-4 text-center">
-    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300 shadow-sm animate-pulse-notice">
+  <header class="relative z-10 pt-6 pb-4 px-4 text-center">
+    <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-sm animate-pulse-notice">
       <span>🚧 2026 운영 준비 중 (현재 2025 기준 프리뷰)</span>
     </div>
 
-    <div class="flex items-center justify-center gap-2 mt-2">
+    <div class="flex items-center justify-center gap-2 mt-3">
       <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-800">
         2026 운양 동아리 발표회
       </h1>
-      <span class="text-xs px-2 py-0.5 rounded-md bg-rose-500 text-white font-extrabold shadow-sm shrink-0">
+      <span class="text-xs px-2.5 py-1 rounded-lg bg-rose-500 text-white font-extrabold shadow-sm shrink-0">
         공사중 🚧
       </span>
     </div>
     
-    <p class="text-xs font-semibold text-slate-500 mt-1">
-      🎉 한눈에 쏙! 원하는 장르나 층을 터치해서 바로 확인해보세요!
+    <p class="text-sm font-semibold text-slate-600 mt-1.5">
+      🎉 원하는 장르나 층을 터치해서 부스 위치를 확인해보세요!
     </p>
 
     <!-- 실시간 축제 빵파레 버튼 -->
-    <div class="mt-3 flex justify-center">
-      <button onclick="launchConfetti()" class="press-effect inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 text-white text-xs font-extrabold shadow-md hover:shadow-lg transition">
+    <div class="mt-3.5 flex justify-center">
+      <button onclick="launchConfetti()" class="press-effect inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 text-white text-sm font-black shadow-md hover:shadow-lg transition">
         <span>🎊 축제 응원 팡파레 터뜨리기!</span>
       </button>
     </div>
@@ -106,20 +107,20 @@
   <div class="max-w-md mx-auto px-4 relative z-10 mt-1">
     
     <!-- 최상단 메인 탭 (부스 한눈에 / 층별 지도 / 타임라인) -->
-    <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-white/70 backdrop-blur border border-pink-200/60 shadow-sm mb-3">
-      <button onclick="changeView('category')" id="tabBtn-category" class="py-2 rounded-xl text-xs font-extrabold transition text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-sm">
+    <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-white/80 backdrop-blur border border-pink-200/80 shadow-sm mb-3.5">
+      <button onclick="changeView('category')" id="tabBtn-category" class="py-2.5 rounded-xl text-sm font-extrabold transition text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-sm">
         🎪 부스 장르별
       </button>
-      <button onclick="changeView('floor')" id="tabBtn-floor" class="py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900">
+      <button onclick="changeView('floor')" id="tabBtn-floor" class="py-2.5 rounded-xl text-sm font-bold transition text-slate-600 hover:text-slate-900">
         🗺️ 1~5층 지도
       </button>
-      <button onclick="changeView('schedule')" id="tabBtn-schedule" class="py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900">
+      <button onclick="changeView('schedule')" id="tabBtn-schedule" class="py-2.5 rounded-xl text-sm font-bold transition text-slate-600 hover:text-slate-900">
         ⏰ 시간표·일정
       </button>
     </div>
 
     <!-- ================= 1. 장르별 부스 한눈에 보기 (No-scroll Grid) ================= -->
-    <section id="view-category" class="space-y-3">
+    <section id="view-category" class="space-y-3.5">
       
       <!-- 검색바: 빠른 필터 -->
       <div class="relative">
@@ -128,34 +129,34 @@
           type="text" 
           oninput="handleSearch()"
           placeholder="🔍 동아리명, 교실, 키워드(방탈출, 크로플...)" 
-          class="w-full pl-9 pr-8 py-2.5 rounded-2xl bg-white/90 border border-pink-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm"
+          class="w-full pl-10 pr-9 py-3 rounded-2xl bg-white/95 border border-pink-200 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm font-medium"
         />
-        <button onclick="clearSearch()" id="searchClear" class="hidden absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-600">✕</button>
+        <button onclick="clearSearch()" id="searchClear" class="hidden absolute right-3.5 top-3 text-sm text-slate-400 hover:text-slate-600">✕</button>
       </div>
 
       <!-- 검색 결과 표시 영역 (검색 시에만 열림) -->
       <div id="searchResultArea" class="hidden space-y-2">
-        <div class="text-xs font-bold text-slate-600 px-1 flex justify-between">
+        <div class="text-sm font-bold text-slate-700 px-1 flex justify-between">
           <span>검색 결과</span>
-          <button onclick="clearSearch()" class="text-pink-600 text-[11px]">닫기</button>
+          <button onclick="clearSearch()" class="text-pink-600 text-xs font-bold">닫기</button>
         </div>
-        <div id="searchResultList" class="space-y-1.5 max-h-72 overflow-y-auto no-scrollbar"></div>
+        <div id="searchResultList" class="space-y-2 max-h-80 overflow-y-auto no-scrollbar"></div>
       </div>
 
       <!-- 스크롤 없는 5대 장르 큐브 카드 (클릭하면 모달로 전개!) -->
-      <div id="categoryCubes" class="grid grid-cols-2 gap-2.5">
+      <div id="categoryCubes" class="grid grid-cols-2 gap-3">
         
         <!-- 1. 체험/실습형 (16) -->
         <div onclick="openCategorySheet('체험/실습형')" class="press-effect cursor-pointer fest-card rounded-2xl p-4 flex flex-col justify-between border-l-4 border-indigo-400 hover:border-indigo-500 group">
           <div class="flex items-center justify-between">
-            <span class="text-2xl p-2 rounded-xl bg-indigo-50">🧪</span>
-            <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">16개</span>
+            <span class="text-3xl p-2 rounded-2xl bg-indigo-50">🧪</span>
+            <span class="text-xs font-black px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-800">16개</span>
           </div>
-          <div class="mt-2">
-            <h3 class="text-sm font-black text-slate-800 group-hover:text-indigo-600 transition">체험 &amp; 실습</h3>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">칵테일바, 크로플, 보바, 소개팅</p>
+          <div class="mt-2.5">
+            <h3 class="text-base font-black text-slate-800 group-hover:text-indigo-600 transition">체험 &amp; 실습</h3>
+            <p class="text-xs text-slate-500 font-medium mt-1 line-clamp-1">칵테일바, 크로플, 보바, 소개팅</p>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-indigo-600">
+          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-black text-indigo-600">
             <span>목록 보기</span>
             <span>👉</span>
           </div>
@@ -164,14 +165,14 @@
         <!-- 2. 방탈출/추리 테마형 (5) -->
         <div onclick="openCategorySheet('방탈출/추리')" class="press-effect cursor-pointer fest-card rounded-2xl p-4 flex flex-col justify-between border-l-4 border-rose-400 hover:border-rose-500 group">
           <div class="flex items-center justify-between">
-            <span class="text-2xl p-2 rounded-xl bg-rose-50">🕵️</span>
-            <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">5개</span>
+            <span class="text-3xl p-2 rounded-2xl bg-rose-50">🕵️</span>
+            <span class="text-xs font-black px-2.5 py-1 rounded-full bg-rose-100 text-rose-800">5개</span>
           </div>
-          <div class="mt-2">
-            <h3 class="text-sm font-black text-slate-800 group-hover:text-rose-600 transition">방탈출 &amp; 추리</h3>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">귀신의집, 살인사건, 무당집</p>
+          <div class="mt-2.5">
+            <h3 class="text-base font-black text-slate-800 group-hover:text-rose-600 transition">방탈출 &amp; 추리</h3>
+            <p class="text-xs text-slate-500 font-medium mt-1 line-clamp-1">귀신의집, 살인사건, 무당집</p>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-rose-600">
+          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-black text-rose-600">
             <span>목록 보기</span>
             <span>👉</span>
           </div>
@@ -180,14 +181,14 @@
         <!-- 3. 무대 공연형 (3) -->
         <div onclick="openCategorySheet('공연형')" class="press-effect cursor-pointer fest-card rounded-2xl p-4 flex flex-col justify-between border-l-4 border-pink-400 hover:border-pink-500 group">
           <div class="flex items-center justify-between">
-            <span class="text-2xl p-2 rounded-xl bg-pink-50">🎸</span>
-            <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-pink-100 text-pink-700">3개</span>
+            <span class="text-3xl p-2 rounded-2xl bg-pink-50">🎸</span>
+            <span class="text-xs font-black px-2.5 py-1 rounded-full bg-pink-100 text-pink-800">3개</span>
           </div>
-          <div class="mt-2">
-            <h3 class="text-sm font-black text-slate-800 group-hover:text-pink-600 transition">무대 라이브 공연</h3>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">댄스(강당), 밴드, 연극</p>
+          <div class="mt-2.5">
+            <h3 class="text-base font-black text-slate-800 group-hover:text-pink-600 transition">무대 공연</h3>
+            <p class="text-xs text-slate-500 font-medium mt-1 line-clamp-1">댄스(강당), 밴드, 연극</p>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-pink-600">
+          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-black text-pink-600">
             <span>목록 보기</span>
             <span>👉</span>
           </div>
@@ -196,139 +197,139 @@
         <!-- 4. 체육 & 대결형 (3) -->
         <div onclick="openCategorySheet('체육활동형')" class="press-effect cursor-pointer fest-card rounded-2xl p-4 flex flex-col justify-between border-l-4 border-emerald-400 hover:border-emerald-500 group">
           <div class="flex items-center justify-between">
-            <span class="text-2xl p-2 rounded-xl bg-emerald-50">🏀</span>
-            <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">3개</span>
+            <span class="text-3xl p-2 rounded-2xl bg-emerald-50">🏀</span>
+            <span class="text-xs font-black px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">3개</span>
           </div>
-          <div class="mt-2">
-            <h3 class="text-sm font-black text-slate-800 group-hover:text-emerald-600 transition">스포츠 &amp; 대결</h3>
-            <p class="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">체대 챌린지, 배드민턴, 농구</p>
+          <div class="mt-2.5">
+            <h3 class="text-base font-black text-slate-800 group-hover:text-emerald-600 transition">스포츠 &amp; 대결</h3>
+            <p class="text-xs text-slate-500 font-medium mt-1 line-clamp-1">체대 챌린지, 배드민턴, 농구</p>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-emerald-600">
+          <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-black text-emerald-600">
             <span>목록 보기</span>
             <span>👉</span>
           </div>
         </div>
 
         <!-- 5. 문화예술·포토 (3) -->
-        <div onclick="openCategorySheet('문화예술형')" class="col-span-2 press-effect cursor-pointer fest-card rounded-2xl p-3.5 flex items-center justify-between border-l-4 border-amber-400 hover:border-amber-500 group">
-          <div class="flex items-center gap-3">
-            <span class="text-2xl p-2 rounded-xl bg-amber-50">🎨</span>
+        <div onclick="openCategorySheet('문화예술형')" class="col-span-2 press-effect cursor-pointer fest-card rounded-2xl p-4 flex items-center justify-between border-l-4 border-amber-400 hover:border-amber-500 group">
+          <div class="flex items-center gap-3.5">
+            <span class="text-3xl p-2.5 rounded-2xl bg-amber-50">🎨</span>
             <div>
-              <div class="flex items-center gap-1.5">
-                <h3 class="text-sm font-black text-slate-800 group-hover:text-amber-600 transition">문화·예술 &amp; 포토존</h3>
-                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">3개</span>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-black text-slate-800 group-hover:text-amber-600 transition">문화·예술 &amp; 포토존</h3>
+                <span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">3개</span>
               </div>
-              <p class="text-[11px] text-slate-500 font-medium mt-0.5">해리포터 포토존, 일본 축제 부스, 영화 상영관</p>
+              <p class="text-xs text-slate-500 font-medium mt-1">해리포터 포토존, 일본 축제 부스, 영화 상영관</p>
             </div>
           </div>
-          <span class="text-xs font-bold text-amber-600 shrink-0">보기 👉</span>
+          <span class="text-xs font-black text-amber-600 shrink-0">보기 👉</span>
         </div>
 
       </div>
 
       <!-- 하단 미니 팁 배너 -->
-      <div class="p-3 rounded-2xl bg-gradient-to-r from-pink-100/80 to-purple-100/80 border border-pink-200/80 flex items-center gap-2.5">
-        <span class="text-xl">💡</span>
-        <div class="text-[11px] text-slate-600 font-medium leading-snug">
-          원하는 장르 타일을 <strong>클릭</strong>하면 세부 동아리 목록과 위치를 바로 확인할 수 있습니다!
+      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-pink-100/90 to-purple-100/90 border border-pink-200 flex items-center gap-3">
+        <span class="text-2xl">💡</span>
+        <div class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+          원하는 장르 타일을 <strong>터치</strong>하면 세부 동아리 목록과 교실 위치를 한눈에 볼 수 있습니다!
         </div>
       </div>
     </section>
 
     <!-- ================= 2. 1~5층 인터랙티브 지도 (No-scroll Floor View) ================= -->
-    <section id="view-floor" class="hidden space-y-3">
+    <section id="view-floor" class="hidden space-y-3.5">
       <!-- 층 선택 칩 -->
-      <div class="grid grid-cols-5 gap-1.5" id="floorChipGroup">
-        <button onclick="pickFloor(1)" data-fl="1" class="fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-white text-slate-700 border border-slate-200">1층</button>
-        <button onclick="pickFloor(2)" data-fl="2" class="fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-white text-slate-700 border border-slate-200">2층</button>
-        <button onclick="pickFloor(3)" data-fl="3" class="fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm">3층</button>
-        <button onclick="pickFloor(4)" data-fl="4" class="fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-white text-slate-700 border border-slate-200">4층</button>
-        <button onclick="pickFloor(5)" data-fl="5" class="fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-white text-slate-700 border border-slate-200">5층</button>
+      <div class="grid grid-cols-5 gap-2" id="floorChipGroup">
+        <button onclick="pickFloor(1)" data-fl="1" class="fl-chip py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-700 border border-slate-200">1층</button>
+        <button onclick="pickFloor(2)" data-fl="2" class="fl-chip py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-700 border border-slate-200">2층</button>
+        <button onclick="pickFloor(3)" data-fl="3" class="fl-chip py-2.5 rounded-xl text-sm font-black transition bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm">3층</button>
+        <button onclick="pickFloor(4)" data-fl="4" class="fl-chip py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-700 border border-slate-200">4층</button>
+        <button onclick="pickFloor(5)" data-fl="5" class="fl-chip py-2.5 rounded-xl text-sm font-black transition bg-white text-slate-700 border border-slate-200">5층</button>
       </div>
 
       <!-- 선택된 층 안내 카드 -->
-      <div id="floorDetailCard" class="fest-card rounded-2xl p-4 space-y-2.5">
+      <div id="floorDetailCard" class="fest-card rounded-2xl p-4 space-y-3">
         <!-- JS로 동적 렌더링 -->
       </div>
     </section>
 
     <!-- ================= 3. 시간표 & 일정 (컴팩트 카드뷰) ================= -->
-    <section id="view-schedule" class="hidden space-y-2.5">
+    <section id="view-schedule" class="hidden space-y-3">
       
       <div class="fest-card rounded-2xl p-4 border-l-4 border-rose-500">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-rose-100 text-rose-700">08:50 기준 지각 처리!</span>
-          <span class="text-xs text-slate-400 font-bold">1~4교시 운영</span>
+          <span class="text-xs font-black px-3 py-1 rounded-full bg-rose-100 text-rose-700">08:50 기준 지각 처리!</span>
+          <span class="text-xs text-slate-500 font-bold">1~4교시 운영</span>
         </div>
-        <h3 class="text-base font-black text-slate-800 mt-2">동아리 발표회 운영 시간표</h3>
-        <p class="text-xs text-slate-500 mt-0.5">A팀과 B팀으로 나누어 체험과 부스 운영을 교대로 진행합니다.</p>
+        <h3 class="text-lg font-black text-slate-800 mt-2">동아리 발표회 운영 시간표</h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1">A팀과 B팀으로 나누어 체험과 부스 운영을 교대로 진행합니다.</p>
       </div>
 
       <!-- 타임 블록들 (한눈에 보는 깔끔한 3단 카드) -->
-      <div class="space-y-2">
-        <div class="fest-card rounded-2xl p-3.5 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm font-black shrink-0">조회</span>
+      <div class="space-y-2.5">
+        <div class="fest-card rounded-2xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <span class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm font-black shrink-0">조회</span>
             <div>
-              <div class="text-xs font-bold text-slate-700">08:50 ~ 09:00 (10분)</div>
-              <div class="text-sm font-extrabold text-slate-900 mt-0.5">각 동아리 발표 장소 출석 점검</div>
+              <div class="text-xs font-bold text-slate-500">08:50 ~ 09:00 (10분)</div>
+              <div class="text-sm sm:text-base font-black text-slate-900 mt-0.5">각 동아리 발표 장소 출석 점검</div>
             </div>
           </div>
-          <span class="text-[11px] font-bold px-2 py-1 rounded-lg bg-slate-100 text-slate-600">지각 엄수</span>
+          <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-rose-50 text-rose-600 border border-rose-100">지각 엄수</span>
         </div>
 
-        <div class="fest-card rounded-2xl p-3.5 border-l-4 border-indigo-400">
-          <div class="flex justify-between items-center mb-1.5">
-            <span class="text-xs font-black text-indigo-600">1부 교차 운영 · 09:00 ~ 10:30 (90분)</span>
-            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-indigo-50 text-indigo-600">1차</span>
+        <div class="fest-card rounded-2xl p-4 border-l-4 border-indigo-400">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-black text-indigo-700">1부 교차 운영 · 09:00 ~ 10:30 (90분)</span>
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700">1차</span>
           </div>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div class="p-2 rounded-xl bg-indigo-50/60 border border-indigo-100 text-center">
-              <span class="font-extrabold text-indigo-700">🏃 A팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-medium">타 동아리 체험</div>
+          <div class="grid grid-cols-2 gap-2.5 text-xs sm:text-sm">
+            <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 text-center">
+              <span class="font-black text-indigo-800 text-sm">🏃 A팀 학생</span>
+              <div class="text-xs text-slate-600 mt-1 font-semibold">타 동아리 부스 체험</div>
             </div>
-            <div class="p-2 rounded-xl bg-emerald-50/60 border border-emerald-100 text-center">
-              <span class="font-extrabold text-emerald-700">🏪 B팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-medium">우리 동아리 운영</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="fest-card rounded-2xl p-3.5 border-l-4 border-purple-400">
-          <div class="flex justify-between items-center mb-1.5">
-            <span class="text-xs font-black text-purple-600">2부 교차 운영 · 10:30 ~ 12:00 (90분)</span>
-            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-purple-50 text-purple-600">2차</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div class="p-2 rounded-xl bg-emerald-50/60 border border-emerald-100 text-center">
-              <span class="font-extrabold text-emerald-700">🏪 A팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-medium">우리 동아리 운영</div>
-            </div>
-            <div class="p-2 rounded-xl bg-indigo-50/60 border border-indigo-100 text-center">
-              <span class="font-extrabold text-indigo-700">🏃 B팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-medium">타 동아리 체험</div>
+            <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-center">
+              <span class="font-black text-emerald-800 text-sm">🏪 B팀 학생</span>
+              <div class="text-xs text-slate-600 mt-1 font-semibold">우리 동아리 부스 운영</div>
             </div>
           </div>
         </div>
 
-        <div class="fest-card rounded-2xl p-3.5 flex items-center justify-between border-l-4 border-teal-400">
-          <div class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-sm font-black shrink-0">마무리</span>
+        <div class="fest-card rounded-2xl p-4 border-l-4 border-purple-400">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-black text-purple-700">2부 교차 운영 · 10:30 ~ 12:00 (90분)</span>
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-700">2차</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5 text-xs sm:text-sm">
+            <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-center">
+              <span class="font-black text-emerald-800 text-sm">🏪 A팀 학생</span>
+              <div class="text-xs text-slate-600 mt-1 font-semibold">우리 동아리 부스 운영</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100 text-center">
+              <span class="font-black text-indigo-800 text-sm">🏃 B팀 학생</span>
+              <div class="text-xs text-slate-600 mt-1 font-semibold">타 동아리 부스 체험</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fest-card rounded-2xl p-4 flex items-center justify-between border-l-4 border-teal-400">
+          <div class="flex items-center gap-3.5">
+            <span class="w-11 h-11 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-sm font-black shrink-0">마무리</span>
             <div>
-              <div class="text-xs font-bold text-slate-700">12:00 ~ 12:40 (40분)</div>
-              <div class="text-sm font-extrabold text-slate-900 mt-0.5">부스 철거 &amp; 교실 환경정화</div>
+              <div class="text-xs font-bold text-slate-500">12:00 ~ 12:40 (40분)</div>
+              <div class="text-sm sm:text-base font-black text-slate-900 mt-0.5">부스 철거 &amp; 교실 환경정화</div>
             </div>
           </div>
-          <span class="text-[11px] font-extrabold px-2 py-1 rounded-lg bg-teal-100 text-teal-800">봉사 1시간</span>
+          <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800">봉사 1시간</span>
         </div>
       </div>
 
       <!-- 우수동아리 시상 안내 -->
-      <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 space-y-1">
-        <div class="font-extrabold flex items-center gap-1">
+      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-1.5">
+        <div class="font-black text-sm flex items-center gap-1.5">
           <span>🏆 우수동아리 시상 (전교생 온라인 설문)</span>
         </div>
-        <p class="text-[11px] text-amber-800/90 leading-relaxed">
+        <p class="text-xs sm:text-sm text-amber-800 leading-relaxed font-medium">
           최우수 1팀, 우수 1팀, 장려 3팀 총 5팀 선발 · <strong>매점이용권 10만원</strong> 증정!
         </p>
       </div>
@@ -342,22 +343,22 @@
     <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl max-h-[85vh] flex flex-col animate-sheet">
       
       <!-- 시트 헤더 -->
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center gap-2">
-          <span id="sheetIcon" class="text-2xl"></span>
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <span id="sheetIcon" class="text-3xl"></span>
           <div>
-            <h3 id="sheetTitle" class="text-base font-black text-slate-800"></h3>
-            <span id="sheetCount" class="text-xs font-bold text-pink-600"></span>
+            <h3 id="sheetTitle" class="text-lg font-black text-slate-800"></h3>
+            <span id="sheetCount" class="text-xs font-extrabold text-pink-600"></span>
           </div>
         </div>
-        <button onclick="closeCategorySheet()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200">✕</button>
+        <button onclick="closeCategorySheet()" class="w-9 h-9 rounded-full bg-slate-100 text-slate-500 text-base font-bold flex items-center justify-center hover:bg-slate-200">✕</button>
       </div>
 
       <!-- 부스 카드 리스트 (스크롤 컴팩트) -->
-      <div id="sheetBoothList" class="overflow-y-auto no-scrollbar space-y-2 py-3 flex-1"></div>
+      <div id="sheetBoothList" class="overflow-y-auto no-scrollbar space-y-2.5 py-3.5 flex-1"></div>
 
-      <div class="pt-2 border-t border-slate-100 text-center">
-        <button onclick="closeCategorySheet()" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200">
+      <div class="pt-2.5 border-t border-slate-100 text-center">
+        <button onclick="closeCategorySheet()" class="w-full py-3 rounded-xl bg-slate-100 text-slate-700 text-sm font-bold hover:bg-slate-200">
           닫기
         </button>
       </div>
@@ -366,36 +367,36 @@
 
   <!-- ================= 부스 상세 팝업 ================= -->
   <div id="boothDetailModal" onclick="if(event.target===this) closeBoothDetail()" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl animate-sheet border border-pink-100">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-sheet border border-pink-100">
       <div class="flex items-start justify-between">
-        <div class="flex items-center gap-2.5">
-          <span id="detailEmoji" class="text-3xl p-2 rounded-2xl bg-pink-50"></span>
+        <div class="flex items-center gap-3">
+          <span id="detailEmoji" class="text-4xl p-2.5 rounded-2xl bg-pink-50"></span>
           <div>
-            <span id="detailCat" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-pink-100 text-pink-700"></span>
-            <h3 id="detailName" class="text-lg font-black text-slate-800 mt-0.5"></h3>
+            <span id="detailCat" class="text-xs font-black px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-700"></span>
+            <h3 id="detailName" class="text-xl font-black text-slate-800 mt-1"></h3>
           </div>
         </div>
-        <button onclick="closeBoothDetail()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        <button onclick="closeBoothDetail()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
       </div>
 
-      <div class="mt-3.5 p-3 rounded-2xl bg-slate-50 text-xs text-slate-700 font-medium leading-relaxed" id="detailDesc"></div>
+      <div class="mt-4 p-3.5 rounded-2xl bg-slate-50 text-sm text-slate-700 font-medium leading-relaxed" id="detailDesc"></div>
 
-      <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
-        <div class="p-2.5 rounded-xl bg-pink-50/70 border border-pink-100">
-          <div class="text-[10px] text-pink-600 font-bold">📍 부스 위치</div>
-          <div id="detailRoom" class="text-xs font-black text-slate-800 mt-0.5"></div>
+      <div class="grid grid-cols-2 gap-2.5 mt-3.5">
+        <div class="p-3 rounded-xl bg-pink-50/80 border border-pink-100">
+          <div class="text-xs text-pink-600 font-bold">📍 부스 위치</div>
+          <div id="detailRoom" class="text-sm font-black text-slate-800 mt-0.5"></div>
         </div>
-        <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-100">
-          <div class="text-[10px] text-indigo-600 font-bold">🏢 층수</div>
-          <div id="detailFloor" class="text-xs font-black text-slate-800 mt-0.5"></div>
+        <div class="p-3 rounded-xl bg-indigo-50/80 border border-indigo-100">
+          <div class="text-xs text-indigo-600 font-bold">🏢 층수</div>
+          <div id="detailFloor" class="text-sm font-black text-slate-800 mt-0.5"></div>
         </div>
       </div>
 
       <div class="mt-4 flex gap-2">
-        <button onclick="goToFloorFromDetail()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-bold shadow hover:opacity-95">
+        <button onclick="goToFloorFromDetail()" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white text-sm font-black shadow hover:opacity-95">
           🗺️ 지도에서 위치 보기
         </button>
-        <button onclick="closeBoothDetail()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">
+        <button onclick="closeBoothDetail()" class="px-5 py-3 rounded-xl bg-slate-100 text-slate-700 text-sm font-bold">
           확인
         </button>
       </div>
@@ -491,10 +492,10 @@
         const btn = document.getElementById(`tabBtn-${v}`);
         if (v === view) {
           el.classList.remove('hidden');
-          btn.className = "py-2 rounded-xl text-xs font-extrabold transition text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-sm";
+          btn.className = "py-2.5 rounded-xl text-sm font-extrabold transition text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-sm";
         } else {
           el.classList.add('hidden');
-          btn.className = "py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900";
+          btn.className = "py-2.5 rounded-xl text-sm font-bold transition text-slate-600 hover:text-slate-900";
         }
       });
       if (view === 'floor') pickFloor(3);
@@ -511,18 +512,18 @@
 
       const container = document.getElementById('sheetBoothList');
       container.innerHTML = list.map(b => `
-        <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between hover:bg-pink-50/50 hover:border-pink-200 transition">
-          <div class="flex items-center gap-2.5">
-            <span class="text-2xl">${b.emoji}</span>
+        <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between hover:bg-pink-50/60 hover:border-pink-200 transition">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">${b.emoji}</span>
             <div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-sm font-black text-slate-800">${b.name}</span>
-                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-white text-indigo-600 border border-indigo-100">📍 ${b.room} (${b.floor}층)</span>
+              <div class="flex items-center gap-2">
+                <span class="text-base font-black text-slate-800">${b.name}</span>
+                <span class="text-xs font-bold px-2 py-0.5 rounded bg-white text-indigo-700 border border-indigo-100">📍 ${b.room} (${b.floor}층)</span>
               </div>
-              <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">${b.desc}</p>
+              <p class="text-xs sm:text-sm text-slate-600 line-clamp-1 mt-0.5 font-medium">${b.desc}</p>
             </div>
           </div>
-          <span class="text-xs text-pink-500 font-bold shrink-0">상세 👉</span>
+          <span class="text-xs sm:text-sm text-pink-500 font-bold shrink-0">상세 👉</span>
         </div>
       `).join('');
 
@@ -566,9 +567,9 @@
     function pickFloor(floor) {
       document.querySelectorAll('.fl-chip').forEach(btn => {
         if (Number(btn.dataset.fl) === floor) {
-          btn.className = "fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm";
+          btn.className = "fl-chip py-2.5 rounded-xl text-sm font-black transition bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm";
         } else {
-          btn.className = "fl-chip py-2 rounded-xl text-xs font-extrabold transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-50";
+          btn.className = "fl-chip py-2.5 rounded-xl text-sm font-bold transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-50";
         }
       });
 
@@ -577,26 +578,26 @@
 
       const card = document.getElementById('floorDetailCard');
       card.innerHTML = `
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
           <div>
-            <h4 class="text-sm font-black text-slate-800">${data.title}</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">${data.desc}</p>
+            <h4 class="text-base font-black text-slate-800">${data.title}</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-0.5">${data.desc}</p>
           </div>
-          <span class="text-xs font-bold px-2 py-1 rounded-lg bg-pink-50 text-pink-600">${floorBooths.length}개 부스</span>
+          <span class="text-xs sm:text-sm font-extrabold px-2.5 py-1 rounded-lg bg-pink-50 text-pink-600">${floorBooths.length}개 부스</span>
         </div>
-        <div class="grid grid-cols-2 gap-2 pt-1">
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
           ${floorBooths.map(b => `
-            <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-2.5 rounded-xl bg-white border border-slate-100 shadow-xs hover:border-pink-300 flex flex-col justify-between">
+            <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-pink-300 flex flex-col justify-between">
               <div>
-                <div class="flex items-center justify-between text-xs font-extrabold text-pink-600">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-black text-pink-600">
                   <span>📍 ${b.room}</span>
-                  <span>${b.emoji}</span>
+                  <span class="text-lg">${b.emoji}</span>
                 </div>
-                <div class="text-xs font-black text-slate-800 mt-1 truncate">${b.name}</div>
-                <p class="text-[10px] text-slate-500 line-clamp-1 mt-0.5">${b.desc}</p>
+                <div class="text-sm font-black text-slate-800 mt-1 truncate">${b.name}</div>
+                <p class="text-xs text-slate-500 line-clamp-1 mt-0.5">${b.desc}</p>
               </div>
-              <div class="mt-2 text-right">
-                <span class="text-[10px] text-indigo-500 font-bold">터치하여 확인 👉</span>
+              <div class="mt-2.5 text-right">
+                <span class="text-xs text-indigo-600 font-black">터치하여 확인 👉</span>
               </div>
             </div>
           `).join('')}
@@ -625,18 +626,18 @@
       });
 
       if (matches.length === 0) {
-        list.innerHTML = `<div class="p-3 text-center text-xs text-slate-400">일치하는 부스가 없습니다.</div>`;
+        list.innerHTML = `<div class="p-4 text-center text-sm text-slate-400">일치하는 부스가 없습니다.</div>`;
       } else {
         list.innerHTML = matches.map(b => `
-          <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-2.5 rounded-xl bg-white border border-pink-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-xl">${b.emoji}</span>
+          <div onclick="openBoothDetail(${b.id})" class="press-effect cursor-pointer p-3 rounded-2xl bg-white border border-pink-100 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">${b.emoji}</span>
               <div>
-                <div class="text-xs font-extrabold text-slate-800">${b.name} <span class="text-[10px] text-indigo-600 font-bold ml-1">📍 ${b.room}</span></div>
-                <div class="text-[10px] text-slate-500 line-clamp-1">${b.desc}</div>
+                <div class="text-sm font-black text-slate-800">${b.name} <span class="text-xs text-indigo-600 font-bold ml-1">📍 ${b.room}</span></div>
+                <div class="text-xs text-slate-500 line-clamp-1 font-medium">${b.desc}</div>
               </div>
             </div>
-            <span class="text-xs text-pink-500 font-bold">보기</span>
+            <span class="text-xs text-pink-500 font-bold shrink-0">보기</span>
           </div>
         `).join('');
       }
