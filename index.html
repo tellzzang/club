@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>2026 운양고 동아리 발표회 가이드</title>
+  <title>2026 운양고 동아리 발표회</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <style>
     :root {
       --primary: #4f46e5;
       --primary-dark: #3730a3;
-      --primary-light: #e0e7ff;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
@@ -18,7 +17,7 @@
       --border: #e2e8f0;
       --radius: 16px;
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.07);
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -64,7 +63,7 @@
       font-weight: 700;
     }
 
-    /* Sub-header Bar (when in sub-views) */
+    /* Sub Navigation Bar (when inside a section) */
     .sub-bar {
       display: none;
       align-items: center;
@@ -75,7 +74,7 @@
     }
     .sub-bar.active { display: flex; }
     .back-btn {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       color: white;
       padding: 6px 12px;
@@ -93,15 +92,14 @@
       color: #cbd5e1;
     }
 
-    /* Main Container */
     main {
-      padding: 18px 16px;
-      max-width: 600px;
+      padding: 16px;
+      max-width: 520px;
       margin: 0 auto;
     }
 
     /* ============================================================
-       HOME VIEW: 4개 메인 메뉴 선택 카드 (메인 화면에서 1개 선택)
+       HOME VIEW: 메인 4개 메뉴 선택 카드
        ============================================================ */
     #view-home { display: block; }
     .hero-banner {
@@ -109,10 +107,10 @@
       border: 1px solid #c7d2fe;
       border-radius: var(--radius);
       padding: 22px 18px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       text-align: center;
     }
-    .hero-emoji { font-size: 2.5rem; margin-bottom: 8px; }
+    .hero-emoji { font-size: 2.4rem; margin-bottom: 8px; }
     .hero-title { font-size: 1.25rem; font-weight: 900; color: #1e1b4b; }
     .hero-desc { font-size: 0.85rem; color: #4338ca; margin-top: 4px; font-weight: 600; }
 
@@ -125,7 +123,7 @@
       background: white;
       border: 1.5px solid var(--border);
       border-radius: 18px;
-      padding: 22px 16px;
+      padding: 24px 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -144,16 +142,14 @@
       background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
       box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15);
     }
-    .menu-icon { font-size: 2.6rem; margin-bottom: 10px; }
+    .menu-icon { font-size: 2.7rem; margin-bottom: 10px; }
     .menu-title { font-size: 1.05rem; font-weight: 800; color: #0f172a; }
     .menu-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
 
     /* ============================================================
-       1. 🗺️ 세로형 교실 배치도 지도 뷰 (모바일 가로 스크롤 완전 0%)
+       1. 🗺️ 지도로 보기: 90도 회전된 실제 세로 도면 뷰어 (가로 스크롤 X)
        ============================================================ */
     #view-map { display: none; }
-
-    /* 1층 ~ 5층 선택 세그먼트 버튼 */
     .floor-tabs {
       display: flex;
       background: #e2e8f0;
@@ -164,11 +160,11 @@
     }
     .floor-tab-btn {
       flex: 1;
-      padding: 9px 0;
+      padding: 10px 0;
       border: none;
       background: transparent;
       color: #475569;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       font-weight: 800;
       border-radius: 9px;
       cursor: pointer;
@@ -180,125 +176,96 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    /* 세로형 평면도 컨테이너 */
-    .vertical-floor-plan {
+    .floor-plan-card {
       background: white;
       border-radius: var(--radius);
       border: 1.5px solid var(--border);
-      padding: 16px;
       box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 20px;
     }
-    .plan-header {
+    .floor-plan-header {
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 14px;
-      border-bottom: 1.5px dashed var(--border);
-      margin-bottom: 16px;
     }
-    .plan-title {
-      font-size: 1.1rem;
+    .floor-plan-title {
+      font-size: 1.05rem;
       font-weight: 900;
       color: #1e1b4b;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-    .plan-notice {
-      font-size: 0.75rem;
+    .floor-plan-tip {
+      font-size: 0.74rem;
       color: #4338ca;
+      font-weight: 700;
       background: #eff6ff;
       padding: 4px 8px;
       border-radius: 6px;
-      font-weight: 700;
     }
 
-    /* 학교 도면 존(Zone) 카드 - 세로 흐름 구조 */
-    .wing-block {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
+    /* 90도 회전된 실제 도면 세로 컨테이너 (모바일 폭 100%에 딱 맞춤) */
+    .vertical-map-container {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      line-height: 0;
     }
-    .wing-block:last-child { margin-bottom: 0; }
-    .wing-title {
-      font-size: 0.82rem;
+    .vertical-map-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* 도면 속 교실/동아리 터치 핫스팟 버튼 */
+    .map-hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.74rem;
       font-weight: 800;
-      color: #64748b;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      text-transform: uppercase;
-    }
-
-    .corridor-grid {
-      display: grid;
-      gap: 8px;
-    }
-    .corridor-grid.cols-1 { grid-template-columns: 1fr; }
-    .corridor-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-    .corridor-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-    /* 교실 칸 (지도 내 교실 박스) */
-    .room-cell {
-      background: white;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 10px 8px;
-      text-align: center;
       cursor: pointer;
-      transition: all 0.15s ease;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 56px;
+      gap: 3px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      z-index: 10;
+      line-height: 1.2;
     }
-    .room-cell:active {
-      transform: scale(0.97);
+    .map-hotspot.booth {
+      background: #4f46e5;
+      color: #ffffff;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 2px 7px rgba(79, 70, 229, 0.4);
+      animation: pulse 2.2s infinite;
     }
-    .room-cell.booth {
-      border-color: #6366f1;
-      background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
-      box-shadow: 0 2px 7px rgba(99, 102, 241, 0.18);
+    .map-hotspot.booth:active {
+      transform: translate(-50%, -50%) scale(1.18);
+      background: #e11d48;
+      z-index: 20;
     }
-    .room-cell.booth:hover, .room-cell.booth:active {
-      border-color: #4338ca;
-      background: #e0e7ff;
-    }
-    .room-cell.facility {
-      background: #f1f5f9;
-      border-color: #e2e8f0;
-      color: #64748b;
-      cursor: default;
+    .map-hotspot.facility {
+      background: rgba(255, 255, 255, 0.92);
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      font-weight: 600;
+      font-size: 0.68rem;
     }
 
-    .room-number {
-      font-size: 0.78rem;
-      font-weight: 900;
-      color: #334155;
-    }
-    .room-cell.booth .room-number {
-      color: #312e81;
-    }
-    .room-club-badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #4338ca;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
     }
 
     /* ============================================================
-       2. 🏪 부스별로 보기 뷰
+       2. 🏪 부스별로 보기
        ============================================================ */
     #view-booths { display: none; }
     .search-box {
@@ -376,7 +343,7 @@
     }
 
     /* ============================================================
-       3. 🎪 장르별로 보기 뷰
+       3. 🎪 장르별로 보기
        ============================================================ */
     #view-genres { display: none; }
     .genre-grid {
@@ -405,7 +372,7 @@
     }
 
     /* ============================================================
-       4. ⏰ 운영시간표 뷰
+       4. ⏰ 운영시간표
        ============================================================ */
     #view-schedule { display: none; }
     .schedule-card {
@@ -526,10 +493,10 @@
         <span style="font-size: 1.3rem;">🏫</span>
         <div class="header-title">운양고 2026 동아리 발표회</div>
       </div>
-      <div class="header-badge">모바일 가이드</div>
+      <div class="header-badge">축제 안내</div>
     </div>
 
-    <!-- Sub Navigation Bar (when inside sub-view) -->
+    <!-- Sub Navigation Bar -->
     <div class="sub-bar" id="subBar">
       <button class="back-btn" onclick="goHome()">◀ 메인 메뉴</button>
       <span class="view-indicator" id="viewIndicator">지도로 보기</span>
@@ -538,7 +505,7 @@
 
   <main>
     <!-- ============================================================
-         HOME VIEW (메인 화면: 4개 메뉴 중 선택)
+         HOME VIEW (메인 화면: 4개 메뉴 중 1개 선택)
          ============================================================ -->
     <div id="view-home">
       <div class="hero-banner">
@@ -552,7 +519,7 @@
         <div class="menu-card highlight" onclick="navigateTo('map')">
           <div class="menu-icon">🗺️</div>
           <div class="menu-title">지도로 보기</div>
-          <div class="menu-subtitle">1~5층 세로형 배치도</div>
+          <div class="menu-subtitle">1~5층 세로형 실제 배치도</div>
         </div>
 
         <!-- 2. 부스별로 보기 -->
@@ -579,10 +546,10 @@
     </div>
 
     <!-- ============================================================
-         1. 🗺️ 지도로 보기 VIEW (세로가 긴 층별 평면도, 가로 스크롤 X)
+         1. 🗺️ 지도로 보기 VIEW (90도 회전된 실제 도면 세로 뷰어)
          ============================================================ -->
     <div id="view-map">
-      <!-- 1층 ~ 5층 선택 버튼 -->
+      <!-- 1층 ~ 5층 선택 탭 -->
       <div class="floor-tabs">
         <button class="floor-tab-btn" onclick="selectFloor(5)">5층</button>
         <button class="floor-tab-btn" onclick="selectFloor(4)">4층</button>
@@ -591,9 +558,15 @@
         <button class="floor-tab-btn active" onclick="selectFloor(1)">1층</button>
       </div>
 
-      <!-- 선택된 층의 세로형 배치도 렌더링 컨테이너 -->
-      <div class="vertical-floor-plan" id="floorPlanContainer">
-        <!-- JS로 세로형 교실 배치도 렌더링 -->
+      <!-- 선택된 층의 90도 회전 세로 실제 도면 카드 -->
+      <div class="floor-plan-card">
+        <div class="floor-plan-header">
+          <div class="floor-plan-title" id="floorTitle">1층 실제 배치도 지도</div>
+          <span class="floor-plan-tip">교실 터치 시 소개</span>
+        </div>
+        <div class="vertical-map-container" id="verticalMapContainer">
+          <!-- JS로 회전된 실제 도면 이미지 및 인터랙티브 핀 렌더링 -->
+        </div>
       </div>
     </div>
 
@@ -733,180 +706,8 @@
       { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
     ];
 
-    // 2026 운양고 실제 건축 도면 기반 1층~5층 세로형 배치도 데이터
-    const FLOOR_MAPS = {
-      5: {
-        title: "5층 배치도 (2학년 교실 & 미술실)",
-        sections: [
-          {
-            wing: "북측 특별교실 구역",
-            cols: 2,
-            rooms: [
-              { num: "미술실", club: "미술 전시실", boothId: null, type: "facility" },
-              { num: "1-1 교실", club: "👻 경영위키 (방탈출)", boothId: 20, type: "booth" },
-              { num: "wee클래스", club: "상담실", boothId: null, type: "facility" },
-              { num: "1-2 교실", club: "일반교실", boothId: null, type: "facility" }
-            ]
-          },
-          {
-            wing: "동측 복도 구역 (2학년 동편)",
-            cols: 3,
-            rooms: [
-              { num: "2-6", club: "일반교실", boothId: null, type: "facility" },
-              { num: "2-7", club: "💅 에끌라 (네일/분장)", boothId: 12, type: "booth" },
-              { num: "2-8", club: "🍪 글로톡 (타투/쿠키)", boothId: 16, type: "booth" },
-              { num: "2-9", club: "☕ 축구부 (메이드카페)", boothId: 9, type: "booth" },
-              { num: "2-10", club: "일반교실", boothId: null, type: "facility" },
-              { num: "교육연구부", club: "교무실", boothId: null, type: "facility" }
-            ]
-          },
-          {
-            wing: "중앙 및 서측 복도 구역 (2학년 서편)",
-            cols: 3,
-            rooms: [
-              { num: "2-5", club: "💘 소프라테스 (소개팅)", boothId: 7, type: "booth" },
-              { num: "2-4", club: "🕵️ 블루라인 (과학수사)", boothId: 21, type: "booth" },
-              { num: "상담실", club: "진로상담", boothId: null, type: "facility" },
-              { num: "2-1", club: "🏮 애그부 (일러스트)", boothId: 19, type: "booth" },
-              { num: "2-2", club: "🏮 애그부 (마츠리부스)", boothId: 19, type: "booth" },
-              { num: "2-3", club: "🎁 교집합 (퀴즈배틀)", boothId: 13, type: "booth" }
-            ]
-          }
-        ]
-      },
-      4: {
-        title: "4층 배치도 (과학실험실 & 3학년 교실)",
-        sections: [
-          {
-            wing: "북측 첨단 과학실험 구역",
-            cols: 2,
-            rooms: [
-              { num: "화학실", club: "🧋 시너지 · 🌌 생명보험", boothIds: [2, 4], type: "booth" },
-              { num: "생물실", club: "🐟 아스클 · 🧼 화생방", boothIds: [3, 6], type: "booth" }
-            ]
-          },
-          {
-            wing: "동측 과학실 및 자치활동 구역",
-            cols: 2,
-            rooms: [
-              { num: "물리실", club: "🍹 스파크 (과학칵테일)", boothId: 1, type: "booth" },
-              { num: "지구과학실", club: "🌭 멘날바 (상태변화/간식)", boothId: 5, type: "booth" },
-              { num: "1-3 교실", club: "🏺 교지편집부 (유물추리)", boothId: 24, type: "booth" },
-              { num: "학생자치부", club: "운영본부", boothId: null, type: "facility" }
-            ]
-          },
-          {
-            wing: "서측 3학년 교실 구역 (3-1 ~ 3-5)",
-            cols: 3,
-            rooms: [
-              { num: "3-5", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-4", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3학년교무실", club: "교무실", boothId: null, type: "facility" },
-              { num: "3-1", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-2", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-3", club: "3학년교실", boothId: null, type: "facility" }
-            ]
-          }
-        ]
-      },
-      3: {
-        title: "3층 배치도 (1학년 교실 & 3학년 교실)",
-        sections: [
-          {
-            wing: "북측 1학년 교실 구역",
-            cols: 2,
-            rooms: [
-              { num: "1-4 교실", club: "🙈 창연회 (블라인드소개팅)", boothId: 11, type: "booth" },
-              { num: "1-5 교실", club: "🪄 잡지식 (해리포터포토존)", boothId: 18, type: "booth" }
-            ]
-          },
-          {
-            wing: "동측 복도 구역 (1-6 ~ 1-10)",
-            cols: 3,
-            rooms: [
-              { num: "1-6 교실", club: "⛩️ 유아트 (무당집방탈출A)", boothId: 22, type: "booth" },
-              { num: "1-7 교실", club: "⛩️ 유아트 (무당집방탈출B)", boothId: 22, type: "booth" },
-              { num: "1-8 교실", club: "🍿 필름메이커스 (시네마)", boothId: 17, type: "booth" },
-              { num: "1-9 교실", club: "일반교실", boothId: null, type: "facility" },
-              { num: "1-10 교실", club: "💌 또래상담부 (심리테스트)", boothId: 10, type: "booth" },
-              { num: "1학년교무실", club: "교무실", boothId: null, type: "facility" }
-            ]
-          },
-          {
-            wing: "서측 3학년 교실 구역 (3-6 ~ 3-10)",
-            cols: 3,
-            rooms: [
-              { num: "3-10", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-9", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "인문사회부", club: "교무센터", boothId: null, type: "facility" },
-              { num: "3-6", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-7", club: "3학년교실", boothId: null, type: "facility" },
-              { num: "3-8", club: "3학년교실", boothId: null, type: "facility" }
-            ]
-          }
-        ]
-      },
-      2: {
-        title: "2층 배치도 (대강당 운양관 · 기술가정실 · 방송실 · 도서관)",
-        sections: [
-          {
-            wing: "서측 대강당(운양관) — 메인 공연 & 체육존",
-            cols: 1,
-            rooms: [
-              { num: "대강당 (운양관)", club: "💃 러쉬온미(댄스) · 🏋️ 체대입시 · 🏸 플라잉셔틀즈", boothIds: [25, 26, 27], type: "booth" }
-            ]
-          },
-          {
-            wing: "중앙 실습 및 학습 구역",
-            cols: 2,
-            rooms: [
-              { num: "기술가정실", club: "🧇 베이킹메이킹 (크로플)", boothId: 8, type: "booth" },
-              { num: "청운관 (학습실)", club: "자기주도학습실", boothId: null, type: "facility" }
-            ]
-          },
-          {
-            wing: "동측 및 남측 미디어·도서관 구역",
-            cols: 2,
-            rooms: [
-              { num: "방송실", club: "🎤 소나기 (귀신의집/노래방)", boothId: 23, type: "booth" },
-              { num: "도서관", club: "🎰 도서관사람들 (책팟게임)", boothId: 15, type: "booth" },
-              { num: "컴퓨터실", club: "🏎️ 알고리즘 (코딩게임/레이싱)", boothId: 14, type: "booth" },
-              { num: "교무센터", club: "전산/교무지원", boothId: null, type: "facility" }
-            ]
-          }
-        ]
-      },
-      1: {
-        title: "1층 배치도 (음악실 · 시청각실 · 운동장 · 매점)",
-        sections: [
-          {
-            wing: "실외 체육 구역",
-            cols: 1,
-            rooms: [
-              { num: "운동장 / 야외 농구장", club: "🏀 슬램덩크(농구부) (1:1/자유투)", boothId: 30, type: "booth" }
-            ]
-          },
-          {
-            wing: "공연 예술 전문관 구역",
-            cols: 2,
-            rooms: [
-              { num: "음악실", club: "🎸 밴드부 (라이브 콘서트)", boothId: 28, type: "booth" },
-              { num: "시청각실", club: "🎭 시퀀스 (연극 '20세기 소녀')", boothId: 29, type: "booth" }
-            ]
-          },
-          {
-            wing: "편의 및 행정 지원 구역",
-            cols: 2,
-            rooms: [
-              { num: "매점 (운수대통)", club: "학생 매점 / 스낵", boothId: null, type: "facility" },
-              { num: "급식소 (식당)", club: "점심 식사 공간", boothId: null, type: "facility" },
-              { num: "보건실", club: "응급 처치", boothId: null, type: "facility" },
-              { num: "행정실 / 교장실", club: "학교 본부", boothId: null, type: "facility" }
-            ]
-          }
-        ]
-      }
-    };
+    // 90도 회전된 층별 배치도 핫스팟 데이터
+    const ROTATED_HOTSPOTS = [{"name": "1-1", "alias": "1-1", "floor": 5, "left": 81.8, "top": 58.1, "club_id": 20, "club_ids": null, "club_name": "경영위키", "cat": "방탈출/추리", "emoji": "👻", "has_booth": true}, {"name": "1-2", "alias": "1-2", "floor": 5, "left": 72.1, "top": 58.1, "club_id": null, "club_ids": null, "club_name": "1-2 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "미술실", "alias": "미술실", "floor": 5, "left": 75.5, "top": 46.7, "club_id": null, "club_ids": null, "club_name": "미술실", "cat": "특별실", "emoji": "🎨", "has_booth": false}, {"name": "2-5", "alias": "2-5", "floor": 5, "left": 39.3, "top": 34.2, "club_id": 7, "club_ids": null, "club_name": "소프라테스", "cat": "체험/실습형", "emoji": "💘", "has_booth": true}, {"name": "2-4", "alias": "2-4", "floor": 5, "left": 29.2, "top": 34.2, "club_id": 21, "club_ids": null, "club_name": "블루라인", "cat": "방탈출/추리", "emoji": "🕵️", "has_booth": true}, {"name": "2-6", "alias": "2-6", "floor": 5, "left": 39.3, "top": 54.5, "club_id": null, "club_ids": null, "club_name": "2-6 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "2-7", "alias": "2-7", "floor": 5, "left": 39.3, "top": 61.7, "club_id": 12, "club_ids": null, "club_name": "에끌라", "cat": "체험/실습형", "emoji": "💅", "has_booth": true}, {"name": "2-8", "alias": "2-8", "floor": 5, "left": 39.3, "top": 69.0, "club_id": 16, "club_ids": null, "club_name": "글로톡", "cat": "체험/실습형", "emoji": "🍪", "has_booth": true}, {"name": "2-9", "alias": "2-9", "floor": 5, "left": 39.3, "top": 76.3, "club_id": 9, "club_ids": null, "club_name": "축구부", "cat": "체험/실습형", "emoji": "☕", "has_booth": true}, {"name": "2-10", "alias": "2-10", "floor": 5, "left": 39.3, "top": 83.0, "club_id": null, "club_ids": null, "club_name": "2-10 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "2-1", "alias": "2-1", "floor": 5, "left": 7.7, "top": 12.4, "club_id": 19, "club_ids": null, "club_name": "애그부", "cat": "문화예술형", "emoji": "🏮", "has_booth": true}, {"name": "2-2", "alias": "2-2", "floor": 5, "left": 7.7, "top": 19.7, "club_id": 19, "club_ids": null, "club_name": "애그부", "cat": "문화예술형", "emoji": "🏮", "has_booth": true}, {"name": "2-3", "alias": "2-3", "floor": 5, "left": 7.7, "top": 26.9, "club_id": 13, "club_ids": null, "club_name": "교집합", "cat": "체험/실습형", "emoji": "🎁", "has_booth": true}, {"name": "화학실", "alias": "화학실", "floor": 4, "left": 89.2, "top": 46.4, "club_id": null, "club_ids": [2, 4], "club_name": "시너지 · 생명보험", "cat": "체험/실습형", "emoji": "🧋", "has_booth": true}, {"name": "생물실", "alias": "생물실", "floor": 4, "left": 89.2, "top": 57.4, "club_id": null, "club_ids": [3, 6], "club_name": "아스클 · 화생방", "cat": "체험/실습형", "emoji": "🐟", "has_booth": true}, {"name": "물리실", "alias": "물리실", "floor": 4, "left": 47.2, "top": 62.8, "club_id": 1, "club_ids": null, "club_name": "스파크", "cat": "체험/실습형", "emoji": "🍹", "has_booth": true}, {"name": "과학실험실(지구과학)", "alias": "지구과학실", "floor": 4, "left": 45.0, "top": 77.1, "club_id": 5, "club_ids": null, "club_name": "멘날바", "cat": "체험/실습형", "emoji": "🌭", "has_booth": true}, {"name": "1-3", "alias": "1-3", "floor": 4, "left": 46.9, "top": 54.5, "club_id": 24, "club_ids": null, "club_name": "교지편집부", "cat": "방탈출/추리", "emoji": "🏺", "has_booth": true}, {"name": "3-5", "alias": "3-5", "floor": 4, "left": 44.4, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-5 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-4", "alias": "3-4", "floor": 4, "left": 32.5, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-4 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-1", "alias": "3-1", "floor": 4, "left": 8.3, "top": 12.4, "club_id": null, "club_ids": null, "club_name": "3-1 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-2", "alias": "3-2", "floor": 4, "left": 8.3, "top": 19.7, "club_id": null, "club_ids": null, "club_name": "3-2 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-3", "alias": "3-3", "floor": 4, "left": 8.3, "top": 26.9, "club_id": null, "club_ids": null, "club_name": "3-3 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "1-4", "alias": "1-4", "floor": 3, "left": 96.5, "top": 58.1, "club_id": 11, "club_ids": null, "club_name": "창연회", "cat": "체험/실습형", "emoji": "🙈", "has_booth": true}, {"name": "1-5", "alias": "1-5", "floor": 3, "left": 86.4, "top": 58.1, "club_id": 18, "club_ids": null, "club_name": "잡지식", "cat": "문화예술형", "emoji": "🪄", "has_booth": true}, {"name": "1-6", "alias": "1-6", "floor": 3, "left": 50.6, "top": 54.5, "club_id": 22, "club_ids": null, "club_name": "유아트(무당집)", "cat": "방탈출/추리", "emoji": "⛩️", "has_booth": true}, {"name": "1-7", "alias": "1-7", "floor": 3, "left": 50.6, "top": 61.7, "club_id": 22, "club_ids": null, "club_name": "유아트(무당집)", "cat": "방탈출/추리", "emoji": "⛩️", "has_booth": true}, {"name": "1-8", "alias": "1-8", "floor": 3, "left": 50.6, "top": 69.0, "club_id": 17, "club_ids": null, "club_name": "필름메이커스", "cat": "문화예술형", "emoji": "🍿", "has_booth": true}, {"name": "1-9", "alias": "1-9", "floor": 3, "left": 50.6, "top": 76.3, "club_id": null, "club_ids": null, "club_name": "1-9 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "1-10", "alias": "1-10", "floor": 3, "left": 50.6, "top": 83.0, "club_id": 10, "club_ids": null, "club_name": "또래상담부", "cat": "체험/실습형", "emoji": "💌", "has_booth": true}, {"name": "3-10", "alias": "3-10", "floor": 3, "left": 44.6, "top": 33.8, "club_id": null, "club_ids": null, "club_name": "3-10 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-9", "alias": "3-9", "floor": 3, "left": 35.6, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-9 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-6", "alias": "3-6", "floor": 3, "left": 8.8, "top": 12.4, "club_id": null, "club_ids": null, "club_name": "3-6 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-7", "alias": "3-7", "floor": 3, "left": 8.8, "top": 19.7, "club_id": null, "club_ids": null, "club_name": "3-7 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-8", "alias": "3-8", "floor": 3, "left": 8.8, "top": 26.9, "club_id": null, "club_ids": null, "club_name": "3-8 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "강당(운양관)", "alias": "강당", "floor": 2, "left": 76.3, "top": 18.6, "club_id": null, "club_ids": [25, 26, 27], "club_name": "러쉬온미 · 체대입시 · 플라잉셔틀즈", "cat": "공연/체육", "emoji": "💃", "has_booth": true}, {"name": "기술가정실", "alias": "기술가정실", "floor": 2, "left": 76.8, "top": 45.7, "club_id": 8, "club_ids": null, "club_name": "베이킹메이킹(크로플)", "cat": "체험/실습형", "emoji": "🧇", "has_booth": true}, {"name": "청운관(학습실)", "alias": "청운관", "floor": 2, "left": 80.8, "top": 57.6, "club_id": null, "club_ids": null, "club_name": "청운관", "cat": "자기주도학습실", "emoji": "📖", "has_booth": false}, {"name": "방송실", "alias": "방송실", "floor": 2, "left": 40.7, "top": 57.1, "club_id": 23, "club_ids": null, "club_name": "소나기(귀신의집/노래방)", "cat": "방탈출/추리", "emoji": "🎤", "has_booth": true}, {"name": "도서관", "alias": "도서관", "floor": 2, "left": 24.7, "top": 33.7, "club_id": 15, "club_ids": null, "club_name": "도서관사람들(책팟)", "cat": "체험/실습형", "emoji": "🎰", "has_booth": true}, {"name": "컴퓨터실", "alias": "컴퓨터실", "floor": 2, "left": 9.4, "top": 13.2, "club_id": 14, "club_ids": null, "club_name": "알고리즘", "cat": "체험/실습형", "emoji": "🏎️", "has_booth": true}, {"name": "매점(운수대통)", "alias": "매점", "floor": 1, "left": 83.0, "top": 48.6, "club_id": null, "club_ids": null, "club_name": "운수대통 매점", "cat": "편의시설", "emoji": "🏪", "has_booth": false}, {"name": "급식소", "alias": "급식소", "floor": 1, "left": 82.6, "top": 17.1, "club_id": null, "club_ids": null, "club_name": "급식소", "cat": "편의시설", "emoji": "🍱", "has_booth": false}, {"name": "음악실", "alias": "음악실", "floor": 1, "left": 31.3, "top": 33.7, "club_id": 28, "club_ids": null, "club_name": "밴드부", "cat": "공연형", "emoji": "🎸", "has_booth": true}, {"name": "시청각실", "alias": "시청각실", "floor": 1, "left": 12.2, "top": 17.4, "club_id": 29, "club_ids": null, "club_name": "시퀀스(연극)", "cat": "공연형", "emoji": "🎭", "has_booth": true}, {"name": "운동장", "alias": "운동장", "floor": 1, "left": 12.8, "top": 67.2, "club_id": 30, "club_ids": null, "club_name": "슬램덩크(농구부)", "cat": "체육활동형", "emoji": "🏀", "has_booth": true}];
 
     // 네비게이션 전환
     function navigateTo(viewName) {
@@ -929,7 +730,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (viewName === 'map') {
-        selectFloor(1); // 기본 1층부터 보여줌
+        selectFloor(1); // 기본 1층
       }
     }
 
@@ -943,63 +744,63 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 층 선택 및 세로형 도면 렌더링
+    // 90도 회전된 실제 배치도 렌더링
     function selectFloor(floorNum) {
       document.querySelectorAll('.floor-tab-btn').forEach(b => {
         if (b.innerText.includes(floorNum + '층')) b.classList.add('active');
         else b.classList.remove('active');
       });
 
-      const container = document.getElementById('floorPlanContainer');
-      const data = FLOOR_MAPS[floorNum];
-      if (!data) return;
+      document.getElementById('floorTitle').innerText = floorNum + '층 실제 배치도 지도';
 
-      let html = `
-        <div class="plan-header">
-          <div class="plan-title">🏛️ ${data.title}</div>
-          <span class="plan-notice">교실 터치 시 소개</span>
-        </div>
-      `;
+      const container = document.getElementById('verticalMapContainer');
+      const imgSrc = `floor_vertical_${floorNum}.png`;
 
-      data.sections.forEach(sec => {
-        html += `
-          <div class="wing-block">
-            <div class="wing-title">📍 ${sec.wing}</div>
-            <div class="corridor-grid cols-${sec.cols}">
-        `;
+      // 핫스팟 필터링
+      const flHotspots = ROTATED_HOTSPOTS.filter(h => h.floor === floorNum);
 
-        sec.rooms.forEach(r => {
-          const isBooth = r.type === 'booth';
-          const clickAction = isBooth 
-            ? `onclick="handleRoomClick('${r.num}', ${r.boothId || 'null'}, ${r.boothIds ? JSON.stringify(r.boothIds) : 'null'})"`
-            : `onclick="handleFacilityClick('${r.num}', '${r.club}')"`;
+      let spotsHtml = '';
+      flHotspots.forEach(h => {
+        const hasBooth = h.has_booth;
+        const cls = hasBooth ? 'map-hotspot booth' : 'map-hotspot facility';
+        const label = hasBooth ? h.club_name : h.name;
+        const emoji = hasBooth && h.emoji ? h.emoji + ' ' : '';
+        const cid = h.club_id || '';
+        const cids = h.club_ids ? h.club_ids.join(',') : '';
+        const rm = h.name.replace(/'/g, "\'");
 
-          html += `
-            <div class="room-cell ${r.type}" ${clickAction}>
-              <div class="room-number">${r.num}</div>
-              <div class="room-club-badge">${r.club}</div>
-            </div>
-          `;
-        });
-
-        html += `
-            </div>
+        spotsHtml += `
+          <div class="${cls}" style="left: ${h.left}%; top: ${h.top}%;"
+               onclick="openRoomModal('${rm}', '${cid}', '${cids}')">
+            <span>${emoji}${label}</span>
           </div>
         `;
       });
 
-      container.innerHTML = html;
+      container.innerHTML = `
+        <img class="vertical-map-img" src="${imgSrc}" alt="${floorNum}층 실제 배치도" />
+        ${spotsHtml}
+      `;
     }
 
-    // 교실 클릭 이벤트 핸들러
-    function handleRoomClick(roomName, boothId, boothIds) {
-      if (boothId) {
-        const b = BOOTHS.find(x => x.id === boothId);
-        if (b) openBoothModal(b);
-        return;
+    function openBoothModal(b) {
+      document.getElementById('mEmoji').innerText = b.emoji;
+      document.getElementById('mTitle').innerText = b.name;
+      document.getElementById('mFloor').innerText = '🏛️ ' + b.floor + '층';
+      document.getElementById('mRoom').innerText = '📍 ' + b.room;
+      document.getElementById('mGenre').innerText = '🎪 ' + b.cat;
+      document.getElementById('mDesc').innerText = b.desc;
+      document.getElementById('detailModal').classList.add('active');
+    }
+
+    function openRoomModal(roomName, cid, cids) {
+      if (cid) {
+        const b = BOOTHS.find(x => x.id === parseInt(cid));
+        if (b) { openBoothModal(b); return; }
       }
-      if (boothIds && boothIds.length > 0) {
-        const matched = BOOTHS.filter(x => boothIds.includes(x.id));
+      if (cids) {
+        const idList = cids.split(',').map(x => parseInt(x));
+        const matched = BOOTHS.filter(x => idList.includes(x.id));
         if (matched.length > 0) {
           document.getElementById('mEmoji').innerText = '🎪';
           document.getElementById('mTitle').innerText = roomName;
@@ -1013,27 +814,16 @@
           });
           document.getElementById('mDesc').innerText = fullDesc.trim();
           document.getElementById('detailModal').classList.add('active');
+          return;
         }
       }
-    }
-
-    function handleFacilityClick(roomName, desc) {
+      // 일반 시설
       document.getElementById('mEmoji').innerText = '🏫';
       document.getElementById('mTitle').innerText = roomName;
       document.getElementById('mFloor').innerText = '🏛️ 학교 시설';
-      document.getElementById('mRoom').innerText = '📍 ' + roomName;
-      document.getElementById('mGenre').innerText = '편의 및 행정 공간';
-      document.getElementById('mDesc').innerText = desc + ' 공간입니다. 본 공간은 축제 부스 운영 공간이 아니거나 휴게 및 질서 유지를 위한 관리 공간입니다.';
-      document.getElementById('detailModal').classList.add('active');
-    }
-
-    function openBoothModal(b) {
-      document.getElementById('mEmoji').innerText = b.emoji;
-      document.getElementById('mTitle').innerText = b.name;
-      document.getElementById('mFloor').innerText = '🏛️ ' + b.floor + '층';
-      document.getElementById('mRoom').innerText = '📍 ' + b.room;
-      document.getElementById('mGenre').innerText = '🎪 ' + b.cat;
-      document.getElementById('mDesc').innerText = b.desc;
+      document.getElementById('mRoom').innerText = '📍 운양고등학교';
+      document.getElementById('mGenre').innerText = '일반 교실 및 편의 공간';
+      document.getElementById('mDesc').innerText = roomName + ' 공간입니다. 본 공간은 축제 부스 운영 공간이 아니거나 휴게 및 교무 관리 공간으로 사용됩니다.';
       document.getElementById('detailModal').classList.add('active');
     }
 
