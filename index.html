@@ -63,7 +63,7 @@
       font-weight: 700;
     }
 
-    /* Sub Navigation Bar (when inside a section) */
+    /* Sub Navigation Bar */
     .sub-bar {
       display: none;
       align-items: center;
@@ -147,7 +147,7 @@
     .menu-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
 
     /* ============================================================
-       1. 🗺️ 지도로 보기: 90도 회전된 실제 세로 도면 뷰어 (가로 스크롤 X)
+       1. 🗺️ 지도로 보기: 90도 회전 세로 도면 + 정방향(가로) 글자 오버레이
        ============================================================ */
     #view-map { display: none; }
     .floor-tabs {
@@ -206,7 +206,7 @@
       border-radius: 6px;
     }
 
-    /* 90도 회전된 실제 도면 세로 컨테이너 (모바일 폭 100%에 딱 맞춤) */
+    /* 90도 회전된 실제 건축 도면 컨테이너 (스마트폰 세로 폭 100%에 완벽 일치) */
     .vertical-map-container {
       position: relative;
       width: 100%;
@@ -221,12 +221,12 @@
       user-select: none;
     }
 
-    /* 도면 속 교실/동아리 터치 핫스팟 버튼 */
+    /* 정방향(가로 방향)으로 읽기 편하게 배치된 교실/동아리 글자 버튼 */
     .map-hotspot {
       position: absolute;
       transform: translate(-50%, -50%);
-      padding: 5px 8px;
-      border-radius: 6px;
+      padding: 5px 9px;
+      border-radius: 7px;
       font-size: 0.74rem;
       font-weight: 800;
       cursor: pointer;
@@ -242,19 +242,19 @@
       background: #4f46e5;
       color: #ffffff;
       border: 1.5px solid #ffffff;
-      box-shadow: 0 2px 7px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.45);
       animation: pulse 2.2s infinite;
     }
     .map-hotspot.booth:active {
       transform: translate(-50%, -50%) scale(1.18);
       background: #e11d48;
-      z-index: 20;
+      z-index: 25;
     }
     .map-hotspot.facility {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       color: #334155;
       border: 1px solid #cbd5e1;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.68rem;
     }
 
@@ -505,7 +505,7 @@
 
   <main>
     <!-- ============================================================
-         HOME VIEW (메인 화면: 4개 메뉴 중 1개 선택)
+         HOME VIEW (메인 화면: 4개 메뉴 선택)
          ============================================================ -->
     <div id="view-home">
       <div class="hero-banner">
@@ -546,7 +546,7 @@
     </div>
 
     <!-- ============================================================
-         1. 🗺️ 지도로 보기 VIEW (90도 회전된 실제 도면 세로 뷰어)
+         1. 🗺️ 지도로 보기 VIEW (90도 회전 세로 도면 + 정방향 글자)
          ============================================================ -->
     <div id="view-map">
       <!-- 1층 ~ 5층 선택 탭 -->
@@ -565,7 +565,7 @@
           <span class="floor-plan-tip">교실 터치 시 소개</span>
         </div>
         <div class="vertical-map-container" id="verticalMapContainer">
-          <!-- JS로 회전된 실제 도면 이미지 및 인터랙티브 핀 렌더링 -->
+          <!-- JS로 실제 도면 및 정방향 글자 렌더링 -->
         </div>
       </div>
     </div>
@@ -706,8 +706,8 @@
       { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
     ];
 
-    // 90도 회전된 층별 배치도 핫스팟 데이터
-    const ROTATED_HOTSPOTS = [{"name": "1-1", "alias": "1-1", "floor": 5, "left": 81.8, "top": 58.1, "club_id": 20, "club_ids": null, "club_name": "경영위키", "cat": "방탈출/추리", "emoji": "👻", "has_booth": true}, {"name": "1-2", "alias": "1-2", "floor": 5, "left": 72.1, "top": 58.1, "club_id": null, "club_ids": null, "club_name": "1-2 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "미술실", "alias": "미술실", "floor": 5, "left": 75.5, "top": 46.7, "club_id": null, "club_ids": null, "club_name": "미술실", "cat": "특별실", "emoji": "🎨", "has_booth": false}, {"name": "2-5", "alias": "2-5", "floor": 5, "left": 39.3, "top": 34.2, "club_id": 7, "club_ids": null, "club_name": "소프라테스", "cat": "체험/실습형", "emoji": "💘", "has_booth": true}, {"name": "2-4", "alias": "2-4", "floor": 5, "left": 29.2, "top": 34.2, "club_id": 21, "club_ids": null, "club_name": "블루라인", "cat": "방탈출/추리", "emoji": "🕵️", "has_booth": true}, {"name": "2-6", "alias": "2-6", "floor": 5, "left": 39.3, "top": 54.5, "club_id": null, "club_ids": null, "club_name": "2-6 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "2-7", "alias": "2-7", "floor": 5, "left": 39.3, "top": 61.7, "club_id": 12, "club_ids": null, "club_name": "에끌라", "cat": "체험/실습형", "emoji": "💅", "has_booth": true}, {"name": "2-8", "alias": "2-8", "floor": 5, "left": 39.3, "top": 69.0, "club_id": 16, "club_ids": null, "club_name": "글로톡", "cat": "체험/실습형", "emoji": "🍪", "has_booth": true}, {"name": "2-9", "alias": "2-9", "floor": 5, "left": 39.3, "top": 76.3, "club_id": 9, "club_ids": null, "club_name": "축구부", "cat": "체험/실습형", "emoji": "☕", "has_booth": true}, {"name": "2-10", "alias": "2-10", "floor": 5, "left": 39.3, "top": 83.0, "club_id": null, "club_ids": null, "club_name": "2-10 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "2-1", "alias": "2-1", "floor": 5, "left": 7.7, "top": 12.4, "club_id": 19, "club_ids": null, "club_name": "애그부", "cat": "문화예술형", "emoji": "🏮", "has_booth": true}, {"name": "2-2", "alias": "2-2", "floor": 5, "left": 7.7, "top": 19.7, "club_id": 19, "club_ids": null, "club_name": "애그부", "cat": "문화예술형", "emoji": "🏮", "has_booth": true}, {"name": "2-3", "alias": "2-3", "floor": 5, "left": 7.7, "top": 26.9, "club_id": 13, "club_ids": null, "club_name": "교집합", "cat": "체험/실습형", "emoji": "🎁", "has_booth": true}, {"name": "화학실", "alias": "화학실", "floor": 4, "left": 89.2, "top": 46.4, "club_id": null, "club_ids": [2, 4], "club_name": "시너지 · 생명보험", "cat": "체험/실습형", "emoji": "🧋", "has_booth": true}, {"name": "생물실", "alias": "생물실", "floor": 4, "left": 89.2, "top": 57.4, "club_id": null, "club_ids": [3, 6], "club_name": "아스클 · 화생방", "cat": "체험/실습형", "emoji": "🐟", "has_booth": true}, {"name": "물리실", "alias": "물리실", "floor": 4, "left": 47.2, "top": 62.8, "club_id": 1, "club_ids": null, "club_name": "스파크", "cat": "체험/실습형", "emoji": "🍹", "has_booth": true}, {"name": "과학실험실(지구과학)", "alias": "지구과학실", "floor": 4, "left": 45.0, "top": 77.1, "club_id": 5, "club_ids": null, "club_name": "멘날바", "cat": "체험/실습형", "emoji": "🌭", "has_booth": true}, {"name": "1-3", "alias": "1-3", "floor": 4, "left": 46.9, "top": 54.5, "club_id": 24, "club_ids": null, "club_name": "교지편집부", "cat": "방탈출/추리", "emoji": "🏺", "has_booth": true}, {"name": "3-5", "alias": "3-5", "floor": 4, "left": 44.4, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-5 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-4", "alias": "3-4", "floor": 4, "left": 32.5, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-4 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-1", "alias": "3-1", "floor": 4, "left": 8.3, "top": 12.4, "club_id": null, "club_ids": null, "club_name": "3-1 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-2", "alias": "3-2", "floor": 4, "left": 8.3, "top": 19.7, "club_id": null, "club_ids": null, "club_name": "3-2 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-3", "alias": "3-3", "floor": 4, "left": 8.3, "top": 26.9, "club_id": null, "club_ids": null, "club_name": "3-3 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "1-4", "alias": "1-4", "floor": 3, "left": 96.5, "top": 58.1, "club_id": 11, "club_ids": null, "club_name": "창연회", "cat": "체험/실습형", "emoji": "🙈", "has_booth": true}, {"name": "1-5", "alias": "1-5", "floor": 3, "left": 86.4, "top": 58.1, "club_id": 18, "club_ids": null, "club_name": "잡지식", "cat": "문화예술형", "emoji": "🪄", "has_booth": true}, {"name": "1-6", "alias": "1-6", "floor": 3, "left": 50.6, "top": 54.5, "club_id": 22, "club_ids": null, "club_name": "유아트(무당집)", "cat": "방탈출/추리", "emoji": "⛩️", "has_booth": true}, {"name": "1-7", "alias": "1-7", "floor": 3, "left": 50.6, "top": 61.7, "club_id": 22, "club_ids": null, "club_name": "유아트(무당집)", "cat": "방탈출/추리", "emoji": "⛩️", "has_booth": true}, {"name": "1-8", "alias": "1-8", "floor": 3, "left": 50.6, "top": 69.0, "club_id": 17, "club_ids": null, "club_name": "필름메이커스", "cat": "문화예술형", "emoji": "🍿", "has_booth": true}, {"name": "1-9", "alias": "1-9", "floor": 3, "left": 50.6, "top": 76.3, "club_id": null, "club_ids": null, "club_name": "1-9 교실", "cat": "일반교실", "emoji": "🏫", "has_booth": false}, {"name": "1-10", "alias": "1-10", "floor": 3, "left": 50.6, "top": 83.0, "club_id": 10, "club_ids": null, "club_name": "또래상담부", "cat": "체험/실습형", "emoji": "💌", "has_booth": true}, {"name": "3-10", "alias": "3-10", "floor": 3, "left": 44.6, "top": 33.8, "club_id": null, "club_ids": null, "club_name": "3-10 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-9", "alias": "3-9", "floor": 3, "left": 35.6, "top": 34.2, "club_id": null, "club_ids": null, "club_name": "3-9 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-6", "alias": "3-6", "floor": 3, "left": 8.8, "top": 12.4, "club_id": null, "club_ids": null, "club_name": "3-6 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-7", "alias": "3-7", "floor": 3, "left": 8.8, "top": 19.7, "club_id": null, "club_ids": null, "club_name": "3-7 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "3-8", "alias": "3-8", "floor": 3, "left": 8.8, "top": 26.9, "club_id": null, "club_ids": null, "club_name": "3-8 교실", "cat": "3학년교실", "emoji": "🏫", "has_booth": false}, {"name": "강당(운양관)", "alias": "강당", "floor": 2, "left": 76.3, "top": 18.6, "club_id": null, "club_ids": [25, 26, 27], "club_name": "러쉬온미 · 체대입시 · 플라잉셔틀즈", "cat": "공연/체육", "emoji": "💃", "has_booth": true}, {"name": "기술가정실", "alias": "기술가정실", "floor": 2, "left": 76.8, "top": 45.7, "club_id": 8, "club_ids": null, "club_name": "베이킹메이킹(크로플)", "cat": "체험/실습형", "emoji": "🧇", "has_booth": true}, {"name": "청운관(학습실)", "alias": "청운관", "floor": 2, "left": 80.8, "top": 57.6, "club_id": null, "club_ids": null, "club_name": "청운관", "cat": "자기주도학습실", "emoji": "📖", "has_booth": false}, {"name": "방송실", "alias": "방송실", "floor": 2, "left": 40.7, "top": 57.1, "club_id": 23, "club_ids": null, "club_name": "소나기(귀신의집/노래방)", "cat": "방탈출/추리", "emoji": "🎤", "has_booth": true}, {"name": "도서관", "alias": "도서관", "floor": 2, "left": 24.7, "top": 33.7, "club_id": 15, "club_ids": null, "club_name": "도서관사람들(책팟)", "cat": "체험/실습형", "emoji": "🎰", "has_booth": true}, {"name": "컴퓨터실", "alias": "컴퓨터실", "floor": 2, "left": 9.4, "top": 13.2, "club_id": 14, "club_ids": null, "club_name": "알고리즘", "cat": "체험/실습형", "emoji": "🏎️", "has_booth": true}, {"name": "매점(운수대통)", "alias": "매점", "floor": 1, "left": 83.0, "top": 48.6, "club_id": null, "club_ids": null, "club_name": "운수대통 매점", "cat": "편의시설", "emoji": "🏪", "has_booth": false}, {"name": "급식소", "alias": "급식소", "floor": 1, "left": 82.6, "top": 17.1, "club_id": null, "club_ids": null, "club_name": "급식소", "cat": "편의시설", "emoji": "🍱", "has_booth": false}, {"name": "음악실", "alias": "음악실", "floor": 1, "left": 31.3, "top": 33.7, "club_id": 28, "club_ids": null, "club_name": "밴드부", "cat": "공연형", "emoji": "🎸", "has_booth": true}, {"name": "시청각실", "alias": "시청각실", "floor": 1, "left": 12.2, "top": 17.4, "club_id": 29, "club_ids": null, "club_name": "시퀀스(연극)", "cat": "공연형", "emoji": "🎭", "has_booth": true}, {"name": "운동장", "alias": "운동장", "floor": 1, "left": 12.8, "top": 67.2, "club_id": 30, "club_ids": null, "club_name": "슬램덩크(농구부)", "cat": "체육활동형", "emoji": "🏀", "has_booth": true}];
+    // 90도 회전된 층별 배치도 및 정방향 가로 텍스트 라벨 데이터
+    const FLOOR_LABELS = {"5": [{"name": "1-1", "club_name": "경영위키", "emoji": "👻", "club_id": 20, "club_ids": null, "has_booth": true, "left": 81.8, "top": 58.1}, {"name": "1-2", "club_name": "1-2 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 72.1, "top": 58.1}, {"name": "미술실", "club_name": "미술실", "emoji": "🎨", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.5, "top": 46.7}, {"name": "2-5", "club_name": "소프라테스", "emoji": "💘", "club_id": 7, "club_ids": null, "has_booth": true, "left": 39.3, "top": 34.2}, {"name": "2-4", "club_name": "블루라인", "emoji": "🕵️", "club_id": 21, "club_ids": null, "has_booth": true, "left": 29.2, "top": 34.2}, {"name": "2-6", "club_name": "2-6 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 39.3, "top": 54.5}, {"name": "2-7", "club_name": "에끌라", "emoji": "💅", "club_id": 12, "club_ids": null, "has_booth": true, "left": 39.3, "top": 61.7}, {"name": "2-8", "club_name": "글로톡", "emoji": "🍪", "club_id": 16, "club_ids": null, "has_booth": true, "left": 39.3, "top": 69.0}, {"name": "2-9", "club_name": "축구부", "emoji": "☕", "club_id": 9, "club_ids": null, "has_booth": true, "left": 39.3, "top": 76.3}, {"name": "2-10", "club_name": "2-10 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 39.3, "top": 83.0}, {"name": "2-1", "club_name": "애그부", "emoji": "🏮", "club_id": 19, "club_ids": null, "has_booth": true, "left": 7.7, "top": 12.4}, {"name": "2-2", "club_name": "애그부", "emoji": "🏮", "club_id": 19, "club_ids": null, "has_booth": true, "left": 7.7, "top": 19.7}, {"name": "2-3", "club_name": "교집합", "emoji": "🎁", "club_id": 13, "club_ids": null, "has_booth": true, "left": 7.7, "top": 26.9}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.0, "top": 25.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 36.0}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 20.8, "top": 33.2}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.1, "top": 35.2}], "4": [{"name": "화학실", "club_name": "시너지 · 생명보험", "emoji": "🧋", "club_id": null, "club_ids": [2, 4], "has_booth": true, "left": 89.2, "top": 46.4}, {"name": "생물실", "club_name": "아스클 · 화생방", "emoji": "🐟", "club_id": null, "club_ids": [3, 6], "has_booth": true, "left": 89.2, "top": 57.4}, {"name": "물리실", "club_name": "스파크", "emoji": "🍹", "club_id": 1, "club_ids": null, "has_booth": true, "left": 47.2, "top": 62.8}, {"name": "과학실험실(지구과학)", "club_name": "멘날바", "emoji": "🌭", "club_id": 5, "club_ids": null, "has_booth": true, "left": 45.0, "top": 77.1}, {"name": "1-3", "club_name": "교지편집부", "emoji": "🏺", "club_id": 24, "club_ids": null, "has_booth": true, "left": 46.9, "top": 54.5}, {"name": "3-5", "club_name": "3-5 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 44.4, "top": 34.2}, {"name": "3-4", "club_name": "3-4 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 34.2}, {"name": "3-1", "club_name": "3-1 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 12.4}, {"name": "3-2", "club_name": "3-2 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 19.7}, {"name": "3-3", "club_name": "3-3 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 36.0}, {"name": "탈의실", "club_name": "탈의실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 78.3, "top": 45.8}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 23.6, "top": 33.2}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.9, "top": 35.2}], "3": [{"name": "1-4", "club_name": "창연회", "emoji": "🙈", "club_id": 11, "club_ids": null, "has_booth": true, "left": 96.5, "top": 58.1}, {"name": "1-5", "club_name": "잡지식", "emoji": "🪄", "club_id": 18, "club_ids": null, "has_booth": true, "left": 86.4, "top": 58.1}, {"name": "1-6", "club_name": "유아트(무당집)", "emoji": "⛩️", "club_id": 22, "club_ids": null, "has_booth": true, "left": 50.6, "top": 54.5}, {"name": "1-7", "club_name": "유아트(무당집)", "emoji": "⛩️", "club_id": 22, "club_ids": null, "has_booth": true, "left": 50.6, "top": 61.7}, {"name": "1-8", "club_name": "필름메이커스", "emoji": "🍿", "club_id": 17, "club_ids": null, "has_booth": true, "left": 50.6, "top": 69.0}, {"name": "1-9", "club_name": "1-9 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 50.6, "top": 76.3}, {"name": "1-10", "club_name": "또래상담부", "emoji": "💌", "club_id": 10, "club_ids": null, "has_booth": true, "left": 50.6, "top": 83.0}, {"name": "3-10", "club_name": "3-10 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 44.6, "top": 33.8}, {"name": "3-9", "club_name": "3-9 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 35.6, "top": 34.2}, {"name": "3-6", "club_name": "3-6 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 12.4}, {"name": "3-7", "club_name": "3-7 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 19.7}, {"name": "3-8", "club_name": "3-8 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 36.0}, {"name": "탈의실", "club_name": "탈의실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 79.2, "top": 45.8}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 87.1}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 51.0, "top": 48.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 28.9, "top": 33.2}], "2": [{"name": "강당(운양관)", "club_name": "러쉬온미 · 체대입시 · 플라잉셔틀즈", "emoji": "💃", "club_id": null, "club_ids": [25, 26, 27], "has_booth": true, "left": 76.3, "top": 18.6}, {"name": "기술가정실", "club_name": "베이킹메이킹(크로플)", "emoji": "🧇", "club_id": 8, "club_ids": null, "has_booth": true, "left": 76.8, "top": 45.7}, {"name": "청운관(학습실)", "club_name": "청운관", "emoji": "📖", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.8, "top": 57.6}, {"name": "방송실", "club_name": "소나기(귀신의집/노래방)", "emoji": "🎤", "club_id": 23, "club_ids": null, "has_booth": true, "left": 40.7, "top": 57.1}, {"name": "도서관", "club_name": "도서관사람들(책팟)", "emoji": "🎰", "club_id": 15, "club_ids": null, "has_booth": true, "left": 24.7, "top": 33.7}, {"name": "컴퓨터실", "club_name": "알고리즘", "emoji": "🏎️", "club_id": 14, "club_ids": null, "has_booth": true, "left": 9.4, "top": 13.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 36.0}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 26.9}], "1": [{"name": "매점(운수대통)", "club_name": "운수대통 매점", "emoji": "🏪", "club_id": null, "club_ids": null, "has_booth": false, "left": 83.0, "top": 48.6}, {"name": "급식소", "club_name": "급식소", "emoji": "🍱", "club_id": null, "club_ids": null, "has_booth": false, "left": 82.6, "top": 17.1}, {"name": "음악실", "club_name": "밴드부", "emoji": "🎸", "club_id": 28, "club_ids": null, "has_booth": true, "left": 31.3, "top": 33.7}, {"name": "시청각실", "club_name": "시퀀스(연극)", "emoji": "🎭", "club_id": 29, "club_ids": null, "has_booth": true, "left": 12.2, "top": 17.4}, {"name": "운동장", "club_name": "슬램덩크(농구부)", "emoji": "🏀", "club_id": 30, "club_ids": null, "has_booth": true, "left": 12.8, "top": 67.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 36.0}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 82.4, "top": 58.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 74.4, "top": 77.6}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 74.4, "top": 81.3}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 78.2, "top": 87.1}, {"name": "행정실", "club_name": "행정실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 58.3, "top": 53.1}, {"name": "보건실", "club_name": "보건실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 57.7, "top": 75.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 33.4, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 33.4, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 31.3, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.1, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.1, "top": 22.8}]};
 
     // 네비게이션 전환
     function navigateTo(viewName) {
@@ -744,7 +744,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 90도 회전된 실제 배치도 렌더링
+    // 90도 회전된 실제 도면 + 정방향(가로) 텍스트 라벨 렌더링
     function selectFloor(floorNum) {
       document.querySelectorAll('.floor-tab-btn').forEach(b => {
         if (b.innerText.includes(floorNum + '층')) b.classList.add('active');
@@ -754,17 +754,17 @@
       document.getElementById('floorTitle').innerText = floorNum + '층 실제 배치도 지도';
 
       const container = document.getElementById('verticalMapContainer');
-      const imgSrc = `floor_vertical_${floorNum}.png`;
+      const imgSrc = `floor_clean_vertical_${floorNum}.png`;
 
-      // 핫스팟 필터링
-      const flHotspots = ROTATED_HOTSPOTS.filter(h => h.floor === floorNum);
+      // 핫스팟 필터링 (가로 방향으로 읽기 쉬운 정방향 라벨)
+      const labels = FLOOR_LABELS[floorNum] || [];
 
       let spotsHtml = '';
-      flHotspots.forEach(h => {
+      labels.forEach(h => {
         const hasBooth = h.has_booth;
         const cls = hasBooth ? 'map-hotspot booth' : 'map-hotspot facility';
         const label = hasBooth ? h.club_name : h.name;
-        const emoji = hasBooth && h.emoji ? h.emoji + ' ' : '';
+        const emoji = h.emoji ? h.emoji + ' ' : '';
         const cid = h.club_id || '';
         const cids = h.club_ids ? h.club_ids.join(',') : '';
         const rm = h.name.replace(/'/g, "\'");
