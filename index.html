@@ -2,37 +2,26 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>2026 운양고 동아리 발표회 모바일 가이드</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>2026 운양고 동아리 발표회</title>
   
-  <!-- Pretendard Dynamic Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  
-  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-light: #818cf8;
-      --primary-dark: #3730a3;
-      --accent: #ec4899;
-      --accent-glow: rgba(236, 72, 153, 0.4);
-      --bg-page: #f8fafc;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #a5b4fc;
+      --accent: #f43f5e;
+      --bg-page: #0f172a;
+      --bg-surface: #1e293b;
       --bg-card: #ffffff;
-      --text-main: #0f172a;
-      --text-sub: #475569;
-      --text-muted: #94a3b8;
-      --border: #e2e8f0;
-      --border-focus: #6366f1;
-      --radius-sm: 12px;
-      --radius-md: 18px;
-      --radius-lg: 24px;
-      --radius-full: 9999px;
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-      --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-      --shadow-lg: 0 16px 40px rgba(79, 70, 229, 0.16);
-      --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.35);
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
     }
 
     * {
@@ -44,658 +33,529 @@
     }
 
     body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-      background: var(--bg-page);
-      color: var(--text-main);
-      overflow-x: hidden;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #090d16;
+      color: #f8fafc;
       min-height: 100vh;
       display: flex;
       justify-content: center;
+      overflow-x: hidden;
       position: relative;
     }
 
-    /* Floating Animated Ambient Blobs */
-    .bg-blob-1, .bg-blob-2 {
+    /* Futuristic Animated Gradient Background */
+    .ambient-bg {
       position: fixed;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      filter: blur(80px);
+      inset: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(244, 63, 94, 0.22) 0%, transparent 40%),
+                  radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+      filter: blur(50px);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.45;
-      animation: floatBlobs 12s infinite alternate ease-in-out;
+      animation: pulseGlow 10s ease-in-out infinite alternate;
     }
-    .bg-blob-1 {
-      top: -60px;
-      left: -60px;
-      background: radial-gradient(circle, #818cf8, #c084fc);
-    }
-    .bg-blob-2 {
-      bottom: -60px;
-      right: -60px;
-      background: radial-gradient(circle, #f472b6, #fb7185);
-      animation-delay: -6s;
-    }
-    @keyframes floatBlobs {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, 40px) scale(1.1); }
-      100% { transform: translate(-20px, 20px) scale(0.95); }
+    @keyframes pulseGlow {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(5deg); }
     }
 
-    /* Main App Container */
+    /* Main Phone Shell Container */
     #app-container {
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(255,255,255,0.08);
       position: relative;
       z-index: 1;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 50px rgba(0,0,0,0.06);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
     }
 
-    /* Ripple Effect on Click */
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      animation: rippleEffect 0.6s linear;
-      background-color: rgba(255, 255, 255, 0.6);
-      pointer-events: none;
-    }
-    @keyframes rippleEffect {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-
-    /* App Header */
+    /* Top Sticky Header */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.3s ease;
     }
     .header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
     }
     .header-logo {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #4f46e5, #ec4899);
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #6366f1, #f43f5e);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 19px;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-      animation: logoPulse 3s infinite ease-in-out;
+      font-size: 20px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      animation: logoBounce 2.5s infinite ease-in-out;
     }
-    @keyframes logoPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08) rotate(3deg); }
+    @keyframes logoBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px) rotate(6deg); }
     }
-    .header-title-box h1 {
+    .header-text h1 {
       font-size: 18px;
       font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.4px;
+      color: #ffffff;
+      letter-spacing: -0.5px;
     }
-    .header-title-box p {
+    .header-text p {
       font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
+      color: #94a3b8;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .header-actions {
-      display: flex;
-      gap: 8px;
-    }
-    .header-icon-btn {
-      background: #f1f5f9;
-      border: none;
-      width: 38px;
-      height: 38px;
+    .confetti-trigger-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .header-icon-btn:active {
-      transform: scale(0.9);
-      background: #e2e8f0;
-    }
-
-    /* Global Sticky 3-Tab Bar */
-    .global-nav-bar {
-      position: sticky;
-      top: 65px;
-      z-index: 95;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 2px solid #eef2f6;
-      padding: 8px 14px;
-      display: none;
-      animation: slideDownNav 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes slideDownNav {
-      from { transform: translateY(-10px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .global-nav-inner {
-      display: flex;
-      gap: 6px;
-      background: #f1f5f9;
-      padding: 4px;
-      border-radius: 16px;
-    }
-    .nav-tab-btn {
-      flex: 1;
-      padding: 10px 4px;
-      border: none;
-      background: transparent;
-      border-radius: 12px;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-sub);
+      font-size: 19px;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .confetti-trigger-btn:active {
+      transform: scale(0.85);
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Global 3-Tab Bar */
+    .top-nav-bar {
+      padding: 10px 16px;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-pills-box {
+      display: flex;
+      background: rgba(30, 41, 59, 0.8);
+      padding: 5px;
+      border-radius: 18px;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-pill {
+      flex: 1;
+      padding: 11px 4px;
+      border-radius: 14px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 5px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       white-space: nowrap;
     }
-    .nav-tab-btn.active {
-      background: white;
-      color: var(--primary);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    .nav-pill.active {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
       transform: scale(1.02);
     }
 
-    /* Search Bar */
-    .search-container {
-      padding: 14px 18px 4px 18px;
-    }
-    .search-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      font-size: 17px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-    .search-input {
-      width: 100%;
-      height: 48px;
-      padding: 0 42px 0 44px;
-      background: #f1f5f9;
-      border: 2px solid transparent;
-      border-radius: var(--radius-md);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-main);
-      outline: none;
-      transition: all 0.25s ease;
-    }
-    .search-input:focus {
-      background: white;
-      border-color: var(--border-focus);
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-    }
-    .search-clear-btn {
-      position: absolute;
-      right: 12px;
-      background: #cbd5e1;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* Main Content Area */
+    /* Main Scrollable View Container */
     main {
       flex: 1;
-      padding: 16px 18px 80px 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
     }
 
     /* ============================================================
-       0. HOME VIEW
+       CAROUSEL CARD DECK STYLES (No Vertical Scroll Drag!)
        ============================================================ */
-    .home-hero {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
-      border-radius: var(--radius-lg);
-      padding: 24px 20px;
-      color: white;
+    .carousel-section {
       position: relative;
-      overflow: hidden;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow-lg);
-      animation: heroFloat 6s ease-in-out infinite alternate;
+      width: 100%;
+      margin: 10px 0 20px 0;
     }
-    @keyframes heroFloat {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-4px); }
-    }
-    .home-hero-badge {
-      display: inline-flex;
+    .carousel-top-bar {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(8px);
-      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .carousel-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .carousel-category-pill {
+      padding: 4px 12px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-    .home-hero-title {
-      font-size: 24px;
-      font-weight: 900;
-      line-height: 1.3;
-      margin-bottom: 8px;
-    }
-    .home-hero-desc {
-      font-size: 13.5px;
-      opacity: 0.92;
-      line-height: 1.5;
-    }
-    .hero-sparkle {
-      position: absolute;
-      right: 14px;
-      bottom: 14px;
-      font-size: 50px;
-      opacity: 0.28;
-      pointer-events: none;
-      animation: spinSlow 15s linear infinite;
-    }
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .carousel-counter {
+      font-size: 13px;
+      font-weight: 800;
+      color: #94a3b8;
+      background: rgba(30, 41, 59, 0.9);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* 3 Main Action Cards on Home */
-    .home-cards-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .action-card {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: 22px;
-      padding: 20px 18px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      cursor: pointer;
+    /* Card Viewport */
+    .card-deck-viewport {
       position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .action-card:hover, .action-card:active {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-focus);
-    }
-    .action-card.hero-action {
-      background: linear-gradient(135deg, #f5f3ff 0%, #eff6ff 100%);
-      border: 2.5px solid #a5b4fc;
-    }
-    .action-icon-box {
-      width: 60px;
-      height: 60px;
-      border-radius: 18px;
+      width: 100%;
+      min-height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
-      flex-shrink: 0;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      perspective: 1000px;
     }
-    .action-card:active .action-icon-box {
-      transform: scale(1.2) rotate(-8deg);
+
+    /* Individual Booth Presentation Card */
+    .super-booth-card {
+      width: 100%;
+      background: white;
+      color: var(--text-dark);
+      border-radius: 28px;
+      padding: 26px 22px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      border: 3px solid rgba(255,255,255,0.85);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      animation: cardAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center;
     }
-    .action-info {
-      flex: 1;
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-    .action-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 6px;
-      margin-bottom: 4px;
+    @keyframes slideNextAnim {
+      0% { opacity: 0; transform: translateX(60px) scale(0.94) rotate(3deg); }
+      100% { opacity: 1; transform: translateX(0) scale(1) rotate(0deg); }
     }
-    .action-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 4px;
+    @keyframes slidePrevAnim {
+      0% { opacity: 0; transform: translateX(-60px) scale(0.94) rotate(-3deg); }
+      100% { opacity: 1; transform: translateX(0) scale(1) rotate(0deg); }
+    }
+
+    /* Card Top Header */
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .card-avatar-box {
+      width: 68px;
+      height: 68px;
+      background: #f1f5f9;
+      border-radius: 22px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      border: 2px solid #e2e8f0;
+      animation: avatarWiggle 4s infinite ease-in-out;
+    }
+    @keyframes avatarWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-8deg) scale(1.05); }
+      40% { transform: rotate(8deg) scale(1.05); }
+      60% { transform: rotate(0deg); }
+    }
+    .card-badge-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       gap: 6px;
     }
-    .action-sub {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.4;
+    .card-floor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: #e0e7ff;
+      color: #3730a3;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 800;
     }
-    .action-arrow {
-      font-size: 20px;
-      color: var(--text-muted);
-      transition: transform 0.2s ease;
+    .card-category-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
     }
-    .action-card:hover .action-arrow {
-      transform: translateX(4px);
-      color: var(--primary);
+
+    /* Card Club Title */
+    .card-club-name {
+      font-size: 25px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-room-name {
+      font-size: 14.5px;
+      color: #6366f1;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Card Description Box */
+    .card-body-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #1e293b;
+      margin-bottom: 20px;
+      flex: 1;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Card Bottom Action Buttons */
+    .card-bottom-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .card-action-btn {
+      flex: 1;
+      padding: 14px 0;
+      border-radius: 16px;
+      border: none;
+      font-size: 14.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-action-btn.map-jump {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+    }
+    .card-action-btn.map-jump:active {
+      transform: scale(0.96);
+    }
+    .card-action-btn.bookmark {
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .card-action-btn.bookmark.bookmarked {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1.5px solid #fde68a;
+    }
+
+    /* Floating Navigation Arrow Buttons (Left / Right) */
+    .nav-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-arrow-btn:active {
+      transform: translateY(-50%) scale(0.85);
+      background: #6366f1;
+    }
+    .nav-arrow-btn.left {
+      left: -12px;
+    }
+    .nav-arrow-btn.right {
+      right: -12px;
+    }
+
+    /* Pagination Indicator Dots */
+    .carousel-dots-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+    .carousel-dot.active {
+      width: 24px;
+      border-radius: 12px;
+      background: #6366f1;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
     }
 
     /* ============================================================
-       1. 🏢 층별로 보기 VIEW
+       THEME SELECTOR HORIZONTAL CHIPS
        ============================================================ */
-    #view-map {
-      display: none;
-    }
-    .floor-tabs-bar {
+    .theme-chips-row {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding: 4px 2px 14px 2px;
       scrollbar-width: none;
     }
-    .floor-tabs-bar::-webkit-scrollbar {
+    .theme-chips-row::-webkit-scrollbar {
       display: none;
     }
-    .floor-pill-btn {
-      flex: 1;
-      min-width: 68px;
-      padding: 12px 0;
-      border-radius: 16px;
-      border: 2px solid var(--border);
-      background: white;
-      font-size: 15px;
+    .theme-chip {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 13.5px;
       font-weight: 800;
-      color: var(--text-sub);
+      white-space: nowrap;
       cursor: pointer;
-      text-align: center;
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: var(--shadow-sm);
-    }
-    .floor-pill-btn.active {
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
-      color: white;
-      border-color: #4f46e5;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
-    }
-
-    .map-stage-wrapper {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: 24px;
-      padding: 16px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    .map-badge-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed var(--border);
-    }
-    .map-badge-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--primary);
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .map-badge-tip {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 600;
+    .theme-chip.active {
+      background: white;
+      color: #0f172a;
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.25);
     }
 
-    /* SVG Floor Stage */
-    .floor-svg-container {
-      width: 100%;
+    /* ============================================================
+       FLOOR MAP VIEW SPECIFICS
+       ============================================================ */
+    .floor-pills-row {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .floor-pill-btn {
+      flex: 1;
+      padding: 12px 0;
+      border-radius: 16px;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      background: rgba(30, 41, 59, 0.8);
+      color: #94a3b8;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .floor-pill-btn.active {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      border-color: #6366f1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+    }
+
+    .map-svg-card {
+      background: white;
+      border-radius: 24px;
+      padding: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
       overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .map-hint-banner {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
     }
     .floor-svg-container svg {
       width: 100%;
       height: auto;
-      max-height: 720px;
-      transition: transform 0.3s ease;
+      max-height: 520px;
+      display: block;
     }
     .room-clickable {
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.2s ease;
     }
     .room-clickable:hover rect {
       fill: #e0e7ff !important;
       stroke: #4f46e5 !important;
       stroke-width: 3.5 !important;
     }
-    .room-clickable:active rect {
-      transform: scale(0.98);
-    }
 
     /* ============================================================
-       2. 🎪 테마·장르별 보기 VIEW
+       SCHEDULE VIEW
        ============================================================ */
-    #view-genres {
-      display: none;
-    }
-    .genre-filter-chips {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 4px 2px 14px 2px;
-      scrollbar-width: none;
-    }
-    .genre-filter-chips::-webkit-scrollbar {
-      display: none;
-    }
-    .genre-chip {
-      padding: 10px 16px;
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--text-sub);
-      cursor: pointer;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .genre-chip.active {
-      background: var(--text-main);
-      color: white;
-      border-color: var(--text-main);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
-    }
-
-    /* Category Showcase Cards */
-    .category-section {
-      margin-bottom: 26px;
-    }
-    .category-header-banner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      border-radius: 18px;
-      margin-bottom: 12px;
-      color: white;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-    .category-header-left h3 {
-      font-size: 17px;
-      font-weight: 900;
-      margin-bottom: 3px;
-    }
-    .category-header-left p {
-      font-size: 12px;
-      opacity: 0.9;
-      font-weight: 600;
-    }
-    .category-badge-count {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(6px);
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 800;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-    }
-
-    /* Booth Cards Grid */
-    .booths-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .booth-card {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      position: relative;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .booth-card:hover, .booth-card:active {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-focus);
-    }
-    .booth-avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: #f8fafc;
-      border: 2px solid #eef2f6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      flex-shrink: 0;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .booth-card:hover .booth-avatar {
-      transform: scale(1.15) rotate(5deg);
-    }
-    .booth-main {
-      flex: 1;
-      min-width: 0;
-    }
-    .booth-top-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-    .booth-name {
-      font-size: 16.5px;
-      font-weight: 800;
-      color: var(--text-main);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .booth-loc-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      padding: 2px 8px;
-      background: #eef2ff;
-      color: var(--primary);
-      border-radius: 6px;
-      font-size: 11.5px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    .booth-desc-preview {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.4;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .booth-bookmark-btn {
-      background: transparent;
-      border: none;
-      font-size: 20px;
-      color: #cbd5e1;
-      padding: 6px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .booth-bookmark-btn.bookmarked {
-      color: #f59e0b;
-      transform: scale(1.2);
-    }
-
-    /* ============================================================
-       3. ⏰ 운영시간표 VIEW
-       ============================================================ */
-    #view-schedule {
-      display: none;
-    }
     .timeline-wrap {
       position: relative;
       padding-left: 28px;
+      margin-top: 10px;
     }
     .timeline-wrap::before {
       content: '';
@@ -704,806 +564,548 @@
       top: 10px;
       bottom: 20px;
       width: 3px;
-      background: linear-gradient(180deg, #4f46e5, #ec4899);
+      background: linear-gradient(180deg, #6366f1, #f43f5e);
       border-radius: 3px;
     }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 22px;
-    }
-    .timeline-dot {
-      position: absolute;
-      left: -28px;
-      top: 4px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: white;
-      border: 4px solid var(--primary);
-      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
-    }
-    .timeline-box {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: var(--shadow-sm);
+    .timeline-card {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
     .timeline-time {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      color: var(--primary);
+      color: #a5b4fc;
       margin-bottom: 4px;
     }
     .timeline-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
-      color: var(--text-main);
+      color: white;
       margin-bottom: 6px;
     }
     .timeline-desc {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.4;
-    }
-
-    /* ============================================================
-       BOOTH DETAIL POPUP MODAL (Bottom Sheet)
-       ============================================================ */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .modal-backdrop.active {
-      display: flex;
-      opacity: 1;
-    }
-    .modal-sheet {
-      width: 100%;
-      max-width: 480px;
-      background: white;
-      border-radius: 28px 28px 0 0;
-      padding: 24px 22px 34px 22px;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-    }
-    .modal-backdrop.active .modal-sheet {
-      transform: translateY(0);
-    }
-    .modal-handle {
-      width: 44px;
-      height: 5px;
-      background: #cbd5e1;
-      border-radius: 4px;
-      margin: 0 auto 18px auto;
-    }
-    .modal-close-btn {
-      position: absolute;
-      right: 18px;
-      top: 18px;
-      background: #f1f5f9;
-      border: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      color: var(--text-sub);
-      cursor: pointer;
-    }
-    .modal-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-    .modal-avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 20px;
-      background: #f8fafc;
-      border: 2px solid #eef2f6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      box-shadow: var(--shadow-sm);
-    }
-    .modal-title-box h2 {
-      font-size: 21px;
-      font-weight: 900;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-    .modal-badge-row {
-      display: flex;
-      gap: 6px;
-    }
-    .modal-tag {
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .modal-desc-box {
-      background: #f8fafc;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: var(--text-main);
-      margin-bottom: 20px;
-    }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-    }
-    .modal-btn {
-      flex: 1;
-      padding: 14px 0;
-      border-radius: 16px;
-      font-size: 15px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .modal-btn-map {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-    }
-    .modal-btn-map:active {
-      transform: scale(0.97);
-    }
-    .modal-btn-like {
-      background: #f1f5f9;
-      color: var(--text-main);
-    }
-    .modal-btn-like.liked {
-      background: #fce7f3;
-      color: #ec4899;
-    }
-
-    /* Empty Search State */
-    .empty-state {
-      text-align: center;
-      padding: 48px 20px;
-      display: none;
-    }
-    .empty-state-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-    .empty-state-title {
-      font-size: 17px;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .empty-state-desc {
       font-size: 13.5px;
-      color: var(--text-muted);
+      color: #cbd5e1;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
-  <!-- Ambient Glow Blobs -->
-  <div class="bg-blob-1"></div>
-  <div class="bg-blob-2"></div>
+  <div class="ambient-bg"></div>
 
   <div id="app-container">
-    <!-- Header -->
+    <!-- Top Sticky Header -->
     <header>
-      <div class="header-left" onclick="navigateTo('home')">
+      <div class="header-left" onclick="switchNav('genres')">
         <div class="header-logo">✨</div>
-        <div class="header-title-box">
-          <h1>운양고 동아리 발표회</h1>
-          <p>2026 OFFICIAL GUIDE</p>
+        <div class="header-text">
+          <h1>2026 운양고 동아리 발표회</h1>
+          <p>UNYANG FESTIVAL GUIDE</p>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="header-icon-btn" onclick="fireCelebrationConfetti()" title="축제 폭죽!">🎉</button>
-      </div>
+      <button class="confetti-trigger-btn" onclick="blastFestiveConfetti()" title="축제 폭죽 팡팡!">🎉</button>
     </header>
 
-    <!-- Global Sticky 3-Tab Bar (Visible in all sub-views) -->
-    <div class="global-nav-bar" id="global-nav-bar">
-      <div class="global-nav-inner">
-        <button class="nav-tab-btn" id="nav-btn-map" onclick="navigateTo('map')">🏢 층별로 보기</button>
-        <button class="nav-tab-btn" id="nav-btn-genres" onclick="navigateTo('genres')">🎪 테마·장르별 보기</button>
-        <button class="nav-tab-btn" id="nav-btn-schedule" onclick="navigateTo('schedule')">⏰ 운영시간표</button>
+    <!-- Top Sticky 3-Tab Bar -->
+    <div class="top-nav-bar">
+      <div class="nav-pills-box">
+        <button class="nav-pill active" id="tab-genres" onclick="switchNav('genres')">🎪 테마·장르별 보기</button>
+        <button class="nav-pill" id="tab-map" onclick="switchNav('map')">🏢 층별로 보기</button>
+        <button class="nav-pill" id="tab-schedule" onclick="switchNav('schedule')">⏰ 운영시간표</button>
       </div>
     </div>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="동아리명, 키워드, 교실 검색..." oninput="handleSearch(this.value)">
-        <button id="searchClearBtn" class="search-clear-btn" onclick="clearSearch()">✕</button>
-      </div>
-    </div>
-
-    <!-- Main Views -->
+    <!-- Main Content Area -->
     <main>
       <!-- ============================================================
-           0. HOME VIEW
-           ============================================================ -->
-      <div id="view-home">
-        <!-- Hero Banner -->
-        <div class="home-hero">
-          <div class="home-hero-badge">🔥 2026 UNYANG FESTIVAL</div>
-          <div class="home-hero-title">열정과 재능이 폭발하는<br>운양 동아리 한마당!</div>
-          <div class="home-hero-desc">1~5층 전 교실에서 펼쳐지는 30개 이색 부스를 지금 모바일에서 만나보세요.</div>
-          <div class="hero-sparkle">🎆</div>
-        </div>
-
-        <!-- 3 Primary Nav Cards -->
-        <div class="home-cards-wrapper">
-          <!-- 1. 층별로 보기 -->
-          <div class="action-card hero-action" onclick="navigateTo('map')">
-            <div class="action-icon-box" style="background: #e0e7ff; color: #4338ca;">🏢</div>
-            <div class="action-info">
-              <span class="action-tag" style="background: #c7d2fe; color: #3730a3;">1~5층 세로형 배치도</span>
-              <div class="action-title">층별로 보기 <span style="font-size:14px;">🗺️</span></div>
-              <div class="action-sub">내 폰에 쏙 들어오는 스마트폰 전용 도면 &amp; 부스 터치 바로가기</div>
-            </div>
-            <div class="action-arrow">➔</div>
-          </div>
-
-          <!-- 2. 테마·장르별 보기 -->
-          <div class="action-card" onclick="navigateTo('genres')">
-            <div class="action-icon-box" style="background: #fce7f3; color: #be185d;">🎪</div>
-            <div class="action-info">
-              <span class="action-tag" style="background: #fbcfe8; color: #9d174d;">취향저격 6대 테마</span>
-              <div class="action-title">테마·장르별 보기 <span style="font-size:14px;">⚡</span></div>
-              <div class="action-sub">방탈출·괴담, 존맛탱 디저트, 심쿵 소개팅, 도파민 배틀 30개 부스</div>
-            </div>
-            <div class="action-arrow">➔</div>
-          </div>
-
-          <!-- 3. 운영시간표 -->
-          <div class="action-card" onclick="navigateTo('schedule')">
-            <div class="action-icon-box" style="background: #fef3c7; color: #b45309;">⏰</div>
-            <div class="action-info">
-              <span class="action-tag" style="background: #fde68a; color: #92400e;">타임테이블</span>
-              <div class="action-title">운영시간표 <span style="font-size:14px;">📋</span></div>
-              <div class="action-sub">개막식, 부스 체험 시간, 시청각실 밴드·연극 공연 타임테이블</div>
-            </div>
-            <div class="action-arrow">➔</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           1. 🏢 층별로 보기 VIEW
-           ============================================================ -->
-      <div id="view-map">
-        <!-- Floor Tabs (5F down to 1F) -->
-        <div class="floor-tabs-bar">
-          <button class="floor-pill-btn" onclick="selectFloor(5)" id="floor-tab-5">5층</button>
-          <button class="floor-pill-btn" onclick="selectFloor(4)" id="floor-tab-4">4층</button>
-          <button class="floor-pill-btn" onclick="selectFloor(3)" id="floor-tab-3">3층</button>
-          <button class="floor-pill-btn" onclick="selectFloor(2)" id="floor-tab-2">2층</button>
-          <button class="floor-pill-btn active" onclick="selectFloor(1)" id="floor-tab-1">1층</button>
-        </div>
-
-        <!-- SVG Map Container -->
-        <div class="map-stage-wrapper">
-          <div class="map-badge-header">
-            <div class="map-badge-title" id="currentFloorTitle">📍 1층 배치도</div>
-            <div class="map-badge-tip">교실 또는 부스를 터치하면 상세 정보가 열립니다</div>
-          </div>
-          <div class="floor-svg-container" id="floorSvgContainer">
-            <!-- Dynamic SVG injected here -->
-          </div>
-        </div>
-
-        <!-- Booths on this floor -->
-        <div style="margin-top: 14px;">
-          <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 10px; color: var(--text-main);" id="floorBoothsTitle">
-            1층 부스 목록
-          </h3>
-          <div class="booths-grid" id="floorBoothsList">
-            <!-- Dynamic booth cards -->
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           2. 🎪 테마·장르별 보기 VIEW
+           1. 🎪 테마·장르별 보기 (CARD SWIPE CAROUSEL)
            ============================================================ -->
       <div id="view-genres">
-        <!-- Genre Filter Chips -->
-        <div class="genre-filter-chips">
-          <button class="genre-chip active" onclick="filterGenre('all')" id="genre-chip-all">전체 (30)</button>
-          <button class="genre-chip" onclick="filterGenre('horror')" id="genre-chip-horror">👻 방탈출·추리</button>
-          <button class="genre-chip" onclick="filterGenre('food')" id="genre-chip-food">😋 먹거리·디저트</button>
-          <button class="genre-chip" onclick="filterGenre('romance')" id="genre-chip-romance">💖 소개팅·심리</button>
-          <button class="genre-chip" onclick="filterGenre('science')" id="genre-chip-science">🧪 이색실험</button>
-          <button class="genre-chip" onclick="filterGenre('game')" id="genre-chip-game">⚡ 게임·배틀</button>
-          <button class="genre-chip" onclick="filterGenre('stage')" id="genre-chip-stage">🎸 공연·감성</button>
+        <!-- Theme Selector Chips -->
+        <div class="theme-chips-row">
+          <button class="theme-chip active" onclick="selectTheme('all')" id="theme-btn-all">전체 (30개)</button>
+          <button class="theme-chip" onclick="selectTheme('horror')" id="theme-btn-horror">👻 방탈출·추리</button>
+          <button class="theme-chip" onclick="selectTheme('food')" id="theme-btn-food">😋 디저트·먹거리</button>
+          <button class="theme-chip" onclick="selectTheme('romance')" id="theme-btn-romance">💖 소개팅·심리</button>
+          <button class="theme-chip" onclick="selectTheme('science')" id="theme-btn-science">🧪 이색실험</button>
+          <button class="theme-chip" onclick="selectTheme('game')" id="theme-btn-game">⚡ 게임·배틀</button>
+          <button class="theme-chip" onclick="selectTheme('stage')" id="theme-btn-stage">🎸 공연·아트</button>
         </div>
 
-        <!-- Genre Sections Container -->
-        <div id="genresContentContainer">
-          <!-- Dynamic Category Sections -->
+        <!-- Carousel Presentation Area -->
+        <div class="carousel-section">
+          <div class="carousel-top-bar">
+            <div class="carousel-title-group">
+              <span class="carousel-category-pill" id="deckThemePill" style="background:#6366f1;">전체 동아리</span>
+              <span style="font-size:12px; color:#94a3b8; font-weight:700;">가나다순 카드 덱</span>
+            </div>
+            <div class="carousel-counter" id="deckCounter">1 / 30</div>
+          </div>
+
+          <!-- Card Deck Viewport with Left/Right Buttons -->
+          <div class="card-deck-viewport">
+            <button class="nav-arrow-btn left" onclick="prevCard()" title="이전 부스">◀</button>
+            
+            <div id="activeCardContainer" style="width:100%;">
+              <!-- Injected Dynamic Card -->
+            </div>
+
+            <button class="nav-arrow-btn right" onclick="nextCard()" title="다음 부스">▶</button>
+          </div>
+
+          <!-- Pagination Indicator Dots -->
+          <div class="carousel-dots-wrap" id="carouselDots">
+            <!-- Dynamic Dots -->
+          </div>
         </div>
       </div>
 
       <!-- ============================================================
-           3. ⏰ 운영시간표 VIEW
+           2. 🏢 층별로 보기 (FLOOR MAP & ROOM FOCUS)
            ============================================================ -->
-      <div id="view-schedule">
-        <div class="timeline-wrap">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-box">
-              <div class="timeline-time">09:00 ~ 09:30</div>
-              <div class="timeline-title">🎉 개막식 및 부스 준비</div>
-              <div class="timeline-desc">전교생 방송 시청, 축제 개막 선언 및 각 부스 최종 리허설/점검</div>
+      <div id="view-map" style="display:none;">
+        <div class="floor-pills-row">
+          <button class="floor-pill-btn" onclick="selectFloor(5)" id="floor-pill-5">5층</button>
+          <button class="floor-pill-btn" onclick="selectFloor(4)" id="floor-pill-4">4층</button>
+          <button class="floor-pill-btn" onclick="selectFloor(3)" id="floor-pill-3">3층</button>
+          <button class="floor-pill-btn" onclick="selectFloor(2)" id="floor-pill-2">2층</button>
+          <button class="floor-pill-btn active" onclick="selectFloor(1)" id="floor-pill-1">1층</button>
+        </div>
+
+        <div class="map-svg-card">
+          <div class="map-hint-banner">
+            <span id="currentFloorBadge">📍 1층 배치도</span>
+            <span style="color:#6366f1;">교실을 터치하면 부스 카드가 뜹니다!</span>
+          </div>
+          <div class="floor-svg-container" id="floorSvgContainer">
+            <!-- Injected SVG -->
+          </div>
+        </div>
+
+        <!-- Floor Booths Card Carousel -->
+        <div class="carousel-section" style="margin-top:0;">
+          <div class="carousel-top-bar">
+            <div class="carousel-title-group">
+              <span class="carousel-category-pill" id="floorDeckPill" style="background:#4f46e5;">1층 부스 덱</span>
             </div>
+            <div class="carousel-counter" id="floorDeckCounter">1 / 4</div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-box" style="border-color: #a5b4fc;">
-              <div class="timeline-time">09:30 ~ 12:00</div>
-              <div class="timeline-title">🎪 1부 동아리 부스 체험</div>
-              <div class="timeline-desc">1층~5층 전 교실 및 특별실 부스 자유 체험, 스탬프 투어 이벤트 진행</div>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-box">
-              <div class="timeline-time">12:00 ~ 13:20</div>
-              <div class="timeline-title">🍱 점심 식사 및 휴식</div>
-              <div class="timeline-desc">맛있는 급식 시간 &amp; 오후 2부 행사 준비</div>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-box" style="border-color: #f472b6;">
-              <div class="timeline-time">13:30 ~ 15:30</div>
-              <div class="timeline-title">🎸 시청각실 특별 무대 공연 &amp; 2부 부스</div>
-              <div class="timeline-desc">
-                • 13:30 ~ 14:10 : 밴드부 라이브 콘서트<br>
-                • 14:15 ~ 14:45 : 러쉬온미 K-POP 커버 댄스<br>
-                • 14:50 ~ 15:30 : 연극부 〈20세기 소녀〉 연극 상연
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-box">
-              <div class="timeline-time">15:30 ~ 16:30</div>
-              <div class="timeline-title">🧹 폐막식 및 환경 정리</div>
-              <div class="timeline-desc">스탬프 추첨 선물 증정식, 부스 정리 정돈 및 종례</div>
-            </div>
+          <div class="card-deck-viewport" style="min-height:420px;">
+            <button class="nav-arrow-btn left" onclick="prevFloorCard()" title="이전 부스">◀</button>
+            <div id="activeFloorCardContainer" style="width:100%;"></div>
+            <button class="nav-arrow-btn right" onclick="nextFloorCard()" title="다음 부스">▶</button>
           </div>
         </div>
       </div>
 
-      <!-- Empty Search State -->
-      <div class="empty-state" id="emptySearchState">
-        <div class="empty-state-icon">🔍</div>
-        <div class="empty-state-title">검색 결과가 없습니다</div>
-        <div class="empty-state-desc">철자를 확인하거나 다른 검색어로 찾아보세요.</div>
+      <!-- ============================================================
+           3. ⏰ 운영시간표
+           ============================================================ -->
+      <div id="view-schedule" style="display:none;">
+        <div class="timeline-wrap">
+          <div class="timeline-card">
+            <div class="timeline-time">09:00 ~ 09:30</div>
+            <div class="timeline-title">🎉 개막식 및 부스 리허설</div>
+            <div class="timeline-desc">전교생 방송 시청, 축제 개막 선언 및 동아리 부스 최종 점검</div>
+          </div>
+
+          <div class="timeline-card" style="border-color:#818cf8;">
+            <div class="timeline-time">09:30 ~ 12:00</div>
+            <div class="timeline-title">🎪 1부 동아리 부스 체험</div>
+            <div class="timeline-desc">1층~5층 전 교실 및 특별실 부스 자유 체험 &amp; 스탬프 투어 챌린지!</div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">12:00 ~ 13:20</div>
+            <div class="timeline-title">🍱 점심 식사 및 휴식</div>
+            <div class="timeline-desc">맛있는 축제 급식 &amp; 오후 2부 행사 준비</div>
+          </div>
+
+          <div class="timeline-card" style="border-color:#f43f5e;">
+            <div class="timeline-time">13:30 ~ 15:30</div>
+            <div class="timeline-title">🎸 시청각실 특별 공연 &amp; 2부 부스</div>
+            <div class="timeline-desc">
+              • 13:30 ~ 14:10 : 밴드부 라이브 콘서트<br>
+              • 14:15 ~ 14:45 : 러쉬온미 K-POP 댄스 메들리<br>
+              • 14:50 ~ 15:30 : 연극부 〈20세기 소녀〉 무대 상연
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-time">15:30 ~ 16:30</div>
+            <div class="timeline-title">🧹 폐막식 &amp; 경품 추첨</div>
+            <div class="timeline-desc">스탬프 투어 럭키 드로우 시상식, 환경 정리 및 종례</div>
+          </div>
+        </div>
       </div>
     </main>
-
-    <!-- Bottom Sheet Modal for Booth Detail -->
-    <div class="modal-backdrop" id="boothModal" onclick="closeModalOnBackdrop(event)">
-      <div class="modal-sheet">
-        <div class="modal-handle"></div>
-        <button class="modal-close-btn" onclick="closeBoothModal()">✕</button>
-        <div class="modal-header">
-          <div class="modal-avatar" id="modalEmoji">🎪</div>
-          <div class="modal-title-box">
-            <h2 id="modalName">동아리명</h2>
-            <div class="modal-badge-row">
-              <span class="modal-tag" id="modalCat" style="background:#e0e7ff; color:#3730a3;">장르</span>
-              <span class="modal-tag" id="modalLoc" style="background:#fef3c7; color:#92400e;">위치</span>
-            </div>
-          </div>
-        </div>
-        <div class="modal-desc-box" id="modalDesc">
-          부스 소개 내용이 여기에 표시됩니다.
-        </div>
-        <div class="modal-actions">
-          <button class="modal-btn modal-btn-like" id="modalLikeBtn" onclick="toggleCurrentBoothBookmark()">
-            <span id="modalBookmarkIcon">⭐</span> 즐겨찾기
-          </button>
-          <button class="modal-btn modal-btn-map" onclick="showOnFloorMap()">
-            <span>🏢</span> 지도에서 보기
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script>
-    // Raw Data (Korean Alphabetical Order Guaranteed)
     const BOOTHS = [
-      {
-            "id": 20,
-            "name": "경영위키",
-            "cat": "👻 등골오싹 방탈출·추리",
-            "cat_id": "horror",
-            "emoji": "👻",
-            "room": "1-1",
-            "floor": 5,
-            "desc": "심장이 약한 분 주의! 폐쇄된 어두운 교실에서 단서를 찾아 제한 시간 내 탈출하는 공포의 방탈출!"
-      },
-      {
-            "id": 24,
-            "name": "교지편집부",
-            "cat": "👻 등골오싹 방탈출·추리",
-            "cat_id": "horror",
-            "emoji": "🏺",
-            "room": "1-3",
-            "floor": 4,
-            "desc": "국립 박물관 고대 유물 도난 사건 발생! 교실 곳곳에 숨겨진 단서와 암호를 해독해 진범을 검거하세요!"
-      },
-      {
-            "id": 21,
-            "name": "교집합",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "🎲",
-            "room": "1-2",
-            "floor": 5,
-            "desc": "상식, 넌센스, 학교 역사 퀴즈 배틀! 연속 정답자에게 주어지는 럭키 드로우 선물 박스!"
-      },
-      {
-            "id": 26,
-            "name": "글로톡",
-            "cat": "😋 존맛탱 먹거리·디저트",
-            "cat_id": "food",
-            "emoji": "🍪",
-            "room": "1-5",
-            "floor": 4,
-            "desc": "물로 간편하게 새기는 개성 만점 타투 스티커 및 달콤한 아이싱으로 글씨와 그림을 그리는 수제 쿠키 꾸미기!"
-      },
-      {
-            "id": 13,
-            "name": "도서관사람들",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "🎰",
-            "room": "2-6",
-            "floor": 4,
-            "desc": "잭팟이 터지는 〈책팟(Book-Pot)〉! 슬롯머신, 대형 주사위, 미니볼링 게임존과 독서 퀴즈 챌린지!"
-      },
-      {
-            "id": 27,
-            "name": "또래상담부",
-            "cat": "💖 심쿵유발 소개팅·심리",
-            "cat_id": "romance",
-            "emoji": "💬",
-            "room": "1-6",
-            "floor": 4,
-            "desc": "MBTI 성격 유형 분석 및 기대심리를 활용한 두근두근 연애·우정 심리 상담 & 커플 매칭 테스트!"
-      },
-      {
-            "id": 28,
-            "name": "러쉬온미",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "💃",
-            "room": "1-7",
-            "floor": 4,
-            "desc": "무대를 뒤집어 놓는 파워풀 K-POP 커버 & 스트릿 댄스 리믹스 메들리 공연!"
-      },
-      {
-            "id": 8,
-            "name": "멘날바",
-            "cat": "😋 존맛탱 먹거리·디저트",
-            "cat_id": "food",
-            "emoji": "🌭",
-            "room": "2-1",
-            "floor": 3,
-            "desc": "실생활 속 열역학 상태 변화 관찰 (마시멜로 융해와 핫도그 열전도 가열 원리 관찰 후 맛있는 시식)!"
-      },
-      {
-            "id": 2,
-            "name": "밴드부",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "🎸",
-            "room": "시청각실",
-            "floor": 1,
-            "desc": "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다."
-      },
-      {
-            "id": 19,
-            "name": "베이킹메이킹",
-            "cat": "😋 존맛탱 먹거리·디저트",
-            "cat_id": "food",
-            "emoji": "🧇",
-            "room": "가사실습실",
-            "floor": 3,
-            "desc": "갓 구운 겉바속촉 크로플 제작 및 나만의 생크림, 초코, 딸기 토핑 데코레이션 디저트 체험!"
-      },
-      {
-            "id": 10,
-            "name": "블루라인",
-            "cat": "👻 등골오싹 방탈출·추리",
-            "cat_id": "horror",
-            "emoji": "🔍",
-            "room": "2-3",
-            "floor": 3,
-            "desc": "크리스마스 살인사건 미스터리! 현장에 남겨진 지문과 혈흔, 알리바이를 분석해 진범을 가려내는 과학수사 추리!"
-      },
-      {
-            "id": 6,
-            "name": "생명보험",
-            "cat": "🧪 신기방기 이색실험·체험",
-            "cat_id": "science",
-            "emoji": "🍹",
-            "room": "2-9",
-            "floor": 2,
-            "desc": "지시약의 pH 산·염기 색 변화 반응을 이용한 영롱한 오로라빛 은하수 에이드 제조 실험 체험!"
-      },
-      {
-            "id": 3,
-            "name": "소나기(방송부)",
-            "cat": "👻 등골오싹 방탈출·추리",
-            "cat_id": "horror",
-            "emoji": "🎙️",
-            "room": "방송실",
-            "floor": 2,
-            "desc": "방송실 최첨단 조명과 입체 음향 시스템으로 구현한 오싹한 공포 귀신의 집 & 신나는 방음 노래방 체험!"
-      },
-      {
-            "id": 11,
-            "name": "소프라테스",
-            "cat": "💖 심쿵유발 소개팅·심리",
-            "cat_id": "romance",
-            "emoji": "🧠",
-            "room": "2-4",
-            "floor": 3,
-            "desc": "철학적 가치관 딜레마 테스트를 통해 영혼의 짝을 찾아주는 〈운명적 철학 소개팅 & 심층 상담〉!"
-      },
-      {
-            "id": 7,
-            "name": "스파크",
-            "cat": "🧪 신기방기 이색실험·체험",
-            "cat_id": "science",
-            "emoji": "🍸",
-            "room": "2-10",
-            "floor": 2,
-            "desc": "밀도 차이에 따른 층 분리와 pH 지시약 색 변화를 응용한 신비로운 무알콜 과학 칵테일 바!"
-      },
-      {
-            "id": 22,
-            "name": "슬램덩크(농구부)",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "🏀",
-            "room": "체육관",
-            "floor": 5,
-            "desc": "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결! 푸짐한 상품이 기다립니다."
-      },
-      {
-            "id": 12,
-            "name": "시너지",
-            "cat": "🧪 신기방기 이색실험·체험",
-            "cat_id": "science",
-            "emoji": "🧋",
-            "room": "2-5",
-            "floor": 3,
-            "desc": "알긴산나트륨과 젖산칼슘의 화학적 겔화 반응을 활용한 톡톡 터지는 수제 팝핑보바 만들기 & 시식!"
-      },
-      {
-            "id": 1,
-            "name": "시퀀스",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "🎭",
-            "room": "시청각실",
-            "floor": 1,
-            "desc": "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연! 운양고 연극부의 열연을 감상해 보세요."
-      },
-      {
-            "id": 5,
-            "name": "아스클",
-            "cat": "😋 존맛탱 먹거리·디저트",
-            "cat_id": "food",
-            "emoji": "🐟",
-            "room": "화학실험실",
-            "floor": 2,
-            "desc": "생명과학의 소소한 재미! 달콤 바삭 달고나 제작 & 따끈따끈 미니 붕어빵 만들기 DIY!"
-      },
-      {
-            "id": 18,
-            "name": "알고리즘",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "💻",
-            "room": "인공지능실",
-            "floor": 3,
-            "desc": "학생들이 직접 파이썬/C언어로 개발한 코딩 기반 미니게임 3종 & 스릴 만점 레이싱 게임 플레이 존!"
-      },
-      {
-            "id": 4,
-            "name": "애그부",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "🎨",
-            "room": "생물실험실",
-            "floor": 2,
-            "desc": "부원들의 정성 어린 창작 일러스트 전시 및 일본 여름 마츠리 축제 감성의 야타이 포토존!"
-      },
-      {
-            "id": 14,
-            "name": "에끌라",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "💅",
-            "room": "2-7",
-            "floor": 4,
-            "desc": "프로 못지않은 블링블링 젤 네일아트 케어 & 방송 분장 수준의 실감 나는 할로윈 특수분장 뷰티샵!"
-      },
-      {
-            "id": 23,
-            "name": "유아트",
-            "cat": "👻 등골오싹 방탈출·추리",
-            "cat_id": "horror",
-            "emoji": "🔮",
-            "room": "미술실",
-            "floor": 5,
-            "desc": "미술 동아리가 특수 조명과 음향, 미술 오브제로 직접 세팅한 고퀄리티 한국 공포 테마 〈무당집 괴담 방탈출〉!"
-      },
-      {
-            "id": 15,
-            "name": "잡지식",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "📸",
-            "room": "2-8",
-            "floor": 4,
-            "desc": "해리포터 & 겨울왕국 테마 감성 포토존! 소중한 친구에게 전하는 실링왁스 손편지 및 자체 제작 매거진 전시."
-      },
-      {
-            "id": 9,
-            "name": "창연회",
-            "cat": "💖 심쿵유발 소개팅·심리",
-            "cat_id": "romance",
-            "emoji": "💌",
-            "room": "2-2",
-            "floor": 3,
-            "desc": "선입견 없이 오직 대화와 목소리로만 서로를 알아가는 설렘 가득 〈블라인드 1:1 소개팅〉!"
-      },
-      {
-            "id": 30,
-            "name": "체대입시부",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "🏋️",
-            "room": "체육관",
-            "floor": 5,
-            "desc": "체대입시부에 도전하라! 제자리멀리뛰기, 악력 측정, 셔틀런 및 체대 입시생들과의 힘겨루기 한판 승부!"
-      },
-      {
-            "id": 29,
-            "name": "축구부",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "⚽",
-            "room": "운동장",
-            "floor": 1,
-            "desc": "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!"
-      },
-      {
-            "id": 31,
-            "name": "플라잉셔틀즈",
-            "cat": "⚡ 도파민폭발 게임·배틀",
-            "cat_id": "game",
-            "emoji": "🏸",
-            "room": "체육관",
-            "floor": 5,
-            "desc": "배드민턴부를 이겨라! 고난도 스매싱 타겟 맞추기 챌린지 & 배드민턴 1점 내기 미니 대결!"
-      },
-      {
-            "id": 32,
-            "name": "필름메이커스",
-            "cat": "🎸 무대찢는 공연·감성아트",
-            "cat_id": "stage",
-            "emoji": "🎬",
-            "room": "시청각실",
-            "floor": 1,
-            "desc": "운양 시네마 클럽! 학생들이 직접 기획·촬영한 독립 단편 영화 상영관 및 팝콘 제공, 명대사 퀴즈!"
-      },
-      {
-            "id": 16,
-            "name": "화생방",
-            "cat": "🧪 신기방기 이색실험·체험",
-            "cat_id": "science",
-            "emoji": "🧼",
-            "room": "물리실험실",
-            "floor": 2,
-            "desc": "천연 에센셜 오일과 유기농 색소를 조합하여 나만의 향과 색을 담는 수제 MP 비누 만들기 공방!"
-      }
+    {
+        "id": 20,
+        "name": "경영위키",
+        "cat": "👻 등골오싹 방탈출·추리",
+        "cat_id": "horror",
+        "emoji": "👻",
+        "room": "1-1",
+        "floor": 5,
+        "desc": "심장이 약한 분 주의! 폐쇄된 어두운 교실에서 단서를 찾아 제한 시간 내 탈출하는 공포의 방탈출!"
+    },
+    {
+        "id": 24,
+        "name": "교지편집부",
+        "cat": "👻 등골오싹 방탈출·추리",
+        "cat_id": "horror",
+        "emoji": "🏺",
+        "room": "1-3",
+        "floor": 4,
+        "desc": "국립 박물관 고대 유물 도난 사건 발생! 교실 곳곳에 숨겨진 단서와 암호를 해독해 진범을 검거하세요!"
+    },
+    {
+        "id": 21,
+        "name": "교집합",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "🎲",
+        "room": "1-2",
+        "floor": 5,
+        "desc": "상식, 넌센스, 학교 역사 퀴즈 배틀! 연속 정답자에게 주어지는 럭키 드로우 선물 박스!"
+    },
+    {
+        "id": 26,
+        "name": "글로톡",
+        "cat": "😋 존맛탱 먹거리·디저트",
+        "cat_id": "food",
+        "emoji": "🍪",
+        "room": "1-5",
+        "floor": 4,
+        "desc": "물로 간편하게 새기는 개성 만점 타투 스티커 및 달콤한 아이싱으로 글씨와 그림을 그리는 수제 쿠키 꾸미기!"
+    },
+    {
+        "id": 13,
+        "name": "도서관사람들",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "🎰",
+        "room": "2-6",
+        "floor": 4,
+        "desc": "잭팟이 터지는 〈책팟(Book-Pot)〉! 슬롯머신, 대형 주사위, 미니볼링 게임존과 독서 퀴즈 챌린지!"
+    },
+    {
+        "id": 27,
+        "name": "또래상담부",
+        "cat": "💖 심쿵유발 소개팅·심리",
+        "cat_id": "romance",
+        "emoji": "💬",
+        "room": "1-6",
+        "floor": 4,
+        "desc": "MBTI 성격 유형 분석 및 기대심리를 활용한 두근두근 연애·우정 심리 상담 & 커플 매칭 테스트!"
+    },
+    {
+        "id": 28,
+        "name": "러쉬온미",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "💃",
+        "room": "1-7",
+        "floor": 4,
+        "desc": "무대를 뒤집어 놓는 파워풀 K-POP 커버 & 스트릿 댄스 리믹스 메들리 공연!"
+    },
+    {
+        "id": 8,
+        "name": "멘날바",
+        "cat": "😋 존맛탱 먹거리·디저트",
+        "cat_id": "food",
+        "emoji": "🌭",
+        "room": "2-1",
+        "floor": 3,
+        "desc": "실생활 속 열역학 상태 변화 관찰 (마시멜로 융해와 핫도그 열전도 가열 원리 관찰 후 맛있는 시식)!"
+    },
+    {
+        "id": 2,
+        "name": "밴드부",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "🎸",
+        "room": "시청각실",
+        "floor": 1,
+        "desc": "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다."
+    },
+    {
+        "id": 19,
+        "name": "베이킹메이킹",
+        "cat": "😋 존맛탱 먹거리·디저트",
+        "cat_id": "food",
+        "emoji": "🧇",
+        "room": "가사실습실",
+        "floor": 3,
+        "desc": "갓 구운 겉바속촉 크로플 제작 및 나만의 생크림, 초코, 딸기 토핑 데코레이션 디저트 체험!"
+    },
+    {
+        "id": 10,
+        "name": "블루라인",
+        "cat": "👻 등골오싹 방탈출·추리",
+        "cat_id": "horror",
+        "emoji": "🔍",
+        "room": "2-3",
+        "floor": 3,
+        "desc": "크리스마스 살인사건 미스터리! 현장에 남겨진 지문과 혈흔, 알리바이를 분석해 진범을 가려내는 과학수사 추리!"
+    },
+    {
+        "id": 6,
+        "name": "생명보험",
+        "cat": "🧪 신기방기 이색실험·체험",
+        "cat_id": "science",
+        "emoji": "🍹",
+        "room": "2-9",
+        "floor": 2,
+        "desc": "지시약의 pH 산·염기 색 변화 반응을 이용한 영롱한 오로라빛 은하수 에이드 제조 실험 체험!"
+    },
+    {
+        "id": 3,
+        "name": "소나기(방송부)",
+        "cat": "👻 등골오싹 방탈출·추리",
+        "cat_id": "horror",
+        "emoji": "🎙️",
+        "room": "방송실",
+        "floor": 2,
+        "desc": "방송실 최첨단 조명과 입체 음향 시스템으로 구현한 오싹한 공포 귀신의 집 & 신나는 방음 노래방 체험!"
+    },
+    {
+        "id": 11,
+        "name": "소프라테스",
+        "cat": "💖 심쿵유발 소개팅·심리",
+        "cat_id": "romance",
+        "emoji": "🧠",
+        "room": "2-4",
+        "floor": 3,
+        "desc": "철학적 가치관 딜레마 테스트를 통해 영혼의 짝을 찾아주는 〈운명적 철학 소개팅 & 심층 상담〉!"
+    },
+    {
+        "id": 7,
+        "name": "스파크",
+        "cat": "🧪 신기방기 이색실험·체험",
+        "cat_id": "science",
+        "emoji": "🍸",
+        "room": "2-10",
+        "floor": 2,
+        "desc": "밀도 차이에 따른 층 분리와 pH 지시약 색 변화를 응용한 신비로운 무알콜 과학 칵테일 바!"
+    },
+    {
+        "id": 22,
+        "name": "슬램덩크(농구부)",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "🏀",
+        "room": "체육관",
+        "floor": 5,
+        "desc": "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결! 푸짐한 상품이 기다립니다."
+    },
+    {
+        "id": 12,
+        "name": "시너지",
+        "cat": "🧪 신기방기 이색실험·체험",
+        "cat_id": "science",
+        "emoji": "🧋",
+        "room": "2-5",
+        "floor": 3,
+        "desc": "알긴산나트륨과 젖산칼슘의 화학적 겔화 반응을 활용한 톡톡 터지는 수제 팝핑보바 만들기 & 시식!"
+    },
+    {
+        "id": 1,
+        "name": "시퀀스",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "🎭",
+        "room": "시청각실",
+        "floor": 1,
+        "desc": "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연! 운양고 연극부의 열연을 감상해 보세요."
+    },
+    {
+        "id": 5,
+        "name": "아스클",
+        "cat": "😋 존맛탱 먹거리·디저트",
+        "cat_id": "food",
+        "emoji": "🐟",
+        "room": "화학실험실",
+        "floor": 2,
+        "desc": "생명과학의 소소한 재미! 달콤 바삭 달고나 제작 & 따끈따끈 미니 붕어빵 만들기 DIY!"
+    },
+    {
+        "id": 18,
+        "name": "알고리즘",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "💻",
+        "room": "인공지능실",
+        "floor": 3,
+        "desc": "학생들이 직접 파이썬/C언어로 개발한 코딩 기반 미니게임 3종 & 스릴 만점 레이싱 게임 플레이 존!"
+    },
+    {
+        "id": 4,
+        "name": "애그부",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "🎨",
+        "room": "생물실험실",
+        "floor": 2,
+        "desc": "부원들의 정성 어린 창작 일러스트 전시 및 일본 여름 마츠리 축제 감성의 야타이 포토존!"
+    },
+    {
+        "id": 14,
+        "name": "에끌라",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "💅",
+        "room": "2-7",
+        "floor": 4,
+        "desc": "프로 못지않은 블링블링 젤 네일아트 케어 & 방송 분장 수준의 실감 나는 할로윈 특수분장 뷰티샵!"
+    },
+    {
+        "id": 23,
+        "name": "유아트",
+        "cat": "👻 등골오싹 방탈출·추리",
+        "cat_id": "horror",
+        "emoji": "🔮",
+        "room": "미술실",
+        "floor": 5,
+        "desc": "미술 동아리가 특수 조명과 음향, 미술 오브제로 직접 세팅한 고퀄리티 한국 공포 테마 〈무당집 괴담 방탈출〉!"
+    },
+    {
+        "id": 15,
+        "name": "잡지식",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "📸",
+        "room": "2-8",
+        "floor": 4,
+        "desc": "해리포터 & 겨울왕국 테마 감성 포토존! 소중한 친구에게 전하는 실링왁스 손편지 및 자체 제작 매거진 전시."
+    },
+    {
+        "id": 9,
+        "name": "창연회",
+        "cat": "💖 심쿵유발 소개팅·심리",
+        "cat_id": "romance",
+        "emoji": "💌",
+        "room": "2-2",
+        "floor": 3,
+        "desc": "선입견 없이 오직 대화와 목소리로만 서로를 알아가는 설렘 가득 〈블라인드 1:1 소개팅〉!"
+    },
+    {
+        "id": 30,
+        "name": "체대입시부",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "🏋️",
+        "room": "체육관",
+        "floor": 5,
+        "desc": "체대입시부에 도전하라! 제자리멀리뛰기, 악력 측정, 셔틀런 및 체대 입시생들과의 힘겨루기 한판 승부!"
+    },
+    {
+        "id": 29,
+        "name": "축구부",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "⚽",
+        "room": "운동장",
+        "floor": 1,
+        "desc": "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!"
+    },
+    {
+        "id": 31,
+        "name": "플라잉셔틀즈",
+        "cat": "⚡ 도파민폭발 게임·배틀",
+        "cat_id": "game",
+        "emoji": "🏸",
+        "room": "체육관",
+        "floor": 5,
+        "desc": "배드민턴부를 이겨라! 고난도 스매싱 타겟 맞추기 챌린지 & 배드민턴 1점 내기 미니 대결!"
+    },
+    {
+        "id": 32,
+        "name": "필름메이커스",
+        "cat": "🎸 무대찢는 공연·감성아트",
+        "cat_id": "stage",
+        "emoji": "🎬",
+        "room": "시청각실",
+        "floor": 1,
+        "desc": "운양 시네마 클럽! 학생들이 직접 기획·촬영한 독립 단편 영화 상영관 및 팝콘 제공, 명대사 퀴즈!"
+    },
+    {
+        "id": 16,
+        "name": "화생방",
+        "cat": "🧪 신기방기 이색실험·체험",
+        "cat_id": "science",
+        "emoji": "🧼",
+        "room": "물리실험실",
+        "floor": 2,
+        "desc": "천연 에센셜 오일과 유기농 색소를 조합하여 나만의 향과 색을 담는 수제 MP 비누 만들기 공방!"
+    }
 ];
     const CATEGORIES = [
-      {
-            "id": "horror",
-            "name": "👻 등골오싹 방탈출·추리",
-            "short": "방탈출·괴담",
-            "badge": "bg-red",
-            "tagline": "심장 약하면 뒤로가기! 소름 돋는 공포 & 두뇌 암호 해독",
-            "emoji": "👻",
-            "color": "#ef4444"
-      },
-      {
-            "id": "food",
-            "name": "😋 존맛탱 먹거리·디저트",
-            "short": "디저트·먹거리",
-            "badge": "bg-amber",
-            "tagline": "달달한 크로플부터 따끈따끈 붕어빵까지! 냄새 맡고 모여라",
-            "emoji": "🧇",
-            "color": "#f59e0b"
-      },
-      {
-            "id": "romance",
-            "name": "💖 심쿵유발 소개팅·심리",
-            "short": "소개팅·심리",
-            "badge": "bg-pink",
-            "tagline": "설렘 치사량 초과! 블라인드 데이트 & 과몰입 MBTI 심리상담",
-            "emoji": "💘",
-            "color": "#ec4899"
-      },
-      {
-            "id": "science",
-            "name": "🧪 신기방기 이색실험·체험",
-            "short": "실험·체험공방",
-            "badge": "bg-cyan",
-            "tagline": "은하수 에이드와 분자요리 팝핑보바! 눈이 번쩍 뜨이는 공방",
-            "emoji": "🧪",
-            "color": "#06b6d4"
-      },
-      {
-            "id": "game",
-            "name": "⚡ 도파민폭발 게임·배틀",
-            "short": "게임·스포츠",
-            "badge": "bg-purple",
-            "tagline": "체대생과의 팔씨름 승부 & 연속 3점슛! 상품 싹쓸이 도전",
-            "emoji": "🎮",
-            "color": "#8b5cf6"
-      },
-      {
-            "id": "stage",
-            "name": "🎸 무대찢는 공연·감성아트",
-            "short": "공연·스튜디오",
-            "badge": "bg-indigo",
-            "tagline": "가슴 웅장한 밴드 라이브와 댄스 리믹스, 감성 시네마 & 인생네컷",
-            "emoji": "🎤",
-            "color": "#6366f1"
-      }
+    {
+        "id": "horror",
+        "name": "👻 등골오싹 방탈출·추리",
+        "short": "방탈출·괴담",
+        "badge": "bg-red",
+        "tagline": "심장 약하면 뒤로가기! 소름 돋는 공포 & 두뇌 암호 해독",
+        "emoji": "👻",
+        "color": "#ef4444"
+    },
+    {
+        "id": "food",
+        "name": "😋 존맛탱 먹거리·디저트",
+        "short": "디저트·먹거리",
+        "badge": "bg-amber",
+        "tagline": "달달한 크로플부터 따끈따끈 붕어빵까지! 냄새 맡고 모여라",
+        "emoji": "🧇",
+        "color": "#f59e0b"
+    },
+    {
+        "id": "romance",
+        "name": "💖 심쿵유발 소개팅·심리",
+        "short": "소개팅·심리",
+        "badge": "bg-pink",
+        "tagline": "설렘 치사량 초과! 블라인드 데이트 & 과몰입 MBTI 심리상담",
+        "emoji": "💘",
+        "color": "#ec4899"
+    },
+    {
+        "id": "science",
+        "name": "🧪 신기방기 이색실험·체험",
+        "short": "실험·체험공방",
+        "badge": "bg-cyan",
+        "tagline": "은하수 에이드와 분자요리 팝핑보바! 눈이 번쩍 뜨이는 공방",
+        "emoji": "🧪",
+        "color": "#06b6d4"
+    },
+    {
+        "id": "game",
+        "name": "⚡ 도파민폭발 게임·배틀",
+        "short": "게임·스포츠",
+        "badge": "bg-purple",
+        "tagline": "체대생과의 팔씨름 승부 & 연속 3점슛! 상품 싹쓸이 도전",
+        "emoji": "🎮",
+        "color": "#8b5cf6"
+    },
+    {
+        "id": "stage",
+        "name": "🎸 무대찢는 공연·감성아트",
+        "short": "공연·스튜디오",
+        "badge": "bg-indigo",
+        "tagline": "가슴 웅장한 밴드 라이브와 댄스 리믹스, 감성 시네마 & 인생네컷",
+        "emoji": "🎤",
+        "color": "#6366f1"
+    }
 ];
 
-    // Pre-rendered SVG floor plans
     const FLOOR_SVGS = {
       1: `<svg viewBox="0 0 380 520" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <!-- Background / Corridor -->
@@ -1871,337 +1473,303 @@
         </svg>`
     };
 
-    let currentView = 'home';
+    let currentNav = 'genres';
+    let activeThemeId = 'all';
+    let currentThemeBooths = [...BOOTHS];
+    let currentThemeIndex = 0;
+
     let currentFloor = 1;
-    let selectedGenre = 'all';
-    let currentModalBooth = null;
-    let bookmarks = new Set(JSON.parse(localStorage.getItem('uny_bookmarks') || '[]'));
+    let currentFloorBooths = BOOTHS.filter(b => b.floor === 1);
+    let currentFloorIndex = 0;
+
+    let bookmarks = new Set(JSON.parse(localStorage.getItem('uny_bmarks_v2') || '[]'));
 
     // Navigation Switcher
-    function navigateTo(viewName) {
-      currentView = viewName;
-      
-      const views = ['home', 'map', 'genres', 'schedule'];
-      views.forEach(v => {
-        const el = document.getElementById('view-' + v);
-        if (el) el.style.display = (v === viewName) ? 'block' : 'none';
+    function switchNav(navId) {
+      currentNav = navId;
+      ['genres', 'map', 'schedule'].forEach(id => {
+        const el = document.getElementById('view-' + id);
+        const tab = document.getElementById('tab-' + id);
+        if (id === navId) {
+          el.style.display = 'block';
+          tab.classList.add('active');
+        } else {
+          el.style.display = 'none';
+          tab.classList.remove('active');
+        }
       });
 
-      // Top sticky 3-tab bar visibility
-      const navBar = document.getElementById('global-nav-bar');
-      if (viewName === 'home') {
-        navBar.style.display = 'none';
-      } else {
-        navBar.style.display = 'block';
-        ['map', 'genres', 'schedule'].forEach(v => {
-          const btn = document.getElementById('nav-btn-' + v);
-          if (btn) {
-            if (v === viewName) btn.classList.add('active');
-            else btn.classList.remove('active');
-          }
-        });
-      }
-
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // View-specific initialization
-      if (viewName === 'map') {
-        renderFloorMap(currentFloor);
-      } else if (viewName === 'genres') {
-        renderGenresView();
+      if (navId === 'genres') {
+        renderThemeCard();
+      } else if (navId === 'map') {
+        renderFloorView(currentFloor);
       }
     }
 
     // ==========================================
-    // FLOOR MAP LOGIC
+    // THEME CAROUSEL CONTROLLER
+    // ==========================================
+    function selectTheme(themeId) {
+      activeThemeId = themeId;
+      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      const activeBtn = document.getElementById('theme-btn-' + themeId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (themeId === 'all') {
+        currentThemeBooths = [...BOOTHS];
+        document.getElementById('deckThemePill').innerText = '전체 동아리';
+        document.getElementById('deckThemePill').style.background = '#6366f1';
+      } else {
+        const cat = CATEGORIES.find(c => c.id === themeId);
+        currentThemeBooths = BOOTHS.filter(b => b.cat_id === themeId);
+        document.getElementById('deckThemePill').innerText = cat ? cat.short : '테마';
+        document.getElementById('deckThemePill').style.background = cat ? cat.color : '#6366f1';
+      }
+
+      currentThemeIndex = 0;
+      renderThemeCard('next');
+      blastCardConfetti();
+    }
+
+    function nextCard() {
+      if (currentThemeBooths.length === 0) return;
+      currentThemeIndex = (currentThemeIndex + 1) % currentThemeBooths.length;
+      renderThemeCard('next');
+    }
+
+    function prevCard() {
+      if (currentThemeBooths.length === 0) return;
+      currentThemeIndex = (currentThemeIndex - 1 + currentThemeBooths.length) % currentThemeBooths.length;
+      renderThemeCard('prev');
+    }
+
+    function renderThemeCard(direction = 'next') {
+      const total = currentThemeBooths.length;
+      const counterEl = document.getElementById('deckCounter');
+      const container = document.getElementById('activeCardContainer');
+
+      if (total === 0) {
+        counterEl.innerText = '0 / 0';
+        container.innerHTML = '<div class="super-booth-card" style="text-align:center;">부스가 없습니다.</div>';
+        return;
+      }
+
+      counterEl.innerText = `${currentThemeIndex + 1} / ${total}`;
+      const booth = currentThemeBooths[currentThemeIndex];
+      const animClass = direction === 'next' ? 'slideNextAnim' : 'slidePrevAnim';
+
+      container.innerHTML = generateCardHtml(booth, animClass, 'jumpToMapFromTheme');
+      renderDots(total, currentThemeIndex, 'carouselDots', (idx) => {
+        currentThemeIndex = idx;
+        renderThemeCard('next');
+      });
+    }
+
+    // ==========================================
+    // FLOOR CAROUSEL CONTROLLER
     // ==========================================
     function selectFloor(floorNum) {
       currentFloor = floorNum;
       for (let f = 1; f <= 5; f++) {
-        const btn = document.getElementById('floor-tab-' + f);
+        const btn = document.getElementById('floor-pill-' + f);
         if (btn) {
           if (f === floorNum) btn.classList.add('active');
           else btn.classList.remove('active');
         }
       }
-      renderFloorMap(floorNum);
+      renderFloorView(floorNum);
     }
 
-    function renderFloorMap(floorNum) {
-      document.getElementById('currentFloorTitle').innerHTML = `📍 ${floorNum}층 배치도`;
-      document.getElementById('floorBoothsTitle').innerHTML = `${floorNum}층 동아리 부스`;
+    function renderFloorView(floorNum) {
+      document.getElementById('currentFloorBadge').innerText = `📍 ${floorNum}층 배치도`;
+      document.getElementById('floorSvgContainer').innerHTML = FLOOR_SVGS[floorNum] || '<p>도면을 불러올 수 없습니다.</p>';
 
-      const container = document.getElementById('floorSvgContainer');
-      container.innerHTML = FLOOR_SVGS[floorNum] || '<p>도면을 불러올 수 없습니다.</p>';
-
-      // Render booth list on this floor (Korean alphabetical order)
-      const floorBooths = BOOTHS.filter(b => b.floor === floorNum).sort((a,b) => a.name.localeCompare(b.name, 'ko-KR'));
-      const listContainer = document.getElementById('floorBoothsList');
-      listContainer.innerHTML = '';
-
-      if (floorBooths.length === 0) {
-        listContainer.innerHTML = '<p style="color:var(--text-muted); padding:10px;">이 층에는 동아리 부스가 없습니다.</p>';
-      } else {
-        floorBooths.forEach(b => {
-          listContainer.appendChild(createBoothCard(b));
-        });
-      }
+      currentFloorBooths = BOOTHS.filter(b => b.floor === floorNum).sort((a,b) => a.name.localeCompare(b.name, 'ko-KR'));
+      currentFloorIndex = 0;
+      renderFloorCard();
     }
 
-    // Called from SVG room onclick
-    function onRoomClick(roomName, floorNum) {
-      // Find matching booth
-      const match = BOOTHS.find(b => b.floor === floorNum && (b.room === roomName || roomName.includes(b.room) || b.room.includes(roomName)));
-      if (match) {
-        openBoothModal(match.id);
-        fireConfetti(0.5, 0.6);
-      } else {
-        alert(`${floorNum}층 ${roomName} (행사 부스가 아니거나 일반 운영 교실입니다)`);
-      }
+    function nextFloorCard() {
+      if (currentFloorBooths.length === 0) return;
+      currentFloorIndex = (currentFloorIndex + 1) % currentFloorBooths.length;
+      renderFloorCard('next');
     }
 
-    // ==========================================
-    // GENRES / THEMES LOGIC
-    // ==========================================
-    function filterGenre(genreId) {
-      selectedGenre = genreId;
-      document.querySelectorAll('.genre-chip').forEach(c => c.classList.remove('active'));
-      const activeChip = document.getElementById('genre-chip-' + genreId);
-      if (activeChip) activeChip.classList.add('active');
-      renderGenresView();
+    function prevFloorCard() {
+      if (currentFloorBooths.length === 0) return;
+      currentFloorIndex = (currentFloorIndex - 1 + currentFloorBooths.length) % currentFloorBooths.length;
+      renderFloorCard('prev');
     }
 
-    function renderGenresView() {
-      const container = document.getElementById('genresContentContainer');
-      container.innerHTML = '';
+    function renderFloorCard(direction = 'next') {
+      const total = currentFloorBooths.length;
+      const counterEl = document.getElementById('floorDeckCounter');
+      const container = document.getElementById('activeFloorCardContainer');
+      document.getElementById('floorDeckPill').innerText = `${currentFloor}층 부스 덱`;
 
-      const targetCategories = (selectedGenre === 'all') 
-        ? CATEGORIES 
-        : CATEGORIES.filter(c => c.id === selectedGenre);
-
-      targetCategories.forEach(cat => {
-        const catBooths = BOOTHS.filter(b => b.cat_id === cat.id).sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
-        if (catBooths.length === 0) return;
-
-        const sec = document.createElement('div');
-        sec.className = 'category-section';
-
-        sec.innerHTML = `
-          <div class="category-header-banner" style="background: linear-gradient(135deg, ${cat.color} 0%, #0f172a 130%);">
-            <div class="category-header-left">
-              <h3>${cat.name}</h3>
-              <p>${cat.tagline}</p>
-            </div>
-            <div class="category-badge-count">${catBooths.length}개 부스</div>
-          </div>
-          <div class="booths-grid" id="grid-cat-${cat.id}"></div>
-        `;
-
-        const grid = sec.querySelector(`#grid-cat-${cat.id}`);
-        catBooths.forEach(b => {
-          grid.appendChild(createBoothCard(b));
-        });
-
-        container.appendChild(sec);
-      });
-    }
-
-    // ==========================================
-    // BOOTH CARD CREATOR (Uniform & Reusable)
-    // ==========================================
-    function createBoothCard(booth) {
-      const isBookmarked = bookmarks.has(booth.id);
-      const card = document.createElement('div');
-      card.className = 'booth-card';
-      card.onclick = () => openBoothModal(booth.id);
-
-      card.innerHTML = `
-        <div class="booth-avatar">${booth.emoji}</div>
-        <div class="booth-main">
-          <div class="booth-top-row">
-            <span class="booth-name">${booth.name}</span>
-            <span class="booth-loc-tag">📍 ${booth.floor}층 ${booth.room}</span>
-          </div>
-          <div class="booth-desc-preview">${booth.desc}</div>
-        </div>
-        <button class="booth-bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
-                onclick="toggleBookmark(event, ${booth.id})" title="즐겨찾기">
-          ${isBookmarked ? '★' : '☆'}
-        </button>
-      `;
-      return card;
-    }
-
-    // ==========================================
-    // SEARCH LOGIC
-    // ==========================================
-    function handleSearch(query) {
-      const q = query.trim().toLowerCase();
-      const clearBtn = document.getElementById('searchClearBtn');
-      clearBtn.style.display = q ? 'flex' : 'none';
-
-      if (!q) {
-        document.getElementById('emptySearchState').style.display = 'none';
-        navigateTo(currentView);
+      if (total === 0) {
+        counterEl.innerText = '0 / 0';
+        container.innerHTML = '<div class="super-booth-card" style="text-align:center; min-height:160px; justify-content:center;">이 층에는 동아리 부스가 없습니다.</div>';
         return;
       }
 
-      // Switch to genres view and render matching booths
-      navigateTo('genres');
-      const container = document.getElementById('genresContentContainer');
-      container.innerHTML = '';
+      counterEl.innerText = `${currentFloorIndex + 1} / ${total}`;
+      const booth = currentFloorBooths[currentFloorIndex];
+      const animClass = direction === 'next' ? 'slideNextAnim' : 'slidePrevAnim';
 
-      const matched = BOOTHS.filter(b => 
-        b.name.toLowerCase().includes(q) ||
-        b.desc.toLowerCase().includes(q) ||
-        b.room.toLowerCase().includes(q) ||
-        b.cat.toLowerCase().includes(q) ||
-        `${b.floor}층`.includes(q)
-      ).sort((a,b) => a.name.localeCompare(b.name, 'ko-KR'));
+      container.innerHTML = generateCardHtml(booth, animClass, null);
+    }
 
-      const emptyEl = document.getElementById('emptySearchState');
-      if (matched.length === 0) {
-        emptyEl.style.display = 'block';
+    // Called when clicking room in SVG
+    function onRoomClick(roomName, floorNum) {
+      const foundIdx = currentFloorBooths.findIndex(b => b.room === roomName || roomName.includes(b.room) || b.room.includes(roomName));
+      if (foundIdx !== -1) {
+        currentFloorIndex = foundIdx;
+        renderFloorCard('next');
+        blastCardConfetti();
       } else {
-        emptyEl.style.display = 'none';
-        const sec = document.createElement('div');
-        sec.className = 'category-section';
-        sec.innerHTML = `
-          <div class="category-header-banner" style="background: linear-gradient(135deg, #4f46e5, #0f172a);">
-            <div class="category-header-left">
-              <h3>🔍 '${query}' 검색 결과</h3>
-              <p>총 ${matched.length}개의 동아리 부스가 검색되었습니다.</p>
+        alert(`${floorNum}층 ${roomName} (행사 부스가 아니거나 일반 운영실입니다)`);
+      }
+    }
+
+    // ==========================================
+    // REUSABLE CARD HTML GENERATOR
+    // ==========================================
+    function generateCardHtml(booth, animClass, mapJumpFnName) {
+      const isBookmarked = bookmarks.has(booth.id);
+      return `
+        <div class="super-booth-card" style="animation: ${animClass} 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);">
+          <div class="card-header-row">
+            <div class="card-avatar-box">${booth.emoji}</div>
+            <div class="card-badge-right">
+              <span class="card-floor-badge">📍 ${booth.floor}층 ${booth.room}</span>
+              <span class="card-category-badge">${booth.cat}</span>
             </div>
-            <div class="category-badge-count">${matched.length}개</div>
           </div>
-          <div class="booths-grid" id="searchGrid"></div>
-        `;
-        const grid = sec.querySelector('#searchGrid');
-        matched.forEach(b => grid.appendChild(createBoothCard(b)));
-        container.appendChild(sec);
+
+          <div class="card-club-name">
+            ${booth.name}
+          </div>
+          <div class="card-room-name">
+            🏢 운양고등학교 ${booth.floor}층 [${booth.room}]
+          </div>
+
+          <div class="card-body-box">
+            ${booth.desc}
+          </div>
+
+          <div class="card-bottom-actions">
+            <button class="card-action-btn bookmark ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleCardBookmark(${booth.id})">
+              <span>${isBookmarked ? '★' : '☆'}</span> ${isBookmarked ? '즐겨찾기됨' : '즐겨찾기'}
+            </button>
+            ${mapJumpFnName ? `
+              <button class="card-action-btn map-jump" onclick="jumpToFloorMap(${booth.floor}, '${booth.room}')">
+                <span>🏢</span> 배치도에서 위치보기
+              </button>
+            ` : `
+              <button class="card-action-btn map-jump" onclick="blastFestiveConfetti()">
+                <span>🎉</span> 신나는 응원하기!
+              </button>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDots(total, activeIdx, containerId, onClickFn) {
+      const dotsWrap = document.getElementById(containerId);
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      if (total <= 1 || total > 30) return; // avoid overflowing dots
+
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === activeIdx ? ' active' : '');
+        dot.onclick = () => onClickFn(i);
+        dotsWrap.appendChild(dot);
       }
     }
 
-    function clearSearch() {
-      const input = document.getElementById('searchInput');
-      input.value = '';
-      handleSearch('');
-      input.focus();
-    }
-
-    // ==========================================
-    // MODAL LOGIC
-    // ==========================================
-    function openBoothModal(boothId) {
-      const b = BOOTHS.find(x => x.id === boothId);
-      if (!b) return;
-      currentModalBooth = b;
-
-      document.getElementById('modalEmoji').innerText = b.emoji;
-      document.getElementById('modalName').innerText = b.name;
-      document.getElementById('modalCat').innerText = b.cat;
-      document.getElementById('modalLoc').innerText = `📍 ${b.floor}층 ${b.room}`;
-      document.getElementById('modalDesc').innerText = b.desc;
-
-      updateModalBookmarkState();
-
-      const modal = document.getElementById('boothModal');
-      modal.classList.add('active');
-    }
-
-    function closeBoothModal() {
-      const modal = document.getElementById('boothModal');
-      modal.classList.remove('active');
-      currentModalBooth = null;
-    }
-
-    function closeModalOnBackdrop(e) {
-      if (e.target.id === 'boothModal') {
-        closeBoothModal();
-      }
-    }
-
-    function showOnFloorMap() {
-      if (!currentModalBooth) return;
-      const b = currentModalBooth;
-      closeBoothModal();
-      navigateTo('map');
-      selectFloor(b.floor);
-    }
-
-    // ==========================================
-    // BOOKMARKS & CELEBRATION EFFECTS
-    // ==========================================
-    function toggleBookmark(e, boothId) {
-      e.stopPropagation();
-      if (bookmarks.has(boothId)) {
-        bookmarks.delete(boothId);
-      } else {
-        bookmarks.add(boothId);
-        fireConfetti(0.8, 0.7);
-      }
-      localStorage.setItem('uny_bookmarks', JSON.stringify([...bookmarks]));
-      
-      // Re-render current view cards
-      if (currentView === 'map') renderFloorMap(currentFloor);
-      else if (currentView === 'genres') renderGenresView();
-    }
-
-    function toggleCurrentBoothBookmark() {
-      if (!currentModalBooth) return;
-      const id = currentModalBooth.id;
+    // Bookmark Toggle
+    function toggleCardBookmark(id) {
       if (bookmarks.has(id)) {
         bookmarks.delete(id);
       } else {
         bookmarks.add(id);
-        fireConfetti(0.5, 0.5);
+        blastCardConfetti();
       }
-      localStorage.setItem('uny_bookmarks', JSON.stringify([...bookmarks]));
-      updateModalBookmarkState();
-
-      if (currentView === 'map') renderFloorMap(currentFloor);
-      else if (currentView === 'genres') renderGenresView();
+      localStorage.setItem('uny_bmarks_v2', JSON.stringify([...bookmarks]));
+      if (currentNav === 'genres') renderThemeCard();
+      else if (currentNav === 'map') renderFloorCard();
     }
 
-    function updateModalBookmarkState() {
-      if (!currentModalBooth) return;
-      const isBookmarked = bookmarks.has(currentModalBooth.id);
-      const btn = document.getElementById('modalLikeBtn');
-      const icon = document.getElementById('modalBookmarkIcon');
-      if (isBookmarked) {
-        btn.classList.add('liked');
-        icon.innerText = '★';
-      } else {
-        btn.classList.remove('liked');
-        icon.innerText = '☆';
+    // Map Jump
+    function jumpToFloorMap(floor, room) {
+      switchNav('map');
+      selectFloor(floor);
+      const idx = currentFloorBooths.findIndex(b => b.room === room || room.includes(b.room) || b.room.includes(room));
+      if (idx !== -1) {
+        currentFloorIndex = idx;
+        renderFloorCard('next');
+        blastCardConfetti();
       }
     }
 
-    function fireConfetti(x = 0.5, y = 0.5) {
+    // Confetti Effects
+    function blastCardConfetti() {
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 50,
+          particleCount: 45,
           spread: 60,
-          origin: { x, y },
-          colors: ['#4f46e5', '#ec4899', '#f59e0b', '#10b981', '#3b82f6']
+          origin: { x: 0.5, y: 0.6 },
+          colors: ['#6366f1', '#f43f5e', '#10b981', '#f59e0b', '#3b82f6']
         });
       }
     }
 
-    function fireCelebrationConfetti() {
+    function blastFestiveConfetti() {
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 100,
-          spread: 90,
-          origin: { x: 0.5, y: 0.2 }
+          particleCount: 120,
+          spread: 100,
+          origin: { x: 0.5, y: 0.3 }
         });
       }
     }
 
-    // Init App
+    // Swipe Support on Mobile (Touch Events)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) {
+          // Swipe Left -> Next
+          if (currentNav === 'genres') nextCard();
+          else if (currentNav === 'map') nextFloorCard();
+        } else {
+          // Swipe Right -> Prev
+          if (currentNav === 'genres') prevCard();
+          else if (currentNav === 'map') prevFloorCard();
+        }
+      }
+    }
+
+    // Init
     window.addEventListener('DOMContentLoaded', () => {
-      navigateTo('home');
+      switchNav('genres');
     });
   </script>
 </body>
