@@ -129,7 +129,7 @@
     }
 
     /* ============================================================
-       HOME VIEW: 메인 4개 메뉴 카드 (큼직한 폰트, 바운스 인터랙션)
+       HOME VIEW: 메인 4개 메뉴 카드
        ============================================================ */
     #view-home { display: block; }
     .hero-banner {
@@ -142,14 +142,6 @@
       box-shadow: var(--shadow-sm);
       position: relative;
       overflow: hidden;
-    }
-    .hero-banner::after {
-      content: '';
-      position: absolute;
-      top: -50%; right: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
-      pointer-events: none;
     }
     .hero-emoji {
       font-size: 3rem;
@@ -311,7 +303,6 @@
       display: block;
     }
 
-    /* SVG Room Interactivity & Motion */
     .svg-room {
       cursor: pointer;
       transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -332,7 +323,43 @@
     }
 
     /* ============================================================
-       2. 🏪 부스별로 보기 (큰 폰트 & 바운스 카드)
+       2. 🎪 장르별로 보기
+       ============================================================ */
+    #view-genres { display: none; }
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .genre-chip {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 6px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #334155;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .genre-chip:hover {
+      transform: translateY(-2px);
+    }
+    .genre-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transform: scale(1.04);
+    }
+    .genre-chip:active {
+      transform: scale(0.92);
+    }
+
+    /* ============================================================
+       3. 🏪 부스별로 보기 (가나다 순 30개 전체 목록)
        ============================================================ */
     #view-booths { display: none; }
     .search-box {
@@ -420,42 +447,6 @@
       font-size: 0.92rem;
       color: var(--text-muted);
       line-height: 1.5;
-    }
-
-    /* ============================================================
-       3. 🎪 장르별로 보기
-       ============================================================ */
-    #view-genres { display: none; }
-    .genre-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .genre-chip {
-      background: white;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 6px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 900;
-      color: #334155;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .genre-chip:hover {
-      transform: translateY(-2px);
-    }
-    .genre-chip.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: white;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-      transform: scale(1.04);
-    }
-    .genre-chip:active {
-      transform: scale(0.92);
     }
 
     /* ============================================================
@@ -645,7 +636,7 @@
         <div class="home-menu-card" onclick="navigateTo('booths')">
           <div class="home-menu-icon">🏪</div>
           <div class="home-menu-title">부스별로 보기</div>
-          <div class="home-menu-sub">30개 부스 전체 목록</div>
+          <div class="home-menu-sub">30개 부스 (가나다 순)</div>
         </div>
 
         <!-- 4. 운영시간표 -->
@@ -683,18 +674,7 @@
     </div>
 
     <!-- ============================================================
-         2. 🏪 부스별로 보기 VIEW
-         ============================================================ -->
-    <div id="view-booths">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="boothSearch" placeholder="동아리명, 교실, 장르 검색..." oninput="filterBooths()" />
-      </div>
-      <div class="booth-list" id="boothListContainer"></div>
-    </div>
-
-    <!-- ============================================================
-         3. 🎪 장르별로 보기 VIEW
+         2. 🎪 장르별로 보기 VIEW
          ============================================================ -->
     <div id="view-genres">
       <div class="genre-grid">
@@ -706,6 +686,17 @@
         <div class="genre-chip" onclick="selectGenre('문화예술형')">🎨 문화예술 (3)</div>
       </div>
       <div class="booth-list" id="genreBoothContainer"></div>
+    </div>
+
+    <!-- ============================================================
+         3. 🏪 부스별로 보기 VIEW
+         ============================================================ -->
+    <div id="view-booths">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="boothSearch" placeholder="동아리명, 교실, 장르 검색..." oninput="filterBooths()" />
+      </div>
+      <div class="booth-list" id="boothListContainer"></div>
     </div>
 
     <!-- ============================================================
@@ -776,48 +767,279 @@
   </div>
 
   <script>
-    // 30개 동아리 원본 상세 데이터
+    // 30개 동아리 원본 상세 데이터 (원천 데이터부터 한국어 가나다 순으로 완벽 정렬)
     const BOOTHS = [
-      // 1층
-      { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다." },
-      { id: 29, name: "시퀀스", cat: "공연형", emoji: "🎭", room: "시청각실", floor: 1, desc: "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연! 운양고 연극부의 열연을 감상해 보세요." },
-      { id: 30, name: "슬램덩크(농구부)", cat: "체육활동형", emoji: "🏀", room: "운동장/농구장", floor: 1, desc: "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결! 푸짐한 상품이 기다립니다." },
-
-      // 2층
-      { id: 14, name: "알고리즘", cat: "체험/실습형", emoji: "🏎️", room: "컴퓨터실", floor: 2, desc: "학생들이 직접 파이썬/C언어로 개발한 코딩 기반 미니게임 3종 & 스릴 만점 레이싱 게임 플레이 존!" },
-      { id: 15, name: "도서관사람들", cat: "체험/실습형", emoji: "🎰", room: "도서관", floor: 2, desc: "잭팟이 터지는 〈책팟(Book-Pot)〉! 슬롯머신, 대형 주사위, 미니볼링 게임존과 독서 퀴즈 챌린지!" },
-      { id: 23, name: "소나기(방송부)", cat: "방탈출/추리", emoji: "🎤", room: "방송실", floor: 2, desc: "방송실 최첨단 조명과 입체 음향 시스템으로 구현한 오싹한 공포 귀신의 집 & 신나는 방음 노래방 체험!" },
-      { id: 25, name: "체대입시부", cat: "체육활동형", emoji: "🏋️", room: "강당(운양관)", floor: 2, desc: "체대입시부에 도전하라! 제자리멀리뛰기, 악력 측정, 셔틀런 및 체대 입시생들과의 힘겨루기 한판 승부!" },
-      { id: 26, name: "플라잉셔틀즈", cat: "체육활동형", emoji: "🏸", room: "강당(운양관)", floor: 2, desc: "배드민턴부를 이겨라! 고난도 스매싱 타겟 맞추기 챌린지 & 배드민턴 1점 내기 미니 대결!" },
-      { id: 27, name: "러쉬온미", cat: "공연형", emoji: "💃", room: "강당(운양관)", floor: 2, desc: "무대를 뒤집어 놓는 파워풀 K-POP 커버 & 스트릿 댄스 리믹스 메들리 공연!" },
-      { id: 8, name: "베이킹메이킹", cat: "체험/실습형", emoji: "🧇", room: "기술가정실", floor: 2, desc: "갓 구운 겉바속촉 크로플 제작 및 나만의 생크림, 초코, 딸기 토핑 데코레이션 디저트 체험!" },
-
-      // 3층
-      { id: 11, name: "창연회", cat: "체험/실습형", emoji: "🙈", room: "1-4", floor: 3, desc: "선입견 없이 오직 대화와 목소리로만 서로를 알아가는 설렘 가득 〈블라인드 1:1 소개팅〉!" },
-      { id: 18, name: "잡지식", cat: "문화예술형", emoji: "🪄", room: "1-5", floor: 3, desc: "해리포터 & 겨울왕국 테마 감성 포토존! 소중한 친구에게 전하는 실링왁스 손편지 및 자체 제작 매거진 전시." },
-      { id: 22, name: "유아트", cat: "방탈출/추리", emoji: "⛩️", room: "1-6 · 1-7", floor: 3, desc: "미술 동아리가 특수 조명과 음향, 미술 오브제로 직접 세팅한 고퀄리티 한국 공포 테마 〈무당집 괴담 방탈출〉!" },
-      { id: 17, name: "필름메이커스", cat: "문화예술형", emoji: "🍿", room: "1-8", floor: 3, desc: "운양 시네마 클럽! 학생들이 직접 기획·촬영한 독립 단편 영화 상영관 및 팝콘 제공, 명대사 퀴즈!" },
-      { id: 10, name: "또래상담부", cat: "체험/실습형", emoji: "💌", room: "1-10", floor: 3, desc: "MBTI 성격 유형 분석 및 기대심리를 활용한 두근두근 연애·우정 심리 상담 & 커플 매칭 테스트!" },
-
-      // 4층
-      { id: 2, name: "시너지", cat: "체험/실습형", emoji: "🧋", room: "화학실", floor: 4, desc: "알긴산나트륨과 젖산칼슘의 화학적 겔화 반응을 활용한 톡톡 터지는 수제 팝핑보바 만들기 & 시식!" },
-      { id: 4, name: "생명보험", cat: "체험/실습형", emoji: "🌌", room: "화학실", floor: 4, desc: "지시약의 pH 산·염기 색 변화 반응을 이용한 영롱한 오로라빛 은하수 에이드 제조 실험 체험!" },
-      { id: 3, name: "아스클", cat: "체험/실습형", emoji: "🐟", room: "생물실", floor: 4, desc: "생명과학의 소소한 재미! 달콤 바삭 달고나 제작 & 따끈따끈 미니 붕어빵 만들기 DIY!" },
-      { id: 6, name: "화생방", cat: "체험/실습형", emoji: "🧼", room: "생물실", floor: 4, desc: "천연 에센셜 오일과 유기농 색소를 조합하여 나만의 향과 색을 담는 수제 MP 비누 만들기 공방!" },
-      { id: 1, name: "스파크", cat: "체험/실습형", emoji: "🍹", room: "물리실", floor: 4, desc: "밀도 차이에 따른 층 분리와 pH 지시약 색 변화를 응용한 신비로운 무알콜 과학 칵테일 바!" },
-      { id: 5, name: "멘날바", cat: "체험/실습형", emoji: "🌭", room: "과학실험실(지구과학)", floor: 4, desc: "실생활 속 열역학 상태 변화 관찰 (마시멜로 융해와 핫도그 열전도 가열 원리 관찰 후 맛있는 시식)!" },
-      { id: 24, name: "교지편집부", cat: "방탈출/추리", emoji: "🏺", room: "1-3", floor: 4, desc: "국립 박물관 고대 유물 도난 사건 발생! 교실 곳곳에 숨겨진 단서와 암호를 해독해 진범을 검거하세요!" },
-
-      // 5층
-      { id: 20, name: "경영위키", cat: "방탈출/추리", emoji: "👻", room: "1-1", floor: 5, desc: "심장이 약한 분 주의! 폐쇄된 어두운 교실에서 단서를 찾아 제한 시간 내 탈출하는 공포의 방탈출!" },
-      { id: 19, name: "애그부", cat: "문화예술형", emoji: "🏮", room: "2-1 · 2-2", floor: 5, desc: "부원들의 정성 어린 창작 일러스트 전시 및 일본 여름 마츠리 축제 감성의 야타이 포토존!" },
-      { id: 13, name: "교집합", cat: "체험/실습형", emoji: "🎁", room: "2-3", floor: 5, desc: "상식, 넌센스, 학교 역사 퀴즈 배틀! 연속 정답자에게 주어지는 럭키 드로우 선물 박스!" },
-      { id: 21, name: "블루라인", cat: "방탈출/추리", emoji: "🕵️", room: "2-4", floor: 5, desc: "크리스마스 살인사건 미스터리! 현장에 남겨진 지문과 혈흔, 알리바이를 분석해 진범을 가려내는 과학수사 추리!" },
-      { id: 7, name: "소프라테스", cat: "체험/실습형", emoji: "💘", room: "2-5", floor: 5, desc: "철학적 가치관 딜레마 테스트를 통해 영혼의 짝을 찾아주는 〈운명적 철학 소개팅 & 심층 상담〉!" },
-      { id: 12, name: "에끌라", cat: "체험/실습형", emoji: "💅", room: "2-7", floor: 5, desc: "프로 못지않은 블링블링 젤 네일아트 케어 & 방송 분장 수준의 실감 나는 할로윈 특수분장 뷰티샵!" },
-      { id: 16, name: "글로톡", cat: "체험/실습형", emoji: "🍪", room: "2-8", floor: 5, desc: "물로 간편하게 새기는 개성 만점 타투 스티커 및 달콤한 아이싱으로 글씨와 그림을 그리는 수제 쿠키 꾸미기!" },
-      { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
-    ];
+      {
+            "id": 20,
+            "name": "경영위키",
+            "cat": "방탈출/추리",
+            "emoji": "👻",
+            "room": "1-1",
+            "floor": 5,
+            "desc": "심장이 약한 분 주의! 폐쇄된 어두운 교실에서 단서를 찾아 제한 시간 내 탈출하는 공포의 방탈출!"
+      },
+      {
+            "id": 24,
+            "name": "교지편집부",
+            "cat": "방탈출/추리",
+            "emoji": "🏺",
+            "room": "1-3",
+            "floor": 4,
+            "desc": "국립 박물관 고대 유물 도난 사건 발생! 교실 곳곳에 숨겨진 단서와 암호를 해독해 진범을 검거하세요!"
+      },
+      {
+            "id": 13,
+            "name": "교집합",
+            "cat": "체험/실습형",
+            "emoji": "🎁",
+            "room": "2-3",
+            "floor": 5,
+            "desc": "상식, 넌센스, 학교 역사 퀴즈 배틀! 연속 정답자에게 주어지는 럭키 드로우 선물 박스!"
+      },
+      {
+            "id": 16,
+            "name": "글로톡",
+            "cat": "체험/실습형",
+            "emoji": "🍪",
+            "room": "2-8",
+            "floor": 5,
+            "desc": "물로 간편하게 새기는 개성 만점 타투 스티커 및 달콤한 아이싱으로 글씨와 그림을 그리는 수제 쿠키 꾸미기!"
+      },
+      {
+            "id": 15,
+            "name": "도서관사람들",
+            "cat": "체험/실습형",
+            "emoji": "🎰",
+            "room": "도서관",
+            "floor": 2,
+            "desc": "잭팟이 터지는 〈책팟(Book-Pot)〉! 슬롯머신, 대형 주사위, 미니볼링 게임존과 독서 퀴즈 챌린지!"
+      },
+      {
+            "id": 10,
+            "name": "또래상담부",
+            "cat": "체험/실습형",
+            "emoji": "💌",
+            "room": "1-10",
+            "floor": 3,
+            "desc": "MBTI 성격 유형 분석 및 기대심리를 활용한 두근두근 연애·우정 심리 상담 & 커플 매칭 테스트!"
+      },
+      {
+            "id": 27,
+            "name": "러쉬온미",
+            "cat": "공연형",
+            "emoji": "💃",
+            "room": "강당(운양관)",
+            "floor": 2,
+            "desc": "무대를 뒤집어 놓는 파워풀 K-POP 커버 & 스트릿 댄스 리믹스 메들리 공연!"
+      },
+      {
+            "id": 5,
+            "name": "멘날바",
+            "cat": "체험/실습형",
+            "emoji": "🌭",
+            "room": "지구과학실",
+            "floor": 4,
+            "desc": "실생활 속 열역학 상태 변화 관찰 (마시멜로 융해와 핫도그 열전도 가열 원리 관찰 후 맛있는 시식)!"
+      },
+      {
+            "id": 28,
+            "name": "밴드부",
+            "cat": "공연형",
+            "emoji": "🎸",
+            "room": "음악실",
+            "floor": 1,
+            "desc": "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다."
+      },
+      {
+            "id": 8,
+            "name": "베이킹메이킹",
+            "cat": "체험/실습형",
+            "emoji": "🧇",
+            "room": "기술가정실",
+            "floor": 2,
+            "desc": "갓 구운 겉바속촉 크로플 제작 및 나만의 생크림, 초코, 딸기 토핑 데코레이션 디저트 체험!"
+      },
+      {
+            "id": 21,
+            "name": "블루라인",
+            "cat": "방탈출/추리",
+            "emoji": "🕵️",
+            "room": "2-4",
+            "floor": 5,
+            "desc": "크리스마스 살인사건 미스터리! 현장에 남겨진 지문과 혈흔, 알리바이를 분석해 진범을 가려내는 과학수사 추리!"
+      },
+      {
+            "id": 4,
+            "name": "생명보험",
+            "cat": "체험/실습형",
+            "emoji": "🌌",
+            "room": "화학실",
+            "floor": 4,
+            "desc": "지시약의 pH 산·염기 색 변화 반응을 이용한 영롱한 오로라빛 은하수 에이드 제조 실험 체험!"
+      },
+      {
+            "id": 23,
+            "name": "소나기(방송부)",
+            "cat": "방탈출/추리",
+            "emoji": "🎤",
+            "room": "방송실",
+            "floor": 2,
+            "desc": "방송실 최첨단 조명과 입체 음향 시스템으로 구현한 오싹한 공포 귀신의 집 & 신나는 방음 노래방 체험!"
+      },
+      {
+            "id": 7,
+            "name": "소프라테스",
+            "cat": "체험/실습형",
+            "emoji": "💘",
+            "room": "2-5",
+            "floor": 5,
+            "desc": "철학적 가치관 딜레마 테스트를 통해 영혼의 짝을 찾아주는 〈운명적 철학 소개팅 & 심층 상담〉!"
+      },
+      {
+            "id": 1,
+            "name": "스파크",
+            "cat": "체험/실습형",
+            "emoji": "🍹",
+            "room": "물리실",
+            "floor": 4,
+            "desc": "밀도 차이에 따른 층 분리와 pH 지시약 색 변화를 응용한 신비로운 무알콜 과학 칵테일 바!"
+      },
+      {
+            "id": 30,
+            "name": "슬램덩크(농구부)",
+            "cat": "체육활동형",
+            "emoji": "🏀",
+            "room": "운동장/농구장",
+            "floor": 1,
+            "desc": "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결! 푸짐한 상품이 기다립니다."
+      },
+      {
+            "id": 2,
+            "name": "시너지",
+            "cat": "체험/실습형",
+            "emoji": "🧋",
+            "room": "화학실",
+            "floor": 4,
+            "desc": "알긴산나트륨과 젖산칼슘의 화학적 겔화 반응을 활용한 톡톡 터지는 수제 팝핑보바 만들기 & 시식!"
+      },
+      {
+            "id": 29,
+            "name": "시퀀스",
+            "cat": "공연형",
+            "emoji": "🎭",
+            "room": "시청각실",
+            "floor": 1,
+            "desc": "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연! 운양고 연극부의 열연을 감상해 보세요."
+      },
+      {
+            "id": 3,
+            "name": "아스클",
+            "cat": "체험/실습형",
+            "emoji": "🐟",
+            "room": "생물실",
+            "floor": 4,
+            "desc": "생명과학의 소소한 재미! 달콤 바삭 달고나 제작 & 따끈따끈 미니 붕어빵 만들기 DIY!"
+      },
+      {
+            "id": 14,
+            "name": "알고리즘",
+            "cat": "체험/실습형",
+            "emoji": "🏎️",
+            "room": "컴퓨터실",
+            "floor": 2,
+            "desc": "학생들이 직접 파이썬/C언어로 개발한 코딩 기반 미니게임 3종 & 스릴 만점 레이싱 게임 플레이 존!"
+      },
+      {
+            "id": 19,
+            "name": "애그부",
+            "cat": "문화예술형",
+            "emoji": "🏮",
+            "room": "2-1 · 2-2",
+            "floor": 5,
+            "desc": "부원들의 정성 어린 창작 일러스트 전시 및 일본 여름 마츠리 축제 감성의 야타이 포토존!"
+      },
+      {
+            "id": 12,
+            "name": "에끌라",
+            "cat": "체험/실습형",
+            "emoji": "💅",
+            "room": "2-7",
+            "floor": 5,
+            "desc": "프로 못지않은 블링블링 젤 네일아트 케어 & 방송 분장 수준의 실감 나는 할로윈 특수분장 뷰티샵!"
+      },
+      {
+            "id": 22,
+            "name": "유아트",
+            "cat": "방탈출/추리",
+            "emoji": "⛩️",
+            "room": "1-6 · 1-7",
+            "floor": 3,
+            "desc": "미술 동아리가 특수 조명과 음향, 미술 오브제로 직접 세팅한 고퀄리티 한국 공포 테마 〈무당집 괴담 방탈출〉!"
+      },
+      {
+            "id": 18,
+            "name": "잡지식",
+            "cat": "문화예술형",
+            "emoji": "🪄",
+            "room": "1-5",
+            "floor": 3,
+            "desc": "해리포터 & 겨울왕국 테마 감성 포토존! 소중한 친구에게 전하는 실링왁스 손편지 및 자체 제작 매거진 전시."
+      },
+      {
+            "id": 11,
+            "name": "창연회",
+            "cat": "체험/실습형",
+            "emoji": "🙈",
+            "room": "1-4",
+            "floor": 3,
+            "desc": "선입견 없이 오직 대화와 목소리로만 서로를 알아가는 설렘 가득 〈블라인드 1:1 소개팅〉!"
+      },
+      {
+            "id": 25,
+            "name": "체대입시부",
+            "cat": "체육활동형",
+            "emoji": "🏋️",
+            "room": "강당(운양관)",
+            "floor": 2,
+            "desc": "체대입시부에 도전하라! 제자리멀리뛰기, 악력 측정, 셔틀런 및 체대 입시생들과의 힘겨루기 한판 승부!"
+      },
+      {
+            "id": 9,
+            "name": "축구부",
+            "cat": "체험/실습형",
+            "emoji": "☕",
+            "room": "2-9",
+            "floor": 5,
+            "desc": "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!"
+      },
+      {
+            "id": 26,
+            "name": "플라잉셔틀즈",
+            "cat": "체육활동형",
+            "emoji": "🏸",
+            "room": "강당(운양관)",
+            "floor": 2,
+            "desc": "배드민턴부를 이겨라! 고난도 스매싱 타겟 맞추기 챌린지 & 배드민턴 1점 내기 미니 대결!"
+      },
+      {
+            "id": 17,
+            "name": "필름메이커스",
+            "cat": "문화예술형",
+            "emoji": "🍿",
+            "room": "1-8",
+            "floor": 3,
+            "desc": "운양 시네마 클럽! 학생들이 직접 기획·촬영한 독립 단편 영화 상영관 및 팝콘 제공, 명대사 퀴즈!"
+      },
+      {
+            "id": 6,
+            "name": "화생방",
+            "cat": "체험/실습형",
+            "emoji": "🧼",
+            "room": "생물실",
+            "floor": 4,
+            "desc": "천연 에센셜 오일과 유기농 색소를 조합하여 나만의 향과 색을 담는 수제 MP 비누 만들기 공방!"
+      }
+];
 
     const SVG_FLOORS = {
       1: `<svg viewBox="0 0 380 520" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
@@ -1299,17 +1521,19 @@
       document.getElementById('detailModal').classList.remove('active');
     }
 
-    // 부스 목록 렌더링 (가나다순 정렬)
+    // 부스 목록 렌더링 (가나다 순 엄격 보장)
     function renderBoothList(list, containerId) {
-      // 이름 가나다 순으로 정렬
-      const sortedList = [...list].sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
       const container = document.getElementById(containerId);
       if (!container) return;
       container.innerHTML = '';
-      if (list.length === 0) {
+      if (!list || list.length === 0) {
         container.innerHTML = '<div style="text-align:center; padding:40px; color:#94a3b8; font-size:1.1rem; font-weight:700;">검색 결과가 없습니다.</div>';
         return;
       }
+
+      // 한글 자음 가나다 순으로 정확히 정렬
+      const sortedList = [...list].sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
+
       sortedList.forEach(b => {
         const card = document.createElement('div');
         card.className = 'booth-card';
@@ -1333,6 +1557,7 @@
       });
     }
 
+    // 부스 검색 (검색 결과도 가나다 순 유지)
     function filterBooths() {
       const query = document.getElementById('boothSearch').value.toLowerCase().trim();
       const filtered = BOOTHS.filter(b => 
@@ -1342,15 +1567,16 @@
         b.desc.toLowerCase().includes(query) ||
         (b.floor + '층').includes(query)
       );
-      renderBoothList(filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko-KR')), 'boothListContainer');
+      renderBoothList(filtered, 'boothListContainer');
     }
 
+    // 장르별 필터링 (가나다 순 유지)
     function selectGenre(genre) {
       document.querySelectorAll('.genre-chip').forEach(c => {
         if (c.innerText.includes(genre)) c.classList.add('active');
         else c.classList.remove('active');
       });
-      const filtered = (genre === '전체' ? BOOTHS : BOOTHS.filter(b => b.cat === genre)).sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
+      const filtered = genre === '전체' ? BOOTHS : BOOTHS.filter(b => b.cat === genre);
       renderBoothList(filtered, 'genreBoothContainer');
     }
 
