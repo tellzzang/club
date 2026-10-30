@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>2026 운양고 동아리 발표회 모바일 스마트 가이드</title>
+  <title>2026 운양고 동아리 발표회 교실배치도</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -16,75 +16,93 @@
     }
 
     body {
-      background: linear-gradient(135deg, #fff1f2 0%, #fdf4ff 35%, #eff6ff 70%, #f0fdf4 100%);
+      background: #f8fafc;
       color: #0f172a;
       min-height: 100vh;
-      font-size: 16px;
+      font-size: 15px;
     }
 
-    /* 모바일 맞춤 햅틱 터치 (active) */
+    /* 터치 피드백 */
     .touch-pop {
-      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
       touch-action: manipulation;
     }
     .touch-pop:active {
-      transform: scale(0.93) !important;
+      transform: scale(0.94) !important;
     }
 
-    /* 팝인 애니메이션 */
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.95) translateY(14px); }
-      75% { transform: scale(1.01) translateY(-2px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .animate-pop-in {
-      animation: popIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    /* 세로형 스마트 지도 블록 스타일 */
-    .v-room {
-      border-radius: 16px;
-      padding: 12px 14px;
-      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* 실제 도면 건축 벽면 스타일 */
+    .cad-wall {
+      background: #ffffff;
+      border: 2px solid #334155;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
       position: relative;
     }
 
-    /* 부스 운영 교실: 크고 선명한 핑크 그라데이션 */
-    .v-room-booth {
-      background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
-      border: 2px solid #fda4af;
-      box-shadow: 0 4px 14px -2px rgba(244, 63, 94, 0.18);
+    /* 도면 내 일반 교실 칸 */
+    .cad-room {
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6px 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    /* 동아리 부스가 있는 실제 교실 칸 (화사한 핑크 하이라이트) */
+    .cad-booth-room {
+      border: 2.5px solid #f43f5e !important;
+      background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) !important;
+      color: #9f1239 !important;
+      font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.25);
       cursor: pointer;
     }
-    .v-room-booth:active {
-      transform: scale(0.95);
-      border-color: #f43f5e;
-      background: #ffe4e6;
+    .cad-booth-room:active {
+      transform: scale(0.93);
+      background: #fecdd3 !important;
     }
 
-    /* 일반 교실 및 시설 */
-    .v-room-normal {
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
+    /* 중앙계단 및 계단실 */
+    .cad-stairs {
+      background: #ede9fe;
+      border: 1.5px dashed #6366f1;
+      color: #4338ca;
+      font-weight: 900;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    /* 복도 통로 표시 */
+    .cad-corridor {
+      background: #f1f5f9;
+      border: 1px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
       color: #64748b;
+      letter-spacing: 2px;
     }
 
-    /* 중앙계단 출발점 블록 */
-    .v-stairs-node {
-      background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 100%);
-      border: 2px dashed #818cf8;
-      border-radius: 18px;
-      padding: 12px 14px;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+    /* 중앙계단 출발 길안내 화살표 펄스 */
+    @keyframes arrowPulse {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-6px); opacity: 0.7; }
     }
-
-    /* 중앙계단 ➡️ 해당 교실 안내 화살표 라인 대시 애니메이션 */
-    @keyframes arrowFlow {
-      to { stroke-dashoffset: -30; }
-    }
-    .nav-arrow-line {
-      stroke-dasharray: 6, 4;
-      animation: arrowFlow 0.8s linear infinite;
+    .arrow-indicator {
+      animation: arrowPulse 1.2s infinite;
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -94,359 +112,306 @@
 <body class="pb-24 select-none relative">
 
   <!-- 🌟 모바일 상단 헤더 -->
-  <header class="relative z-10 pt-5 pb-3 px-4 text-center">
-    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 via-rose-500 to-pink-500 text-white shadow-sm animate-bounce">
-      <span>🏫 2026 운양고 배치도 기반 스마트 가이드</span>
-    </div>
-
-    <div class="flex items-center justify-center gap-2 mt-2">
-      <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
-        운양 동아리 발표회
-      </h1>
-      <span class="text-xs px-2.5 py-0.5 rounded-lg bg-rose-500 text-white font-black shadow-xs">
-        공사중 🚧
-      </span>
-    </div>
-
-    <!-- 모바일 원터치 액션 버튼 -->
-    <div class="mt-3 flex items-center justify-center gap-2">
-      <button onclick="openFullOfficialMapModal()" class="touch-pop inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-indigo-600 text-white text-xs font-black shadow-md">
-        <span>🗺️ 원본 도면 보기</span>
-      </button>
-
-      <button onclick="pickRandomBooth()" class="touch-pop inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-white text-rose-600 border-2 border-rose-300 text-xs font-black shadow-md">
-        <span>🎲 랜덤 부스 뽑기</span>
-      </button>
-
-      <button onclick="launchConfetti()" class="touch-pop inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-rose-100 text-rose-700 text-xs font-black">
-        <span>🎊</span>
+  <header class="relative z-10 pt-4 pb-2.5 px-4 text-center bg-white border-b border-slate-200 shadow-xs">
+    <div class="flex items-center justify-between">
+      <div class="text-left">
+        <span class="text-[10px] font-black px-2 py-0.5 rounded bg-rose-100 text-rose-700">운양고등학교</span>
+        <h1 class="text-lg sm:text-xl font-black text-slate-900 mt-0.5">2026 교실 배치도 (세로 도면)</h1>
+      </div>
+      <button onclick="openOriginalImageModal()" class="touch-pop px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-black shadow-xs">
+        📄 원본 도면
       </button>
     </div>
   </header>
 
   <!-- 📱 메인 앱 컨테이너 -->
-  <main class="max-w-md mx-auto px-3.5 relative z-10">
+  <main class="max-w-md mx-auto px-3 relative z-10 mt-2">
     
     <!-- 🎛️ 상단 4대 메인 탭 (지도로 보기 / 부스별로 보기 / 장르별로 보기 / 운영시간표) -->
-    <div class="grid grid-cols-4 gap-1 p-1.5 rounded-2xl bg-white/90 backdrop-blur-md border border-pink-200 shadow-md mb-3">
-      <button onclick="switchMainTab('map')" id="mainTab-map" class="touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-black transition text-white bg-gradient-to-r from-rose-500 to-pink-600 shadow-sm text-center">
-        🗺️ 지도로 보기
+    <div class="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-200/80 shadow-inner mb-3">
+      <button onclick="switchTab('map')" id="tabBtn-map" class="touch-pop py-2.5 rounded-xl text-xs font-black transition text-white bg-rose-500 shadow-sm text-center">
+        🗺️ 지도로
       </button>
-      <button onclick="switchMainTab('booths')" id="mainTab-booths" class="touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-bold transition text-slate-600 hover:text-rose-600 text-center">
-        🏪 부스별로
+      <button onclick="switchTab('booths')" id="tabBtn-booths" class="touch-pop py-2.5 rounded-xl text-xs font-bold transition text-slate-700 hover:text-rose-600 text-center">
+        🏪 부스별
       </button>
-      <button onclick="switchMainTab('categories')" id="mainTab-categories" class="touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-bold transition text-slate-600 hover:text-rose-600 text-center">
-        🎪 장르별로
+      <button onclick="switchTab('genres')" id="tabBtn-genres" class="touch-pop py-2.5 rounded-xl text-xs font-bold transition text-slate-700 hover:text-rose-600 text-center">
+        🎪 장르별
       </button>
-      <button onclick="switchMainTab('schedule')" id="mainTab-schedule" class="touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-bold transition text-slate-600 hover:text-rose-600 text-center">
-        ⏰ 운영시간표
+      <button onclick="switchTab('schedule')" id="tabBtn-schedule" class="touch-pop py-2.5 rounded-xl text-xs font-bold transition text-slate-700 hover:text-rose-600 text-center">
+        ⏰ 시간표
       </button>
     </div>
 
-    <!-- ================= 1. 지도로 보기 (스마트 세로형 세로 지도) ================= -->
-    <section id="view-map" class="space-y-3 animate-pop-in">
+    <!-- ================= 1. 지도로 보기 (첨부 도면 형태 그대로 90도 회전한 세로 건축 도면) ================= -->
+    <section id="view-map" class="space-y-3">
       
-      <!-- 층 선택 칩 (1~5층) -->
-      <div class="grid grid-cols-5 gap-1.5" id="floorChips">
-        <button onclick="selectFloor(1)" data-fl="1" class="fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-200">1층</button>
-        <button onclick="selectFloor(2)" data-fl="2" class="fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-200">2층</button>
-        <button onclick="selectFloor(3)" data-fl="3" class="fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-500 to-pink-600 text-white shadow-md">3층</button>
-        <button onclick="selectFloor(4)" data-fl="4" class="fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-200">4층</button>
-        <button onclick="selectFloor(5)" data-fl="5" class="fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-200">5층</button>
+      <!-- 층 선택 바 (1층 ~ 5층) -->
+      <div class="grid grid-cols-5 gap-1" id="floorChips">
+        <button onclick="selectFloor(1)" data-fl="1" class="fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-300">1층</button>
+        <button onclick="selectFloor(2)" data-fl="2" class="fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-300">2층</button>
+        <button onclick="selectFloor(3)" data-fl="3" class="fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-rose-500 text-white shadow-sm">3층</button>
+        <button onclick="selectFloor(4)" data-fl="4" class="fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-300">4층</button>
+        <button onclick="selectFloor(5)" data-fl="5" class="fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-300">5층</button>
       </div>
 
-      <!-- 지도 헤더 안내 -->
-      <div class="bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-pink-200 shadow-sm flex items-center justify-between">
+      <!-- 층별 안내 헤더 -->
+      <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-xs flex items-center justify-between">
         <div>
           <div class="flex items-center gap-1.5">
-            <span id="floorBadge" class="text-xs font-black px-2 py-0.5 rounded-md bg-rose-500 text-white">3층</span>
-            <h3 id="floorTitle" class="text-sm font-black text-slate-900">1학년 교실 & 대강당</h3>
+            <span id="floorBadge" class="text-xs font-black px-2 py-0.5 rounded bg-rose-500 text-white">3층</span>
+            <h3 id="floorTitle" class="text-sm font-black text-slate-900">3층 교실 배치도 (세로 뷰)</h3>
           </div>
-          <p id="floorSub" class="text-[11px] text-slate-500 font-bold mt-0.5">교실을 터치하면 동아리 소개 팝업이 바로 열립니다!</p>
+          <p id="floorSub" class="text-[11px] text-slate-500 font-bold mt-0.5">분홍색 부스 교실을 클릭하면 동아리 소개가 바로 뜹니다!</p>
         </div>
-        <span id="floorBoothCount" class="text-xs font-black px-2.5 py-1 rounded-xl bg-pink-100 text-pink-700 shrink-0">11개 부스</span>
+        <span id="floorBoothCount" class="text-xs font-black px-2.5 py-1 rounded-xl bg-rose-100 text-rose-700 shrink-0">11개 부스</span>
       </div>
 
-      <!-- 📱 스마트 세로형 교실 배치 지도 (모바일에서 한눈에 쏙 들어오는 세로 복도 레이아웃) -->
-      <div class="bg-white/95 rounded-3xl p-4 border-2 border-pink-200 shadow-lg space-y-3 relative" id="verticalMapCard">
+      <!-- 길안내 알림 배너 -->
+      <div id="routeGuideBanner" class="hidden p-3 rounded-2xl bg-amber-100 border-2 border-amber-300 text-amber-950 text-xs font-black flex items-center justify-between">
+        <div class="flex items-center gap-1.5">
+          <span class="text-base">🧭</span>
+          <span id="routeGuideText">중앙계단 🚩 ➡️ 해당 교실 이동 안내!</span>
+        </div>
+        <button onclick="clearRouteGuide()" class="text-[11px] px-2 py-0.5 rounded-lg bg-amber-200 text-amber-900 font-black">닫기</button>
+      </div>
+
+      <!-- 📐 실제 첨부된 운양고 배치도를 세로로 정밀하게 다시 그린 건축 배치도 평면도 -->
+      <div class="cad-wall rounded-3xl p-3 bg-white" id="cadBlueprintContainer">
         
-        <!-- 실시간 네비게이션 알림바 -->
-        <div id="navAlertBar" class="hidden p-2.5 rounded-2xl bg-amber-50 border-2 border-amber-300 text-amber-900 text-xs font-black flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="text-base">🧭</span>
-            <span id="navAlertText">중앙계단 🚩 ➡️ 교실 이동 경로 표시 중!</span>
+        <!-- 범례 안내 -->
+        <div class="flex items-center justify-between text-[11px] font-black pb-2 mb-2 border-b border-slate-200">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3.5 h-3.5 rounded bg-rose-100 border-2 border-rose-500 inline-block"></span>
+            <span class="text-rose-600 font-black">부스 운영 교실 (클릭!)</span>
           </div>
-          <button onclick="clearNavRoute()" class="text-xs px-2.5 py-1 rounded-xl bg-amber-200 text-amber-900 font-bold">해제</button>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3.5 h-3.5 rounded bg-indigo-100 border border-indigo-400 inline-block"></span>
+            <span class="text-indigo-700">중앙계단 (출발 기준)</span>
+          </div>
         </div>
 
-        <!-- 세로 지도 렌더링 영역 (JS로 인터랙티브 생성) -->
-        <div id="verticalMapCanvas" class="space-y-4"></div>
+        <!-- 층별 세로 배치도 (JS 동적 렌더링) -->
+        <div id="verticalCadMap" class="space-y-3"></div>
 
       </div>
 
     </section>
 
-    <!-- ================= 2. 부스별로 보기 (전체 30개 동아리 원클릭 탐색) ================= -->
-    <section id="view-booths" class="hidden space-y-3 animate-pop-in">
+    <!-- ================= 2. 부스별로 보기 (30개 전체 목록) ================= -->
+    <section id="view-booths" class="hidden space-y-3">
       <div class="relative">
         <input 
           id="boothSearchInput" 
           type="text" 
           oninput="handleBoothSearch()"
           placeholder="🔍 동아리명, 교실, 키워드 검색 (크로플, 방탈출, 칵테일...)" 
-          class="w-full pl-10 pr-9 py-3 rounded-2xl bg-white/95 border-2 border-pink-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-rose-400 shadow-sm font-bold"
+          class="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-white border-2 border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-rose-500 font-bold"
         />
-        <button onclick="clearBoothSearch()" id="boothSearchClear" class="hidden absolute right-3 top-3 text-sm text-slate-400 hover:text-slate-600 font-bold">✕</button>
+        <button onclick="clearBoothSearch()" id="boothSearchClear" class="hidden absolute right-3 top-2.5 text-sm text-slate-400 hover:text-slate-600 font-bold">✕</button>
       </div>
 
       <!-- 층별 필터 칩 -->
-      <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-1" id="boothFloorFilters">
-        <button onclick="filterBoothByFloor(0)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500 text-white shrink-0 shadow-sm">전체 층 (30)</button>
-        <button onclick="filterBoothByFloor(1)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">1층 (3)</button>
-        <button onclick="filterBoothByFloor(2)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">2층 (4)</button>
-        <button onclick="filterBoothByFloor(3)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">3층 (11)</button>
-        <button onclick="filterBoothByFloor(4)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">4층 (8)</button>
-        <button onclick="filterBoothByFloor(5)" class="b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0">5층 (4)</button>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar py-1" id="boothFloorFilters">
+        <button onclick="filterBoothFloor(0)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500 text-white shrink-0">전체 층 (30)</button>
+        <button onclick="filterBoothFloor(1)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0">1층 (3)</button>
+        <button onclick="filterBoothFloor(2)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0">2층 (4)</button>
+        <button onclick="filterBoothFloor(3)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0">3층 (11)</button>
+        <button onclick="filterBoothFloor(4)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0">4층 (8)</button>
+        <button onclick="filterBoothFloor(5)" class="b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0">5층 (4)</button>
       </div>
 
-      <!-- 30개 부스 카드 그리드 -->
-      <div id="boothsGridList" class="space-y-2.5"></div>
+      <!-- 부스 카드 리스트 -->
+      <div id="boothCardsList" class="space-y-2"></div>
     </section>
 
-    <!-- ================= 3. 장르별로 보기 (5대 장르 큐브 & 바텀시트 전개) ================= -->
-    <section id="view-categories" class="hidden space-y-3.5 animate-pop-in">
-      <div class="p-3.5 rounded-2xl bg-white/90 border border-pink-200 text-xs font-bold text-slate-600 flex items-center gap-2">
-        <span class="text-xl">💡</span>
-        <span>체험, 방탈출, 공연, 스포츠 등 <strong>원하는 장르 타일</strong>을 터치해보세요!</span>
-      </div>
-
-      <!-- 5대 장르 큐브 카드들 -->
-      <div class="grid grid-cols-2 gap-3" id="genreCubes">
-        <!-- 1. 체험/실습형 (16) -->
-        <div onclick="filterAndShowGenre('체험/실습형')" class="touch-pop cursor-pointer p-4 rounded-3xl bg-gradient-to-br from-white to-indigo-50/70 border-l-4 border-indigo-500 border-2 border-indigo-100 shadow-sm flex flex-col justify-between">
+    <!-- ================= 3. 장르별로 보기 ================= -->
+    <section id="view-genres" class="hidden space-y-3">
+      <!-- 5대 장르 큐브 -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <div onclick="filterGenreList('체험/실습형')" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border-2 border-indigo-200 shadow-xs flex flex-col justify-between">
           <div class="flex items-center justify-between">
-            <span class="text-3xl p-2 rounded-2xl bg-indigo-100 text-indigo-700">🧪</span>
-            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-500 text-white">16개</span>
+            <span class="text-2xl p-1.5 rounded-xl bg-indigo-50">🧪</span>
+            <span class="text-xs font-black px-2 py-0.5 rounded-full bg-indigo-500 text-white">16개</span>
           </div>
-          <div class="mt-3">
-            <h3 class="text-base font-black text-slate-900">체험 &amp; 실습</h3>
-            <p class="text-xs text-slate-500 font-bold mt-1 line-clamp-1">칵테일바, 크로플, 보바, 소개팅</p>
-          </div>
-          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-black text-indigo-600">
-            <span>목록 보기</span>
-            <span>👉</span>
-          </div>
+          <h4 class="text-sm font-black text-slate-900 mt-2">체험 &amp; 실습</h4>
+          <span class="text-[11px] font-bold text-indigo-600 mt-1">목록 보기 👉</span>
         </div>
 
-        <!-- 2. 방탈출/추리 (5) -->
-        <div onclick="filterAndShowGenre('방탈출/추리')" class="touch-pop cursor-pointer p-4 rounded-3xl bg-gradient-to-br from-white to-rose-50/70 border-l-4 border-rose-500 border-2 border-rose-100 shadow-sm flex flex-col justify-between">
+        <div onclick="filterGenreList('방탈출/추리')" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border-2 border-rose-200 shadow-xs flex flex-col justify-between">
           <div class="flex items-center justify-between">
-            <span class="text-3xl p-2 rounded-2xl bg-rose-100 text-rose-700">🕵️</span>
-            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-500 text-white">5개</span>
+            <span class="text-2xl p-1.5 rounded-xl bg-rose-50">🕵️</span>
+            <span class="text-xs font-black px-2 py-0.5 rounded-full bg-rose-500 text-white">5개</span>
           </div>
-          <div class="mt-3">
-            <h3 class="text-base font-black text-slate-900">방탈출 &amp; 추리</h3>
-            <p class="text-xs text-slate-500 font-bold mt-1 line-clamp-1">귀신의집, 살인사건, 무당집</p>
-          </div>
-          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-black text-rose-600">
-            <span>목록 보기</span>
-            <span>👉</span>
-          </div>
+          <h4 class="text-sm font-black text-slate-900 mt-2">방탈출 &amp; 추리</h4>
+          <span class="text-[11px] font-bold text-rose-600 mt-1">목록 보기 👉</span>
         </div>
 
-        <!-- 3. 무대 공연 (3) -->
-        <div onclick="filterAndShowGenre('공연형')" class="touch-pop cursor-pointer p-4 rounded-3xl bg-gradient-to-br from-white to-pink-50/70 border-l-4 border-pink-500 border-2 border-pink-100 shadow-sm flex flex-col justify-between">
+        <div onclick="filterGenreList('공연형')" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border-2 border-pink-200 shadow-xs flex flex-col justify-between">
           <div class="flex items-center justify-between">
-            <span class="text-3xl p-2 rounded-2xl bg-pink-100 text-pink-700">🎸</span>
-            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-pink-500 text-white">3개</span>
+            <span class="text-2xl p-1.5 rounded-xl bg-pink-50">🎸</span>
+            <span class="text-xs font-black px-2 py-0.5 rounded-full bg-pink-500 text-white">3개</span>
           </div>
-          <div class="mt-3">
-            <h3 class="text-base font-black text-slate-900">무대 라이브</h3>
-            <p class="text-xs text-slate-500 font-bold mt-1 line-clamp-1">댄스(강당), 밴드, 연극</p>
-          </div>
-          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-black text-pink-600">
-            <span>목록 보기</span>
-            <span>👉</span>
-          </div>
+          <h4 class="text-sm font-black text-slate-900 mt-2">무대 공연</h4>
+          <span class="text-[11px] font-bold text-pink-600 mt-1">목록 보기 👉</span>
         </div>
 
-        <!-- 4. 체육 & 대결 (3) -->
-        <div onclick="filterAndShowGenre('체육활동형')" class="touch-pop cursor-pointer p-4 rounded-3xl bg-gradient-to-br from-white to-emerald-50/70 border-l-4 border-emerald-500 border-2 border-emerald-100 shadow-sm flex flex-col justify-between">
+        <div onclick="filterGenreList('체육활동형')" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border-2 border-emerald-200 shadow-xs flex flex-col justify-between">
           <div class="flex items-center justify-between">
-            <span class="text-3xl p-2 rounded-2xl bg-emerald-100 text-emerald-700">🏀</span>
-            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white">3개</span>
+            <span class="text-2xl p-1.5 rounded-xl bg-emerald-50">🏀</span>
+            <span class="text-xs font-black px-2 py-0.5 rounded-full bg-emerald-500 text-white">3개</span>
           </div>
-          <div class="mt-3">
-            <h3 class="text-base font-black text-slate-900">스포츠 &amp; 배틀</h3>
-            <p class="text-xs text-slate-500 font-bold mt-1 line-clamp-1">체대 챌린지, 배드민턴, 농구</p>
-          </div>
-          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-black text-emerald-600">
-            <span>목록 보기</span>
-            <span>👉</span>
-          </div>
+          <h4 class="text-sm font-black text-slate-900 mt-2">스포츠 &amp; 대결</h4>
+          <span class="text-[11px] font-bold text-emerald-600 mt-1">목록 보기 👉</span>
         </div>
 
-        <!-- 5. 문화예술 포토존 (3 - 와이드) -->
-        <div onclick="filterAndShowGenre('문화예술형')" class="col-span-2 touch-pop cursor-pointer p-4 rounded-3xl bg-gradient-to-br from-white to-amber-50/70 border-l-4 border-amber-500 border-2 border-amber-100 shadow-sm flex items-center justify-between">
-          <div class="flex items-center gap-3.5">
-            <span class="text-3xl p-2.5 rounded-2xl bg-amber-100 text-amber-700">🎨</span>
+        <div onclick="filterGenreList('문화예술형')" class="col-span-2 touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border-2 border-amber-200 shadow-xs flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl p-1.5 rounded-xl bg-amber-50">🎨</span>
             <div>
-              <div class="flex items-center gap-2">
-                <h3 class="text-base font-black text-slate-900">문화·예술 &amp; 감성 포토존</h3>
-                <span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-500 text-white">3개</span>
-              </div>
-              <p class="text-xs text-slate-500 font-bold mt-0.5">해리포터 포토존, 일본 축제(마츠리), 영화관</p>
+              <h4 class="text-sm font-black text-slate-900">문화·예술 &amp; 감성 포토존</h4>
+              <p class="text-[11px] text-slate-500 font-bold">해리포터 포토존, 일본 축제, 영화관</p>
             </div>
           </div>
-          <span class="text-xs font-black text-amber-600 shrink-0">보기 👉</span>
+          <span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-500 text-white">3개</span>
         </div>
       </div>
 
       <!-- 선택된 장르 부스 리스트 -->
-      <div id="genreBoothsArea" class="space-y-2 pt-2"></div>
+      <div id="genreBoothsList" class="space-y-2 pt-2"></div>
     </section>
 
-    <!-- ================= 4. 운영시간표 (A/B팀 교차 운영 & 타임라인) ================= -->
-    <section id="view-schedule" class="hidden space-y-3 animate-pop-in">
-      <div class="bg-white/95 rounded-3xl p-4 border-l-4 border-rose-500 shadow-md">
+    <!-- ================= 4. 운영시간표 ================= -->
+    <section id="view-schedule" class="hidden space-y-2.5">
+      <div class="bg-white rounded-2xl p-4 border-l-4 border-rose-500 shadow-xs">
         <div class="flex items-center justify-between">
           <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-500 text-white">08:50 출석 마감</span>
           <span class="text-xs text-slate-500 font-bold">1~4교시 (봉사 1시간)</span>
         </div>
-        <h3 class="text-base font-black text-slate-900 mt-2">동아리 발표회 타임라인</h3>
+        <h3 class="text-base font-black text-slate-900 mt-2">동아리 발표회 운영 시간표</h3>
         <p class="text-xs text-slate-600 font-semibold mt-0.5">A팀과 B팀이 교대로 체험과 부스 운영을 진행합니다.</p>
       </div>
 
-      <div class="space-y-2.5">
-        <div class="bg-white/95 rounded-2xl p-3.5 border border-slate-200 shadow-sm flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-black shrink-0">조회</span>
+      <div class="space-y-2">
+        <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-black shrink-0">조회</span>
             <div>
-              <div class="text-[11px] font-bold text-slate-500">08:50 ~ 09:00 (10분)</div>
-              <div class="text-xs sm:text-sm font-black text-slate-900">각 동아리 발표 장소 출석 점검</div>
+              <div class="text-[10px] font-bold text-slate-500">08:50 ~ 09:00 (10분)</div>
+              <div class="text-xs font-black text-slate-900">각 동아리 발표 장소 출석 점검</div>
             </div>
           </div>
-          <span class="text-[10px] font-black px-2.5 py-1 rounded-md bg-rose-50 text-rose-600 border border-rose-200">지각 엄수</span>
+          <span class="text-[10px] font-black px-2 py-1 rounded bg-rose-50 text-rose-600">지각 엄수</span>
         </div>
 
-        <div class="bg-white/95 rounded-2xl p-3.5 border-l-4 border-indigo-500 shadow-sm">
+        <div class="bg-white rounded-xl p-3.5 border-l-4 border-indigo-500 border border-slate-200">
           <div class="flex justify-between items-center mb-1.5">
-            <span class="text-xs sm:text-sm font-black text-indigo-700">1부 교차 운영 · 09:00 ~ 10:30 (90분)</span>
+            <span class="text-xs font-black text-indigo-700">1부 교차 운영 · 09:00 ~ 10:30 (90분)</span>
             <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">1차</span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs">
-            <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-center">
-              <span class="font-black text-indigo-800 text-sm">🏃 A팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-bold">타 동아리 부스 체험</div>
+            <div class="p-2 rounded-lg bg-indigo-50 border border-indigo-100 text-center">
+              <span class="font-black text-indigo-800">🏃 A팀 학생</span>
+              <div class="text-[11px] text-slate-600 font-bold mt-0.5">타 동아리 체험</div>
             </div>
-            <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-              <span class="font-black text-emerald-800 text-sm">🏪 B팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-bold">우리 부스 운영</div>
+            <div class="p-2 rounded-lg bg-emerald-50 border border-emerald-100 text-center">
+              <span class="font-black text-emerald-800">🏪 B팀 학생</span>
+              <div class="text-[11px] text-slate-600 font-bold mt-0.5">우리 부스 운영</div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white/95 rounded-2xl p-3.5 border-l-4 border-purple-500 shadow-sm">
+        <div class="bg-white rounded-xl p-3.5 border-l-4 border-purple-500 border border-slate-200">
           <div class="flex justify-between items-center mb-1.5">
-            <span class="text-xs sm:text-sm font-black text-purple-700">2부 교차 운영 · 10:30 ~ 12:00 (90분)</span>
+            <span class="text-xs font-black text-purple-700">2부 교차 운영 · 10:30 ~ 12:00 (90분)</span>
             <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-purple-100 text-purple-700">2차</span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs">
-            <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-              <span class="font-black text-emerald-800 text-sm">🏪 A팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-bold">우리 부스 운영</div>
+            <div class="p-2 rounded-lg bg-emerald-50 border border-emerald-100 text-center">
+              <span class="font-black text-emerald-800">🏪 A팀 학생</span>
+              <div class="text-[11px] text-slate-600 font-bold mt-0.5">우리 부스 운영</div>
             </div>
-            <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-center">
-              <span class="font-black text-indigo-800 text-sm">🏃 B팀 학생</span>
-              <div class="text-[11px] text-slate-600 mt-0.5 font-bold">타 동아리 부스 체험</div>
+            <div class="p-2 rounded-lg bg-indigo-50 border border-indigo-100 text-center">
+              <span class="font-black text-indigo-800">🏃 B팀 학생</span>
+              <div class="text-[11px] text-slate-600 font-bold mt-0.5">타 동아리 체험</div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white/95 rounded-2xl p-3.5 border-l-4 border-teal-500 shadow-sm flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-black shrink-0">마무리</span>
+        <div class="bg-white rounded-xl p-3 border-l-4 border-teal-500 border border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-black shrink-0">마무리</span>
             <div>
-              <div class="text-[11px] font-bold text-slate-500">12:00 ~ 12:40 (40분)</div>
-              <div class="text-xs sm:text-sm font-black text-slate-900">부스 철거 &amp; 교실 환경정화</div>
+              <div class="text-[10px] font-bold text-slate-500">12:00 ~ 12:40 (40분)</div>
+              <div class="text-xs font-black text-slate-900">부스 철거 &amp; 교실 환경정화</div>
             </div>
           </div>
-          <span class="text-[10px] font-black px-2.5 py-1 rounded-md bg-teal-100 text-teal-800">봉사 1시간</span>
+          <span class="text-[10px] font-black px-2 py-1 rounded bg-teal-100 text-teal-800">봉사 1시간</span>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ================= 🎪 부스 상세 팝업 모달 ================= -->
+  <!-- ================= 🎪 부스 상세 소개 팝업 모달 ================= -->
   <div id="boothModal" onclick="if(event.target===this) closeBoothModal()" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl border-2 border-pink-200">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl border-2 border-rose-300">
       <div class="flex items-start justify-between">
         <div class="flex items-center gap-3">
-          <span id="modalEmoji" class="text-4xl p-2.5 rounded-2xl bg-pink-100 text-pink-700"></span>
+          <span id="modalEmoji" class="text-3xl p-2 rounded-2xl bg-rose-100 text-rose-700"></span>
           <div>
-            <span id="modalCat" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700"></span>
-            <h3 id="modalName" class="text-xl font-black text-slate-900 mt-1"></h3>
+            <span id="modalCat" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-100 text-rose-700"></span>
+            <h3 id="modalName" class="text-lg font-black text-slate-900 mt-1"></h3>
           </div>
         </div>
         <button onclick="closeBoothModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-black">✕</button>
       </div>
 
-      <div class="mt-3.5 p-3.5 rounded-2xl bg-slate-50 text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed" id="modalDesc"></div>
+      <div class="mt-3 p-3 rounded-xl bg-slate-50 text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed" id="modalDesc"></div>
 
-      <!-- 위치 안내 카드 -->
+      <!-- 위치 안내 -->
       <div class="grid grid-cols-2 gap-2 mt-3">
-        <div class="p-3 rounded-2xl bg-rose-50 border border-rose-200">
-          <div class="text-[10px] text-rose-600 font-bold">📍 부스 교실</div>
-          <div id="modalRoom" class="text-sm font-black text-slate-900 mt-0.5"></div>
+        <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200">
+          <div class="text-[10px] text-rose-600 font-bold">📍 교실 위치</div>
+          <div id="modalRoom" class="text-xs sm:text-sm font-black text-slate-900 mt-0.5"></div>
         </div>
-        <div class="p-3 rounded-2xl bg-indigo-50 border border-indigo-200">
+        <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200">
           <div class="text-[10px] text-indigo-600 font-bold">🏢 층수</div>
-          <div id="modalFloor" class="text-sm font-black text-slate-900 mt-0.5"></div>
+          <div id="modalFloor" class="text-xs sm:text-sm font-black text-slate-900 mt-0.5"></div>
         </div>
       </div>
 
-      <!-- 길안내 바로 시작 버튼 -->
+      <!-- 중앙계단 길안내 확인 버튼 -->
       <div class="mt-4 flex gap-2">
-        <button onclick="triggerGuideFromModal()" class="touch-pop flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white text-xs sm:text-sm font-black shadow-md flex items-center justify-center gap-1.5">
+        <button onclick="showRouteInMapFromModal()" class="touch-pop flex-1 py-3 rounded-xl bg-rose-500 text-white text-xs font-black shadow-md flex items-center justify-center gap-1.5">
           <span>🧭</span>
-          <span>지도로 위치 & 길안내 보기</span>
+          <span>배치도에서 위치 확인</span>
         </button>
-        <button onclick="closeBoothModal()" class="touch-pop px-4 py-3 rounded-2xl bg-slate-100 text-slate-700 text-xs font-black">
+        <button onclick="closeBoothModal()" class="touch-pop px-4 py-3 rounded-xl bg-slate-100 text-slate-700 text-xs font-black">
           닫기
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= 🗺️ 원본 공식 교실 배치도 모달 ================= -->
-  <div id="officialMapModal" onclick="if(event.target===this) closeOfficialMapModal()" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
-    <div class="bg-white w-full max-w-lg rounded-3xl p-4 sm:p-5 shadow-2xl flex flex-col max-h-[92vh] border-2 border-indigo-300">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🏫</span>
-          <h3 class="text-base font-black text-slate-900">2026 교실 및 교무실 공식 배치도(안)</h3>
-        </div>
-        <button onclick="closeOfficialMapModal()" class="text-slate-400 text-2xl font-black">✕</button>
+  <!-- ================= 📄 원본 도면 모달 ================= -->
+  <div id="originalImgModal" onclick="if(event.target===this) closeOriginalImageModal()" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-3">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-4 shadow-2xl flex flex-col max-h-[92vh]">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+        <h3 class="text-sm font-black text-slate-900">2026 교실 및 교무실 배치도 원본</h3>
+        <button onclick="closeOriginalImageModal()" class="text-slate-400 text-2xl font-black">✕</button>
       </div>
-      
-      <div class="overflow-auto my-3 rounded-2xl border border-slate-200 bg-slate-100 flex-1 flex justify-center items-start">
-        <img src="school_map_official_2026.png" alt="2026 교실 및 교무실 공식 배치도" class="w-full h-auto object-contain rounded-xl" />
+      <div class="overflow-auto my-2 flex-1 rounded-xl bg-slate-100 border border-slate-200">
+        <img src="school_map_official_2026.png" alt="2026 교실 및 교무실 배치도 원본" class="w-full h-auto" />
       </div>
-
-      <div class="pt-2 text-center flex gap-2">
-        <a href="school_map_official_2026.png" target="_blank" class="flex-1 py-2.5 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-black border border-indigo-200 text-center">
-          🔍 새 창에서 초고화질 전체보기
-        </a>
-        <button onclick="closeOfficialMapModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 text-white text-xs font-black">
-          닫기
-        </button>
-      </div>
+      <button onclick="closeOriginalImageModal()" class="w-full py-2.5 rounded-xl bg-slate-800 text-white text-xs font-black">
+        닫기
+      </button>
     </div>
   </div>
 
   <script>
-    // 30개 동아리 상세 데이터
+    // 30개 동아리 데이터
     const BOOTHS = [
       // 1층
       { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 공연" },
@@ -459,7 +424,7 @@
       { id: 23, name: "소나기(방송부)", cat: "방탈출/추리", emoji: "🎤", room: "방송실", floor: 2, desc: "방송실 특수 음향·조명으로 꾸민 오싹한 귀신의 집 & 신나는 노래방 체험" },
       { id: 10, name: "또래상담부", cat: "체험/실습형", emoji: "💌", room: "1-10", floor: 2, desc: "추리력과 기대심리를 활용한 두근두근 커플 매칭 & 심리 체험" },
 
-      // 3층 (대강당 포함 11개)
+      // 3층
       { id: 27, name: "러쉬온미", cat: "공연형", emoji: "💃", room: "강당(운양관)", floor: 3, desc: "무대를 뒤집어 놓는 파워풀 K-POP & 스트릿 댄스 리믹스 공연" },
       { id: 25, name: "체대입시부", cat: "체육활동형", emoji: "🏋️", room: "강당(운양관)", floor: 3, desc: "체대입시부에 도전하라! 제자리멀리뛰기, 농구 챌린지 및 줄다리기 한판 승부" },
       { id: 26, name: "플라잉셔틀즈", cat: "체육활동형", emoji: "🏸", room: "강당(운양관)", floor: 3, desc: "배드민턴부를 이겨라! 스매싱 타겟 챌린지 & 배드민턴 미니 대결" },
@@ -472,9 +437,9 @@
       { id: 12, name: "에끌라", cat: "체험/실습형", emoji: "💅", room: "2-7", floor: 3, desc: "블링블링 네일아트 & 리얼한 특수분장 뷰티 체험 부스" },
       { id: 16, name: "글로톡", cat: "체험/실습형", emoji: "🍪", room: "2-8", floor: 3, desc: "개성 만점 타투 스티커 체험 및 나만의 아이싱 쿠키 꾸미기" },
 
-      // 4층 (8개)
+      // 4층
       { id: 1, name: "스파크", cat: "체험/실습형", emoji: "🍹", room: "물리실", floor: 4, desc: "과학으로 만드는 칵테일 바 (밀도 차이와 pH 지시약 색 변화를 이용한 무알콜 음료 제작 체험)" },
-      { id: 5, name: "멘날바", cat: "체험/실습형", emoji: "🌭", room: "지구과학실", floor: 4, desc: "실생활 속 과학 원리 이해 (마시멜로 융해 과정, 핫도그 가열·해동 과정 관찰)" },
+      { id: 5, name: "멘날바", cat: "체험/실습형", emoji: "🌭", room: "과학실험실(지구과학)", floor: 4, desc: "실생활 속 과학 원리 이해 (마시멜로 융해 과정, 핫도그 가열·해동 과정 관찰)" },
       { id: 20, name: "경영위키", cat: "방탈출/추리", emoji: "👻", room: "1-1", floor: 4, desc: "심장 쫄깃! 공포의 귀신의 집 & 단서를 찾아 탈출하는 방탈출 체험" },
       { id: 24, name: "교지편집부", cat: "방탈출/추리", emoji: "🏺", room: "1-3", floor: 4, desc: "박물관 유물 도난 사건! 남겨진 단서를 조합해 범인을 찾는 추리 수사 게임" },
       { id: 19, name: "애그부", cat: "문화예술형", emoji: "🏮", room: "2-1 · 2-2", floor: 4, desc: "일러스트·창작품 전시회 및 일본 여름 축제(마츠리)풍 감성 포토부스" },
@@ -482,128 +447,184 @@
       { id: 7, name: "소프라테스", cat: "체험/실습형", emoji: "💘", room: "2-5", floor: 4, desc: "개인의 철학적 성향과 상호 이해의 상관성 탐구 — 〈운명적 철학 소개팅〉" },
       { id: 21, name: "블루라인", cat: "방탈출/추리", emoji: "🕵️", room: "2-4", floor: 4, desc: "크리스마스 살인사건의 진범을 찾아라! 과학수사 & 범인 검거 추리 체험" },
 
-      // 5층 (4개)
+      // 5층
       { id: 2, name: "시너지", cat: "체험/실습형", emoji: "🧋", room: "화학실", floor: 5, desc: "겔화 반응을 활용한 톡톡 터지는 팝핑보바 만들기 체험 후 시원한 음료 시식" },
       { id: 4, name: "생명보험", cat: "체험/실습형", emoji: "🌌", room: "화학실", floor: 5, desc: "산·염기 반응을 이용한 영롱한 빛깔의 은하수 에이드 만들기 실험" },
       { id: 3, name: "아스클", cat: "체험/실습형", emoji: "🐟", room: "생물실", floor: 5, desc: "달콤 바삭 달고나 & 겨울 간식 붕어빵 만들기 체험 및 추억의 포토부스 운영" },
       { id: 6, name: "화생방", cat: "체험/실습형", emoji: "🧼", room: "생물실", floor: 5, desc: "나만의 향기와 색을 담은 수제 비누 만들기 DIY 공방 체험" }
     ];
 
-    // 스마트 세로형 층별 교실 배치 구조 데이터
-    // 모바일에서 스크롤하며 중앙계단(출발점)을 중심으로 좌/우 및 북/남 교실을 명확하게 파악할 수 있는 레이아웃
-    const VERTICAL_FLOOR_LAYOUT = {
+    // 첨부된 운양고 배치도(안)을 세로 건축 평면도로 1:1 완벽 재현한 데이터
+    const VERTICAL_CAD_DATA = {
       5: {
-        title: "5층 (2학년 교실 & 과학실험실)",
-        sub: "중앙계단 위쪽은 화학실/생물실, 아래쪽은 2학년 교실입니다.",
-        sections: [
+        title: "5층 배치도",
+        sub: "화학실/생물실 및 2학년 교실 (2-1 ~ 2-10)",
+        rows: [
+          { type: "corridor", text: "▲ 북쪽 (과학실험실 구역)" },
           {
-            title: "🧪 북측 특별실 구역 (화학실 & 생물실)",
-            desc: "중앙계단에서 위쪽 복도로 직진!",
-            rooms: [
-              { name: "화학실", boothIds: [2, 4], desc: "시너지 (팝핑보바) · 생명보험 (은하수에이드)" },
-              { name: "생물실", boothIds: [3, 6], desc: "아스클 (달고나·붕어빵) · 화생방 (수제비누)" }
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "화학실", boothIds: [2, 4], sub: "시너지 · 생명보험" },
+              { name: "생물실", boothIds: [3, 6], sub: "아스클 · 화생방" }
             ]
           },
-          { isStairs: true, label: "📍 5층 중앙계단 (출발점 & E/V)" },
           {
-            title: "🏫 남측 2학년 교실 구역 (2-1 ~ 2-10)",
-            desc: "중앙계단에서 아래쪽 복도로 이동",
-            rooms: [
-              { name: "2-1 ~ 2-10 교실", isNormal: true, desc: "2학년 일반 교실 및 교무실" }
+            type: "stairs", name: "📍 5층 중앙계단 / E.V", desc: "출발 기준점"
+          },
+          { type: "corridor", text: "▼ 남쪽 (2학년 일반교실 구역)" },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "2-5 교실", isNormal: true },
+              { name: "2-6 교실", isNormal: true },
+              { name: "2-7 교실", isNormal: true },
+              { name: "2-8 교실", isNormal: true },
+              { name: "2-9 교실", isNormal: true },
+              { name: "2-10 교실", isNormal: true }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-3",
+            items: [
+              { name: "2-1 교실", isNormal: true },
+              { name: "2-2 교실", isNormal: true },
+              { name: "2-3 교실", isNormal: true }
             ]
           }
         ]
       },
       4: {
-        title: "4층 (물리실 · 지구과학실 · 1-1 귀신의집)",
-        sub: "중앙계단 바로 앞뒤로 꿀잼 실험실과 방탈출 부스가 모여 있습니다.",
-        sections: [
+        title: "4층 배치도",
+        sub: "물리실/지구과학실 및 1-1 귀신의집, 1-3 유물추리",
+        rows: [
+          { type: "corridor", text: "▲ 북쪽 (물리실 · 지구과학실)" },
           {
-            title: "🔬 북측 과학실험실 구역",
-            desc: "중앙계단 위쪽으로 나가면 바로 위치",
-            rooms: [
-              { name: "물리실", boothIds: [1], desc: "스파크 (무알콜 과학 칵테일바)" },
-              { name: "지구과학실", boothIds: [5], desc: "멘날바 (핫도그 & 마시멜로 과학체험)" }
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "물리실", boothIds: [1], sub: "스파크 (칵테일바)" },
+              { name: "과학실험실(지구과학)", boothIds: [5], sub: "멘날바 (핫도그실험)" }
             ]
           },
-          { isStairs: true, label: "📍 4층 중앙계단 (출발점 & E/V)" },
           {
-            title: "🕵️ 중앙 및 동편 구역 (방탈출 & 유물추리)",
-            desc: "중앙계단에서 우측 복도로 이동",
-            rooms: [
-              { name: "1-3 교실", boothIds: [24], desc: "교지편집부 (박물관 유물도난 수사)" },
-              { name: "1-1 교실", boothIds: [20], desc: "경영위키 (공포의 귀신의 집 & 방탈출)" }
+            type: "stairs", name: "📍 4층 중앙계단 / E.V", desc: "출발 기준점"
+          },
+          { type: "corridor", text: "▼ 중앙 및 동편 교실 (방탈출 구역)" },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "1-3 교실", boothIds: [24], sub: "교지편집부 (유물추리)" },
+              { name: "1-1 교실", boothIds: [20], sub: "경영위키 (공포 귀신의집)" }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-3",
+            items: [
+              { name: "3-1", isNormal: true },
+              { name: "3-2", isNormal: true },
+              { name: "3-3", isNormal: true }
             ]
           }
         ]
       },
       3: {
-        title: "3층 (대강당 운양관 & 1학년 교실) - 최대 부스 밀집!",
-        sub: "중앙계단 좌측은 대강당·크로플, 우측은 1학년 교실 복도입니다.",
-        sections: [
+        title: "3층 배치도 (최대 핫플레이스)",
+        sub: "대강당(운양관), 기술가정실(크로플), 1학년 교실 복도",
+        rows: [
+          { type: "corridor", text: "▲ 서편 (대강당 운양관 & 가사실)" },
           {
-            title: "🎭 서편 대강당(운양관) & 기술가정실",
-            desc: "중앙계단에서 왼쪽으로 이동",
-            rooms: [
-              { name: "대강당 (운양관)", boothIds: [27, 25, 26], desc: "러쉬온미(K-POP댄스) · 체대입시부 · 플라잉셔틀즈(배드민턴)" },
-              { name: "기술가정실", boothIds: [8], desc: "베이킹메이킹 (갓 구운 바삭 크로플 & 데코)" }
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "강당(운양관)", boothIds: [27, 25, 26], sub: "댄스 · 체대 · 배드민턴" },
+              { name: "기술가정실", boothIds: [8], sub: "베이킹메이킹 (크로플)" }
             ]
           },
-          { isStairs: true, label: "📍 3층 중앙계단 (출발점 & E/V)" },
           {
-            title: "🎪 동편 1학년 교실 복도 (소개팅 · 포토존 · 무당집 · 영화관)",
-            desc: "중앙계단에서 오른쪽 복도로 이동",
-            rooms: [
-              { name: "1-4 교실", boothIds: [11], desc: "창연회 (설렘 가득 블라인드 소개팅)" },
-              { name: "1-5 교실", boothIds: [18], desc: "잡지식 (해리포터 & 겨울왕국 테마 포토존)" },
-              { name: "1-6 · 1-7 교실", boothIds: [22], desc: "유아트 (공포의 무당집 괴담 방탈출)" },
-              { name: "1-8 교실", boothIds: [17], desc: "필름메이커스 (운양 시네마 단편영화 상영관)" }
+            type: "stairs", name: "📍 3층 중앙계단 / E.V", desc: "출발 기준점"
+          },
+          { type: "corridor", text: "▼ 동편 1학년 교실 복도 (소개팅 · 포토존 · 무당집 · 영화관)" },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "1-4 교실", boothIds: [11], sub: "창연회 (소개팅)" },
+              { name: "1-5 교실", boothIds: [18], sub: "잡지식 (해리포터 포토존)" }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "1-6 · 1-7 교실", boothIds: [22], sub: "유아트 (무당집 방탈출)" },
+              { name: "1-8 교실", boothIds: [17], sub: "필름메이커스 (영화관)" }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "1-9 교실", isNormal: true },
+              { name: "1-10 교실", isNormal: true }
             ]
           }
         ]
       },
       2: {
-        title: "2층 (IT 컴퓨터실 · 북카페 도서관 · 방송실)",
-        sub: "중앙계단 좌측은 컴퓨터실/도서관, 우측은 방송실(노래방)입니다.",
-        sections: [
+        title: "2층 배치도",
+        sub: "컴퓨터실, 도서관(책팟), 방송실(귀신의집 노래방)",
+        rows: [
+          { type: "corridor", text: "▲ 서편 (컴퓨터실 & 도서관)" },
           {
-            title: "💻 서편 IT & 독서 구역",
-            desc: "중앙계단에서 왼쪽 복도로 이동",
-            rooms: [
-              { name: "컴퓨터실", boothIds: [14], desc: "알고리즘 (학생 개발 코딩 게임 & 레이싱)" },
-              { name: "도서관 (북카페)", boothIds: [15], desc: "도서관사람들 (잭팟 책팟 슬롯머신·볼링)" }
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "컴퓨터실", boothIds: [14], sub: "알고리즘 (코딩 레이싱)" },
+              { name: "도서관", boothIds: [15], sub: "도서관사람들 (책팟 슬롯머신)" }
             ]
           },
-          { isStairs: true, label: "📍 2층 중앙계단 (출발점 & E/V)" },
           {
-            title: "🎤 중앙 및 동편 구역 (방송실 노래방)",
-            desc: "중앙계단에서 오른쪽 복도로 이동",
-            rooms: [
-              { name: "방송실", boothIds: [23], desc: "소나기 (오싹한 귀신의 집 & 신나는 노래방)" },
-              { name: "1-10 교실", boothIds: [10], desc: "또래상담부 (커플 매칭 & 심리 탐구)" }
+            type: "stairs", name: "📍 2층 중앙계단 / E.V", desc: "출발 기준점"
+          },
+          { type: "corridor", text: "▼ 동편 (방송실 & 교무센터)" },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "방송실", boothIds: [23], sub: "소나기 (귀신의집 노래방)" },
+              { name: "1-10 교실", boothIds: [10], sub: "또래상담부 (매칭)" }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "교무센터", isNormal: true },
+              { name: "방과후교실", isNormal: true }
             ]
           }
         ]
       },
       1: {
-        title: "1층 & 야외 (음악실 · 시청각실 · 운동장)",
-        sub: "중앙계단을 내려오면 음악실, 시청각실, 야외 농구장으로 연결됩니다.",
-        sections: [
+        title: "1층 & 야외 배치도",
+        sub: "음악실(밴드), 시청각실(연극), 야외 농구장",
+        rows: [
+          { type: "corridor", text: "▲ 공연 예술 구역 (음악실 & 시청각실)" },
           {
-            title: "🎸 서편 문화예술 공연 구역",
-            desc: "중앙계단에서 왼쪽으로 이동",
-            rooms: [
-              { name: "음악실", boothIds: [28], desc: "밴드부 (가슴 웅장한 라이브 락 공연)" },
-              { name: "시청각실", boothIds: [29], desc: "시퀀스 (청춘 로맨스 연극 20세기 소녀)" }
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "음악실", boothIds: [28], sub: "밴드부 (라이브 락 공연)" },
+              { name: "시청각실", boothIds: [29], sub: "시퀀스 (청춘 연극 20세기 소녀)" }
             ]
           },
-          { isStairs: true, label: "📍 1층 중앙 로비 / 중앙계단 (출발점)" },
           {
-            title: "🏀 야외 운동장 & 편의시설",
-            desc: "중앙 현관을 통해 운동장 및 매점으로 이동",
-            rooms: [
-              { name: "운동장 / 농구장", boothIds: [30], desc: "슬램덩크 (자유투 챌린지 & 1:1 농구)" },
-              { name: "매점 (운수대통)", isNormal: true, desc: "축제 간식 및 음료" }
+            type: "stairs", name: "📍 1층 중앙 로비 / 중앙계단", desc: "출발 기준점"
+          },
+          { type: "corridor", text: "▼ 야외 운동장 & 편의시설" },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "운동장/농구장", boothIds: [30], sub: "슬램덩크 (농구 자유투)" },
+              { name: "매점 (운수대통)", isNormal: true, sub: "간식 및 음료" }
+            ]
+          },
+          {
+            type: "grid", cols: "grid-cols-2",
+            items: [
+              { name: "행정실 / 교장실", isNormal: true },
+              { name: "보건실 / 숙직실", isNormal: true }
             ]
           }
         ]
@@ -613,46 +634,42 @@
     let curFloor = 3;
     let selectedBooth = null;
 
-    // 4대 메인 탭 전환 함수
-    function switchMainTab(tab) {
-      ['map', 'booths', 'categories', 'schedule'].forEach(t => {
+    // 4대 탭 전환
+    function switchTab(tab) {
+      ['map', 'booths', 'genres', 'schedule'].forEach(t => {
         const view = document.getElementById(`view-${t}`);
-        const btn = document.getElementById(`mainTab-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
         if (t === tab) {
           view.classList.remove('hidden');
-          view.classList.remove('animate-pop-in');
-          void view.offsetWidth;
-          view.classList.add('animate-pop-in');
-
-          btn.className = "touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-black transition text-white bg-gradient-to-r from-rose-500 to-pink-600 shadow-sm text-center";
+          btn.className = "touch-pop py-2.5 rounded-xl text-xs font-black transition text-white bg-rose-500 shadow-sm text-center";
         } else {
           view.classList.add('hidden');
-          btn.className = "touch-pop py-2.5 rounded-xl text-[11px] sm:text-xs font-bold transition text-slate-600 hover:text-rose-600 text-center";
+          btn.className = "touch-pop py-2.5 rounded-xl text-xs font-bold transition text-slate-700 hover:text-rose-600 text-center";
         }
       });
 
-      if (tab === 'map') renderVerticalFloorMap(curFloor);
-      if (tab === 'booths') renderBoothsGrid();
-      if (tab === 'categories') filterAndShowGenre('체험/실습형');
+      if (tab === 'map') renderVerticalCadMap(curFloor);
+      if (tab === 'booths') renderBoothsList();
+      if (tab === 'genres') filterGenreList('체험/실습형');
     }
 
     // 층 선택
     function selectFloor(fl) {
       curFloor = fl;
-      clearNavRoute();
+      clearRouteGuide();
       document.querySelectorAll('.fl-chip').forEach(btn => {
         if (Number(btn.dataset.fl) === fl) {
-          btn.className = "fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-500 to-pink-600 text-white shadow-md";
+          btn.className = "fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-rose-500 text-white shadow-sm";
         } else {
-          btn.className = "fl-chip touch-pop py-2.5 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-200";
+          btn.className = "fl-chip touch-pop py-2 rounded-xl text-xs font-black bg-white text-slate-700 border border-slate-300";
         }
       });
-      renderVerticalFloorMap(fl);
+      renderVerticalCadMap(fl);
     }
 
-    // 스마트 세로형 지도 렌더링
-    function renderVerticalFloorMap(fl) {
-      const data = VERTICAL_FLOOR_LAYOUT[fl];
+    // 세로형 건축 도면 렌더링
+    function renderVerticalCadMap(fl) {
+      const data = VERTICAL_CAD_DATA[fl];
       document.getElementById('floorBadge').textContent = `${fl}층`;
       document.getElementById('floorTitle').textContent = data.title;
       document.getElementById('floorSub').textContent = data.sub;
@@ -660,169 +677,151 @@
       const floorBooths = BOOTHS.filter(b => b.floor === fl);
       document.getElementById('floorBoothCount').textContent = `${floorBooths.length}개 부스`;
 
-      const canvas = document.getElementById('verticalMapCanvas');
-      canvas.innerHTML = data.sections.map((sec, secIdx) => {
-        if (sec.isStairs) {
+      const container = document.getElementById('verticalCadMap');
+      container.innerHTML = data.rows.map(row => {
+        if (row.type === 'corridor') {
           return `
-            <div id="v-stairs-${fl}" class="v-stairs-node flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="text-xl">🚩</span>
-                <div>
-                  <h4 class="text-xs sm:text-sm font-black text-indigo-900">${sec.label}</h4>
-                  <p class="text-[10px] text-indigo-600 font-bold">여기서부터 각 교실로 화살표 안내가 시작됩니다</p>
-                </div>
-              </div>
-              <span class="text-[10px] font-black px-2 py-1 rounded-lg bg-indigo-200/80 text-indigo-800">기준점</span>
+            <div class="cad-corridor py-1 rounded-lg">
+              <span>${row.text}</span>
             </div>
           `;
         }
 
-        return `
-          <div class="space-y-2">
-            <div class="flex items-center justify-between px-1">
-              <h4 class="text-xs sm:text-sm font-black text-slate-800">${sec.title}</h4>
-              <span class="text-[10px] font-bold text-slate-500">${sec.desc}</span>
+        if (row.type === 'stairs') {
+          return `
+            <div id="stairs-node" class="cad-stairs py-2.5 rounded-xl my-1 border-2 border-indigo-400">
+              <span class="text-xs font-black text-indigo-900">${row.name}</span>
+              <span class="text-[10px] text-indigo-600 font-bold">${row.desc}</span>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              ${sec.rooms.map(room => {
-                if (room.isNormal) {
+          `;
+        }
+
+        if (row.type === 'grid') {
+          return `
+            <div class="grid ${row.cols} gap-1.5">
+              ${row.items.map(item => {
+                if (item.isNormal) {
                   return `
-                    <div class="v-room v-room-normal flex items-center justify-between">
-                      <div>
-                        <span class="text-xs font-bold text-slate-700">${room.name}</span>
-                        <p class="text-[10px] text-slate-400 mt-0.5">${room.desc}</p>
-                      </div>
-                      <span class="text-[10px] text-slate-400">일반 구역</span>
+                    <div class="cad-room rounded-xl">
+                      <span class="text-xs font-bold text-slate-600">${item.name}</span>
+                      ${item.sub ? `<span class="text-[9px] text-slate-400 mt-0.5">${item.sub}</span>` : ''}
                     </div>
                   `;
                 }
 
                 // 부스 교실
-                const bList = room.boothIds.map(id => BOOTHS.find(x => x.id === id)).filter(Boolean);
-                const primaryB = bList[0];
-
+                const b = item.boothIds ? BOOTHS.find(x => x.id === item.boothIds[0]) : null;
                 return `
-                  <div id="v-room-${primaryB.id}" onclick="triggerVerticalRoute(${primaryB.id})" class="v-room v-room-booth">
-                    <div class="flex items-start justify-between">
-                      <div class="flex items-center gap-2">
-                        <span class="text-2xl p-1.5 rounded-xl bg-pink-100">${primaryB.emoji}</span>
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <span class="text-sm font-black text-slate-900">${room.name}</span>
-                            <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-500 text-white">부스 운영중</span>
-                          </div>
-                          <h5 class="text-xs sm:text-sm font-black text-rose-600 mt-0.5">${bList.map(b => b.name).join(' · ')}</h5>
-                        </div>
-                      </div>
-                      <span class="text-xs font-black text-rose-500">터치 👉</span>
+                  <div id="cad-room-${b ? b.id : ''}" onclick="openBoothModal(${b ? b.id : 0})" class="cad-room cad-booth-room rounded-xl">
+                    <div class="flex items-center gap-1">
+                      <span class="text-sm">${b ? b.emoji : '🎪'}</span>
+                      <span class="text-xs font-black text-rose-800">${item.name}</span>
                     </div>
-                    <p class="text-xs text-slate-600 font-bold mt-2 pl-1 border-l-2 border-rose-300 line-clamp-1">${room.desc}</p>
+                    <span class="text-[10px] font-black text-rose-600 mt-0.5 truncate max-w-[130px]">${item.sub || (b ? b.name : '')}</span>
+                    <span class="text-[9px] text-rose-500 font-extrabold mt-0.5">클릭 시 소개 보기 👉</span>
                   </div>
                 `;
               }).join('')}
             </div>
-          </div>
-        `;
+          `;
+        }
       }).join('');
     }
 
-    // 세로형 지도에서 중앙계단 ➡️ 목표 교실 길안내 트리거
-    function triggerVerticalRoute(boothId) {
-      const b = BOOTHS.find(x => x.id === boothId);
-      if (!b) return;
+    // 모달에서 도면 위치 보기 클릭 시
+    function showRouteInMapFromModal() {
+      if (!selectedBooth) return;
+      const b = selectedBooth;
+      closeBoothModal();
+      switchTab('map');
+      selectFloor(b.floor);
 
-      openBoothModal(b.id);
+      const banner = document.getElementById('routeGuideBanner');
+      const bannerText = document.getElementById('routeGuideText');
+      bannerText.textContent = `중앙계단 🚩 ➡️ [${b.room} ${b.name}] 교실 위치가 반짝입니다!`;
+      banner.classList.remove('hidden');
 
-      const alertBar = document.getElementById('navAlertBar');
-      const alertText = document.getElementById('navAlertText');
-      alertText.textContent = `중앙계단 🚩 ➡️ [${b.floor}층 ${b.room} ${b.name}] 길안내 활성화!`;
-      alertBar.classList.remove('hidden');
-
-      // 해당 교실 요소로 스무스 스크롤 이동 및 펄스 하이라이트
       setTimeout(() => {
-        const el = document.getElementById(`v-room-${b.id}`);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('ring-4', 'ring-rose-400');
-          setTimeout(() => el.classList.remove('ring-4', 'ring-rose-400'), 3000);
+        const targetRoomEl = document.getElementById(`cad-room-${b.id}`);
+        if (targetRoomEl) {
+          targetRoomEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetRoomEl.classList.add('ring-4', 'ring-rose-500', 'animate-pulse');
+          setTimeout(() => {
+            targetRoomEl.classList.remove('ring-4', 'ring-rose-500', 'animate-pulse');
+          }, 4000);
         }
-      }, 150);
+      }, 200);
 
       launchConfetti();
     }
 
-    function clearNavRoute() {
-      const alertBar = document.getElementById('navAlertBar');
-      if (alertBar) alertBar.classList.add('hidden');
+    function clearRouteGuide() {
+      const banner = document.getElementById('routeGuideBanner');
+      if (banner) banner.classList.add('hidden');
     }
 
-    // 2. 부스별로 보기 (전체 30개 부스 그리드 렌더링)
-    let currentBoothFloorFilter = 0;
-    function renderBoothsGrid(query = '') {
-      const container = document.getElementById('boothsGridList');
+    // 2. 부스별로 보기 렌더링
+    let curBoothFloor = 0;
+    function renderBoothsList(query = '') {
+      const container = document.getElementById('boothCardsList');
       let filtered = BOOTHS;
-
-      if (currentBoothFloorFilter > 0) {
-        filtered = filtered.filter(b => b.floor === currentBoothFloorFilter);
-      }
-      if (query) {
-        filtered = filtered.filter(b => (b.name + ' ' + b.room + ' ' + b.desc + ' ' + b.cat).toLowerCase().includes(query.toLowerCase()));
-      }
+      if (curBoothFloor > 0) filtered = filtered.filter(b => b.floor === curBoothFloor);
+      if (query) filtered = filtered.filter(b => (b.name + ' ' + b.room + ' ' + b.desc).toLowerCase().includes(query.toLowerCase()));
 
       container.innerHTML = filtered.map(b => `
-        <div onclick="openBoothModal(${b.id})" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border border-pink-100 shadow-sm flex items-center justify-between hover:border-pink-300">
+        <div onclick="openBoothModal(${b.id})" class="touch-pop cursor-pointer p-3 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between hover:border-rose-300">
           <div class="flex items-center gap-3">
-            <span class="text-3xl p-1.5 rounded-xl bg-pink-50">${b.emoji}</span>
+            <span class="text-2xl p-1.5 rounded-xl bg-rose-50">${b.emoji}</span>
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-sm sm:text-base font-black text-slate-900">${b.name}</span>
+                <span class="text-sm font-black text-slate-900">${b.name}</span>
                 <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">📍 ${b.room} (${b.floor}층)</span>
               </div>
               <p class="text-xs text-slate-500 font-bold line-clamp-1 mt-0.5">${b.desc}</p>
             </div>
           </div>
-          <span class="text-xs font-black text-rose-500 shrink-0">소개 보기 👉</span>
+          <span class="text-xs font-black text-rose-500 shrink-0">소개 👉</span>
         </div>
       `).join('');
     }
 
-    function filterBoothByFloor(fl) {
-      currentBoothFloorFilter = fl;
-      document.querySelectorAll('.b-fl-chip').forEach(btn => {
+    function filterBoothFloor(fl) {
+      curBoothFloor = fl;
+      document.querySelectorAll('.b-chip').forEach(btn => {
         if ((fl === 0 && btn.textContent.includes('전체')) || (fl > 0 && btn.textContent.includes(`${fl}층`))) {
-          btn.className = "b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500 text-white shrink-0 shadow-sm";
+          btn.className = "b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500 text-white shrink-0";
         } else {
-          btn.className = "b-fl-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shrink-0";
+          btn.className = "b-chip touch-pop px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 shrink-0";
         }
       });
-      renderBoothsGrid(document.getElementById('boothSearchInput').value.trim());
+      renderBoothsList(document.getElementById('boothSearchInput').value.trim());
     }
 
     function handleBoothSearch() {
       const q = document.getElementById('boothSearchInput').value.trim();
       document.getElementById('boothSearchClear').classList.toggle('hidden', !q);
-      renderBoothsGrid(q);
+      renderBoothsList(q);
     }
 
     function clearBoothSearch() {
       document.getElementById('boothSearchInput').value = '';
       document.getElementById('boothSearchClear').classList.add('hidden');
-      renderBoothsGrid('');
+      renderBoothsList('');
     }
 
-    // 3. 장르별로 보기
-    function filterAndShowGenre(cat) {
+    // 3. 장르별 보기
+    function filterGenreList(cat) {
       const list = BOOTHS.filter(b => b.cat === cat);
-      const container = document.getElementById('genreBoothsArea');
+      const container = document.getElementById('genreBoothsList');
       container.innerHTML = `
-        <div class="text-xs font-black text-slate-700 px-1 pt-2 flex items-center justify-between">
+        <div class="text-xs font-black text-slate-700 px-1 pt-1 flex items-center justify-between">
           <span>🎯 [${cat}] 부스 목록 (${list.length}개)</span>
-          <span class="text-[10px] text-rose-500 font-bold">터치 시 상세 정보</span>
+          <span class="text-[10px] text-rose-500 font-bold">클릭 시 상세 소개</span>
         </div>
         ${list.map(b => `
-          <div onclick="openBoothModal(${b.id})" class="touch-pop cursor-pointer p-3.5 rounded-2xl bg-white border border-pink-100 shadow-sm flex items-center justify-between hover:bg-pink-50/50">
+          <div onclick="openBoothModal(${b.id})" class="touch-pop cursor-pointer p-3 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <span class="text-3xl p-1 rounded-xl bg-pink-50">${b.emoji}</span>
+              <span class="text-2xl p-1.5 rounded-xl bg-pink-50">${b.emoji}</span>
               <div>
                 <div class="flex items-center gap-2">
                   <span class="text-sm font-black text-slate-900">${b.name}</span>
@@ -837,19 +836,7 @@
       `;
     }
 
-    // 모달창에서 지도 위치 안내
-    function triggerGuideFromModal() {
-      if (!selectedBooth) return;
-      const b = selectedBooth;
-      closeBoothModal();
-      switchMainTab('map');
-      selectFloor(b.floor);
-      setTimeout(() => {
-        triggerVerticalRoute(b.id);
-      }, 150);
-    }
-
-    // 부스 상세 모달
+    // 부스 소개 모달
     function openBoothModal(id) {
       const b = BOOTHS.find(x => x.id === id);
       if (!b) return;
@@ -869,19 +856,11 @@
       document.getElementById('boothModal').classList.add('hidden');
     }
 
-    // 원본 도면 모달
-    function openFullOfficialMapModal() {
-      document.getElementById('officialMapModal').classList.remove('hidden');
+    function openOriginalImageModal() {
+      document.getElementById('originalImgModal').classList.remove('hidden');
     }
-    function closeOfficialMapModal() {
-      document.getElementById('officialMapModal').classList.add('hidden');
-    }
-
-    // 랜덤 추천
-    function pickRandomBooth() {
-      launchConfetti();
-      const rand = BOOTHS[Math.floor(Math.random() * BOOTHS.length)];
-      openBoothModal(rand.id);
+    function closeOriginalImageModal() {
+      document.getElementById('originalImgModal').classList.add('hidden');
     }
 
     function launchConfetti() {
@@ -890,7 +869,7 @@
       }
     }
 
-    // 초기 실행: 지도로 보기 3층
+    // 초기 실행: 3층 배치도
     selectFloor(3);
   </script>
 </body>
