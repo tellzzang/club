@@ -609,8 +609,8 @@
     <!-- Global 4-Tab Navigation Bar (Always visible in all sub-views) -->
     <nav class="global-nav" id="globalNav">
       <button class="nav-tab-btn" id="nav-btn-map" onclick="switchNav('map')">🗺️ 지도로 보기</button>
-      <button class="nav-tab-btn" id="nav-btn-booths" onclick="switchNav('booths')">🏪 부스별로 보기</button>
       <button class="nav-tab-btn" id="nav-btn-genres" onclick="switchNav('genres')">🎪 장르별로 보기</button>
+      <button class="nav-tab-btn" id="nav-btn-booths" onclick="switchNav('booths')">🏪 부스별로 보기</button>
       <button class="nav-tab-btn" id="nav-btn-schedule" onclick="switchNav('schedule')">⏰ 운영시간표</button>
     </nav>
   </header>
@@ -634,18 +634,18 @@
           <div class="home-menu-sub">1~5층 세로형 배치도</div>
         </div>
 
-        <!-- 2. 부스별로 보기 -->
-        <div class="home-menu-card" onclick="navigateTo('booths')">
-          <div class="home-menu-icon">🏪</div>
-          <div class="home-menu-title">부스별로 보기</div>
-          <div class="home-menu-sub">30개 부스 전체 목록</div>
-        </div>
-
-        <!-- 3. 장르별로 보기 -->
+        <!-- 2. 장르별로 보기 (왼쪽 배치) -->
         <div class="home-menu-card" onclick="navigateTo('genres')">
           <div class="home-menu-icon">🎪</div>
           <div class="home-menu-title">장르별로 보기</div>
           <div class="home-menu-sub">체험·방탈출·공연·체육</div>
+        </div>
+
+        <!-- 3. 부스별로 보기 -->
+        <div class="home-menu-card" onclick="navigateTo('booths')">
+          <div class="home-menu-icon">🏪</div>
+          <div class="home-menu-title">부스별로 보기</div>
+          <div class="home-menu-sub">30개 부스 전체 목록</div>
         </div>
 
         <!-- 4. 운영시간표 -->
