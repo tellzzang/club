@@ -1299,8 +1299,10 @@
       document.getElementById('detailModal').classList.remove('active');
     }
 
-    // 부스 목록 렌더링
+    // 부스 목록 렌더링 (가나다순 정렬)
     function renderBoothList(list, containerId) {
+      // 이름 가나다 순으로 정렬
+      const sortedList = [...list].sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
       const container = document.getElementById(containerId);
       if (!container) return;
       container.innerHTML = '';
@@ -1308,7 +1310,7 @@
         container.innerHTML = '<div style="text-align:center; padding:40px; color:#94a3b8; font-size:1.1rem; font-weight:700;">검색 결과가 없습니다.</div>';
         return;
       }
-      list.forEach(b => {
+      sortedList.forEach(b => {
         const card = document.createElement('div');
         card.className = 'booth-card';
         card.onclick = () => openBoothModal(b);
@@ -1340,7 +1342,7 @@
         b.desc.toLowerCase().includes(query) ||
         (b.floor + '층').includes(query)
       );
-      renderBoothList(filtered, 'boothListContainer');
+      renderBoothList(filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko-KR')), 'boothListContainer');
     }
 
     function selectGenre(genre) {
@@ -1348,7 +1350,7 @@
         if (c.innerText.includes(genre)) c.classList.add('active');
         else c.classList.remove('active');
       });
-      const filtered = genre === '전체' ? BOOTHS : BOOTHS.filter(b => b.cat === genre);
+      const filtered = (genre === '전체' ? BOOTHS : BOOTHS.filter(b => b.cat === genre)).sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'));
       renderBoothList(filtered, 'genreBoothContainer');
     }
 
