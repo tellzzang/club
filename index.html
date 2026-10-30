@@ -94,12 +94,12 @@
 
     main {
       padding: 16px;
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
     }
 
     /* ============================================================
-       HOME VIEW: 메인 4개 메뉴 선택 카드
+       HOME VIEW: 메인 4개 메뉴 선택
        ============================================================ */
     #view-home { display: block; }
     .hero-banner {
@@ -147,7 +147,7 @@
     .menu-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
 
     /* ============================================================
-       1. 🗺️ 지도로 보기: 90도 회전 세로 도면 + 정방향(가로) 글자 오버레이
+       1. 🗺️ 지도로 보기: 신규 제작 모바일 맞춤형 벡터 SVG 배치도
        ============================================================ */
     #view-map { display: none; }
     .floor-tabs {
@@ -206,62 +206,33 @@
       border-radius: 6px;
     }
 
-    /* 90도 회전된 실제 건축 도면 컨테이너 (스마트폰 세로 폭 100%에 완벽 일치) */
-    .vertical-map-container {
-      position: relative;
+    /* SVG Map Container (스마트폰 세로 폭 100%에 정확히 맞추어 가로 스크롤 없음) */
+    .svg-map-wrapper {
       width: 100%;
+      padding: 12px;
       background: #ffffff;
-      line-height: 0;
+      display: flex;
+      justify-content: center;
     }
-    .vertical-map-img {
+    .floor-svg {
       width: 100%;
       height: auto;
+      max-width: 440px;
       display: block;
-      pointer-events: none;
-      user-select: none;
     }
 
-    /* 정방향(가로 방향)으로 읽기 편하게 배치된 교실/동아리 글자 버튼 */
-    .map-hotspot {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      padding: 5px 9px;
-      border-radius: 7px;
-      font-size: 0.74rem;
-      font-weight: 800;
+    /* SVG 인터랙티브 교실 스타일 */
+    .svg-room {
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      z-index: 10;
-      line-height: 1.2;
+      transition: all 0.18s ease;
     }
-    .map-hotspot.booth {
-      background: #4f46e5;
-      color: #ffffff;
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.45);
-      animation: pulse 2.2s infinite;
+    .svg-room:hover rect, .svg-room:active rect {
+      filter: brightness(0.92);
+      stroke-width: 3;
     }
-    .map-hotspot.booth:active {
-      transform: translate(-50%, -50%) scale(1.18);
-      background: #e11d48;
-      z-index: 25;
-    }
-    .map-hotspot.facility {
-      background: rgba(255, 255, 255, 0.94);
-      color: #334155;
-      border: 1px solid #cbd5e1;
-      font-weight: 700;
-      font-size: 0.68rem;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6); }
-      70% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+    .svg-room.booth:hover rect, .svg-room.booth:active rect {
+      stroke: #4338ca;
+      fill: #c7d2fe;
     }
 
     /* ============================================================
@@ -493,7 +464,7 @@
         <span style="font-size: 1.3rem;">🏫</span>
         <div class="header-title">운양고 2026 동아리 발표회</div>
       </div>
-      <div class="header-badge">축제 안내</div>
+      <div class="header-badge">축제 가이드</div>
     </div>
 
     <!-- Sub Navigation Bar -->
@@ -511,7 +482,7 @@
       <div class="hero-banner">
         <div class="hero-emoji">🎪✨</div>
         <div class="hero-title">2026 운양 동아리 발표회</div>
-        <div class="hero-desc">원하는 메뉴를 터치하여 부스를 탐색해 보세요!</div>
+        <div class="hero-desc">원하는 메뉴를 터치하여 축제를 즐겨보세요!</div>
       </div>
 
       <div class="menu-grid">
@@ -519,7 +490,7 @@
         <div class="menu-card highlight" onclick="navigateTo('map')">
           <div class="menu-icon">🗺️</div>
           <div class="menu-title">지도로 보기</div>
-          <div class="menu-subtitle">1~5층 세로형 실제 배치도</div>
+          <div class="menu-subtitle">1~5층 세로형 맞춤 배치도</div>
         </div>
 
         <!-- 2. 부스별로 보기 -->
@@ -546,7 +517,7 @@
     </div>
 
     <!-- ============================================================
-         1. 🗺️ 지도로 보기 VIEW (90도 회전 세로 도면 + 정방향 글자)
+         1. 🗺️ 지도로 보기 VIEW (세로형 스마트폰 맞춤 벡터 도면)
          ============================================================ -->
     <div id="view-map">
       <!-- 1층 ~ 5층 선택 탭 -->
@@ -558,14 +529,14 @@
         <button class="floor-tab-btn active" onclick="selectFloor(1)">1층</button>
       </div>
 
-      <!-- 선택된 층의 90도 회전 세로 실제 도면 카드 -->
+      <!-- 선택된 층의 신규 세로형 배치도 카드 -->
       <div class="floor-plan-card">
         <div class="floor-plan-header">
-          <div class="floor-plan-title" id="floorTitle">1층 실제 배치도 지도</div>
+          <div class="floor-plan-title" id="floorTitle">1층 교실 배치도 지도</div>
           <span class="floor-plan-tip">교실 터치 시 소개</span>
         </div>
-        <div class="vertical-map-container" id="verticalMapContainer">
-          <!-- JS로 실제 도면 및 정방향 글자 렌더링 -->
+        <div class="svg-map-wrapper" id="svgMapContainer">
+          <!-- JS로 각 층별 SVG 도면 주입 -->
         </div>
       </div>
     </div>
@@ -663,7 +634,7 @@
   </div>
 
   <script>
-    // 30개 동아리 원본 데이터
+    // 30개 동아리 원본 상세 데이터
     const BOOTHS = [
       // 1층
       { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다." },
@@ -706,8 +677,373 @@
       { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
     ];
 
-    // 90도 회전된 층별 배치도 및 정방향 가로 텍스트 라벨 데이터
-    const FLOOR_LABELS = {"5": [{"name": "1-1", "club_name": "경영위키", "emoji": "👻", "club_id": 20, "club_ids": null, "has_booth": true, "left": 81.8, "top": 58.1}, {"name": "1-2", "club_name": "1-2 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 72.1, "top": 58.1}, {"name": "미술실", "club_name": "미술실", "emoji": "🎨", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.5, "top": 46.7}, {"name": "2-5", "club_name": "소프라테스", "emoji": "💘", "club_id": 7, "club_ids": null, "has_booth": true, "left": 39.3, "top": 34.2}, {"name": "2-4", "club_name": "블루라인", "emoji": "🕵️", "club_id": 21, "club_ids": null, "has_booth": true, "left": 29.2, "top": 34.2}, {"name": "2-6", "club_name": "2-6 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 39.3, "top": 54.5}, {"name": "2-7", "club_name": "에끌라", "emoji": "💅", "club_id": 12, "club_ids": null, "has_booth": true, "left": 39.3, "top": 61.7}, {"name": "2-8", "club_name": "글로톡", "emoji": "🍪", "club_id": 16, "club_ids": null, "has_booth": true, "left": 39.3, "top": 69.0}, {"name": "2-9", "club_name": "축구부", "emoji": "☕", "club_id": 9, "club_ids": null, "has_booth": true, "left": 39.3, "top": 76.3}, {"name": "2-10", "club_name": "2-10 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 39.3, "top": 83.0}, {"name": "2-1", "club_name": "애그부", "emoji": "🏮", "club_id": 19, "club_ids": null, "has_booth": true, "left": 7.7, "top": 12.4}, {"name": "2-2", "club_name": "애그부", "emoji": "🏮", "club_id": 19, "club_ids": null, "has_booth": true, "left": 7.7, "top": 19.7}, {"name": "2-3", "club_name": "교집합", "emoji": "🎁", "club_id": 13, "club_ids": null, "has_booth": true, "left": 7.7, "top": 26.9}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.0, "top": 25.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 61.4, "top": 36.0}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 65.9, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 24.2, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 20.8, "top": 33.2}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.1, "top": 35.2}], "4": [{"name": "화학실", "club_name": "시너지 · 생명보험", "emoji": "🧋", "club_id": null, "club_ids": [2, 4], "has_booth": true, "left": 89.2, "top": 46.4}, {"name": "생물실", "club_name": "아스클 · 화생방", "emoji": "🐟", "club_id": null, "club_ids": [3, 6], "has_booth": true, "left": 89.2, "top": 57.4}, {"name": "물리실", "club_name": "스파크", "emoji": "🍹", "club_id": 1, "club_ids": null, "has_booth": true, "left": 47.2, "top": 62.8}, {"name": "과학실험실(지구과학)", "club_name": "멘날바", "emoji": "🌭", "club_id": 5, "club_ids": null, "has_booth": true, "left": 45.0, "top": 77.1}, {"name": "1-3", "club_name": "교지편집부", "emoji": "🏺", "club_id": 24, "club_ids": null, "has_booth": true, "left": 46.9, "top": 54.5}, {"name": "3-5", "club_name": "3-5 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 44.4, "top": 34.2}, {"name": "3-4", "club_name": "3-4 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 34.2}, {"name": "3-1", "club_name": "3-1 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 12.4}, {"name": "3-2", "club_name": "3-2 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 19.7}, {"name": "3-3", "club_name": "3-3 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.3, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.6, "top": 36.0}, {"name": "탈의실", "club_name": "탈의실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 78.3, "top": 45.8}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 75.8, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.4, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 23.6, "top": 33.2}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.9, "top": 35.2}], "3": [{"name": "1-4", "club_name": "창연회", "emoji": "🙈", "club_id": 11, "club_ids": null, "has_booth": true, "left": 96.5, "top": 58.1}, {"name": "1-5", "club_name": "잡지식", "emoji": "🪄", "club_id": 18, "club_ids": null, "has_booth": true, "left": 86.4, "top": 58.1}, {"name": "1-6", "club_name": "유아트(무당집)", "emoji": "⛩️", "club_id": 22, "club_ids": null, "has_booth": true, "left": 50.6, "top": 54.5}, {"name": "1-7", "club_name": "유아트(무당집)", "emoji": "⛩️", "club_id": 22, "club_ids": null, "has_booth": true, "left": 50.6, "top": 61.7}, {"name": "1-8", "club_name": "필름메이커스", "emoji": "🍿", "club_id": 17, "club_ids": null, "has_booth": true, "left": 50.6, "top": 69.0}, {"name": "1-9", "club_name": "1-9 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 50.6, "top": 76.3}, {"name": "1-10", "club_name": "또래상담부", "emoji": "💌", "club_id": 10, "club_ids": null, "has_booth": true, "left": 50.6, "top": 83.0}, {"name": "3-10", "club_name": "3-10 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 44.6, "top": 33.8}, {"name": "3-9", "club_name": "3-9 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 35.6, "top": 34.2}, {"name": "3-6", "club_name": "3-6 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 12.4}, {"name": "3-7", "club_name": "3-7 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 19.7}, {"name": "3-8", "club_name": "3-8 교실", "emoji": "🏫", "club_id": null, "club_ids": null, "has_booth": false, "left": 8.8, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 86.9, "top": 36.0}, {"name": "탈의실", "club_name": "탈의실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 79.2, "top": 45.8}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 77.0, "top": 87.1}, {"name": "교무실", "club_name": "교무실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 51.0, "top": 48.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 32.5, "top": 26.9}, {"name": "상담실", "club_name": "상담실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 28.9, "top": 33.2}], "2": [{"name": "강당(운양관)", "club_name": "러쉬온미 · 체대입시 · 플라잉셔틀즈", "emoji": "💃", "club_id": null, "club_ids": [25, 26, 27], "has_booth": true, "left": 76.3, "top": 18.6}, {"name": "기술가정실", "club_name": "베이킹메이킹(크로플)", "emoji": "🧇", "club_id": 8, "club_ids": null, "has_booth": true, "left": 76.8, "top": 45.7}, {"name": "청운관(학습실)", "club_name": "청운관", "emoji": "📖", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.8, "top": 57.6}, {"name": "방송실", "club_name": "소나기(귀신의집/노래방)", "emoji": "🎤", "club_id": 23, "club_ids": null, "has_booth": true, "left": 40.7, "top": 57.1}, {"name": "도서관", "club_name": "도서관사람들(책팟)", "emoji": "🎰", "club_id": 15, "club_ids": null, "has_booth": true, "left": 24.7, "top": 33.7}, {"name": "컴퓨터실", "club_name": "알고리즘", "emoji": "🏎️", "club_id": 14, "club_ids": null, "has_booth": true, "left": 9.4, "top": 13.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 66.4, "top": 36.0}, {"name": "E/V", "club_name": "E/V", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 50.4}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 58.1}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 64.3, "top": 87.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 21.7, "top": 26.9}], "1": [{"name": "매점(운수대통)", "club_name": "운수대통 매점", "emoji": "🏪", "club_id": null, "club_ids": null, "has_booth": false, "left": 83.0, "top": 48.6}, {"name": "급식소", "club_name": "급식소", "emoji": "🍱", "club_id": null, "club_ids": null, "has_booth": false, "left": 82.6, "top": 17.1}, {"name": "음악실", "club_name": "밴드부", "emoji": "🎸", "club_id": 28, "club_ids": null, "has_booth": true, "left": 31.3, "top": 33.7}, {"name": "시청각실", "club_name": "시퀀스(연극)", "emoji": "🎭", "club_id": 29, "club_ids": null, "has_booth": true, "left": 12.2, "top": 17.4}, {"name": "운동장", "club_name": "슬램덩크(농구부)", "emoji": "🏀", "club_id": 30, "club_ids": null, "has_booth": true, "left": 12.8, "top": 67.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 28.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 31.9}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 80.3, "top": 36.0}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 82.4, "top": 58.1}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 74.4, "top": 77.6}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 74.4, "top": 81.3}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 78.2, "top": 87.1}, {"name": "행정실", "club_name": "행정실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 58.3, "top": 53.1}, {"name": "보건실", "club_name": "보건실", "emoji": "🚪", "club_id": null, "club_ids": null, "has_booth": false, "left": 57.7, "top": 75.3}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 33.4, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 33.4, "top": 22.8}, {"name": "계단", "club_name": "계단", "emoji": "🪜", "club_id": null, "club_ids": null, "has_booth": false, "left": 31.3, "top": 26.9}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.1, "top": 19.2}, {"name": "화장실", "club_name": "화장실", "emoji": "🚻", "club_id": null, "club_ids": null, "has_booth": false, "left": 27.1, "top": 22.8}]};
+    // 각 층별 신규 생성된 모바일 최적화 SVG 도면
+    const SVG_FLOORS = {
+      1: `<svg viewBox="0 0 380 520" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background / Corridor -->
+          <rect x="10" y="10" width="360" height="500" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- 실외: 상단 운동장 / 야외 농구장 -->
+          <g class="svg-room booth" onclick="openBoothById(30)">
+            <rect x="25" y="25" width="330" height="75" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="190" y="52" text-anchor="middle" font-size="14" font-weight="800" fill="#166534">🏀 운동장 / 농구장</text>
+            <text x="190" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">슬램덩크 (농구부 체험 &amp; 1:1)</text>
+          </g>
+
+          <!-- 중앙 복도 라벨 -->
+          <rect x="160" y="110" width="60" height="26" rx="6" fill="#e2e8f0"/>
+          <text x="190" y="127" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">중앙통로</text>
+
+          <!-- 좌측 날개 (공연 및 시청각 구역) -->
+          <!-- 시청각실 (상단 좌측) -->
+          <g class="svg-room booth" onclick="openBoothById(29)">
+            <rect x="25" y="145" width="150" height="150" rx="10" fill="#ede9fe" stroke="#6366f1" stroke-width="2"/>
+            <text x="100" y="200" text-anchor="middle" font-size="14" font-weight="900" fill="#312e81">🎭 시청각실</text>
+            <text x="100" y="224" text-anchor="middle" font-size="12" font-weight="800" fill="#4f46e5">시퀀스 (연극)</text>
+            <text x="100" y="244" text-anchor="middle" font-size="10" font-weight="600" fill="#6366f1">〈20세기 소녀〉 상연</text>
+          </g>
+
+          <!-- 음악실 (하단 좌측) -->
+          <g class="svg-room booth" onclick="openBoothById(28)">
+            <rect x="25" y="310" width="150" height="150" rx="10" fill="#ede9fe" stroke="#6366f1" stroke-width="2"/>
+            <text x="100" y="365" text-anchor="middle" font-size="14" font-weight="900" fill="#312e81">🎸 음악실</text>
+            <text x="100" y="389" text-anchor="middle" font-size="12" font-weight="800" fill="#4f46e5">밴드부</text>
+            <text x="100" y="409" text-anchor="middle" font-size="10" font-weight="600" fill="#6366f1">라이브 락 콘서트</text>
+          </g>
+
+          <!-- 우측 날개 (편의 & 복지 구역) -->
+          <!-- 매점 (운수대통) -->
+          <g class="svg-room facility" onclick="openFacilityModal('매점(운수대통)', '학생 매점 및 스낵 코너')">
+            <rect x="205" y="145" width="150" height="85" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="280" y="182" text-anchor="middle" font-size="13" font-weight="800" fill="#92400e">🏪 매점 (운수대통)</text>
+            <text x="280" y="202" text-anchor="middle" font-size="10" font-weight="600" fill="#b45309">음료 &amp; 간식 판매</text>
+          </g>
+
+          <!-- 급식소 -->
+          <g class="svg-room facility" onclick="openFacilityModal('급식소 (식당)', '점심 식사 및 휴게 공간')">
+            <rect x="205" y="240" width="150" height="95" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="280" y="285" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">🍱 급식소</text>
+            <text x="280" y="305" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">점심 식사 (11:30~13:00)</text>
+          </g>
+
+          <!-- 행정실 & 보건실 -->
+          <g class="svg-room facility" onclick="openFacilityModal('보건실 &amp; 행정실', '응급 처치 및 학교 본부 행정실')">
+            <rect x="205" y="345" width="150" height="115" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="280" y="390" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">🏥 보건실 / 행정실</text>
+            <text x="280" y="410" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">응급 처치 / 교장실</text>
+            <text x="280" y="432" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">🚪 중앙 현관 출입구</text>
+          </g>
+
+          <!-- 중앙 계단 및 화장실 핀 -->
+          <rect x="25" y="470" width="330" height="30" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="489" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 1층 남/여 화장실  •  🪜 중앙 계단 &amp; E/V</text>
+        </svg>`,
+      2: `<svg viewBox="0 0 380 540" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="520" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- 상단: 대강당 (운양관) 메인 공연 & 체육존 -->
+          <g class="svg-room booth" onclick="openMultiBooths([25, 26, 27], '대강당 (운양관)')">
+            <rect x="25" y="25" width="330" height="120" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2"/>
+            <text x="190" y="58" text-anchor="middle" font-size="15" font-weight="900" fill="#312e81">🏛️ 대강당 (운양관)</text>
+            <text x="190" y="82" text-anchor="middle" font-size="12" font-weight="800" fill="#4338ca">💃 러쉬온미 (K-POP 댄스 공연)</text>
+            <text x="190" y="102" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">🏋️ 체대입시부  •  🏸 플라잉셔틀즈</text>
+            <text x="190" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#6366f1">(터치 시 3개 동아리 상세 소개)</text>
+          </g>
+
+          <!-- 중단 복도 -->
+          <rect x="150" y="155" width="80" height="24" rx="6" fill="#e2e8f0"/>
+          <text x="190" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">2층 중앙복도</text>
+
+          <!-- 중단 좌측: 기술가정실 -->
+          <g class="svg-room booth" onclick="openBoothById(8)">
+            <rect x="25" y="188" width="155" height="90" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="102" y="222" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🧇 기술가정실</text>
+            <text x="102" y="244" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">베이킹메이킹</text>
+            <text x="102" y="262" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">수제 크로플 만들기</text>
+          </g>
+
+          <!-- 중단 우측: 청운관 -->
+          <g class="svg-room facility" onclick="openFacilityModal('청운관 (학습실)', '자기주도학습실 및 축제 쉼터 공간')">
+            <rect x="200" y="188" width="155" height="90" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="277" y="226" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">📖 청운관</text>
+            <text x="277" y="248" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">자기주도학습실</text>
+            <text x="277" y="266" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">휴게 및 대기실</text>
+          </g>
+
+          <!-- 하단 좌측: 컴퓨터실 -->
+          <g class="svg-room booth" onclick="openBoothById(14)">
+            <rect x="25" y="288" width="155" height="95" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="102" y="324" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🏎️ 컴퓨터실</text>
+            <text x="102" y="346" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">알고리즘</text>
+            <text x="102" y="364" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">코딩 미니게임 &amp; 레이싱</text>
+          </g>
+
+          <!-- 하단 우측: 방송실 -->
+          <g class="svg-room booth" onclick="openBoothById(23)">
+            <rect x="200" y="288" width="155" height="95" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+            <text x="277" y="324" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🎤 방송실</text>
+            <text x="277" y="346" text-anchor="middle" font-size="12" font-weight="800" fill="#db2777">소나기 (방송부)</text>
+            <text x="277" y="364" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">귀신의 집 &amp; 노래방</text>
+          </g>
+
+          <!-- 최하단: 도서관 & 교무센터 -->
+          <!-- 도서관 -->
+          <g class="svg-room booth" onclick="openBoothById(15)">
+            <rect x="25" y="393" width="200" height="85" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="125" y="428" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🎰 도서관</text>
+            <text x="125" y="449" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">도서관사람들 〈책팟〉</text>
+            <text x="125" y="466" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">슬롯머신 &amp; 주사위 게임존</text>
+          </g>
+
+          <!-- 교무센터 -->
+          <g class="svg-room facility" onclick="openFacilityModal('교무센터 / 전산실', '교무 지원 및 전산실')">
+            <rect x="235" y="393" width="120" height="85" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="295" y="434" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">교무센터</text>
+            <text x="295" y="454" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">전산실/교무실</text>
+          </g>
+
+          <!-- 계단 및 화장실 바 -->
+          <rect x="25" y="490" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="508" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 2층 남/여 화장실  •  🪜 중앙/서측 계단 &amp; E/V</text>
+        </svg>`,
+      3: `<svg viewBox="0 0 380 560" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="540" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- 상단 헤더 라벨 -->
+          <rect x="25" y="22" width="330" height="26" rx="6" fill="#e0e7ff"/>
+          <text x="190" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="#3730a3">📍 3층 북측 1학년 특별 테마 교실</text>
+
+          <!-- 1-4 (창연회) & 1-5 (잡지식) -->
+          <g class="svg-room booth" onclick="openBoothById(11)">
+            <rect x="25" y="56" width="158" height="85" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="104" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🙈 1-4 교실</text>
+            <text x="104" y="109" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">창연회</text>
+            <text x="104" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">블라인드 소개팅</text>
+          </g>
+
+          <g class="svg-room booth" onclick="openBoothById(18)">
+            <rect x="197" y="56" width="158" height="85" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="276" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🪄 1-5 교실</text>
+            <text x="276" y="109" text-anchor="middle" font-size="12" font-weight="800" fill="#d97706">잡지식</text>
+            <text x="276" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="#b45309">해리포터 감성포토존</text>
+          </g>
+
+          <!-- 1학년 동편 복도 구역 헤더 -->
+          <rect x="25" y="152" width="330" height="26" rx="6" fill="#fce7f3"/>
+          <text x="190" y="169" text-anchor="middle" font-size="11" font-weight="800" fill="#9d174d">⛩️ 3층 동측 복도 (공포 방탈출 &amp; 시네마 &amp; 심리존)</text>
+
+          <!-- 1-6 & 1-7 유아트 (무당집 방탈출) -->
+          <g class="svg-room booth" onclick="openBoothById(22)">
+            <rect x="25" y="186" width="330" height="75" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+            <text x="190" y="214" text-anchor="middle" font-size="14" font-weight="900" fill="#831843">⛩️ 1-6 · 1-7 교실 (유아트)</text>
+            <text x="190" y="235" text-anchor="middle" font-size="12" font-weight="800" fill="#db2777">〈무당집 괴담 방탈출〉 (2개 교실 통합 운영)</text>
+            <text x="190" y="250" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">특수미술 &amp; 음향 리얼 공포 테마</text>
+          </g>
+
+          <!-- 1-8 (필름메이커스) & 1-10 (또래상담부) -->
+          <g class="svg-room booth" onclick="openBoothById(17)">
+            <rect x="25" y="271" width="158" height="85" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="104" y="303" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🍿 1-8 교실</text>
+            <text x="104" y="324" text-anchor="middle" font-size="12" font-weight="800" fill="#d97706">필름메이커스</text>
+            <text x="104" y="341" text-anchor="middle" font-size="10" font-weight="600" fill="#b45309">단편 영화 상영관</text>
+          </g>
+
+          <g class="svg-room booth" onclick="openBoothById(10)">
+            <rect x="197" y="271" width="158" height="85" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="276" y="303" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">💌 1-10 교실</text>
+            <text x="276" y="324" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">또래상담부</text>
+            <text x="276" y="341" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">MBTI 커플 심리상담</text>
+          </g>
+
+          <!-- 일반 교실 및 교무 구역 헤더 -->
+          <rect x="25" y="368" width="330" height="24" rx="6" fill="#f1f5f9"/>
+          <text x="190" y="384" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🏫 3학년 일반 교실 &amp; 교무실</text>
+
+          <g class="svg-room facility" onclick="openFacilityModal('1학년 교무실 &amp; 3학년 교실', '1학년 교무실 및 3학년(3-6~3-10) 일반 교실')">
+            <rect x="25" y="398" width="158" height="75" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="104" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">1학년 교무실</text>
+            <text x="104" y="452" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">1-9 일반교실</text>
+          </g>
+
+          <g class="svg-room facility" onclick="openFacilityModal('3학년 교실 구역', '3-6, 3-7, 3-8, 3-9, 3-10 일반 교실')">
+            <rect x="197" y="398" width="158" height="75" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="276" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">3-6 ~ 3-10 교실</text>
+            <text x="276" y="452" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">인문사회부</text>
+          </g>
+
+          <!-- 계단 및 화장실 바 -->
+          <rect x="25" y="488" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="506" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 3층 남/여 화장실  •  🪜 양측 계단 &amp; 홈베이스</text>
+        </svg>`,
+      4: `<svg viewBox="0 0 380 560" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="540" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- 상단: 첨단 과학실험 구역 헤더 -->
+          <rect x="25" y="22" width="330" height="26" rx="6" fill="#dbeafe"/>
+          <text x="190" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="#1e40af">🧪 4층 북측 첨단 과학실험실 (화학 &amp; 생물)</text>
+
+          <!-- 화학실 (2개 부스 통합) -->
+          <g class="svg-room booth" onclick="openMultiBooths([2, 4], '화학실')">
+            <rect x="25" y="56" width="158" height="95" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="104" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🧋 화학실</text>
+            <text x="104" y="108" text-anchor="middle" font-size="11" font-weight="800" fill="#2563eb">시너지 (팝핑보바)</text>
+            <text x="104" y="125" text-anchor="middle" font-size="11" font-weight="800" fill="#4338ca">생명보험 (은하수에이드)</text>
+            <text x="104" y="141" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6">(터치 시 2개 부스 상세 보기)</text>
+          </g>
+
+          <!-- 생물실 (2개 부스 통합) -->
+          <g class="svg-room booth" onclick="openMultiBooths([3, 6], '생물실')">
+            <rect x="197" y="56" width="158" height="95" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="276" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🐟 생물실</text>
+            <text x="276" y="108" text-anchor="middle" font-size="11" font-weight="800" fill="#2563eb">아스클 (달고나/붕어빵)</text>
+            <text x="276" y="125" text-anchor="middle" font-size="11" font-weight="800" fill="#4338ca">화생방 (천연비누 DIY)</text>
+            <text x="276" y="141" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6">(터치 시 2개 부스 상세 보기)</text>
+          </g>
+
+          <!-- 중단: 물리 & 지구과학 & 추리존 헤더 -->
+          <rect x="25" y="162" width="330" height="26" rx="6" fill="#e0e7ff"/>
+          <text x="190" y="179" text-anchor="middle" font-size="11" font-weight="800" fill="#3730a3">🍹 4층 동측 실험실 &amp; 추리수사존</text>
+
+          <!-- 물리실 (스파크) -->
+          <g class="svg-room booth" onclick="openBoothById(1)">
+            <rect x="25" y="196" width="158" height="85" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="104" y="228" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🍹 물리실</text>
+            <text x="104" y="249" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">스파크</text>
+            <text x="104" y="266" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">과학 무알콜 칵테일 바</text>
+          </g>
+
+          <!-- 과학실험실 (지구과학 - 멘날바) -->
+          <g class="svg-room booth" onclick="openBoothById(5)">
+            <rect x="197" y="196" width="158" height="85" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="276" y="228" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🌭 지구과학실</text>
+            <text x="276" y="249" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">멘날바</text>
+            <text x="276" y="266" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">상태변화 관찰 &amp; 핫도그</text>
+          </g>
+
+          <!-- 1-3 (교지편집부 유물추리) -->
+          <g class="svg-room booth" onclick="openBoothById(24)">
+            <rect x="25" y="291" width="330" height="75" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+            <text x="190" y="322" text-anchor="middle" font-size="14" font-weight="900" fill="#831843">🏺 1-3 교실 (교지편집부)</text>
+            <text x="190" y="343" text-anchor="middle" font-size="12" font-weight="800" fill="#db2777">〈박물관 유물 도난 사건 진범 검거 추리 게임〉</text>
+            <text x="190" y="358" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">단서 수집 &amp; 암호 해독</text>
+          </g>
+
+          <!-- 하단: 3학년 일반교실 및 교무실 -->
+          <rect x="25" y="378" width="330" height="24" rx="6" fill="#f1f5f9"/>
+          <text x="190" y="394" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🏫 3학년 교실 (3-1 ~ 3-5) &amp; 학생자치부</text>
+
+          <g class="svg-room facility" onclick="openFacilityModal('학생자치부 &amp; 3학년 교무실', '학생자치부 운영본부 및 3학년 교무실')">
+            <rect x="25" y="408" width="158" height="68" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="104" y="438" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">학생자치부 본부</text>
+            <text x="104" y="457" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">3학년 교무실</text>
+          </g>
+
+          <g class="svg-room facility" onclick="openFacilityModal('3학년 교실 (3-1 ~ 3-5)', '3학년 1반부터 5반까지의 일반 교실')">
+            <rect x="197" y="408" width="158" height="68" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="276" y="438" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">3-1 ~ 3-5 교실</text>
+            <text x="276" y="457" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">홈베이스 휴게공간</text>
+          </g>
+
+          <!-- 계단 및 화장실 바 -->
+          <rect x="25" y="488" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="506" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 4층 남/여 화장실  •  🪜 양측 계단 &amp; 탈의실</text>
+        </svg>`,
+      5: `<svg viewBox="0 0 380 620" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="600" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- 상단 헤더: 미술실 & 1-1 -->
+          <rect x="25" y="22" width="330" height="26" rx="6" fill="#fce7f3"/>
+          <text x="190" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="#9d174d">👻 5층 북측 미술실 &amp; 공포 방탈출 구역</text>
+
+          <!-- 1-1 경영위키 (방탈출) -->
+          <g class="svg-room booth" onclick="openBoothById(20)">
+            <rect x="25" y="56" width="158" height="85" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+            <text x="104" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">👻 1-1 교실</text>
+            <text x="104" y="109" text-anchor="middle" font-size="12" font-weight="800" fill="#db2777">경영위키</text>
+            <text x="104" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">공포의 암실 방탈출</text>
+          </g>
+
+          <!-- 미술실 & wee클래스 -->
+          <g class="svg-room facility" onclick="openFacilityModal('미술실 &amp; wee클래스', '학생 미술 작품 전시 및 wee클래스 상담실')">
+            <rect x="197" y="56" width="158" height="85" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="276" y="88" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">🎨 미술실</text>
+            <text x="276" y="109" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">미술작품 상설 전시</text>
+            <text x="276" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">wee클래스 상담실</text>
+          </g>
+
+          <!-- 2학년 동편 복도 헤더 -->
+          <rect x="25" y="152" width="330" height="26" rx="6" fill="#dbeafe"/>
+          <text x="190" y="169" text-anchor="middle" font-size="11" font-weight="800" fill="#1e40af">🎪 2학년 동편 복도 (뷰티 · 쿠키 · 메이드카페)</text>
+
+          <!-- 2-7 에끌라 -->
+          <g class="svg-room booth" onclick="openBoothById(12)">
+            <rect x="25" y="186" width="105" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="77" y="218" text-anchor="middle" font-size="12" font-weight="900" fill="#1e3a8a">💅 2-7</text>
+            <text x="77" y="238" text-anchor="middle" font-size="11" font-weight="800" fill="#2563eb">에끌라</text>
+            <text x="77" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6">네일 &amp; 분장</text>
+          </g>
+
+          <!-- 2-8 글로톡 -->
+          <g class="svg-room booth" onclick="openBoothById(16)">
+            <rect x="137" y="186" width="105" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="189" y="218" text-anchor="middle" font-size="12" font-weight="900" fill="#1e3a8a">🍪 2-8</text>
+            <text x="189" y="238" text-anchor="middle" font-size="11" font-weight="800" fill="#2563eb">글로톡</text>
+            <text x="189" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6">타투 &amp; 쿠키</text>
+          </g>
+
+          <!-- 2-9 축구부 -->
+          <g class="svg-room booth" onclick="openBoothById(9)">
+            <rect x="250" y="186" width="105" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="302" y="218" text-anchor="middle" font-size="12" font-weight="900" fill="#1e3a8a">☕ 2-9</text>
+            <text x="302" y="238" text-anchor="middle" font-size="11" font-weight="800" fill="#2563eb">축구부</text>
+            <text x="302" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#3b82f6">메이드 카페</text>
+          </g>
+
+          <!-- 2학년 서편 복도 헤더 -->
+          <rect x="25" y="288" width="330" height="26" rx="6" fill="#fef3c7"/>
+          <text x="190" y="305" text-anchor="middle" font-size="11" font-weight="800" fill="#92400e">🏮 2학년 서편 복도 (문화예술 · 추리수사 · 철학)</text>
+
+          <!-- 2-1 & 2-2 애그부 (마츠리 포토존) -->
+          <g class="svg-room booth" onclick="openBoothById(19)">
+            <rect x="25" y="322" width="330" height="70" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="190" y="350" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🏮 2-1 · 2-2 교실 (애그부)</text>
+            <text x="190" y="370" text-anchor="middle" font-size="12" font-weight="800" fill="#d97706">일본 여름 마츠리 축제풍 감성 포토부스 &amp; 일러스트전</text>
+          </g>
+
+          <!-- 2-3 교집합 & 2-4 블루라인 -->
+          <g class="svg-room booth" onclick="openBoothById(13)">
+            <rect x="25" y="400" width="158" height="80" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="104" y="430" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🎁 2-3 교실</text>
+            <text x="104" y="450" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">교집합</text>
+            <text x="104" y="466" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">스피드 퀴즈 배틀</text>
+          </g>
+
+          <g class="svg-room booth" onclick="openBoothById(21)">
+            <rect x="197" y="400" width="158" height="80" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+            <text x="276" y="430" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🕵️ 2-4 교실</text>
+            <text x="276" y="450" text-anchor="middle" font-size="12" font-weight="800" fill="#db2777">블루라인</text>
+            <text x="276" y="466" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">살인사건 과학수사 추리</text>
+          </g>
+
+          <!-- 2-5 소프라테스 & 교무실 -->
+          <g class="svg-room booth" onclick="openBoothById(7)">
+            <rect x="25" y="488" width="158" height="75" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+            <text x="104" y="518" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">💘 2-5 교실</text>
+            <text x="104" y="538" text-anchor="middle" font-size="12" font-weight="800" fill="#2563eb">소프라테스</text>
+            <text x="104" y="553" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">운명적 철학 소개팅</text>
+          </g>
+
+          <g class="svg-room facility" onclick="openFacilityModal('2학년 교무실 &amp; 교육과정부', '2학년 교무실 및 교육연구부')">
+            <rect x="197" y="488" width="158" height="75" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="276" y="522" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">2학년 교무실</text>
+            <text x="276" y="542" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">교육과정부/연구부</text>
+          </g>
+
+          <!-- 계단 및 화장실 바 -->
+          <rect x="25" y="575" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="593" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 5층 남/여 화장실  •  🪜 양측 계단 &amp; 홈베이스</text>
+        </svg>`
+    };
 
     // 네비게이션 전환
     function navigateTo(viewName) {
@@ -730,7 +1066,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (viewName === 'map') {
-        selectFloor(1); // 기본 1층
+        selectFloor(1); // 1층부터 시작
       }
     }
 
@@ -744,43 +1080,52 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 90도 회전된 실제 도면 + 정방향(가로) 텍스트 라벨 렌더링
+    // 층 선택 및 SVG 렌더링
     function selectFloor(floorNum) {
       document.querySelectorAll('.floor-tab-btn').forEach(b => {
         if (b.innerText.includes(floorNum + '층')) b.classList.add('active');
         else b.classList.remove('active');
       });
 
-      document.getElementById('floorTitle').innerText = floorNum + '층 실제 배치도 지도';
+      document.getElementById('floorTitle').innerText = floorNum + '층 교실 배치도 지도';
+      const container = document.getElementById('svgMapContainer');
+      container.innerHTML = SVG_FLOORS[floorNum] || '<div style="padding:40px; text-align:center;">도면을 준비 중입니다.</div>';
+    }
 
-      const container = document.getElementById('verticalMapContainer');
-      const imgSrc = `floor_clean_vertical_${floorNum}.png`;
+    // 단일 부스 모달 열기
+    function openBoothById(boothId) {
+      const b = BOOTHS.find(x => x.id === boothId);
+      if (b) openBoothModal(b);
+    }
 
-      // 핫스팟 필터링 (가로 방향으로 읽기 쉬운 정방향 라벨)
-      const labels = FLOOR_LABELS[floorNum] || [];
+    // 복합 부스 모달 열기 (강당, 화학실, 생물실 등)
+    function openMultiBooths(idList, roomName) {
+      const matched = BOOTHS.filter(x => idList.includes(x.id));
+      if (matched.length > 0) {
+        document.getElementById('mEmoji').innerText = '🎪';
+        document.getElementById('mTitle').innerText = roomName;
+        document.getElementById('mFloor').innerText = '🏛️ ' + matched[0].floor + '층';
+        document.getElementById('mRoom').innerText = '📍 ' + roomName;
+        document.getElementById('mGenre').innerText = '🎪 ' + matched.map(m => m.name).join(' · ');
 
-      let spotsHtml = '';
-      labels.forEach(h => {
-        const hasBooth = h.has_booth;
-        const cls = hasBooth ? 'map-hotspot booth' : 'map-hotspot facility';
-        const label = hasBooth ? h.club_name : h.name;
-        const emoji = h.emoji ? h.emoji + ' ' : '';
-        const cid = h.club_id || '';
-        const cids = h.club_ids ? h.club_ids.join(',') : '';
-        const rm = h.name.replace(/'/g, "\'");
+        let fullDesc = '';
+        matched.forEach(m => {
+          fullDesc += '【' + m.emoji + ' ' + m.name + ' (' + m.cat + ')】\n' + m.desc + '\n\n';
+        });
+        document.getElementById('mDesc').innerText = fullDesc.trim();
+        document.getElementById('detailModal').classList.add('active');
+      }
+    }
 
-        spotsHtml += `
-          <div class="${cls}" style="left: ${h.left}%; top: ${h.top}%;"
-               onclick="openRoomModal('${rm}', '${cid}', '${cids}')">
-            <span>${emoji}${label}</span>
-          </div>
-        `;
-      });
-
-      container.innerHTML = `
-        <img class="vertical-map-img" src="${imgSrc}" alt="${floorNum}층 실제 배치도" />
-        ${spotsHtml}
-      `;
+    // 일반 편의시설 모달
+    function openFacilityModal(name, desc) {
+      document.getElementById('mEmoji').innerText = '🏫';
+      document.getElementById('mTitle').innerText = name;
+      document.getElementById('mFloor').innerText = '🏛️ 학교 시설';
+      document.getElementById('mRoom').innerText = '📍 ' + name;
+      document.getElementById('mGenre').innerText = '편의 및 관리 공간';
+      document.getElementById('mDesc').innerText = desc + ' 안내 공간입니다. 본 장소는 동아리 부스 운영 장소가 아니거나 휴게 및 안전 관리를 위해 사용됩니다.';
+      document.getElementById('detailModal').classList.add('active');
     }
 
     function openBoothModal(b) {
@@ -790,40 +1135,6 @@
       document.getElementById('mRoom').innerText = '📍 ' + b.room;
       document.getElementById('mGenre').innerText = '🎪 ' + b.cat;
       document.getElementById('mDesc').innerText = b.desc;
-      document.getElementById('detailModal').classList.add('active');
-    }
-
-    function openRoomModal(roomName, cid, cids) {
-      if (cid) {
-        const b = BOOTHS.find(x => x.id === parseInt(cid));
-        if (b) { openBoothModal(b); return; }
-      }
-      if (cids) {
-        const idList = cids.split(',').map(x => parseInt(x));
-        const matched = BOOTHS.filter(x => idList.includes(x.id));
-        if (matched.length > 0) {
-          document.getElementById('mEmoji').innerText = '🎪';
-          document.getElementById('mTitle').innerText = roomName;
-          document.getElementById('mFloor').innerText = '🏛️ ' + matched[0].floor + '층';
-          document.getElementById('mRoom').innerText = '📍 ' + roomName;
-          document.getElementById('mGenre').innerText = '🎪 ' + matched.map(m => m.name).join(' · ');
-
-          let fullDesc = '';
-          matched.forEach(m => {
-            fullDesc += '【' + m.emoji + ' ' + m.name + ' (' + m.cat + ')】\n' + m.desc + '\n\n';
-          });
-          document.getElementById('mDesc').innerText = fullDesc.trim();
-          document.getElementById('detailModal').classList.add('active');
-          return;
-        }
-      }
-      // 일반 시설
-      document.getElementById('mEmoji').innerText = '🏫';
-      document.getElementById('mTitle').innerText = roomName;
-      document.getElementById('mFloor').innerText = '🏛️ 학교 시설';
-      document.getElementById('mRoom').innerText = '📍 운양고등학교';
-      document.getElementById('mGenre').innerText = '일반 교실 및 편의 공간';
-      document.getElementById('mDesc').innerText = roomName + ' 공간입니다. 본 공간은 축제 부스 운영 공간이 아니거나 휴게 및 교무 관리 공간으로 사용됩니다.';
       document.getElementById('detailModal').classList.add('active');
     }
 
