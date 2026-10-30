@@ -220,7 +220,7 @@
     }
 
     /* ============================================================
-       1. 🗺️ 지도로 보기: 반응형 벡터 SVG 세로형 도면
+       1. 🏢 층별로 보기: 반응형 벡터 SVG 세로형 도면
        ============================================================ */
     #view-map { display: none; }
     .floor-tabs {
@@ -599,7 +599,7 @@
 
     <!-- Global 4-Tab Navigation Bar (Always visible in all sub-views) -->
     <nav class="global-nav" id="globalNav">
-      <button class="nav-tab-btn" id="nav-btn-map" onclick="switchNav('map')">🗺️ 지도로 보기</button>
+      <button class="nav-tab-btn" id="nav-btn-map" onclick="switchNav('map')">🏢 층별로 보기</button>
       <button class="nav-tab-btn" id="nav-btn-genres" onclick="switchNav('genres')">🎪 장르별로 보기</button>
       <button class="nav-tab-btn" id="nav-btn-booths" onclick="switchNav('booths')">🏪 부스별로 보기</button>
       <button class="nav-tab-btn" id="nav-btn-schedule" onclick="switchNav('schedule')">⏰ 운영시간표</button>
@@ -618,10 +618,10 @@
       </div>
 
       <div class="home-menu-grid">
-        <!-- 1. 지도로 보기 -->
+        <!-- 1. 층별로 보기 -->
         <div class="home-menu-card highlight" onclick="navigateTo('map')">
           <div class="home-menu-icon">🗺️</div>
-          <div class="home-menu-title">지도로 보기</div>
+          <div class="home-menu-title">층별로 보기</div>
           <div class="home-menu-sub">1~5층 세로형 배치도</div>
         </div>
 
@@ -649,7 +649,7 @@
     </div>
 
     <!-- ============================================================
-         1. 🗺️ 지도로 보기 VIEW (세로형 스마트폰 맞춤 벡터 도면)
+         1. 🏢 층별로 보기 VIEW (세로형 스마트폰 맞춤 벡터 도면)
          ============================================================ -->
     <div id="view-map">
       <!-- 1층 ~ 5층 선택 탭 -->
