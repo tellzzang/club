@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>2026 운양고 동아리 발표회 모바일 가이드</title>
+  <title>2026 운양고 동아리 발표회 가이드</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <style>
@@ -11,15 +11,14 @@
       --primary: #4f46e5;
       --primary-dark: #3730a3;
       --primary-light: #e0e7ff;
-      --accent: #f59e0b;
-      --accent-pink: #ec4899;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --radius: 14px;
-      --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      --radius: 16px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.07);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -28,14 +27,14 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding-bottom: 70px;
+      padding-bottom: 40px;
     }
 
     /* Header */
     header {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
       color: white;
-      padding: 16px 20px 14px;
+      padding: 16px 20px;
       position: sticky;
       top: 0;
       z-index: 50;
@@ -46,211 +45,262 @@
       justify-content: space-between;
       align-items: center;
     }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
     .header-title {
       font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
     .header-badge {
       background: rgba(255, 255, 255, 0.2);
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 20px;
       font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    /* Top Navigation 4 Tabs */
-    .tab-bar {
-      display: flex;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      padding: 3px;
-      margin-top: 12px;
-      gap: 2px;
-    }
-    .tab-btn {
-      flex: 1;
-      padding: 9px 4px;
-      border: none;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.82rem;
       font-weight: 700;
-      border-radius: 9px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      white-space: nowrap;
-    }
-    .tab-btn.active {
-      background: #ffffff;
-      color: #312e81;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    /* Tab Content Panels */
-    .tab-content { display: none; padding: 16px; }
-    .tab-content.active { display: block; }
-
-    /* 1. 🗺️ 세로형 학교 배치도 지도 뷰어 스타일 */
-    .map-header-box {
-      background: linear-gradient(to right, #eff6ff, #eef2ff);
-      border: 1px solid #c7d2fe;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-      font-size: 0.83rem;
-      color: #3730a3;
-      display: flex;
+    /* Sub-header Bar (when in sub-views) */
+    .sub-bar {
+      display: none;
       align-items: center;
       justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
-    .map-header-box strong { font-weight: 800; }
-
-    /* Quick Floor Jump Bar */
-    .floor-nav {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-      scrollbar-width: none;
-    }
-    .floor-nav::-webkit-scrollbar { display: none; }
-    .floor-pill {
-      flex: 1;
-      min-width: 58px;
-      padding: 8px 6px;
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
+    .sub-bar.active { display: flex; }
+    .back-btn {
+      background: rgba(255, 255, 255, 0.18);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 700;
-      text-align: center;
       cursor: pointer;
-      color: #475569;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-      transition: all 0.15s;
-    }
-    .floor-pill:hover, .floor-pill.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
-    }
-
-    /* Vertical Floor Plan Container (도면을 세로로 길게 1층~5층 스크롤) */
-    .vertical-map-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .floor-card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .floor-card-title {
-      padding: 12px 16px;
-      background: #f8fafc;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .floor-badge {
-      background: #312e81;
-      color: white;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 4px;
     }
-    .floor-summary {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    /* Horizontal Scroll Canvas for Map */
-    .floor-plan-viewport {
-      position: relative;
-      width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      background: #fafafa;
-      -webkit-overflow-scrolling: touch;
-    }
-    .floor-plan-inner {
-      position: relative;
-      width: 1100px; /* 도면을 선명하고 널찍하게 렌더링 */
-      min-width: 1100px;
-      line-height: 0;
-    }
-    .floor-plan-img {
-      width: 100%;
-      display: block;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Interactive Classroom Click Hotspots */
-    .room-hotspot {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.74rem;
+    .view-indicator {
+      font-size: 0.88rem;
       font-weight: 800;
+      color: #cbd5e1;
+    }
+
+    /* Main Container */
+    main {
+      padding: 18px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       HOME VIEW: 4개 메인 메뉴 선택 카드 (메인 화면에서 1개 선택)
+       ============================================================ */
+    #view-home { display: block; }
+    .hero-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+      border: 1px solid #c7d2fe;
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    .hero-emoji { font-size: 2.5rem; margin-bottom: 8px; }
+    .hero-title { font-size: 1.25rem; font-weight: 900; color: #1e1b4b; }
+    .hero-desc { font-size: 0.85rem; color: #4338ca; margin-top: 4px; font-weight: 600; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .menu-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 16px;
+      text-align: center;
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-card:active {
+      transform: scale(0.96);
+      background: #f8fafc;
+    }
+    .menu-card.highlight {
+      border-color: #818cf8;
+      background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15);
+    }
+    .menu-icon { font-size: 2.6rem; margin-bottom: 10px; }
+    .menu-title { font-size: 1.05rem; font-weight: 800; color: #0f172a; }
+    .menu-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
+
+    /* ============================================================
+       1. 🗺️ 세로형 교실 배치도 지도 뷰 (모바일 가로 스크롤 완전 0%)
+       ============================================================ */
+    #view-map { display: none; }
+
+    /* 1층 ~ 5층 선택 세그먼트 버튼 */
+    .floor-tabs {
+      display: flex;
+      background: #e2e8f0;
+      border-radius: 12px;
+      padding: 3px;
+      margin-bottom: 16px;
+      gap: 2px;
+    }
+    .floor-tab-btn {
+      flex: 1;
+      padding: 9px 0;
+      border: none;
+      background: transparent;
+      color: #475569;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .floor-tab-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* 세로형 평면도 컨테이너 */
+    .vertical-floor-plan {
+      background: white;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1.5px dashed var(--border);
+      margin-bottom: 16px;
+    }
+    .plan-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #1e1b4b;
       display: flex;
       align-items: center;
-      gap: 3px;
-      box-shadow: 0 2px 7px rgba(0,0,0,0.2);
-      white-space: nowrap;
+      gap: 6px;
+    }
+    .plan-notice {
+      font-size: 0.75rem;
+      color: #4338ca;
+      background: #eff6ff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* 학교 도면 존(Zone) 카드 - 세로 흐름 구조 */
+    .wing-block {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .wing-block:last-child { margin-bottom: 0; }
+    .wing-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #64748b;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+    }
+
+    .corridor-grid {
+      display: grid;
+      gap: 8px;
+    }
+    .corridor-grid.cols-1 { grid-template-columns: 1fr; }
+    .corridor-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .corridor-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    /* 교실 칸 (지도 내 교실 박스) */
+    .room-cell {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
       transition: all 0.15s ease;
-      z-index: 10;
-      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
     }
-    .room-hotspot.booth {
-      background: #4f46e5;
-      color: #ffffff;
-      border: 1.5px solid #ffffff;
-      animation: pulse 2.2s infinite;
+    .room-cell:active {
+      transform: scale(0.97);
     }
-    .room-hotspot.booth:hover, .room-hotspot.booth:active {
-      transform: translate(-50%, -50%) scale(1.15);
-      background: #e11d48;
-      z-index: 20;
+    .room-cell.booth {
+      border-color: #6366f1;
+      background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+      box-shadow: 0 2px 7px rgba(99, 102, 241, 0.18);
     }
-    .room-hotspot.facility {
-      background: rgba(255, 255, 255, 0.9);
+    .room-cell.booth:hover, .room-cell.booth:active {
+      border-color: #4338ca;
+      background: #e0e7ff;
+    }
+    .room-cell.facility {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #64748b;
+      cursor: default;
+    }
+
+    .room-number {
+      font-size: 0.78rem;
+      font-weight: 900;
       color: #334155;
-      border: 1px solid #cbd5e1;
-      font-weight: 600;
-      font-size: 0.68rem;
+    }
+    .room-cell.booth .room-number {
+      color: #312e81;
+    }
+    .room-club-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #4338ca;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6); }
-      70% { box-shadow: 0 0 0 7px rgba(79, 70, 229, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
-    }
-
-    /* 2. 🏪 부스별로 보기 (검색 + 카드 리스트) */
+    /* ============================================================
+       2. 🏪 부스별로 보기 뷰
+       ============================================================ */
+    #view-booths { display: none; }
     .search-box {
       margin-bottom: 14px;
       position: relative;
@@ -261,13 +311,10 @@
       border: 1.5px solid var(--border);
       border-radius: 12px;
       font-size: 0.9rem;
-      font-family: inherit;
       outline: none;
       background: white;
     }
-    .search-input:focus {
-      border-color: var(--primary);
-    }
+    .search-input:focus { border-color: var(--primary); }
     .search-icon {
       position: absolute;
       left: 14px;
@@ -286,15 +333,12 @@
       background: white;
       border-radius: var(--radius);
       padding: 14px 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
       cursor: pointer;
       transition: all 0.15s;
     }
-    .booth-card:active {
-      transform: scale(0.98);
-      background: #f1f5f9;
-    }
+    .booth-card:active { transform: scale(0.98); background: #f8fafc; }
     .booth-card-header {
       display: flex;
       justify-content: space-between;
@@ -304,7 +348,6 @@
     .booth-name {
       font-size: 1rem;
       font-weight: 800;
-      color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -320,10 +363,9 @@
     .tag-문화예술 { background: #fef3c7; color: #92400e; }
     .tag-공연 { background: #ede9fe; color: #5b21b6; }
     .tag-체육활동 { background: #dcfce7; color: #166534; }
-
-    .booth-location {
+    .booth-loc {
       font-size: 0.8rem;
-      color: #4f46e5;
+      color: var(--primary);
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -333,39 +375,46 @@
       line-height: 1.4;
     }
 
-    /* 3. 🎪 장르별로 보기 */
+    /* ============================================================
+       3. 🎪 장르별로 보기 뷰
+       ============================================================ */
+    #view-genres { display: none; }
     .genre-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
     }
-    .genre-cube {
+    .genre-chip {
       background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 6px;
       text-align: center;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: all 0.2s;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #334155;
+      transition: all 0.15s;
     }
-    .genre-cube.active {
+    .genre-chip.active {
+      background: var(--primary);
       border-color: var(--primary);
-      background: #eff6ff;
+      color: white;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
     }
-    .genre-icon { font-size: 2rem; margin-bottom: 6px; }
-    .genre-title { font-size: 0.95rem; font-weight: 800; }
-    .genre-count { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* 4. ⏰ 운영시간표 */
+    /* ============================================================
+       4. ⏰ 운영시간표 뷰
+       ============================================================ */
+    #view-schedule { display: none; }
     .schedule-card {
       background: white;
       border-radius: var(--radius);
       padding: 16px;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       margin-bottom: 14px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
     }
     .schedule-header {
       font-size: 0.95rem;
@@ -384,14 +433,11 @@
     }
     .time-slot:last-child { border-bottom: none; }
     .time-badge {
-      width: 85px;
+      width: 90px;
       font-weight: 800;
       color: #334155;
     }
-    .time-detail {
-      flex: 1;
-      color: var(--text-muted);
-    }
+    .time-detail { flex: 1; color: var(--text-muted); }
     .time-detail strong { color: var(--text); font-weight: 700; }
 
     /* Detail Modal Popup */
@@ -415,7 +461,6 @@
       padding: 24px 20px 30px;
       box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
       animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
     }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -474,415 +519,181 @@
 </head>
 <body>
 
-  <!-- Top Sticky Header -->
+  <!-- Header -->
   <header>
     <div class="header-top">
-      <div class="header-title">
-        🏫 운양고 2026 동아리 발표회
+      <div class="header-brand" onclick="goHome()">
+        <span style="font-size: 1.3rem;">🏫</span>
+        <div class="header-title">운양고 2026 동아리 발표회</div>
       </div>
-      <div class="header-badge">축제 종합안내</div>
+      <div class="header-badge">모바일 가이드</div>
     </div>
 
-    <!-- 4대 상단 탭 -->
-    <nav class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('map')">🗺️ 지도로 보기</button>
-      <button class="tab-btn" onclick="switchTab('booths')">🏪 부스별로 보기</button>
-      <button class="tab-btn" onclick="switchTab('genres')">🎪 장르별로 보기</button>
-      <button class="tab-btn" onclick="switchTab('schedule')">⏰ 운영시간표</button>
-    </nav>
+    <!-- Sub Navigation Bar (when inside sub-view) -->
+    <div class="sub-bar" id="subBar">
+      <button class="back-btn" onclick="goHome()">◀ 메인 메뉴</button>
+      <span class="view-indicator" id="viewIndicator">지도로 보기</span>
+    </div>
   </header>
 
-  <!-- 1. 🗺️ 지도로 보기 (실제 교실 배치도 평면도 세로 뷰어) -->
-  <div id="tab-map" class="tab-content active">
-    <div class="map-header-box">
-      <div>
-        <strong>📌 교실 배치도 지도 터치 안내</strong><br/>
-        교실 칸 안의 동아리명을 터치하면 즉시 소개 팝업이 열립니다.
+  <main>
+    <!-- ============================================================
+         HOME VIEW (메인 화면: 4개 메뉴 중 선택)
+         ============================================================ -->
+    <div id="view-home">
+      <div class="hero-banner">
+        <div class="hero-emoji">🎪✨</div>
+        <div class="hero-title">2026 운양 동아리 발표회</div>
+        <div class="hero-desc">원하는 메뉴를 터치하여 부스를 탐색해 보세요!</div>
+      </div>
+
+      <div class="menu-grid">
+        <!-- 1. 지도로 보기 -->
+        <div class="menu-card highlight" onclick="navigateTo('map')">
+          <div class="menu-icon">🗺️</div>
+          <div class="menu-title">지도로 보기</div>
+          <div class="menu-subtitle">1~5층 세로형 배치도</div>
+        </div>
+
+        <!-- 2. 부스별로 보기 -->
+        <div class="menu-card" onclick="navigateTo('booths')">
+          <div class="menu-icon">🏪</div>
+          <div class="menu-title">부스별로 보기</div>
+          <div class="menu-subtitle">30개 부스 전체 목록</div>
+        </div>
+
+        <!-- 3. 장르별로 보기 -->
+        <div class="menu-card" onclick="navigateTo('genres')">
+          <div class="menu-icon">🎪</div>
+          <div class="menu-title">장르별로 보기</div>
+          <div class="menu-subtitle">체험·방탈출·공연·체육</div>
+        </div>
+
+        <!-- 4. 운영시간표 -->
+        <div class="menu-card" onclick="navigateTo('schedule')">
+          <div class="menu-icon">⏰</div>
+          <div class="menu-title">운영시간표</div>
+          <div class="menu-subtitle">타임테이블 & 공연 일정</div>
+        </div>
       </div>
     </div>
 
-    <!-- 층별 점프 바로가기 버튼 -->
-    <div class="floor-nav">
-      <div class="floor-pill active" onclick="scrollToFloor(5)">5층</div>
-      <div class="floor-pill" onclick="scrollToFloor(4)">4층</div>
-      <div class="floor-pill" onclick="scrollToFloor(3)">3층</div>
-      <div class="floor-pill" onclick="scrollToFloor(2)">2층</div>
-      <div class="floor-pill" onclick="scrollToFloor(1)">1층</div>
-    </div>
-
-    <!-- 세로로 길게 배치된 실제 학교 도면 목록 (5층 -> 1층) -->
-    <div class="vertical-map-wrapper">
-
-      <div class="floor-card" id="floor-section-5">
-        <div class="floor-card-title">
-          <span class="floor-badge">🏛️ 5층</span>
-          <span class="floor-summary">1-1 · 2학년(2-1~2-10) · 미술실</span>
-        </div>
-        <div class="floor-plan-viewport">
-          <div class="floor-plan-inner">
-            <img class="floor-plan-img" src="floor_crop_5.png" alt="5층 도면" />
-
-            <div class="room-hotspot booth" style="left: 58.1%; top: 18.2%;"
-                 onclick="openRoomModal('1-1', '20', '')">
-              <span>👻 경영위키</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 58.1%; top: 27.9%;"
-                 onclick="openRoomModal('1-2', 'None', '')">
-              <span>1-2</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 46.7%; top: 24.5%;"
-                 onclick="openRoomModal('미술실', 'None', '')">
-              <span>미술실</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 34.2%; top: 60.7%;"
-                 onclick="openRoomModal('2-5', '7', '')">
-              <span>💘 소프라테스</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 34.2%; top: 70.8%;"
-                 onclick="openRoomModal('2-4', '21', '')">
-              <span>🕵️ 블루라인</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 54.5%; top: 60.7%;"
-                 onclick="openRoomModal('2-6', 'None', '')">
-              <span>2-6</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 61.7%; top: 60.7%;"
-                 onclick="openRoomModal('2-7', '12', '')">
-              <span>💅 에끌라</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 69.0%; top: 60.7%;"
-                 onclick="openRoomModal('2-8', '16', '')">
-              <span>🍪 글로톡</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 76.3%; top: 60.7%;"
-                 onclick="openRoomModal('2-9', '9', '')">
-              <span>☕ 축구부</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 83.0%; top: 60.7%;"
-                 onclick="openRoomModal('2-10', 'None', '')">
-              <span>2-10</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 12.4%; top: 92.3%;"
-                 onclick="openRoomModal('2-1', '19', '')">
-              <span>🏮 애그부</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 19.7%; top: 92.3%;"
-                 onclick="openRoomModal('2-2', '19', '')">
-              <span>🏮 애그부</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 26.9%; top: 92.3%;"
-                 onclick="openRoomModal('2-3', '13', '')">
-              <span>🎁 교집합</span>
-            </div>
-          </div>
-        </div>
+    <!-- ============================================================
+         1. 🗺️ 지도로 보기 VIEW (세로가 긴 층별 평면도, 가로 스크롤 X)
+         ============================================================ -->
+    <div id="view-map">
+      <!-- 1층 ~ 5층 선택 버튼 -->
+      <div class="floor-tabs">
+        <button class="floor-tab-btn" onclick="selectFloor(5)">5층</button>
+        <button class="floor-tab-btn" onclick="selectFloor(4)">4층</button>
+        <button class="floor-tab-btn" onclick="selectFloor(3)">3층</button>
+        <button class="floor-tab-btn" onclick="selectFloor(2)">2층</button>
+        <button class="floor-tab-btn active" onclick="selectFloor(1)">1층</button>
       </div>
 
-      <div class="floor-card" id="floor-section-4">
-        <div class="floor-card-title">
-          <span class="floor-badge">🏛️ 4층</span>
-          <span class="floor-summary">과학실(화학실·생물실·물리실·지구과학) · 1-3 · 3학년(3-1~3-5)</span>
-        </div>
-        <div class="floor-plan-viewport">
-          <div class="floor-plan-inner">
-            <img class="floor-plan-img" src="floor_crop_4.png" alt="4층 도면" />
-
-            <div class="room-hotspot booth" style="left: 46.4%; top: 10.8%;"
-                 onclick="openRoomModal('화학실', 'None', '2,4')">
-              <span>🧋 시너지 · 생명보험</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 57.4%; top: 10.8%;"
-                 onclick="openRoomModal('생물실', 'None', '3,6')">
-              <span>🐟 아스클 · 화생방</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 62.8%; top: 52.8%;"
-                 onclick="openRoomModal('물리실', '1', '')">
-              <span>🍹 스파크</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 77.1%; top: 55.0%;"
-                 onclick="openRoomModal('과학실험실(지구과학)', '5', '')">
-              <span>🌭 멘날바</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 54.5%; top: 53.1%;"
-                 onclick="openRoomModal('1-3', '24', '')">
-              <span>🏺 교지편집부</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 34.2%; top: 55.6%;"
-                 onclick="openRoomModal('3-5', 'None', '')">
-              <span>3-5</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 34.2%; top: 67.5%;"
-                 onclick="openRoomModal('3-4', 'None', '')">
-              <span>3-4</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 12.4%; top: 91.7%;"
-                 onclick="openRoomModal('3-1', 'None', '')">
-              <span>3-1</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 19.7%; top: 91.7%;"
-                 onclick="openRoomModal('3-2', 'None', '')">
-              <span>3-2</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 26.9%; top: 91.7%;"
-                 onclick="openRoomModal('3-3', 'None', '')">
-              <span>3-3</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="floor-card" id="floor-section-3">
-        <div class="floor-card-title">
-          <span class="floor-badge">🏛️ 3층</span>
-          <span class="floor-summary">1학년 교실(1-4~1-10) · 3학년(3-6~3-10)</span>
-        </div>
-        <div class="floor-plan-viewport">
-          <div class="floor-plan-inner">
-            <img class="floor-plan-img" src="floor_crop_3.png" alt="3층 도면" />
-
-            <div class="room-hotspot booth" style="left: 58.1%; top: 3.5%;"
-                 onclick="openRoomModal('1-4', '11', '')">
-              <span>🙈 창연회</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 58.1%; top: 13.6%;"
-                 onclick="openRoomModal('1-5', '18', '')">
-              <span>🪄 잡지식</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 54.5%; top: 49.4%;"
-                 onclick="openRoomModal('1-6', '22', '')">
-              <span>⛩️ 유아트(무당집)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 61.7%; top: 49.4%;"
-                 onclick="openRoomModal('1-7', '22', '')">
-              <span>⛩️ 유아트(무당집)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 69.0%; top: 49.4%;"
-                 onclick="openRoomModal('1-8', '17', '')">
-              <span>🍿 필름메이커스</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 76.3%; top: 49.4%;"
-                 onclick="openRoomModal('1-9', 'None', '')">
-              <span>1-9</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 83.0%; top: 49.4%;"
-                 onclick="openRoomModal('1-10', '10', '')">
-              <span>💌 또래상담부</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 33.8%; top: 55.4%;"
-                 onclick="openRoomModal('3-10', 'None', '')">
-              <span>3-10</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 34.2%; top: 64.4%;"
-                 onclick="openRoomModal('3-9', 'None', '')">
-              <span>3-9</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 12.4%; top: 91.2%;"
-                 onclick="openRoomModal('3-6', 'None', '')">
-              <span>3-6</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 19.7%; top: 91.2%;"
-                 onclick="openRoomModal('3-7', 'None', '')">
-              <span>3-7</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 26.9%; top: 91.2%;"
-                 onclick="openRoomModal('3-8', 'None', '')">
-              <span>3-8</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="floor-card" id="floor-section-2">
-        <div class="floor-card-title">
-          <span class="floor-badge">🏛️ 2층</span>
-          <span class="floor-summary">강당(운양관) · 기술가정실 · 방송실 · 도서관 · 컴퓨터실</span>
-        </div>
-        <div class="floor-plan-viewport">
-          <div class="floor-plan-inner">
-            <img class="floor-plan-img" src="floor_crop_2.png" alt="2층 도면" />
-
-            <div class="room-hotspot booth" style="left: 18.6%; top: 23.7%;"
-                 onclick="openRoomModal('강당(운양관)', 'None', '25,26,27')">
-              <span>💃 러쉬온미 · 체대입시 · 플라잉셔틀즈</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 45.7%; top: 23.2%;"
-                 onclick="openRoomModal('기술가정실', '8', '')">
-              <span>🧇 베이킹메이킹(크로플)</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 57.6%; top: 19.2%;"
-                 onclick="openRoomModal('청운관(학습실)', 'None', '')">
-              <span>청운관(학습실)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 57.1%; top: 59.3%;"
-                 onclick="openRoomModal('방송실', '23', '')">
-              <span>🎤 소나기(귀신의집/노래방)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 33.7%; top: 75.3%;"
-                 onclick="openRoomModal('도서관', '15', '')">
-              <span>🎰 도서관사람들(책팟)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 13.2%; top: 90.6%;"
-                 onclick="openRoomModal('컴퓨터실', '14', '')">
-              <span>🏎️ 알고리즘</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="floor-card" id="floor-section-1">
-        <div class="floor-card-title">
-          <span class="floor-badge">🏛️ 1층</span>
-          <span class="floor-summary">음악실(밴드부) · 시청각실(연극) · 운동장(농구부) · 매점</span>
-        </div>
-        <div class="floor-plan-viewport">
-          <div class="floor-plan-inner">
-            <img class="floor-plan-img" src="floor_crop_1.png" alt="1층 도면" />
-
-            <div class="room-hotspot facility" style="left: 48.6%; top: 17.0%;"
-                 onclick="openRoomModal('매점(운수대통)', 'None', '')">
-              <span>매점(운수대통)</span>
-            </div>
-            <div class="room-hotspot facility" style="left: 17.1%; top: 17.4%;"
-                 onclick="openRoomModal('급식소', 'None', '')">
-              <span>급식소</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 33.7%; top: 68.7%;"
-                 onclick="openRoomModal('음악실', '28', '')">
-              <span>🎸 밴드부</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 17.4%; top: 87.8%;"
-                 onclick="openRoomModal('시청각실', '29', '')">
-              <span>🎭 시퀀스(연극)</span>
-            </div>
-            <div class="room-hotspot booth" style="left: 67.2%; top: 87.2%;"
-                 onclick="openRoomModal('운동장', '30', '')">
-              <span>🏀 슬램덩크(농구부)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- 2. 🏪 부스별로 보기 (전체 리스트) -->
-  <div id="tab-booths" class="tab-content">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" class="search-input" id="boothSearch" placeholder="동아리명, 교실, 장르 검색..." oninput="filterBooths()" />
-    </div>
-    <div class="booth-list" id="boothListContainer">
-      <!-- JavaScript dynamically injects booths -->
-    </div>
-  </div>
-
-  <!-- 3. 🎪 장르별로 보기 -->
-  <div id="tab-genres" class="tab-content">
-    <div class="genre-grid">
-      <div class="genre-cube active" onclick="selectGenre('전체')">
-        <div class="genre-icon">🌟</div>
-        <div class="genre-title">전체보기</div>
-        <div class="genre-count">30개 부스</div>
-      </div>
-      <div class="genre-cube" onclick="selectGenre('체험/실습형')">
-        <div class="genre-icon">🧪</div>
-        <div class="genre-title">체험/실습형</div>
-        <div class="genre-count">14개 부스</div>
-      </div>
-      <div class="genre-cube" onclick="selectGenre('방탈출/추리')">
-        <div class="genre-icon">🕵️</div>
-        <div class="genre-title">방탈출/추리</div>
-        <div class="genre-count">5개 부스</div>
-      </div>
-      <div class="genre-cube" onclick="selectGenre('공연형')">
-        <div class="genre-icon">🎸</div>
-        <div class="genre-title">공연형</div>
-        <div class="genre-count">3개 부스</div>
-      </div>
-      <div class="genre-cube" onclick="selectGenre('체육활동형')">
-        <div class="genre-icon">🏀</div>
-        <div class="genre-title">체육활동형</div>
-        <div class="genre-count">3개 부스</div>
-      </div>
-      <div class="genre-cube" onclick="selectGenre('문화예술형')">
-        <div class="genre-icon">🎨</div>
-        <div class="genre-title">문화예술형</div>
-        <div class="genre-count">3개 부스</div>
-      </div>
-    </div>
-    <div class="booth-list" id="genreBoothContainer"></div>
-  </div>
-
-  <!-- 4. ⏰ 운영시간표 -->
-  <div id="tab-schedule" class="tab-content">
-    <div class="schedule-card">
-      <div class="schedule-header">⏱️ 동아리 발표회 전체 타임테이블</div>
-      <div class="time-slot">
-        <div class="time-badge">09:00 ~ 09:30</div>
-        <div class="time-detail"><strong>개회식 및 준비</strong> (각 부스 세팅 완료)</div>
-      </div>
-      <div class="time-slot">
-        <div class="time-badge">09:30 ~ 11:30</div>
-        <div class="time-detail"><strong>1차 세션 (오전)</strong> — A팀 부스 운영 / B팀 체험</div>
-      </div>
-      <div class="time-slot">
-        <div class="time-badge">11:30 ~ 13:00</div>
-        <div class="time-detail"><strong>점심시간 및 부스 재정비</strong> (급식소 이용)</div>
-      </div>
-      <div class="time-slot">
-        <div class="time-badge">13:00 ~ 15:00</div>
-        <div class="time-detail"><strong>2차 세션 (오후)</strong> — B팀 부스 운영 / A팀 체험</div>
-      </div>
-      <div class="time-slot">
-        <div class="time-badge">15:00 ~ 15:30</div>
-        <div class="time-detail"><strong>마무리 및 뒷정리</strong> (폐회식)</div>
+      <!-- 선택된 층의 세로형 배치도 렌더링 컨테이너 -->
+      <div class="vertical-floor-plan" id="floorPlanContainer">
+        <!-- JS로 세로형 교실 배치도 렌더링 -->
       </div>
     </div>
 
-    <div class="schedule-card">
-      <div class="schedule-header">📌 주요 공연 특별 시간표</div>
-      <div class="time-slot">
-        <div class="time-badge">10:30, 13:30</div>
-        <div class="time-detail"><strong>🎸 밴드부 공연</strong> (1층 음악실) — 각 40분간 진행</div>
+    <!-- ============================================================
+         2. 🏪 부스별로 보기 VIEW
+         ============================================================ -->
+    <div id="view-booths">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="boothSearch" placeholder="동아리명, 교실, 장르 검색..." oninput="filterBooths()" />
       </div>
-      <div class="time-slot">
-        <div class="time-badge">11:00, 14:00</div>
-        <div class="time-detail"><strong>🎭 시퀀스(연극부)</strong> (1층 시청각실) — 〈20세기 소녀〉</div>
+      <div class="booth-list" id="boothListContainer"></div>
+    </div>
+
+    <!-- ============================================================
+         3. 🎪 장르별로 보기 VIEW
+         ============================================================ -->
+    <div id="view-genres">
+      <div class="genre-grid">
+        <div class="genre-chip active" onclick="selectGenre('전체')">🌟 전체 (30)</div>
+        <div class="genre-chip" onclick="selectGenre('체험/실습형')">🧪 체험/실습 (14)</div>
+        <div class="genre-chip" onclick="selectGenre('방탈출/추리')">🕵️ 방탈출 (5)</div>
+        <div class="genre-chip" onclick="selectGenre('공연형')">🎸 공연형 (3)</div>
+        <div class="genre-chip" onclick="selectGenre('체육활동형')">🏀 체육활동 (3)</div>
+        <div class="genre-chip" onclick="selectGenre('문화예술형')">🎨 문화예술 (3)</div>
       </div>
-      <div class="time-slot">
-        <div class="time-badge">11:30, 14:30</div>
-        <div class="time-detail"><strong>💃 러쉬온미(댄스부)</strong> (2층 대강당 운양관) — K-POP 댄스</div>
+      <div class="booth-list" id="genreBoothContainer"></div>
+    </div>
+
+    <!-- ============================================================
+         4. ⏰ 운영시간표 VIEW
+         ============================================================ -->
+    <div id="view-schedule">
+      <div class="schedule-card">
+        <div class="schedule-header">⏱️ 축제 전체 운영 일정</div>
+        <div class="time-slot">
+          <div class="time-badge">09:00 ~ 09:30</div>
+          <div class="time-detail"><strong>개회식 및 부스 세팅</strong> (동아리별 준비)</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">09:30 ~ 11:30</div>
+          <div class="time-detail"><strong>오전 1차 세션</strong> — A팀 부스 운영 / B팀 체험 활동</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">11:30 ~ 13:00</div>
+          <div class="time-detail"><strong>점심시간 & 부스 재정비</strong> (1층 급식소 이용)</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">13:00 ~ 15:00</div>
+          <div class="time-detail"><strong>오후 2차 세션</strong> — B팀 부스 운영 / A팀 체험 활동</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">15:00 ~ 15:30</div>
+          <div class="time-detail"><strong>부스 정리 및 폐회식</strong> (활동 일지 작성)</div>
+        </div>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-header">📌 특별 공연 & 이벤트 타임</div>
+        <div class="time-slot">
+          <div class="time-badge">10:30, 13:30</div>
+          <div class="time-detail"><strong>🎸 밴드부 라이브 콘서트</strong> (1층 음악실)</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">11:00, 14:00</div>
+          <div class="time-detail"><strong>🎭 시퀀스(연극부)</strong> (1층 시청각실 — 〈20세기 소녀〉)</div>
+        </div>
+        <div class="time-slot">
+          <div class="time-badge">11:30, 14:30</div>
+          <div class="time-detail"><strong>💃 러쉬온미(댄스부)</strong> (2층 대강당 운양관 — K-POP 댄스)</div>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Detail Modal Dialog -->
+  <!-- 상세 소개 모달 팝업 -->
   <div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
     <div class="modal-sheet" onclick="event.stopPropagation()">
       <div class="modal-drag-bar"></div>
       <div class="modal-header">
         <div>
           <div class="modal-emoji" id="mEmoji">✨</div>
-          <div class="modal-title" id="mTitle">동아리 이름</div>
+          <div class="modal-title" id="mTitle">동아리명</div>
         </div>
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
       <div class="modal-info-row">
         <span class="modal-pill" id="mFloor">🏛️ 층수</span>
-        <span class="modal-pill" id="mRoom">📍 교실 위치</span>
+        <span class="modal-pill" id="mRoom">📍 교실</span>
         <span class="modal-pill" id="mGenre">🎪 장르</span>
       </div>
-      <div class="modal-body" id="mDesc">
-        동아리 활동 소개 내용이 여기에 표시됩니다.
-      </div>
+      <div class="modal-body" id="mDesc">소개 내용</div>
     </div>
   </div>
 
   <script>
-    // 30개 동아리 원본 상세 데이터
+    // 30개 동아리 원본 데이터
     const BOOTHS = [
       // 1층
-      { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 공연! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다." },
+      { id: 28, name: "밴드부", cat: "공연형", emoji: "🎸", room: "음악실", floor: 1, desc: "가슴이 웅장해지는 운양고 밴드부의 라이브 락 & 밴드 사운드 콘서트! 보컬, 기타, 베이스, 드럼의 환상적인 라이브 무대입니다." },
       { id: 29, name: "시퀀스", cat: "공연형", emoji: "🎭", room: "시청각실", floor: 1, desc: "설렘과 감동의 청춘 로맨스 연극 〈20세기 소녀〉 무대 상연! 운양고 연극부의 열연을 감상해 보세요." },
       { id: 30, name: "슬램덩크(농구부)", cat: "체육활동형", emoji: "🏀", room: "운동장/농구장", floor: 1, desc: "불꽃 튀는 자유투 연속 성공 도전 & 농구부 에이스와의 1:1 대결! 푸짐한 상품이 기다립니다." },
 
@@ -922,35 +733,300 @@
       { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
     ];
 
-    // 탭 전환
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      
-      const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
-      if (btn) btn.classList.add('active');
-      
-      const content = document.getElementById('tab-' + tabId);
-      if (content) content.classList.add('active');
+    // 2026 운양고 실제 건축 도면 기반 1층~5층 세로형 배치도 데이터
+    const FLOOR_MAPS = {
+      5: {
+        title: "5층 배치도 (2학년 교실 & 미술실)",
+        sections: [
+          {
+            wing: "북측 특별교실 구역",
+            cols: 2,
+            rooms: [
+              { num: "미술실", club: "미술 전시실", boothId: null, type: "facility" },
+              { num: "1-1 교실", club: "👻 경영위키 (방탈출)", boothId: 20, type: "booth" },
+              { num: "wee클래스", club: "상담실", boothId: null, type: "facility" },
+              { num: "1-2 교실", club: "일반교실", boothId: null, type: "facility" }
+            ]
+          },
+          {
+            wing: "동측 복도 구역 (2학년 동편)",
+            cols: 3,
+            rooms: [
+              { num: "2-6", club: "일반교실", boothId: null, type: "facility" },
+              { num: "2-7", club: "💅 에끌라 (네일/분장)", boothId: 12, type: "booth" },
+              { num: "2-8", club: "🍪 글로톡 (타투/쿠키)", boothId: 16, type: "booth" },
+              { num: "2-9", club: "☕ 축구부 (메이드카페)", boothId: 9, type: "booth" },
+              { num: "2-10", club: "일반교실", boothId: null, type: "facility" },
+              { num: "교육연구부", club: "교무실", boothId: null, type: "facility" }
+            ]
+          },
+          {
+            wing: "중앙 및 서측 복도 구역 (2학년 서편)",
+            cols: 3,
+            rooms: [
+              { num: "2-5", club: "💘 소프라테스 (소개팅)", boothId: 7, type: "booth" },
+              { num: "2-4", club: "🕵️ 블루라인 (과학수사)", boothId: 21, type: "booth" },
+              { num: "상담실", club: "진로상담", boothId: null, type: "facility" },
+              { num: "2-1", club: "🏮 애그부 (일러스트)", boothId: 19, type: "booth" },
+              { num: "2-2", club: "🏮 애그부 (마츠리부스)", boothId: 19, type: "booth" },
+              { num: "2-3", club: "🎁 교집합 (퀴즈배틀)", boothId: 13, type: "booth" }
+            ]
+          }
+        ]
+      },
+      4: {
+        title: "4층 배치도 (과학실험실 & 3학년 교실)",
+        sections: [
+          {
+            wing: "북측 첨단 과학실험 구역",
+            cols: 2,
+            rooms: [
+              { num: "화학실", club: "🧋 시너지 · 🌌 생명보험", boothIds: [2, 4], type: "booth" },
+              { num: "생물실", club: "🐟 아스클 · 🧼 화생방", boothIds: [3, 6], type: "booth" }
+            ]
+          },
+          {
+            wing: "동측 과학실 및 자치활동 구역",
+            cols: 2,
+            rooms: [
+              { num: "물리실", club: "🍹 스파크 (과학칵테일)", boothId: 1, type: "booth" },
+              { num: "지구과학실", club: "🌭 멘날바 (상태변화/간식)", boothId: 5, type: "booth" },
+              { num: "1-3 교실", club: "🏺 교지편집부 (유물추리)", boothId: 24, type: "booth" },
+              { num: "학생자치부", club: "운영본부", boothId: null, type: "facility" }
+            ]
+          },
+          {
+            wing: "서측 3학년 교실 구역 (3-1 ~ 3-5)",
+            cols: 3,
+            rooms: [
+              { num: "3-5", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-4", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3학년교무실", club: "교무실", boothId: null, type: "facility" },
+              { num: "3-1", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-2", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-3", club: "3학년교실", boothId: null, type: "facility" }
+            ]
+          }
+        ]
+      },
+      3: {
+        title: "3층 배치도 (1학년 교실 & 3학년 교실)",
+        sections: [
+          {
+            wing: "북측 1학년 교실 구역",
+            cols: 2,
+            rooms: [
+              { num: "1-4 교실", club: "🙈 창연회 (블라인드소개팅)", boothId: 11, type: "booth" },
+              { num: "1-5 교실", club: "🪄 잡지식 (해리포터포토존)", boothId: 18, type: "booth" }
+            ]
+          },
+          {
+            wing: "동측 복도 구역 (1-6 ~ 1-10)",
+            cols: 3,
+            rooms: [
+              { num: "1-6 교실", club: "⛩️ 유아트 (무당집방탈출A)", boothId: 22, type: "booth" },
+              { num: "1-7 교실", club: "⛩️ 유아트 (무당집방탈출B)", boothId: 22, type: "booth" },
+              { num: "1-8 교실", club: "🍿 필름메이커스 (시네마)", boothId: 17, type: "booth" },
+              { num: "1-9 교실", club: "일반교실", boothId: null, type: "facility" },
+              { num: "1-10 교실", club: "💌 또래상담부 (심리테스트)", boothId: 10, type: "booth" },
+              { num: "1학년교무실", club: "교무실", boothId: null, type: "facility" }
+            ]
+          },
+          {
+            wing: "서측 3학년 교실 구역 (3-6 ~ 3-10)",
+            cols: 3,
+            rooms: [
+              { num: "3-10", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-9", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "인문사회부", club: "교무센터", boothId: null, type: "facility" },
+              { num: "3-6", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-7", club: "3학년교실", boothId: null, type: "facility" },
+              { num: "3-8", club: "3학년교실", boothId: null, type: "facility" }
+            ]
+          }
+        ]
+      },
+      2: {
+        title: "2층 배치도 (대강당 운양관 · 기술가정실 · 방송실 · 도서관)",
+        sections: [
+          {
+            wing: "서측 대강당(운양관) — 메인 공연 & 체육존",
+            cols: 1,
+            rooms: [
+              { num: "대강당 (운양관)", club: "💃 러쉬온미(댄스) · 🏋️ 체대입시 · 🏸 플라잉셔틀즈", boothIds: [25, 26, 27], type: "booth" }
+            ]
+          },
+          {
+            wing: "중앙 실습 및 학습 구역",
+            cols: 2,
+            rooms: [
+              { num: "기술가정실", club: "🧇 베이킹메이킹 (크로플)", boothId: 8, type: "booth" },
+              { num: "청운관 (학습실)", club: "자기주도학습실", boothId: null, type: "facility" }
+            ]
+          },
+          {
+            wing: "동측 및 남측 미디어·도서관 구역",
+            cols: 2,
+            rooms: [
+              { num: "방송실", club: "🎤 소나기 (귀신의집/노래방)", boothId: 23, type: "booth" },
+              { num: "도서관", club: "🎰 도서관사람들 (책팟게임)", boothId: 15, type: "booth" },
+              { num: "컴퓨터실", club: "🏎️ 알고리즘 (코딩게임/레이싱)", boothId: 14, type: "booth" },
+              { num: "교무센터", club: "전산/교무지원", boothId: null, type: "facility" }
+            ]
+          }
+        ]
+      },
+      1: {
+        title: "1층 배치도 (음악실 · 시청각실 · 운동장 · 매점)",
+        sections: [
+          {
+            wing: "실외 체육 구역",
+            cols: 1,
+            rooms: [
+              { num: "운동장 / 야외 농구장", club: "🏀 슬램덩크(농구부) (1:1/자유투)", boothId: 30, type: "booth" }
+            ]
+          },
+          {
+            wing: "공연 예술 전문관 구역",
+            cols: 2,
+            rooms: [
+              { num: "음악실", club: "🎸 밴드부 (라이브 콘서트)", boothId: 28, type: "booth" },
+              { num: "시청각실", club: "🎭 시퀀스 (연극 '20세기 소녀')", boothId: 29, type: "booth" }
+            ]
+          },
+          {
+            wing: "편의 및 행정 지원 구역",
+            cols: 2,
+            rooms: [
+              { num: "매점 (운수대통)", club: "학생 매점 / 스낵", boothId: null, type: "facility" },
+              { num: "급식소 (식당)", club: "점심 식사 공간", boothId: null, type: "facility" },
+              { num: "보건실", club: "응급 처치", boothId: null, type: "facility" },
+              { num: "행정실 / 교장실", club: "학교 본부", boothId: null, type: "facility" }
+            ]
+          }
+        ]
+      }
+    };
+
+    // 네비게이션 전환
+    function navigateTo(viewName) {
+      document.getElementById('view-home').style.display = 'none';
+      document.getElementById('view-map').style.display = 'none';
+      document.getElementById('view-booths').style.display = 'none';
+      document.getElementById('view-genres').style.display = 'none';
+      document.getElementById('view-schedule').style.display = 'none';
+
+      document.getElementById('view-' + viewName).style.display = 'block';
+      document.getElementById('subBar').classList.add('active');
+
+      const titles = {
+        'map': '🗺️ 지도로 보기',
+        'booths': '🏪 부스별로 보기',
+        'genres': '🎪 장르별로 보기',
+        'schedule': '⏰ 운영시간표'
+      };
+      document.getElementById('viewIndicator').innerText = titles[viewName] || '';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
-    // 층별 스크롤 바로가기
-    function scrollToFloor(floorNum) {
-      document.querySelectorAll('.floor-pill').forEach(p => p.classList.remove('active'));
-      const pill = Array.from(document.querySelectorAll('.floor-pill')).find(p => p.innerText.includes(floorNum));
-      if (pill) pill.classList.add('active');
-
-      const target = document.getElementById('floor-section-' + floorNum);
-      if (target) {
-        const headerOffset = 135;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      if (viewName === 'map') {
+        selectFloor(1); // 기본 1층부터 보여줌
       }
     }
 
-    // 모달 팝업 열기
+    function goHome() {
+      document.getElementById('view-home').style.display = 'block';
+      document.getElementById('view-map').style.display = 'none';
+      document.getElementById('view-booths').style.display = 'none';
+      document.getElementById('view-genres').style.display = 'none';
+      document.getElementById('view-schedule').style.display = 'none';
+      document.getElementById('subBar').classList.remove('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 층 선택 및 세로형 도면 렌더링
+    function selectFloor(floorNum) {
+      document.querySelectorAll('.floor-tab-btn').forEach(b => {
+        if (b.innerText.includes(floorNum + '층')) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+
+      const container = document.getElementById('floorPlanContainer');
+      const data = FLOOR_MAPS[floorNum];
+      if (!data) return;
+
+      let html = `
+        <div class="plan-header">
+          <div class="plan-title">🏛️ ${data.title}</div>
+          <span class="plan-notice">교실 터치 시 소개</span>
+        </div>
+      `;
+
+      data.sections.forEach(sec => {
+        html += `
+          <div class="wing-block">
+            <div class="wing-title">📍 ${sec.wing}</div>
+            <div class="corridor-grid cols-${sec.cols}">
+        `;
+
+        sec.rooms.forEach(r => {
+          const isBooth = r.type === 'booth';
+          const clickAction = isBooth 
+            ? `onclick="handleRoomClick('${r.num}', ${r.boothId || 'null'}, ${r.boothIds ? JSON.stringify(r.boothIds) : 'null'})"`
+            : `onclick="handleFacilityClick('${r.num}', '${r.club}')"`;
+
+          html += `
+            <div class="room-cell ${r.type}" ${clickAction}>
+              <div class="room-number">${r.num}</div>
+              <div class="room-club-badge">${r.club}</div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 교실 클릭 이벤트 핸들러
+    function handleRoomClick(roomName, boothId, boothIds) {
+      if (boothId) {
+        const b = BOOTHS.find(x => x.id === boothId);
+        if (b) openBoothModal(b);
+        return;
+      }
+      if (boothIds && boothIds.length > 0) {
+        const matched = BOOTHS.filter(x => boothIds.includes(x.id));
+        if (matched.length > 0) {
+          document.getElementById('mEmoji').innerText = '🎪';
+          document.getElementById('mTitle').innerText = roomName;
+          document.getElementById('mFloor').innerText = '🏛️ ' + matched[0].floor + '층';
+          document.getElementById('mRoom').innerText = '📍 ' + roomName;
+          document.getElementById('mGenre').innerText = '🎪 ' + matched.map(m => m.name).join(' · ');
+
+          let fullDesc = '';
+          matched.forEach(m => {
+            fullDesc += '【' + m.emoji + ' ' + m.name + ' (' + m.cat + ')】\n' + m.desc + '\n\n';
+          });
+          document.getElementById('mDesc').innerText = fullDesc.trim();
+          document.getElementById('detailModal').classList.add('active');
+        }
+      }
+    }
+
+    function handleFacilityClick(roomName, desc) {
+      document.getElementById('mEmoji').innerText = '🏫';
+      document.getElementById('mTitle').innerText = roomName;
+      document.getElementById('mFloor').innerText = '🏛️ 학교 시설';
+      document.getElementById('mRoom').innerText = '📍 ' + roomName;
+      document.getElementById('mGenre').innerText = '편의 및 행정 공간';
+      document.getElementById('mDesc').innerText = desc + ' 공간입니다. 본 공간은 축제 부스 운영 공간이 아니거나 휴게 및 질서 유지를 위한 관리 공간입니다.';
+      document.getElementById('detailModal').classList.add('active');
+    }
+
     function openBoothModal(b) {
       document.getElementById('mEmoji').innerText = b.emoji;
       document.getElementById('mTitle').innerText = b.name;
@@ -958,40 +1034,6 @@
       document.getElementById('mRoom').innerText = '📍 ' + b.room;
       document.getElementById('mGenre').innerText = '🎪 ' + b.cat;
       document.getElementById('mDesc').innerText = b.desc;
-      document.getElementById('detailModal').classList.add('active');
-    }
-
-    function openRoomModal(roomName, cid, cids) {
-      if (cid) {
-        const b = BOOTHS.find(x => x.id === parseInt(cid));
-        if (b) { openBoothModal(b); return; }
-      }
-      if (cids) {
-        const idList = cids.split(',').map(x => parseInt(x));
-        const matched = BOOTHS.filter(x => idList.includes(x.id));
-        if (matched.length > 0) {
-          document.getElementById('mEmoji').innerText = '🎪';
-          document.getElementById('mTitle').innerText = roomName + ' 부스 안내';
-          document.getElementById('mFloor').innerText = '🏛️ ' + matched[0].floor + '층';
-          document.getElementById('mRoom').innerText = '📍 ' + roomName;
-          document.getElementById('mGenre').innerText = '🎪 ' + matched.map(m => m.name).join(' · ');
-          
-          let fullDesc = '';
-          matched.forEach(m => {
-            fullDesc += '【' + m.emoji + ' ' + m.name + ' (' + m.cat + ')】\n' + m.desc + '\n\n';
-          });
-          document.getElementById('mDesc').innerText = fullDesc.trim();
-          document.getElementById('detailModal').classList.add('active');
-          return;
-        }
-      }
-      // 일반 교실/편의시설
-      document.getElementById('mEmoji').innerText = '🏫';
-      document.getElementById('mTitle').innerText = roomName;
-      document.getElementById('mFloor').innerText = '🏛️ 학교 시설';
-      document.getElementById('mRoom').innerText = '📍 운양고등학교';
-      document.getElementById('mGenre').innerText = '일반 교실 및 편의 공간';
-      document.getElementById('mDesc').innerText = roomName + ' 공간입니다. 본 공간은 축제 부스 운영 공간이 아니거나 휴게 및 교무 관리 공간으로 사용됩니다.';
       document.getElementById('detailModal').classList.add('active');
     }
 
@@ -1024,14 +1066,13 @@
             <div class="booth-name"><span>${b.emoji}</span> ${b.name}</div>
             <div class="booth-tag ${tagClass}">${b.cat}</div>
           </div>
-          <div class="booth-location">📍 ${b.floor}층 ${b.room}</div>
+          <div class="booth-loc">📍 ${b.floor}층 ${b.room}</div>
           <div class="booth-desc">${b.desc}</div>
         `;
         container.appendChild(card);
       });
     }
 
-    // 부스 검색
     function filterBooths() {
       const query = document.getElementById('boothSearch').value.toLowerCase().trim();
       const filtered = BOOTHS.filter(b => 
@@ -1044,9 +1085,8 @@
       renderBoothList(filtered, 'boothListContainer');
     }
 
-    // 장르별 필터
     function selectGenre(genre) {
-      document.querySelectorAll('.genre-cube').forEach(c => {
+      document.querySelectorAll('.genre-chip').forEach(c => {
         if (c.innerText.includes(genre)) c.classList.add('active');
         else c.classList.remove('active');
       });
