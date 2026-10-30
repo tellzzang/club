@@ -6,18 +6,23 @@
   <title>2026 운양고 동아리 발표회</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <!-- Confetti library for festive interactions -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
       --primary: #4f46e5;
       --primary-dark: #3730a3;
+      --primary-light: #e0e7ff;
+      --accent: #f59e0b;
+      --accent-pink: #ec4899;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --radius: 16px;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --radius: 18px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(79, 70, 229, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -26,18 +31,19 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding-bottom: 40px;
+      padding-bottom: 50px;
+      font-size: 16px;
     }
 
     /* Header */
     header {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
       color: white;
-      padding: 16px 20px;
+      padding: 16px 18px 14px;
       position: sticky;
       top: 0;
-      z-index: 50;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+      z-index: 60;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.2);
     }
     .header-top {
       display: flex;
@@ -47,169 +53,253 @@
     .header-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .header-brand:active {
+      transform: scale(0.95);
     }
     .header-title {
-      font-size: 1.15rem;
-      font-weight: 800;
+      font-size: 1.25rem;
+      font-weight: 900;
       letter-spacing: -0.5px;
     }
     .header-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    /* Sub Navigation Bar */
-    .sub-bar {
+    /* Global Sticky 4-Tab Navigation (Visible everywhere except home) */
+    .global-nav {
       display: none;
-      align-items: center;
-      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 4px;
       margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    .sub-bar.active { display: flex; }
-    .back-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
       gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
-    .view-indicator {
+    .global-nav.active {
+      display: flex;
+      animation: fadeInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-tab-btn {
+      flex: 1;
+      padding: 10px 4px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
       font-size: 0.88rem;
       font-weight: 800;
-      color: #cbd5e1;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .nav-tab-btn.active {
+      background: #ffffff;
+      color: #312e81;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: scale(1.03);
+    }
+    .nav-tab-btn:active {
+      transform: scale(0.94);
     }
 
     main {
-      padding: 16px;
-      max-width: 480px;
+      padding: 20px 16px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
     /* ============================================================
-       HOME VIEW: 메인 4개 메뉴 선택
+       HOME VIEW: 메인 4개 메뉴 카드 (큼직한 폰트, 바운스 인터랙션)
        ============================================================ */
     #view-home { display: block; }
     .hero-banner {
-      background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
-      border: 1px solid #c7d2fe;
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+      border: 2px solid #c7d2fe;
       border-radius: var(--radius);
-      padding: 22px 18px;
-      margin-bottom: 20px;
+      padding: 26px 20px;
+      margin-bottom: 24px;
       text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
     }
-    .hero-emoji { font-size: 2.4rem; margin-bottom: 8px; }
-    .hero-title { font-size: 1.25rem; font-weight: 900; color: #1e1b4b; }
-    .hero-desc { font-size: 0.85rem; color: #4338ca; margin-top: 4px; font-weight: 600; }
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-emoji {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #1e1b4b;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: #4338ca;
+      margin-top: 6px;
+      font-weight: 700;
+    }
 
-    .menu-grid {
+    .home-menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
-    .menu-card {
+    .home-menu-card {
       background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 24px 16px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 18px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
-    .menu-card:active {
-      transform: scale(0.96);
-      background: #f8fafc;
+    .home-menu-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: #6366f1;
+      box-shadow: var(--shadow-md);
     }
-    .menu-card.highlight {
-      border-color: #818cf8;
+    .home-menu-card:active {
+      transform: scale(0.94);
+    }
+    .home-menu-card.highlight {
+      border-color: #6366f1;
       background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.18);
     }
-    .menu-icon { font-size: 2.7rem; margin-bottom: 10px; }
-    .menu-title { font-size: 1.05rem; font-weight: 800; color: #0f172a; }
-    .menu-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
+    .home-menu-icon {
+      font-size: 3.2rem;
+      margin-bottom: 12px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .home-menu-card:hover .home-menu-icon {
+      transform: scale(1.15) rotate(-5deg);
+    }
+    .home-menu-title {
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .home-menu-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 700;
+    }
 
     /* ============================================================
-       1. 🗺️ 지도로 보기: 신규 제작 모바일 맞춤형 벡터 SVG 배치도
+       1. 🗺️ 지도로 보기: 반응형 벡터 SVG 세로형 도면
        ============================================================ */
     #view-map { display: none; }
     .floor-tabs {
       display: flex;
       background: #e2e8f0;
-      border-radius: 12px;
-      padding: 3px;
-      margin-bottom: 16px;
-      gap: 2px;
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 18px;
+      gap: 3px;
     }
     .floor-tab-btn {
       flex: 1;
-      padding: 10px 0;
+      padding: 12px 0;
       border: none;
       background: transparent;
       color: #475569;
-      font-size: 0.86rem;
-      font-weight: 800;
-      border-radius: 9px;
+      font-size: 0.96rem;
+      font-weight: 900;
+      border-radius: 11px;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .floor-tab-btn.active {
-      background: white;
-      color: var(--primary);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+      transform: scale(1.04);
+    }
+    .floor-tab-btn:active {
+      transform: scale(0.92);
     }
 
     .floor-plan-card {
       background: white;
       border-radius: var(--radius);
-      border: 1.5px solid var(--border);
+      border: 2px solid var(--border);
       box-shadow: var(--shadow-md);
       overflow: hidden;
       margin-bottom: 20px;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
     }
     .floor-plan-header {
-      padding: 14px 18px;
+      padding: 16px 20px;
       background: #f8fafc;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .floor-plan-title {
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       font-weight: 900;
       color: #1e1b4b;
     }
     .floor-plan-tip {
-      font-size: 0.74rem;
+      font-size: 0.82rem;
       color: #4338ca;
-      font-weight: 700;
+      font-weight: 800;
       background: #eff6ff;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid #c7d2fe;
     }
 
-    /* SVG Map Container (스마트폰 세로 폭 100%에 정확히 맞추어 가로 스크롤 없음) */
     .svg-map-wrapper {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: #ffffff;
       display: flex;
       justify-content: center;
@@ -217,84 +307,103 @@
     .floor-svg {
       width: 100%;
       height: auto;
-      max-width: 440px;
+      max-width: 460px;
       display: block;
     }
 
-    /* SVG 인터랙티브 교실 스타일 */
+    /* SVG Room Interactivity & Motion */
     .svg-room {
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .svg-room:hover rect, .svg-room:active rect {
-      filter: brightness(0.92);
-      stroke-width: 3;
+    .svg-room:hover {
+      transform: translateY(-2px);
     }
-    .svg-room.booth:hover rect, .svg-room.booth:active rect {
+    .svg-room:active {
+      transform: scale(0.96);
+    }
+    .svg-room rect {
+      transition: fill 0.2s, stroke 0.2s, stroke-width 0.2s;
+    }
+    .svg-room.booth:hover rect {
       stroke: #4338ca;
-      fill: #c7d2fe;
+      stroke-width: 3.5;
+      filter: drop-shadow(0 4px 10px rgba(99, 102, 241, 0.3));
     }
 
     /* ============================================================
-       2. 🏪 부스별로 보기
+       2. 🏪 부스별로 보기 (큰 폰트 & 바운스 카드)
        ============================================================ */
     #view-booths { display: none; }
     .search-box {
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       position: relative;
     }
     .search-input {
       width: 100%;
-      padding: 12px 16px 12px 42px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.9rem;
+      padding: 14px 18px 14px 46px;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 700;
       outline: none;
       background: white;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .search-input:focus { border-color: var(--primary); }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    }
     .search-icon {
       position: absolute;
-      left: 14px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
-      font-size: 1.1rem;
+      font-size: 1.25rem;
     }
 
     .booth-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     .booth-card {
       background: white;
       border-radius: var(--radius);
-      padding: 14px 16px;
-      border: 1.5px solid var(--border);
+      padding: 18px 20px;
+      border: 2px solid var(--border);
       box-shadow: var(--shadow-sm);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .booth-card:active { transform: scale(0.98); background: #f8fafc; }
+    .booth-card:hover {
+      transform: translateY(-3px);
+      border-color: #6366f1;
+      box-shadow: var(--shadow-md);
+    }
+    .booth-card:active {
+      transform: scale(0.96);
+      background: #f8fafc;
+    }
     .booth-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .booth-name {
-      font-size: 1rem;
-      font-weight: 800;
+      font-size: 1.15rem;
+      font-weight: 900;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .booth-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
     }
     .tag-체험 { background: #dbeafe; color: #1e40af; }
     .tag-방탈출 { background: #fce7f3; color: #9d174d; }
@@ -302,15 +411,15 @@
     .tag-공연 { background: #ede9fe; color: #5b21b6; }
     .tag-체육활동 { background: #dcfce7; color: #166534; }
     .booth-loc {
-      font-size: 0.8rem;
+      font-size: 0.92rem;
       color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 6px;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
     .booth-desc {
-      font-size: 0.83rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     /* ============================================================
@@ -320,26 +429,33 @@
     .genre-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
     .genre-chip {
       background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 6px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 6px;
       text-align: center;
       cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 800;
+      font-size: 0.9rem;
+      font-weight: 900;
       color: #334155;
-      transition: all 0.15s;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .genre-chip:hover {
+      transform: translateY(-2px);
     }
     .genre-chip.active {
       background: var(--primary);
       border-color: var(--primary);
       color: white;
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transform: scale(1.04);
+    }
+    .genre-chip:active {
+      transform: scale(0.92);
     }
 
     /* ============================================================
@@ -349,41 +465,41 @@
     .schedule-card {
       background: white;
       border-radius: var(--radius);
-      padding: 16px;
-      border: 1.5px solid var(--border);
-      margin-bottom: 14px;
+      padding: 20px;
+      border: 2px solid var(--border);
+      margin-bottom: 16px;
       box-shadow: var(--shadow-sm);
     }
     .schedule-header {
-      font-size: 0.95rem;
-      font-weight: 800;
+      font-size: 1.15rem;
+      font-weight: 900;
       color: var(--primary);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .time-slot {
       display: flex;
-      padding: 10px 0;
-      border-bottom: 1px dashed var(--border);
-      font-size: 0.85rem;
+      padding: 12px 0;
+      border-bottom: 1.5px dashed var(--border);
+      font-size: 0.94rem;
     }
     .time-slot:last-child { border-bottom: none; }
     .time-badge {
-      width: 90px;
-      font-weight: 800;
-      color: #334155;
+      width: 95px;
+      font-weight: 900;
+      color: #1e1b4b;
     }
-    .time-detail { flex: 1; color: var(--text-muted); }
-    .time-detail strong { color: var(--text); font-weight: 700; }
+    .time-detail { flex: 1; color: var(--text-muted); font-weight: 500; }
+    .time-detail strong { color: var(--text); font-weight: 800; }
 
-    /* Detail Modal Popup */
+    /* Detail Modal Popup with Spring Animation */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
       z-index: 100;
       display: none;
       align-items: flex-end;
@@ -395,123 +511,148 @@
       background: white;
       width: 100%;
       max-width: 500px;
-      border-radius: 24px 24px 0 0;
-      padding: 24px 20px 30px;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
-      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 28px 28px 0 0;
+      padding: 26px 22px 34px;
+      box-shadow: 0 -12px 48px rgba(0,0,0,0.3);
+      animation: springSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes springSlideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
 
     .modal-drag-bar {
-      width: 44px;
-      height: 4px;
+      width: 48px;
+      height: 5px;
       background: #cbd5e1;
       border-radius: 4px;
-      margin: 0 auto 16px;
+      margin: 0 auto 18px;
     }
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
-    .modal-emoji { font-size: 2.2rem; }
-    .modal-title { font-size: 1.3rem; font-weight: 900; color: #1e1b4b; }
+    .modal-emoji { font-size: 2.8rem; margin-bottom: 4px; }
+    .modal-title { font-size: 1.45rem; font-weight: 900; color: #1e1b4b; letter-spacing: -0.5px; }
     .modal-close {
       background: #f1f5f9;
       border: none;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #64748b;
+      transition: transform 0.2s;
     }
+    .modal-close:active { transform: scale(0.85); }
     .modal-info-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
     }
     .modal-pill {
       background: #eef2ff;
       color: #4338ca;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
     }
     .modal-body {
-      font-size: 0.92rem;
+      font-size: 1.02rem;
       color: #334155;
-      line-height: 1.6;
+      line-height: 1.7;
       background: #f8fafc;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .modal-action-btn {
+      width: 100%;
       padding: 14px;
-      border-radius: 12px;
-      margin-bottom: 16px;
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transition: transform 0.2s;
+    }
+    .modal-action-btn:active {
+      transform: scale(0.96);
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Sticky Header -->
   <header>
     <div class="header-top">
       <div class="header-brand" onclick="goHome()">
-        <span style="font-size: 1.3rem;">🏫</span>
+        <span style="font-size: 1.4rem;">🏫</span>
         <div class="header-title">운양고 2026 동아리 발표회</div>
       </div>
-      <div class="header-badge">축제 가이드</div>
+      <div class="header-badge" onclick="fireConfetti()">🎉 축제 모드</div>
     </div>
 
-    <!-- Sub Navigation Bar -->
-    <div class="sub-bar" id="subBar">
-      <button class="back-btn" onclick="goHome()">◀ 메인 메뉴</button>
-      <span class="view-indicator" id="viewIndicator">지도로 보기</span>
-    </div>
+    <!-- Global 4-Tab Navigation Bar (Always visible in all sub-views) -->
+    <nav class="global-nav" id="globalNav">
+      <button class="nav-tab-btn" id="nav-btn-map" onclick="switchNav('map')">🗺️ 지도로 보기</button>
+      <button class="nav-tab-btn" id="nav-btn-booths" onclick="switchNav('booths')">🏪 부스별로 보기</button>
+      <button class="nav-tab-btn" id="nav-btn-genres" onclick="switchNav('genres')">🎪 장르별로 보기</button>
+      <button class="nav-tab-btn" id="nav-btn-schedule" onclick="switchNav('schedule')">⏰ 운영시간표</button>
+    </nav>
   </header>
 
   <main>
     <!-- ============================================================
-         HOME VIEW (메인 화면: 4개 메뉴 선택)
+         HOME VIEW (메인 화면: 4대 메뉴 카드)
          ============================================================ -->
     <div id="view-home">
       <div class="hero-banner">
         <div class="hero-emoji">🎪✨</div>
         <div class="hero-title">2026 운양 동아리 발표회</div>
-        <div class="hero-desc">원하는 메뉴를 터치하여 축제를 즐겨보세요!</div>
+        <div class="hero-desc">원하는 메뉴를 터치하여 축제를 200% 즐겨보세요!</div>
       </div>
 
-      <div class="menu-grid">
+      <div class="home-menu-grid">
         <!-- 1. 지도로 보기 -->
-        <div class="menu-card highlight" onclick="navigateTo('map')">
-          <div class="menu-icon">🗺️</div>
-          <div class="menu-title">지도로 보기</div>
-          <div class="menu-subtitle">1~5층 세로형 맞춤 배치도</div>
+        <div class="home-menu-card highlight" onclick="navigateTo('map')">
+          <div class="home-menu-icon">🗺️</div>
+          <div class="home-menu-title">지도로 보기</div>
+          <div class="home-menu-sub">1~5층 세로형 배치도</div>
         </div>
 
         <!-- 2. 부스별로 보기 -->
-        <div class="menu-card" onclick="navigateTo('booths')">
-          <div class="menu-icon">🏪</div>
-          <div class="menu-title">부스별로 보기</div>
-          <div class="menu-subtitle">30개 부스 전체 목록</div>
+        <div class="home-menu-card" onclick="navigateTo('booths')">
+          <div class="home-menu-icon">🏪</div>
+          <div class="home-menu-title">부스별로 보기</div>
+          <div class="home-menu-sub">30개 부스 전체 목록</div>
         </div>
 
         <!-- 3. 장르별로 보기 -->
-        <div class="menu-card" onclick="navigateTo('genres')">
-          <div class="menu-icon">🎪</div>
-          <div class="menu-title">장르별로 보기</div>
-          <div class="menu-subtitle">체험·방탈출·공연·체육</div>
+        <div class="home-menu-card" onclick="navigateTo('genres')">
+          <div class="home-menu-icon">🎪</div>
+          <div class="home-menu-title">장르별로 보기</div>
+          <div class="home-menu-sub">체험·방탈출·공연·체육</div>
         </div>
 
         <!-- 4. 운영시간표 -->
-        <div class="menu-card" onclick="navigateTo('schedule')">
-          <div class="menu-icon">⏰</div>
-          <div class="menu-title">운영시간표</div>
-          <div class="menu-subtitle">타임테이블 & 공연 일정</div>
+        <div class="home-menu-card" onclick="navigateTo('schedule')">
+          <div class="home-menu-icon">⏰</div>
+          <div class="home-menu-title">운영시간표</div>
+          <div class="home-menu-sub">타임테이블 &amp; 공연 일정</div>
         </div>
       </div>
     </div>
@@ -529,11 +670,11 @@
         <button class="floor-tab-btn active" onclick="selectFloor(1)">1층</button>
       </div>
 
-      <!-- 선택된 층의 신규 세로형 배치도 카드 -->
+      <!-- 선택된 층의 세로형 배치도 카드 -->
       <div class="floor-plan-card">
         <div class="floor-plan-header">
           <div class="floor-plan-title" id="floorTitle">1층 교실 배치도 지도</div>
-          <span class="floor-plan-tip">교실 터치 시 소개</span>
+          <span class="floor-plan-tip">✨ 교실 터치 시 소개</span>
         </div>
         <div class="svg-map-wrapper" id="svgMapContainer">
           <!-- JS로 각 층별 SVG 도면 주입 -->
@@ -583,7 +724,7 @@
         </div>
         <div class="time-slot">
           <div class="time-badge">11:30 ~ 13:00</div>
-          <div class="time-detail"><strong>점심시간 & 부스 재정비</strong> (1층 급식소 이용)</div>
+          <div class="time-detail"><strong>점심시간 &amp; 부스 재정비</strong> (1층 급식소 이용)</div>
         </div>
         <div class="time-slot">
           <div class="time-badge">13:00 ~ 15:00</div>
@@ -596,7 +737,7 @@
       </div>
 
       <div class="schedule-card">
-        <div class="schedule-header">📌 특별 공연 & 이벤트 타임</div>
+        <div class="schedule-header">📌 특별 공연 &amp; 이벤트 타임</div>
         <div class="time-slot">
           <div class="time-badge">10:30, 13:30</div>
           <div class="time-detail"><strong>🎸 밴드부 라이브 콘서트</strong> (1층 음악실)</div>
@@ -630,6 +771,7 @@
         <span class="modal-pill" id="mGenre">🎪 장르</span>
       </div>
       <div class="modal-body" id="mDesc">소개 내용</div>
+      <button class="modal-action-btn" onclick="fireConfetti(); closeModal();">확인 완료 🎉</button>
     </div>
   </div>
 
@@ -677,7 +819,6 @@
       { id: 9, name: "축구부", cat: "체험/실습형", emoji: "☕", room: "2-9", floor: 5, desc: "그라운드를 누비던 축구부원들의 파격 변신! 친절하고 유쾌한 이색 메이드 카페 & 보드게임 라운지!" }
     ];
 
-    // 각 층별 신규 생성된 모바일 최적화 SVG 도면
     const SVG_FLOORS = {
       1: `<svg viewBox="0 0 380 520" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <!-- Background / Corridor -->
@@ -1045,7 +1186,7 @@
         </svg>`
     };
 
-    // 네비게이션 전환
+    // 네비게이션 전환 (홈에서 이동)
     function navigateTo(viewName) {
       document.getElementById('view-home').style.display = 'none';
       document.getElementById('view-map').style.display = 'none';
@@ -1054,20 +1195,25 @@
       document.getElementById('view-schedule').style.display = 'none';
 
       document.getElementById('view-' + viewName).style.display = 'block';
-      document.getElementById('subBar').classList.add('active');
+      document.getElementById('globalNav').classList.add('active');
 
-      const titles = {
-        'map': '🗺️ 지도로 보기',
-        'booths': '🏪 부스별로 보기',
-        'genres': '🎪 장르별로 보기',
-        'schedule': '⏰ 운영시간표'
-      };
-      document.getElementById('viewIndicator').innerText = titles[viewName] || '';
+      updateActiveNavTab(viewName);
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (viewName === 'map') {
-        selectFloor(1); // 1층부터 시작
+        selectFloor(1);
       }
+    }
+
+    // 상단 상시 탭 전환
+    function switchNav(viewName) {
+      navigateTo(viewName);
+    }
+
+    function updateActiveNavTab(viewName) {
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('nav-btn-' + viewName);
+      if (activeBtn) activeBtn.classList.add('active');
     }
 
     function goHome() {
@@ -1076,11 +1222,11 @@
       document.getElementById('view-booths').style.display = 'none';
       document.getElementById('view-genres').style.display = 'none';
       document.getElementById('view-schedule').style.display = 'none';
-      document.getElementById('subBar').classList.remove('active');
+      document.getElementById('globalNav').classList.remove('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 층 선택 및 SVG 렌더링
+    // 층 선택 및 렌더링
     function selectFloor(floorNum) {
       document.querySelectorAll('.floor-tab-btn').forEach(b => {
         if (b.innerText.includes(floorNum + '층')) b.classList.add('active');
@@ -1092,13 +1238,24 @@
       container.innerHTML = SVG_FLOORS[floorNum] || '<div style="padding:40px; text-align:center;">도면을 준비 중입니다.</div>';
     }
 
+    // 폭죽 효과 (Confetti)
+    function fireConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 60,
+          spread: 70,
+          origin: { y: 0.65 }
+        });
+      }
+    }
+
     // 단일 부스 모달 열기
     function openBoothById(boothId) {
       const b = BOOTHS.find(x => x.id === boothId);
       if (b) openBoothModal(b);
     }
 
-    // 복합 부스 모달 열기 (강당, 화학실, 생물실 등)
+    // 복합 부스 모달 열기
     function openMultiBooths(idList, roomName) {
       const matched = BOOTHS.filter(x => idList.includes(x.id));
       if (matched.length > 0) {
@@ -1148,7 +1305,7 @@
       if (!container) return;
       container.innerHTML = '';
       if (list.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:30px; color:#94a3b8;">검색 결과가 없습니다.</div>';
+        container.innerHTML = '<div style="text-align:center; padding:40px; color:#94a3b8; font-size:1.1rem; font-weight:700;">검색 결과가 없습니다.</div>';
         return;
       }
       list.forEach(b => {
