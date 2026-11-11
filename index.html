@@ -1050,18 +1050,18 @@
   },
   {
     "id": 2,
-    "name": "밴드부",
-    "topic": "청운제 라이브 락 & 밴드 콘서트",
+    "name": "밴드부 (UY)",
+    "topic": "청운제 UY 밴드 라이브 공연",
     "cat": "🎸 무대찢는 공연·시네마",
     "cat_id": "stage",
     "emoji": "🎸",
-    "room": "음악실 · 대강당",
-    "floor": 1,
+    "room": "대강당 (운양관) · 음악실",
+    "floor": 2,
     "teacher": "안효주",
-    "leader": "사전선발 밴드 동아리",
-    "members": "11명",
-    "status": "수합중",
-    "desc": "가슴이 웅장해지는 운양고 밴드부의 라이브 콘서트! 보컬, 일렉기타, 베이스, 드럼, 키보드가 만들어내는 생생한 사운드로 축제의 열기를 최고조로 끌어올립니다."
+    "leader": "부장 정소연(20128) · 차장 심제우(11013)",
+    "members": "11명 (1학년 7명 / 2학년 4명)",
+    "status": "확정",
+    "desc": "여러 차례의 버스킹 공연으로 실력을 다져온 운양고 대표 밴드부 UY의 청운제 메인 라이브 콘서트! 1년간 동아리 친구들과 호흡을 맞춰 일궈낸 강렬한 밴드 사운드로 모두가 함께 즐기는 무대를 선사합니다!"
   },
   {
     "id": 5,
@@ -1418,13 +1418,13 @@
       2: `<svg viewBox="0 0 380 550" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="360" height="530" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
-          <!-- 상단: 대강당 (운양관) - 러쉬온미(3), 피에스(4) 공동 운영 -->
-          <g class="svg-room booth" id="svg-booth-multi-3" onclick="openMultiBooths([3, 4], '대강당 (운양관)')">
-            <rect x="25" y="24" width="330" height="122" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
-            <text x="190" y="54" text-anchor="middle" font-size="15" font-weight="900" fill="#312e81">🏛️ 대강당 (운양관) — 2개 동아리 운영</text>
-            <text x="190" y="79" text-anchor="middle" font-size="12.5" font-weight="800" fill="#4338ca">💃 러쉬온미 : 청운제 K-POP 댄스 공연</text>
-            <text x="190" y="101" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1d4ed8">🏋️ 피에스(P.S) : 체대입시부를 이겨라!! (순발력·런닝맨·악력)</text>
-            <text x="190" y="125" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">👆 터치하면 동아리를 선택할 수 있습니다</text>
+          <!-- 상단: 대강당 (운양관) - 밴드부(2), 러쉬온미(3), 피에스(4) 공동 운영 -->
+          <g class="svg-room booth" id="svg-booth-multi-3" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">
+            <rect x="25" y="24" width="330" height="126" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
+            <text x="190" y="50" text-anchor="middle" font-size="14.5" font-weight="900" fill="#312e81">🏛️ 대강당 (운양관) — 3개 동아리 공연·부스</text>
+            <text x="190" y="73" text-anchor="middle" font-size="12" font-weight="800" fill="#4338ca">🎸 밴드부(UY) 라이브 공연  •  💃 러쉬온미 K-POP 댄스</text>
+            <text x="190" y="95" text-anchor="middle" font-size="12" font-weight="800" fill="#1d4ed8">🏋️ 피에스(P.S) : 체대입시부를 이겨라!! (순발력·런닝맨·악력)</text>
+            <text x="190" y="117" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">👆 터치하면 3개 동아리 상세 정보를 볼 수 있습니다</text>
           </g>
 
           <rect x="145" y="156" width="90" height="24" rx="6" fill="#e2e8f0"/>
@@ -1880,7 +1880,7 @@
       document.querySelectorAll('.svg-room').forEach(el => el.classList.remove('highlighted'));
       let target = document.getElementById('svg-booth-' + boothId) || 
                    document.getElementById('svg-booth-multi-' + boothId);
-      if (!target && (boothId === 3 || boothId === 4)) {
+      if (!target && (boothId === 2 || boothId === 3 || boothId === 4)) {
         target = document.getElementById('svg-booth-multi-3');
       }
       if (target) {
