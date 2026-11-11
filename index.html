@@ -713,16 +713,21 @@
       line-height: 1.5;
     }
   
+    
     /* ============================================================
-       CUTE ANIMAL FESTIVAL MASCOTS & ANIMATION STYLES
+       CUTE ANIMAL FESTIVAL MASCOTS & RICH VISUAL STYLES (V3)
        ============================================================ */
     @keyframes mascotFloat {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-7px) rotate(1.5deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+    }
+    @keyframes mascotWiggle {
+      0%, 100% { transform: rotate(-2deg) scale(1); }
+      50% { transform: rotate(2.5deg) scale(1.04); }
     }
     @keyframes mascotPulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.08); }
     }
     @keyframes speechBubbleBounce {
       0%, 100% { transform: translateY(0); }
@@ -731,26 +736,19 @@
 
     /* Welcome Mascot Hero Card */
     .mascot-hero-card {
-      background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 50%, #fef3c7 100%);
-      border: 2px solid #a5b4fc;
-      border-radius: 20px;
-      padding: 16px 18px;
-      margin: 12px 14px 16px 14px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      box-shadow: 0 8px 24px -6px rgba(99, 102, 241, 0.2);
+      background: linear-gradient(135deg, #eef2ff 0%, #fae8ff 48%, #fef3c7 100%);
+      border: 2.5px solid #a5b4fc;
+      border-radius: 22px;
+      padding: 16px 16px 12px 16px;
+      margin: 12px 16px 6px 16px;
+      box-shadow: 0 10px 28px -6px rgba(99, 102, 241, 0.28);
       position: relative;
       overflow: hidden;
     }
-    .mascot-hero-card::after {
-      content: '🎈';
-      position: absolute;
-      top: -5px;
-      right: 12px;
-      font-size: 26px;
-      opacity: 0.35;
-      pointer-events: none;
+    .mascot-hero-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
     .mascot-hero-avatar-wrap {
       flex-shrink: 0;
@@ -760,24 +758,24 @@
       align-items: center;
     }
     .mascot-hero-avatar {
-      width: 86px;
-      height: 86px;
+      width: 92px;
+      height: 92px;
       object-fit: contain;
-      filter: drop-shadow(0 6px 12px rgba(99, 102, 241, 0.3));
-      animation: mascotFloat 3.5s ease-in-out infinite;
+      filter: drop-shadow(0 6px 12px rgba(99, 102, 241, 0.28));
+      animation: mascotFloat 3.2s ease-in-out infinite;
     }
     .mascot-speech-bubble {
       background: #ffffff;
       border: 1.5px solid #818cf8;
       border-radius: 12px;
-      padding: 4px 8px;
+      padding: 3px 8px;
       font-size: 10.5px;
       font-weight: 800;
       color: #312e81;
       white-space: nowrap;
-      margin-top: -6px;
+      margin-top: -8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      animation: speechBubbleBounce 2.8s ease-in-out infinite;
+      animation: speechBubbleBounce 2.6s ease-in-out infinite;
       z-index: 2;
     }
     .mascot-hero-body {
@@ -788,60 +786,174 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      background: #4f46e5;
+      background: linear-gradient(135deg, #4f46e5, #db2777);
       color: #ffffff;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       padding: 3px 9px;
       border-radius: 12px;
       margin-bottom: 5px;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.25);
     }
     .mascot-hero-headline {
-      font-size: 16.5px;
+      font-size: 16px;
       font-weight: 900;
       color: #0f172a;
-      line-height: 1.35;
+      line-height: 1.3;
       margin-bottom: 4px;
+      letter-spacing: -0.3px;
     }
     .mascot-hero-sub {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #475569;
-      line-height: 1.45;
-      margin-bottom: 10px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
     .mascot-quick-actions {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
     .mascot-btn {
       border: none;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 10px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
     .mascot-btn.primary {
       background: #4f46e5;
       color: #ffffff;
       box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
     }
-    .mascot-btn.primary:hover {
-      background: #4338ca;
-      transform: translateY(-1px);
-    }
+    .mascot-btn.primary:hover { background: #4338ca; transform: translateY(-1px); }
     .mascot-btn.secondary {
       background: #ffffff;
       color: #4338ca;
       border: 1.5px solid #c7d2fe;
     }
-    .mascot-btn.secondary:hover {
-      background: #eef2ff;
+
+    /* 7 Animal Friends Interactive Parade Strip */
+    .mascot-parade-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1.5px dashed rgba(99, 102, 241, 0.25);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mascot-parade-strip::-webkit-scrollbar { display: none; }
+    .parade-chip {
+      flex: 1;
+      min-width: 54px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid rgba(165, 180, 252, 0.6);
+      border-radius: 14px;
+      padding: 5px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .parade-chip:hover, .parade-chip:active {
+      transform: translateY(-3px) scale(1.06);
+      background: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 6px 14px rgba(99, 102, 241, 0.25);
+    }
+    .parade-chip img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+    .parade-chip span {
+      font-size: 10px;
+      font-weight: 800;
+      color: #312e81;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    /* Enhanced Card Mascot Avatar (Replaces Plain Emoji Box!) */
+    .card-avatar-box {
+      width: 74px !important;
+      height: 74px !important;
+      border-radius: 22px !important;
+      position: relative;
+      overflow: visible !important;
+      padding: 4px;
+      animation: mascotWiggle 4.2s ease-in-out infinite !important;
+    }
+    .card-avatar-mascot-img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.16));
+    }
+    .card-avatar-mini-emoji {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Card Pastel Theme Borders & Glows */
+    .super-booth-card.theme-stage { background: linear-gradient(180deg, #faf5ff 0%, #ffffff 32%); border-color: #c4b5fd; }
+    .super-booth-card.theme-horror { background: linear-gradient(180deg, #fff1f2 0%, #ffffff 32%); border-color: #fda4af; }
+    .super-booth-card.theme-food { background: linear-gradient(180deg, #fffbeb 0%, #ffffff 32%); border-color: #fcd34d; }
+    .super-booth-card.theme-romance { background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 32%); border-color: #f9a8d4; }
+    .super-booth-card.theme-science { background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 32%); border-color: #6ee7b7; }
+    .super-booth-card.theme-game { background: linear-gradient(180deg, #eff6ff 0%, #ffffff 32%); border-color: #93c5fd; }
+
+    /* Theme Spotlight Banner inside Genres View */
+    .theme-spotlight-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border: 2px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+    .theme-spotlight-img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      flex-shrink: 0;
+      animation: mascotFloat 3.4s ease-in-out infinite;
+    }
+    .theme-spotlight-text h4 {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .theme-spotlight-text p {
+      font-size: 11.5px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.35;
     }
 
     /* Timetable Stage Mascots Row */
@@ -850,46 +962,31 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 4px;
     }
-    @media (max-width: 480px) {
-      .stage-mascots-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 440px) {
+      .stage-mascots-grid { grid-template-columns: 1fr; }
     }
     .stage-mascot-card {
       background: #ffffff;
       border: 2px solid #cbd5e1;
       border-radius: 16px;
-      padding: 12px;
+      padding: 10px 12px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-    .stage-mascot-card.band {
-      border-color: #818cf8;
-      background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
-    }
-    .stage-mascot-card.band:hover {
-      border-color: #4f46e5;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(99, 102, 241, 0.25);
-    }
-    .stage-mascot-card.dance {
-      border-color: #f472b6;
-      background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
-    }
-    .stage-mascot-card.dance:hover {
-      border-color: #db2777;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(236, 72, 153, 0.25);
-    }
+    .stage-mascot-card.band { border-color: #818cf8; background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%); }
+    .stage-mascot-card.dance { border-color: #f472b6; background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%); }
+    .stage-mascot-card.theater { border-color: #fbbf24; background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%); }
+    .stage-mascot-card.sport { border-color: #60a5fa; background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%); }
+    .stage-mascot-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(99,102,241,0.22); }
     .stage-mascot-img-box {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       flex-shrink: 0;
       border-radius: 14px;
       background: #ffffff;
@@ -897,76 +994,95 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-      overflow: hidden;
     }
     .stage-mascot-img-box img {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
-      animation: mascotFloat 4s ease-in-out infinite;
+      animation: mascotFloat 3.6s ease-in-out infinite;
     }
-    .stage-mascot-details {
-      flex: 1;
-      min-width: 0;
-    }
+    .stage-mascot-details { flex: 1; min-width: 0; }
     .stage-tag {
       display: inline-block;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       padding: 2px 7px;
       border-radius: 8px;
       margin-bottom: 3px;
     }
-    .stage-tag.band {
-      background: #ede9fe;
-      color: #4f46e5;
+    .stage-tag.band { background: #ede9fe; color: #4f46e5; }
+    .stage-tag.dance { background: #fce7f3; color: #be185d; }
+    .stage-tag.theater { background: #fef3c7; color: #b45309; }
+    .stage-tag.sport { background: #dbeafe; color: #1d4ed8; }
+    .stage-mascot-details h4 { font-size: 13px; font-weight: 900; color: #0f172a; margin: 0 0 2px 0; }
+    .stage-mascot-details .time { font-size: 11px; font-weight: 800; color: #4f46e5; margin: 0; }
+    .stage-mascot-details .sub { font-size: 10px; color: #64748b; margin: 2px 0 0 0; }
+
+    /* Timeline header mascot sticker */
+    .timeline-header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
-    .stage-tag.dance {
-      background: #fce7f3;
-      color: #be185d;
+    .timeline-corner-mascot {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      flex-shrink: 0;
+      animation: mascotFloat 3.5s ease-in-out infinite;
     }
-    .stage-mascot-details h4 {
-      font-size: 13.5px;
-      font-weight: 900;
-      color: #0f172a;
-      margin: 0 0 2px 0;
+
+    /* Footer Mascot Banner */
+    .mascot-footer-card {
+      margin: 10px 16px 26px 16px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1.5px solid rgba(165, 180, 252, 0.25);
+      border-radius: 20px;
+      padding: 14px;
+      text-align: center;
     }
-    .stage-mascot-details .time {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #4f46e5;
-      margin: 0;
+    .mascot-footer-squad {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
     }
-    .stage-mascot-details .sub {
-      font-size: 10.5px;
-      color: #64748b;
-      margin: 2px 0 0 0;
+    .mascot-footer-squad img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .mascot-footer-squad img:hover {
+      transform: scale(1.25) translateY(-4px);
     }
 
     /* Floating Interactive Mascot Widget */
     .floating-mascot-btn {
       position: fixed;
-      bottom: 24px;
-      right: 20px;
-      width: 58px;
-      height: 58px;
+      bottom: 20px;
+      right: 18px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 999;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 2.5px solid #ffffff;
+      border: 3px solid #ffffff;
     }
-    .floating-mascot-btn:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
+    .floating-mascot-btn:hover { transform: scale(1.1) rotate(5deg); }
     .floating-mascot-img {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
       animation: mascotFloat 3s ease-in-out infinite;
@@ -986,19 +1102,17 @@
       display: none;
       position: fixed;
       bottom: 90px;
-      right: 20px;
-      width: 270px;
+      right: 18px;
+      width: 280px;
       background: #ffffff;
-      border: 2px solid #a5b4fc;
-      border-radius: 18px;
+      border: 2.5px solid #a5b4fc;
+      border-radius: 20px;
       padding: 14px;
-      box-shadow: 0 16px 36px -4px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 16px 36px -4px rgba(99, 102, 241, 0.35);
       z-index: 1000;
       animation: speechBubbleBounce 0.3s ease;
     }
-    .mascot-popover.active {
-      display: block;
-    }
+    .mascot-popover.active { display: block; }
     .mascot-popover-header {
       display: flex;
       justify-content: space-between;
@@ -1021,11 +1135,7 @@
       text-align: left;
       transition: all 0.2s;
     }
-    .popover-action-btn:hover {
-      background: #eef2ff;
-      border-color: #818cf8;
-      color: #4338ca;
-    }
+    .popover-action-btn:hover { background: #eef2ff; border-color: #818cf8; color: #4338ca; }
 
     /* Modal Mascot Avatar Header */
     .modal-mascot-badge {
@@ -1039,24 +1149,14 @@
       margin-bottom: 14px;
     }
     .modal-mascot-img {
-      width: 52px;
-      height: 52px;
+      width: 58px;
+      height: 58px;
       object-fit: contain;
       filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.25));
       animation: mascotFloat 3s ease-in-out infinite;
     }
-    .modal-mascot-text h5 {
-      margin: 0;
-      font-size: 13px;
-      font-weight: 900;
-      color: #312e81;
-    }
-    .modal-mascot-text p {
-      margin: 2px 0 0 0;
-      font-size: 11.5px;
-      color: #6366f1;
-      font-weight: 700;
-    }
+    .modal-mascot-text h5 { margin: 0; font-size: 13px; font-weight: 900; color: #312e81; }
+    .modal-mascot-text p { margin: 2px 0 0 0; font-size: 11.5px; color: #6366f1; font-weight: 700; }
 
   </style>
 </head>
@@ -1067,7 +1167,7 @@
     <!-- Top Sticky Header -->
     <header>
       <div class="header-left" onclick="switchNav('map')">
-        <div class="header-logo">✨</div>
+        <div class="header-logo" style="background:linear-gradient(135deg,#e0e7ff,#fce7f3); padding:3px;"><img src="assets/mascot_tiger.png" alt="운양이" style="width:32px;height:32px;object-fit:contain;"></div>
         <div class="header-text">
           <h1>2026 운양고 동아리 발표회</h1>
           <p>UNYANG FESTIVAL GUIDE</p>
@@ -1087,19 +1187,53 @@
 
     <!-- Main Content Area -->
     
-    <!-- Welcome Mascot Hero Card -->
+        <!-- Welcome Mascot Hero Card + 7 Friends Parade -->
     <div class="mascot-hero-card">
-      <div class="mascot-hero-avatar-wrap">
-        <img src="assets/mascot_tiger.png" alt="운양이" class="mascot-hero-avatar">
-        <div class="mascot-speech-bubble">어서와! 축제는 처음이지? 🐯✨</div>
+      <div class="mascot-hero-top">
+        <div class="mascot-hero-avatar-wrap">
+          <img src="assets/mascot_tiger.png" alt="운양이" class="mascot-hero-avatar">
+          <div class="mascot-speech-bubble">축제는 200% 즐겨야지! 🐯✨</div>
+        </div>
+        <div class="mascot-hero-body">
+          <div class="mascot-badge-pill">🎉 2026 운양고 청운제 공식 가이드</div>
+          <h2 class="mascot-hero-headline">25개 부스 &amp; 대강당 라이브 콘서트</h2>
+          <p class="mascot-hero-sub">귀여운 동물 친구들을 터치하면 부스·공연으로 바로 안내해 드려요!</p>
+          <div class="mascot-quick-actions">
+            <button class="mascot-btn primary" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">🏛️ 2층 대강당 무대</button>
+            <button class="mascot-btn secondary" onclick="switchNav('schedule')">⏰ 공연 시간표</button>
+          </div>
+        </div>
       </div>
-      <div class="mascot-hero-body">
-        <div class="mascot-badge-pill">🎉 2026 운양고 청운제 라이브 가이드</div>
-        <h2 class="mascot-hero-headline">25개 부스 &amp; 대강당 라이브 콘서트</h2>
-        <p class="mascot-hero-sub">도면을 터치하거나 카드를 넘기며 오늘의 축제를 만끽하세요! 🎸</p>
-        <div class="mascot-quick-actions">
-          <button class="mascot-btn primary" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">🏛️ 2층 대강당 공연 보기</button>
-          <button class="mascot-btn secondary" onclick="switchNav('schedule')">⏰ 공연 타임테이블</button>
+
+      <!-- 7 Mascot Friends Parade -->
+      <div class="mascot-parade-strip" title="동물 친구를 눌러 테마로 이동하세요!">
+        <div class="parade-chip" onclick="jumpFromMascot('bunny')">
+          <img src="assets/mascot_bunny.png" alt="락토끼">
+          <span>🎸 밴드부</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('bear')">
+          <img src="assets/mascot_bear.png" alt="댄스곰">
+          <span>💃 댄스부</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('panda')">
+          <img src="assets/mascot_panda.png" alt="판다">
+          <span>🎭 연극·포토</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('cat')">
+          <img src="assets/mascot_cat.png" alt="탐정냥">
+          <span>👻 방탈출</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('puppy')">
+          <img src="assets/mascot_puppy.png" alt="베이커멍">
+          <span>🍪 쿠키·DIY</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('hamster')">
+          <img src="assets/mascot_hamster.png" alt="과학햄찌">
+          <span>🧪 과학실험</span>
+        </div>
+        <div class="parade-chip" onclick="jumpFromMascot('tiger')">
+          <img src="assets/mascot_tiger.png" alt="운양이">
+          <span>🏆 게임배틀</span>
         </div>
       </div>
     </div>
@@ -1162,6 +1296,9 @@
           <button class="theme-chip" onclick="selectTheme('stage')" id="theme-btn-stage">🎸 공연·연극·밴드</button>
         </div>
 
+                <!-- Theme Mascot Spotlight Banner -->
+        <div id="themeSpotlightBanner"></div>
+
         <!-- Carousel Presentation Area -->
         <div class="carousel-section">
           <div class="carousel-top-bar">
@@ -1184,14 +1321,19 @@
         </div>
       </div>
 
-      <!-- ============================================================
+            <!-- ============================================================
            3. ⏰ 운영시간표
            ============================================================ -->
       <div id="view-schedule" style="display:none;">
         <div class="timeline-wrap">
           <div class="timeline-card" style="border-color:#a5b4fc;">
-            <div class="timeline-time">⏰ 1교시 : 08:50 ~ 09:10 (20분)</div>
-            <div class="timeline-title">📋 출석 확인 및 동아리 발표회 최종 점검</div>
+            <div class="timeline-header-flex">
+              <div>
+                <div class="timeline-time">⏰ 1교시 : 08:50 ~ 09:10 (20분)</div>
+                <div class="timeline-title">📋 출석 확인 및 동아리 발표회 최종 점검</div>
+              </div>
+              <img src="assets/mascot_tiger.png" alt="운양이" class="timeline-corner-mascot">
+            </div>
             <div class="timeline-desc">
               • <strong>출석 확인</strong> : 각 동아리 발표 장소에서 동아리 담당 교사가 직접 실시 (8시 50분 기준 지각 처리)<br>
               • <strong>최종 점검</strong> : 부스 교구 및 체험 안내문 세팅, 안전 수칙 및 비상구 확인, 담당 교사 임장 지도
@@ -1199,53 +1341,82 @@
           </div>
 
           <div class="timeline-card" style="border-color:#6366f1;">
-            <div class="timeline-time">⏰ 2교시 : 09:10 ~ 10:40 (90분)</div>
-            <div class="timeline-title">🎪 1부 동아리 부스 운영 &amp; 관람 (A팀 체험 / B팀 운영)</div>
+            <div class="timeline-header-flex">
+              <div>
+                <div class="timeline-time">⏰ 2교시 : 09:10 ~ 10:40 (90분)</div>
+                <div class="timeline-title">🎪 1부 동아리 부스 운영 &amp; 특별 공연</div>
+              </div>
+              <img src="assets/mascot_bunny.png" alt="락토끼" class="timeline-corner-mascot">
+            </div>
             <div class="timeline-desc">
               • <strong>A팀 부원</strong> : 1층~5층 타 동아리 부스 자유 관람 및 체험 참여!<br>
               • <strong>B팀 부원</strong> : 본 동아리 부스 운영 및 방문 학생 안내·체험 진행<br>
-              • <strong>특별 무대 공연</strong> : 1층 시청각실(시퀀스 연극), 2층 대강당(러쉬온미 댄스 · 피에스 체육 · 밴드부 UY 라이브)
+              • <strong>특별 무대 공연</strong> : 1층 시청각실(시퀀스 연극), 2층 대강당(밴드부 UY · 러쉬온미 · 피에스)
             </div>
-            <!-- Stage Mascots Row -->
+            <!-- All Stage & Major Performance Mascots Grid -->
             <div class="stage-mascots-grid">
               <div class="stage-mascot-card band" onclick="openBoothById(2)">
-                <div class="stage-mascot-img-box">
-                  <img src="assets/mascot_bunny.png" alt="밴드부 토끼">
-                </div>
+                <div class="stage-mascot-img-box"><img src="assets/mascot_bunny.png" alt="밴드부 토끼"></div>
                 <div class="stage-mascot-details">
                   <span class="stage-tag band">🎸 2층 대강당</span>
-                  <h4>밴드부 (UY) 라이브 콘서트</h4>
+                  <h4>밴드부 (UY) 라이브</h4>
                   <p class="time">1부 10:45~11:30 · 2부 11:45~12:10</p>
-                  <p class="sub">일렉기타 &amp; 드럼 폭풍 사운드 라이브!</p>
+                  <p class="sub">폭발적인 락 &amp; 밴드 콘서트!</p>
                 </div>
               </div>
               <div class="stage-mascot-card dance" onclick="openBoothById(3)">
-                <div class="stage-mascot-img-box">
-                  <img src="assets/mascot_bear.png" alt="댄스부 곰돌이">
-                </div>
+                <div class="stage-mascot-img-box"><img src="assets/mascot_bear.png" alt="댄스부 곰돌이"></div>
                 <div class="stage-mascot-details">
                   <span class="stage-tag dance">💃 2층 대강당</span>
-                  <h4>러쉬온미 K-POP 댄스 공연</h4>
-                  <p class="time">1부 10:10~10:35 · 2부 11:45~12:05</p>
-                  <p class="sub">최신 힙합 &amp; K-POP 리믹스 퍼포먼스!</p>
+                  <h4>러쉬온미 K-POP 댄스</h4>
+                  <p class="time">1부 10:10~10:30 · 2부 11:45~12:05</p>
+                  <p class="sub">칼군무 &amp; 힙합 스페셜 무대!</p>
+                </div>
+              </div>
+              <div class="stage-mascot-card theater" onclick="openBoothById(1)">
+                <div class="stage-mascot-img-box"><img src="assets/mascot_panda.png" alt="시퀀스 레서판다"></div>
+                <div class="stage-mascot-details">
+                  <span class="stage-tag theater">🎭 1층 시청각실</span>
+                  <h4>시퀀스 창작 연극</h4>
+                  <p class="time">1회 09:40~10:10 · 2회 11:00~11:30</p>
+                  <p class="sub">영화 〈일주일간 친구〉 30분 각색극</p>
+                </div>
+              </div>
+              <div class="stage-mascot-card sport" onclick="openBoothById(4)">
+                <div class="stage-mascot-img-box"><img src="assets/mascot_tiger.png" alt="피에스 운양이"></div>
+                <div class="stage-mascot-details">
+                  <span class="stage-tag sport">🏃 2층 대강당</span>
+                  <h4>피에스 (P.S) 피지컬 배틀</h4>
+                  <p class="time">상시 운영 (09:10 ~ 12:10)</p>
+                  <p class="sub">런닝맨 · 순발력 · 악력왕 대결!</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="timeline-card" style="border-color:#ec4899;">
-            <div class="timeline-time">⏰ 3교시 : 10:40 ~ 12:10 (90분)</div>
-            <div class="timeline-title">🔄 2부 동아리 부스 운영 &amp; 관람 (B팀 체험 / A팀 운영)</div>
+            <div class="timeline-header-flex">
+              <div>
+                <div class="timeline-time">⏰ 3교시 : 10:40 ~ 12:10 (90분)</div>
+                <div class="timeline-title">🔄 2부 동아리 부스 운영 &amp; 관람 (A/B 교대)</div>
+              </div>
+              <img src="assets/mascot_bear.png" alt="댄스곰" class="timeline-corner-mascot">
+            </div>
             <div class="timeline-desc">
               • <strong>B팀 부원</strong> : 1층~5층 타 동아리 부스 자유 관람 및 체험 참여!<br>
               • <strong>A팀 부원</strong> : 본 동아리 부스 운영 및 방문 학생 안내·체험 진행<br>
-              • 모든 부원은 A팀/B팀 5:5 교대 원칙을 엄수하여 부스 운영과 관람에 모두 참여합니다.
+              • 모든 부원은 A팀/B팀 5:5 교대 원칙을 엄수하여 운영과 체험에 모두 참여합니다.
             </div>
           </div>
 
           <div class="timeline-card" style="border-color:#10b981;">
-            <div class="timeline-time">⏰ 4교시 : 12:10 ~ 13:00 (50분)</div>
-            <div class="timeline-title">🧹 전시장 및 체험장 철거, 대청소 (봉사활동 1시간 인정)</div>
+            <div class="timeline-header-flex">
+              <div>
+                <div class="timeline-time">⏰ 4교시 : 12:10 ~ 13:00 (50분)</div>
+                <div class="timeline-title">🧹 전시장 철거 및 대청소 (봉사활동 1시간)</div>
+              </div>
+              <img src="assets/mascot_puppy.png" alt="베이킹멍이" class="timeline-corner-mascot">
+            </div>
             <div class="timeline-desc">
               • <strong>원상 복구</strong> : 각 동아리 체험장 및 전시장 철거, 교실 책걸상 원위치 정돈<br>
               • <strong>분리배출 철저</strong> : 재활용품 및 쓰레기 분리배출, 동아리 담당 교사 최종 확인<br>
@@ -1254,9 +1425,22 @@
           </div>
         </div>
       </div>
-    </div>
-      </div>
     </main>
+
+    <!-- Cute 7 Mascot Friends Footer Banner -->
+    <div class="mascot-footer-card">
+      <div class="mascot-footer-squad">
+        <img src="assets/mascot_tiger.png" alt="운양이" onclick="blastFestiveConfetti()" title="청운제 파이팅!">
+        <img src="assets/mascot_bunny.png" alt="락토끼" onclick="openBoothById(2)" title="밴드부 UY">
+        <img src="assets/mascot_bear.png" alt="댄스곰" onclick="openBoothById(3)" title="러쉬온미 댄스">
+        <img src="assets/mascot_panda.png" alt="감성판다" onclick="openBoothById(1)" title="시퀀스 연극 & 포토">
+        <img src="assets/mascot_cat.png" alt="탐정냥" onclick="switchNav('genres');selectTheme('horror')" title="방탈출·추리">
+        <img src="assets/mascot_puppy.png" alt="베이킹멍이" onclick="switchNav('genres');selectTheme('food')" title="쿠키·슬라임 공방">
+        <img src="assets/mascot_hamster.png" alt="과학햄찌" onclick="switchNav('genres');selectTheme('science')" title="과학·융합실험">
+      </div>
+      <div style="font-size:12px; font-weight:800; color:#e2e8f0;">🐾 2026 운양고 청운제 마스코트 프렌즈</div>
+      <div style="font-size:10.5px; color:#94a3b8; margin-top:2px;">귀여운 캐릭터를 터치하면 해당 테마나 동아리로 바로 점프합니다!</div>
+    </div>
   </div>
 
   <!-- ============================================================
@@ -1331,14 +1515,14 @@
     "cat": "🎸 무대찢는 공연·시네마",
     "cat_id": "stage",
     "emoji": "🎬",
-    "room": "시청각실",
+    "room": "시청각실 (1층)",
     "floor": 1,
     "teacher": "임채영, 주혜리",
-    "leader": "부장 강소율(20201) · 차장 심다윤(20518)",
+    "leader": "부장 강소을(20201) · 차장 심다윤(20518)",
     "members": "26명",
     "status": "확정",
-    "desc": "기억이 일주일마다 리셋되는 특별한 우정 이야기! 영화 〈일주일간 친구〉를 운양고 학생들의 시선으로 재해석한 감동 연극 무대. [공연 시간: 1부 09:40~10:20 / 2부 11:00~11:40]",
-    "timetable": "• 1회차: 09:40 ~ 10:20 (40분)<br>• 2회차: 11:00 ~ 11:40 (40분)<br>※ 공연 시작 5분 전까지 1층 시청각실 입장 완료 권장"
+    "desc": "기억이 일주일마다 리셋되는 특별한 우정 이야기! 영화 〈일주일간 친구〉를 운양고 학생들의 시선으로 각색해 무대에 올리는 30분 감동 연극 공연.",
+    "timetable": "• 1회차: 09:40 ~ 10:10 (30분, 1층 시청각실)<br>• 2회차: 11:00 ~ 11:30 (30분, 1층 시청각실)<br>※ 공연 시작 5분 전까지 1층 시청각실 입장 권장"
   },
   {
     "id": 2,
@@ -1354,13 +1538,13 @@
     "leader": "부장 정소연(20128) · 차장 심제우(11013)",
     "members": "11명",
     "status": "확정",
-    "desc": "가슴을 울리는 드럼 비트와 화려한 일렉기타 사운드! 운양고 대표 락밴드 UY의 폭발적인 대강당 라이브 콘서트. (청운제 라이브 공연 및 버스킹 스테이지)",
-    "timetable": "• 1부 라이브 본공연: 10:45 ~ 11:30 (45분, 대강당 무대)<br>• 2부 앵콜 라이브: 11:45 ~ 12:10 (25분, 대강당 무대)"
+    "desc": "가슴을 울리는 드럼 비트와 화려한 일렉기타 사운드! 동아리 친구들과 땀 흘려 일궈낸 운양고 대표 밴드부 UY의 폭발적인 대강당 라이브 콘서트.",
+    "timetable": "• 1부 라이브 본공연: 10:45 ~ 11:30 (45분, 2층 대강당)<br>• 2부 앵콜 라이브: 11:45 ~ 12:10 (25분, 2층 대강당)"
   },
   {
     "id": 3,
     "name": "러쉬온미",
-    "topic": "청운제 K-POP 댄스 리믹스 공연",
+    "topic": "청운제 K-POP 댄스 공연",
     "official_type": "공연형",
     "cat": "🎸 무대찢는 공연·시네마",
     "cat_id": "stage",
@@ -1371,13 +1555,13 @@
     "leader": "부장 손채아(20214) · 차장 박서연(21011)",
     "members": "14명",
     "status": "확정",
-    "desc": "최신 인기 K-POP과 힙합 트렌드를 담은 파워풀하고 매혹적인 퍼포먼스! 운양고 최고의 댄스 크루 러쉬온미의 청운제 스페셜 스테이지.",
-    "timetable": "• 1부 무대: 10:10 ~ 10:35 (25분, 대강당)<br>• 2부 앵콜 무대: 11:45 ~ 12:05 (20분, 대강당)"
+    "desc": "1년간 갈고닦은 칼군무와 강렬한 팀워크! 최신 K-POP과 힙합 트렌드를 담아 열정과 개성을 폭발시키는 운양고 댄스부 러쉬온미의 청운제 스페셜 무대.",
+    "timetable": "• 1부 무대: 10:10 ~ 10:30 (약 15~20분, 2층 대강당)<br>• 2부 앵콜 무대: 11:45 ~ 12:05 (약 15~20분, 2층 대강당)"
   },
   {
     "id": 4,
     "name": "피에스 (P.S)",
-    "topic": "체대입시부를 이겨라!! (피지컬 배틀 챌린지)",
+    "topic": "체대입시부를 이겨라!!",
     "official_type": "체육활동형",
     "cat": "⚡ 도파민폭발 게임·배틀",
     "cat_id": "game",
@@ -1386,15 +1570,15 @@
     "floor": 2,
     "teacher": "홍철승",
     "leader": "부장 성해담(20717) · 차장 최현우(20531)",
-    "members": "26명",
+    "members": "19명",
     "status": "확정",
-    "desc": "피지컬 100의 운양고 버전! 제자리멀리뛰기, 런닝맨 방울 레이스, 최강 악력 측정 대결로 체대입시부 선배들을 꺾고 최고의 피지컬 킹에 도전하세요!",
+    "desc": "체대입시부의 자존심을 건 한판 승부! 순발력 게임, 운동 대결, 런닝맨 방울 레이스, 최강 악력 측정 챌린지로 다양한 체육활동을 직접 체험해 보세요!",
     "timetable": "• 대강당 피지컬 챌린지 상시 운영 (09:10 ~ 12:10)<br>• 매시 정각 '악력왕 & 런닝맨 보스전' 이벤트 진행"
   },
   {
     "id": 5,
     "name": "베이킹 메이킹",
-    "topic": "코코아밤 만들기 및 토핑 데코레이션",
+    "topic": "코코아밤 만들기 및 데코레이션",
     "official_type": "체험/실습형",
     "cat": "🎨 슬라임·쿠키·DIY공방",
     "cat_id": "food",
@@ -1405,64 +1589,64 @@
     "leader": "부장 신수인(20417) · 차장 신다경(20316)",
     "members": "15명",
     "status": "확정",
-    "desc": "초콜릿 구 안에 마시멜로와 코코아 파우더를 쏙! 따뜻한 우유를 부으면 마법처럼 꽃피는 나만의 크리스마스 코코아밤 제작 공방.",
+    "desc": "불이나 오븐 없이도 쉽고 즐겁게! 동글동글 초콜릿 구 안에 마시멜로와 코코아 파우더를 채우고 디저트 데코까지 직접 꾸미는 달콤 코코아밤 베이킹 공방.",
     "timetable": "• 상시 운영 (A/B팀 교대)"
   },
   {
     "id": 6,
     "name": "알고리즘",
-    "topic": "디지털 방탈출 & 코딩 게임 3종 체험",
+    "topic": "디지털 방탈출 & 자체 제작 게임 3종",
     "official_type": "체험/실습형",
     "cat": "⚡ 도파민폭발 게임·배틀",
     "cat_id": "game",
     "emoji": "💻",
-    "room": "컴퓨터실 (2층)",
+    "room": "정보실 · 컴퓨터실 (2층)",
     "floor": 2,
     "teacher": "정선옥",
     "leader": "부장 윤여민(20120) · 차장 홍성원(20532)",
     "members": "20명",
     "status": "확정",
-    "desc": "학생들이 직접 프로그래밍한 아케이드·퍼즐·레이싱 코딩 게임 3종 클리어 챌린지! 미션 완수 시 즉석 기념 촬영 이벤트.",
-    "timetable": "• 상시 운영 (컴퓨터실 PC 30석 가동)"
+    "desc": "동아리 부원들이 직접 코딩하고 개발한 게임을 플레이하라! 디지털 방탈출과 코딩 게임 체험 후 즉석카메라 폴라로이드 기념사진 촬영까지.",
+    "timetable": "• 상시 운영 (2층 정보실 PC 가동)"
   },
   {
     "id": 7,
     "name": "소나기 (방송부)",
-    "topic": "음향·조명 특수연출 미션형 방탈출 (부적 찾기)",
+    "topic": "음향·조명 미션형 방탈출 (숨겨진 부적 찾기)",
     "official_type": "방탈출/추리형",
     "cat": "👻 등골오싹 방탈출·호러",
     "cat_id": "horror",
     "emoji": "📻",
-    "room": "방송실 (2층)",
+    "room": "방송실 · 방송실 앞 (2층)",
     "floor": 2,
     "teacher": "정원양",
     "leader": "부장 황혜원(20132) · 차장 곽민진(208)",
-    "members": "10명",
+    "members": "18명",
     "status": "확정",
-    "desc": "방송실의 전문 음향 콘솔과 무대 조명을 풀가동한 리얼 서스펜스 방탈출! 어두운 스튜디오 안에서 미스터리 부적을 찾아 탈출하라!",
-    "timetable": "• 회차당 10~15분 소요, 1회 4~5명 입장"
+    "desc": "방송부의 음향·조명 연출과 시나리오가 결합된 3분 타임어택 방탈출! 제한 시간 안에 붉은 부적을 모두 찾아 탈출에 성공하면 달콤한 선물이 기다립니다.",
+    "timetable": "• 제한시간 3분 스피드 방탈출 (방송실 및 방송실 앞 상시 순환)"
   },
   {
     "id": 8,
     "name": "도서관 사람들",
-    "topic": "감성 북카페 & 슈링클 책갈피·키링 제작",
+    "topic": "감성 북카페 (장미조화 · 비밀편지 · 슈링클 키링)",
     "official_type": "체험/실습형",
     "cat": "💖 감성포토·북카페·힐링",
     "cat_id": "romance",
     "emoji": "📚",
-    "room": "도서관 (2층)",
+    "room": "도서관 모둠학습실 (2층)",
     "floor": 2,
     "teacher": "신보아",
     "leader": "부장 유지안(20217) · 차장 이수현(20623)",
-    "members": "12명",
+    "members": "13명",
     "status": "확정",
-    "desc": "책 속 한 문장으로 보는 2027 운세 뽑기, 친구에게 전하는 비밀 책갈피 편지, 오븐에 구워 만드는 나만의 슈링클 독서 키링 공방.",
-    "timetable": "• 상시 운영 (도서관 모둠학습실)"
+    "desc": "독서와 다채로운 공예가 만나는 힐링 공간! 책 속 구절 뽑기와 도서 추천 릴레이, 미니 편지지 작성 및 나만의 슈링클 책갈피·키링 만들기 체험.",
+    "timetable": "• 상시 운영 (2층 도서관 모둠학습실)"
   },
   {
     "id": 9,
     "name": "마케팅 허브",
-    "topic": "스릴 트랩 미션 체험 & 감성 포토존",
+    "topic": "트랩 미션 체험 & 스릴 어트랙션",
     "official_type": "방탈출/추리형",
     "cat": "👻 등골오싹 방탈출·호러",
     "cat_id": "horror",
@@ -1471,15 +1655,15 @@
     "floor": 3,
     "teacher": "신동빈, 김진아",
     "leader": "부장 남가윤(20905) · 차장 이채원(210)",
-    "members": "18명",
+    "members": "25명",
     "status": "확정",
-    "desc": "레이저 트랩 센서를 건드리지 않고 제한시간 내 탈출하는 고난도 신체 미션! 탈출 성공 후 네온사인 감성 포토존에서 인생샷 촬영.",
-    "timetable": "• 회차당 5~8분 소요, 1회 2~3명 입장"
+    "desc": "검은 장막과 출입 금지 테이프가 감싼 1-6반 비밀 구역! 자체 제작 트랩 미션을 통과하며 순위를 겨루고 인증 포토존까지 즐기는 스릴 체험.",
+    "timetable": "• 회차당 약 5~8분 순환 운영"
   },
   {
     "id": 10,
     "name": "다각도",
-    "topic": "폐교를 배경으로 한 학교폭력 추리 방탈출",
+    "topic": "폐교 배경 학교폭력 추리 방탈출",
     "official_type": "방탈출/추리형",
     "cat": "👻 등골오싹 방탈출·호러",
     "cat_id": "horror",
@@ -1490,8 +1674,8 @@
     "leader": "부장 정하랑(21030) · 차장 이윤영(21018)",
     "members": "36명",
     "status": "확정",
-    "desc": "교실 2개를 튼 대규모 미스터리 세트장! 폐교에서 발견된 의문의 일기장과 증거 단서들을 수집하여 진실을 밝혀내는 몰입형 수사 방탈출.",
-    "timetable": "• 회차당 15분 소요, 1회 6~8명 팀 단위 입장"
+    "desc": "교실 2칸을 연결한 초대형 수사 세트! 폐교를 배경으로 학교폭력 피해와 상처의 진실을 붉은 조명과 형광 단서 속에 추적하는 몰입형 방탈출.",
+    "timetable": "• 회차당 약 15분 소요 (팀 단위 순환 입장)"
   },
   {
     "id": 11,
@@ -1507,8 +1691,8 @@
     "leader": "부장 이태휘(20126) · 차장 이채은(20125)",
     "members": "34명",
     "status": "확정",
-    "desc": "물컹물컹 촉감 힐링 슬라임 & 수제 말랑이 제작, 금손 부원들이 1분 만에 그려주는 맞춤 캐리커쳐와 귀여운 페이스페인팅 체험 부스.",
-    "timetable": "• 상시 운영 (체험별 부스 4구역 운영)"
+    "desc": "전구 트리와 산타 모자가 가득한 크리스마스 공방! 눈꽃 슬라임 & 말랑이 제작부터 금손 부원들의 캐리커쳐, 페이스페인팅까지 한자리에서 체험.",
+    "timetable": "• 상시 운영 (코너별 동시 체험)"
   },
   {
     "id": 12,
@@ -1521,16 +1705,16 @@
     "room": "3-10 (3층)",
     "floor": 3,
     "teacher": "홍정화, 이민희",
-    "leader": "부장 권수연(20503) · 차장 강윤서(20101)",
+    "leader": "부장 권수영(20503) · 차장 강윤서(20101)",
     "members": "23명",
     "status": "확정",
-    "desc": "붉은 부적과 전통 설화 콘셉트의 한국형 공포 테마! 교실 곳곳에 숨겨진 단서를 모아 사라진 실종자의 행방을 밝혀내세요.",
-    "timetable": "• 회차당 10분 소요, 1회 4명 입장"
+    "desc": "미술동아리의 홍보·의상·공간·캐릭터 역량을 총동원한 독창적 호러 테마! 귀신 마스코트가 서빙하는 오싹 귀신까페에서 달콤 간식과 미션을 함께 즐기세요.",
+    "timetable": "• 상시 순환 운영 (3학년 10반)"
   },
   {
     "id": 13,
     "name": "아스클",
-    "topic": "손 끝으로 만나는 생명과학 (손가락화석 · DNA키링 · 탱탱볼)",
+    "topic": "손 끝으로 만나는 생명과학 (화석·DNA키링·탱탱볼)",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
@@ -1539,32 +1723,32 @@
     "floor": 4,
     "teacher": "김정현, 최화선",
     "leader": "부장 이예지(20919) · 차장 최예령(20732)",
-    "members": "32명",
+    "members": "30명",
     "status": "확정",
-    "desc": "알지네이트를 이용한 실물 손가락 화석 모형 제작, 4색 염기 서열을 조합한 이중나선 DNA 비즈 키링, 온도에 따라 탄성이 바뀌는 신기한 탱탱볼 실험!",
-    "timetable": "• 상시 운영 (화학실 실험대 8개 구역)"
+    "desc": "생명과학 및 의학의 핵심인 연대 측정 화석과 유전자 DNA 키링을 직접 제작하고 온도변화 탱탱볼 원리를 즐겁게 탐구하는 보건·의학 체험 부스.",
+    "timetable": "• 상시 운영 (4층 화학실)"
   },
   {
     "id": 14,
     "name": "화생방",
-    "topic": "화학적 원리를 활용한 비누 및 천연 립밤 제작",
+    "topic": "화학적 원리를 활용한 천연 비누 및 립밤 제작",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
     "emoji": "🧼",
-    "room": "생물실 (4층)",
+    "room": "생물실 · 생명실 (4층)",
     "floor": 4,
     "teacher": "이재권, 이이라",
     "leader": "부장 정윤채(20923) · 차장 윤희영(20917)",
-    "members": "33명",
+    "members": "32명",
     "status": "확정",
-    "desc": "비누화 반응과 유화 원리를 배우며 만드는 나만의 천연 보습 비누와 겨울철 필수템 천연 오일 립밤 만들기 클래스.",
-    "timetable": "• 상시 운영 (체험 소요시간 약 15분)"
+    "desc": "일상에서 쓰는 비누와 립밤 속 비누화·상태 변화 원리를 직접 실험! 천연 오일과 왁스를 녹여 나만의 촉촉한 수제 비누·립밤을 만들어 가는 실생활 과학 공방.",
+    "timetable": "• 상시 운영 (도입 10분 / 제작 70분 순환)"
   },
   {
     "id": 15,
     "name": "스파크",
-    "topic": "물리를 이용한 롤러코스터 (역학적 에너지 보존 체험)",
+    "topic": "물리를 이용한 롤러코스터 (역학적 에너지 체험)",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
@@ -1575,13 +1759,13 @@
     "leader": "부장 박경민(20310) · 차장 주건태(20926)",
     "members": "32명",
     "status": "확정",
-    "desc": "위치에너지와 운동에너지의 전환 원리로 직접 레일을 설계하고 쇠구슬을 굴리는 초대형 롤러코스터 루프 챌린지 및 스피드 물리 퀴즈!",
-    "timetable": "• 상시 운영 (물리실 중앙 트랙)"
+    "desc": "역학적 에너지 보존 법칙과 위치에너지·운동에너지 전환 원리를 눈으로 확인! 직접 레일을 따라 구르는 MDF 롤러코스터를 체험하고 퀴즈에 도전하세요.",
+    "timetable": "• 상시 운영 (4층 물리실)"
   },
   {
     "id": 16,
     "name": "멘날바",
-    "topic": "쥬라기 월드 (공룡알 왁스볼 · 비즈화석 · 나만의 향수)",
+    "topic": "쥬라기 월드 (공룡알 왁스볼 · 비즈화석 · 향수)",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
@@ -1592,30 +1776,30 @@
     "leader": "부장 박윤아(20611) · 차장 선건우(20515)",
     "members": "38명",
     "status": "확정",
-    "desc": "고생대부터 중생대까지! 공룡알 모양의 왁스 방향제 제작, 지층 속 비즈 화석 발굴 체험, 천연 에센셜 오일을 블렌딩하는 시그니처 향수 만들기.",
-    "timetable": "• 상시 운영 (지구과학실 실험대 6조)"
+    "desc": "공룡 탈과 함께하는 지질 탐험! 공룡알 모양 비즈왁스 왁스볼 만들기, 지층 화석 발굴 팔찌 공예, 화학적 결합 원리를 활용한 나만의 향수 블렌딩 체험.",
+    "timetable": "• 상시 운영 (4층 지구과학실)"
   },
   {
     "id": 17,
     "name": "소비의 정석",
-    "topic": "소비자 취향과 합리적 선택을 반영한 슬라임 제작",
+    "topic": "나만의 슬라임 만들기 (합리적 소비·선택 체험)",
     "official_type": "체험/실습형",
     "cat": "🎨 슬라임·쿠키·DIY공방",
     "cat_id": "food",
-    "emoji": "🧪",
+    "emoji": "🫧",
     "room": "1-3 (4층)",
     "floor": 4,
     "teacher": "장용훈, 이정훈",
     "leader": "부장 엄지우(20514) · 차장 유나경(20617)",
     "members": "27명",
     "status": "확정",
-    "desc": "소비자의 기호와 트렌드를 반영하여 색상·펄·파츠를 커스텀하는 슬라임 연구소! 촉감과 소리로 스트레스를 날려버리는 맞춤 슬라임 제작.",
-    "timetable": "• 상시 운영"
+    "desc": "소비자의 취향과 합리적 선택의 기준을 경험하는 DIY 체험! 블루베리·바닐라·메론 등 다채로운 향료와 스팽글·크런치 파츠로 나만의 슬라임을 설계해 보세요.",
+    "timetable": "• 상시 운영 (4층 1-3 교실)"
   },
   {
     "id": 18,
     "name": "경제·경영 위키",
-    "topic": "경제 팝업카페 & 크리스마스 포토·카드 카페",
+    "topic": "경제 팝업카페 & 크리스마스 포토카페",
     "official_type": "체험/실습형",
     "cat": "💖 감성포토·북카페·힐링",
     "cat_id": "romance",
@@ -1626,13 +1810,13 @@
     "leader": "부장 황주상(20232) · 차장 서아영(20112)",
     "members": "40명",
     "status": "확정",
-    "desc": "[1-1 팝업카페] 경제 퀴즈 & 죄수의 딜레마 게임 쿠폰 교환소! [1-2 포토카페] 크리스마스 트리 감성 포토존 및 새해 소원 카드 캘리그라피 체험.",
-    "timetable": "• 상시 운영 (1-1반 게임존 / 1-2반 포토존)"
+    "desc": "[1-1 팝업카페] 경영·경제 퀴즈, 죄수의 딜레마·윷놀이 게임 포인트로 음료와 디저트 쿠폰 교환! [1-2 포토카페] 크리스마스 감성 콘셉트 포토존 운영.",
+    "timetable": "• 상시 운영 (1-1반 경제카페 / 1-2반 크리스마스 포토카페)"
   },
   {
     "id": 19,
     "name": "애그부",
-    "topic": "애니·게임·만화 3색 부스 (전시회 · 캐릭터 쿠키 · 캐리커쳐)",
+    "topic": "애니·게임·만화 전시회 & 쿠키·캐리커쳐 부스",
     "official_type": "문화예술형",
     "cat": "🎨 슬라임·쿠키·DIY공방",
     "cat_id": "food",
@@ -1641,10 +1825,10 @@
     "floor": 5,
     "teacher": "이혜림, 김유은, 이성희",
     "leader": "부장 최수아(21031) · 차장 김유림(20606)",
-    "members": "56명",
+    "members": "43명",
     "status": "확정",
-    "desc": "교실 3개를 아우르는 대규모 서브컬처 페스티벌! 부원들의 창작 일러스트 전시회(2-1), 귀여운 캐릭터 아이싱 쿠키 꾸미기(2-2), 웹툰풍 캐리커쳐 부스(2-3).",
-    "timetable": "• 상시 운영 (3개 교실 테마별 동시 오픈)"
+    "desc": "교실 3개를 잇는 초대형 애니메이션 페스티벌! 부원 창작 일러스트 작품 전시회(2-1), 초코펜으로 그리는 캐릭터 쿠키 & 개성 만점 캐리커쳐 부스(2-2·2-3).",
+    "timetable": "• 상시 운영 (5층 2-1~2-3 동시 오픈)"
   },
   {
     "id": 20,
@@ -1660,13 +1844,13 @@
     "leader": "부장 조수빈(20432) · 차장 박서진(21012)",
     "members": "39명",
     "status": "확정",
-    "desc": "지적 탐구와 역동적인 배틀의 결합! 스피드 세계 국기 퀴즈, 레이싱 휠 시뮬레이터 배틀, 표적을 명중시키는 사격 챌린지까지 3단 콤보 게임존.",
-    "timetable": "• 상시 운영"
+    "desc": "사회와 문화 속 세계의 매력을 게임으로 즐기자! 스릴 넘치는 세계 국기 맞히기 플래시 퀴즈, 레이싱 게임 및 사격 표적 챌린지까지 3종 배틀 체험.",
+    "timetable": "• 상시 운영 (5층 2-4 교실)"
   },
   {
     "id": 21,
     "name": "프리즘",
-    "topic": "일상 속 과학·수학 융합 체험 4종 부스",
+    "topic": "일상 속 과학·수학 융합체험 (탱탱볼·자외선팔찌·쿠키)",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
@@ -1675,15 +1859,15 @@
     "floor": 5,
     "teacher": "김은선",
     "leader": "부장 김명록(20206) · 차장 김애경(20208)",
-    "members": "21명",
+    "members": "17명",
     "status": "확정",
-    "desc": "고분자 폴리머 탱탱볼 만들기, 비즈 구슬 쿠키 데코, 자외선 감응 비즈 팔찌 공예, 수학적 프랙탈 슬라임까지 과학과 수학의 신비한 융합 체험.",
-    "timetable": "• 상시 운영"
+    "desc": "과학과 수학 원리를 쉽고 재미있게! 빛에 반응하는 자외선 비즈 팔찌, 탱탱볼 만들기, 비즈 공예와 퀴즈 상품이 가득한 융합탐구 체험관.",
+    "timetable": "• 상시 운영 (5층 2-5 교실)"
   },
   {
     "id": 22,
     "name": "또래상담부",
-    "topic": "크리스마스 포토부스 & 소원트리 롤링페이퍼",
+    "topic": "크리스마스 포토부스 & 소원트리",
     "official_type": "문화예술형",
     "cat": "💖 감성포토·북카페·힐링",
     "cat_id": "romance",
@@ -1692,61 +1876,61 @@
     "floor": 5,
     "teacher": "정희진",
     "leader": "부장 방소희(20415) · 차장 정경운(21026)",
-    "members": "20명",
+    "members": "12명",
     "status": "확정",
-    "desc": "마음이 따뜻해지는 힐링 공간! 크리스마스 루돌프·산타 소품 포토부스에서 폴라로이드 촬영 및 1년 동안 수고한 서로에게 전하는 소원트리 메시지 카드 작성.",
-    "timetable": "• 상시 운영"
+    "desc": "또래상담부와 함께하는 따뜻한 연말 추억! 크리스마스 벽트리와 전구 배경 앞에서 친구들과 인생 사진을 남기고 소원트리에 응원의 메시지를 걸어보세요.",
+    "timetable": "• 상시 운영 (5층 2-6 교실)"
   },
   {
     "id": 23,
     "name": "스카이",
-    "topic": "물리역학 롤러코스터 & 항공 과학 원리 체험",
+    "topic": "물리역학 롤러코스터",
     "official_type": "체험/실습형",
     "cat": "🧪 신기방기 과학·융합실험",
     "cat_id": "science",
-    "emoji": "✈️",
+    "emoji": "🎢",
     "room": "2-7 (5층)",
     "floor": 5,
     "teacher": "이영탁",
     "leader": "부장 신성민(20416) · 차장 박은재(20411)",
-    "members": "16명",
+    "members": "17명",
     "status": "확정",
-    "desc": "베르누이 정리와 양력의 법칙을 배우는 에어로 로켓 발사 체험 및 중력가속도를 극복하는 루프형 롤러코스터 구조물 설계 챌린지.",
-    "timetable": "• 상시 운영"
+    "desc": "물리역학을 활용한 직접 설계 롤러코스터 체험! 2층 교실 공간을 입체적으로 활용한 대형 트랙을 따라 중력과 구심력의 짜릿한 작용·반작용을 탐구합니다.",
+    "timetable": "• 상시 운영 (5층 2-7 교실)"
   },
   {
     "id": 24,
     "name": "교집합",
-    "topic": "도전! 교집합 퀴즈쇼 (상식·초성·넌센스·노래·OX)",
+    "topic": "도전! 교집합 퀴즈쇼",
     "official_type": "체험/실습형",
     "cat": "⚡ 도파민폭발 게임·배틀",
     "cat_id": "game",
-    "emoji": "🎪",
+    "emoji": "🏆",
     "room": "2-8 · 2-9 (5층)",
     "floor": 5,
     "teacher": "서성미, 장현정",
     "leader": "부장 박미소(20908) · 차장 김민지(20903)",
-    "members": "32명",
+    "members": "34명",
     "status": "확정",
-    "desc": "교실 2개를 연결한 초대형 퀴즈 버라이어티! 상식, 케이팝 1초 듣고 노래 맞히기, 훈민정음 초성 퀴즈, 배꼽 잡는 넌센스와 최종 생존자 OX 퀴즈 배틀.",
-    "timetable": "• 매시 15분, 45분 회차별 퀴즈쇼 진행"
+    "desc": "스탠리 텀블러, 닥터자르트 핸드크림, 바디미스트 등 초호화 상품이 걸린 교실 2칸 연결 대형 퀴즈쇼! 상식·초성·노래 맞히기 등 참여형 협동 게임.",
+    "timetable": "• 회차별 퀴즈쇼 상시 진행 (5층 2-8 · 2-9)"
   },
   {
     "id": 25,
     "name": "아뜰리에",
-    "topic": "나만의 컬러 슬라임 만들기 카페",
+    "topic": "나만의 컬러 슬라임 만들기",
     "official_type": "체험/실습형",
     "cat": "🎨 슬라임·쿠키·DIY공방",
     "cat_id": "food",
     "emoji": "🫧",
     "room": "2-10 (5층)",
     "floor": 5,
-    "teacher": "노기원, 김정택",
+    "teacher": "노기원",
     "leader": "부장 윤여영(20522) · 차장 송지인(20114)",
-    "members": "27명",
+    "members": "25명",
     "status": "확정",
-    "desc": "팬톤 컬러칩처럼 영롱한 나만의 색소와 반짝이 글리터, 폼볼을 조합하여 완성하는 커스텀 프리미엄 버터·클라우드 슬라임 카페.",
-    "timetable": "• 상시 운영"
+    "desc": "미술동아리의 디자인 감성을 살린 색채 감각 슬라임 카페! 다채로운 색상 배합과 아모스 호감·물풀 베이스로 내 손안의 작은 예술 작품을 빚어보세요.",
+    "timetable": "• 상시 운영 (5층 2-10 교실)"
   }
 ];
     const CATEGORIES = [
@@ -1809,30 +1993,33 @@
       1: `<svg viewBox="0 0 380 520" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="360" height="500" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
-          <!-- 상단: 운동장 & 농구장 -->
-          <g class="svg-room facility" onclick="openFacilityModal('운동장 / 야외광장', '야외 휴게 공간 및 이동 동선')">
+          <!-- 상단: 운동장 & 출입구 (운양이 마중!) -->
+          <g class="svg-room facility" onclick="openFacilityModal('운동장 / 야외광장', '야외 휴게 공간 및 1층 주출입구 동선')">
             <rect x="25" y="22" width="330" height="75" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,4"/>
-            <text x="190" y="55" text-anchor="middle" font-size="14" font-weight="900" fill="#065f46">🌳 운양고 대운동장 &amp; 모담생태공원 출입구</text>
-            <text x="190" y="77" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">1층 주출입구 연결</text>
+            <image href="assets/mascot_tiger.png" x="28" y="26" width="64" height="64" />
+            <text x="212" y="54" text-anchor="middle" font-size="13.5" font-weight="900" fill="#065f46">🌳 대운동장 &amp; 모담생태공원</text>
+            <text x="212" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">1층 주출입구 · 운양이 환영 존 🐯</text>
           </g>
 
-          <rect x="150" y="106" width="80" height="24" rx="6" fill="#e2e8f0"/>
+          <rect x="145" y="106" width="90" height="24" rx="6" fill="#e2e8f0"/>
           <text x="190" y="122" text-anchor="middle" font-size="11" font-weight="800" fill="#475569">1층 중앙복도</text>
 
           <!-- 좌측 상단: 시청각실 (시퀀스 id: 1) -->
           <g class="svg-room booth" id="svg-booth-1" onclick="openBoothById(1)">
             <rect x="25" y="140" width="155" height="150" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
-            <text x="102" y="185" text-anchor="middle" font-size="14" font-weight="900" fill="#312e81">🎭 시청각실</text>
-            <text x="102" y="210" text-anchor="middle" font-size="13" font-weight="900" fill="#4f46e5">시퀀스 (연극부)</text>
-            <text x="102" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">영화 〈일주일간 친구〉</text>
-            <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">각색 연극 공연 (30분)</text>
+            <image href="assets/mascot_panda.png" x="72" y="145" width="60" height="60" />
+            <text x="102" y="220" text-anchor="middle" font-size="13.5" font-weight="900" fill="#312e81">🎭 시청각실</text>
+            <text x="102" y="242" text-anchor="middle" font-size="13" font-weight="900" fill="#4f46e5">시퀀스 (연극부)</text>
+            <text x="102" y="261" text-anchor="middle" font-size="10" font-weight="700" fill="#6366f1">영화 〈일주일간 친구〉</text>
+            <text x="102" y="277" text-anchor="middle" font-size="10" font-weight="700" fill="#6366f1">각색 연극 공연 (30분)</text>
           </g>
 
-          <!-- 좌측 하단: 음악실 (비운영 공간) -->
-          <g class="svg-room facility" onclick="openFacilityModal('음악실', '음악 수업 교실 (동아리 발표회 부스 미운영 교실)')">
+          <!-- 좌측 하단: 음악실 (발표회 미운영 교실) -->
+          <g class="svg-room facility" onclick="openFacilityModal('음악실', '음악 수업 교실 (동아리 발표회 부스 미운영 교실 — 밴드부는 2층 대강당에서 공연합니다!)')">
             <rect x="25" y="302" width="155" height="150" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-            <text x="102" y="365" text-anchor="middle" font-size="14" font-weight="800" fill="#475569">🎵 음악실</text>
-            <text x="102" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#94a3b8">(발표회 미운영 공간)</text>
+            <text x="102" y="362" text-anchor="middle" font-size="14" font-weight="800" fill="#475569">🎵 음악실</text>
+            <text x="102" y="388" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">(발표회 미운영 교실)</text>
+            <text x="102" y="408" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6366f1">※ 밴드부 공연은 2층 대강당!</text>
           </g>
 
           <!-- 우측 날개 (편의 & 행정 구역) -->
@@ -1858,108 +2045,117 @@
           <rect x="25" y="464" width="330" height="30" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
           <text x="190" y="483" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 1층 남/여 화장실  •  🪜 중앙 계단 &amp; E/V</text>
         </svg>`,
-      2: `<svg viewBox="0 0 380 550" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="360" height="530" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+      2: `<svg viewBox="0 0 380 560" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="360" height="540" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
           <!-- 상단: 대강당 (운양관) - 밴드부(2), 러쉬온미(3), 피에스(4) 공동 운영 -->
           <g class="svg-room booth" id="svg-booth-multi-3" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">
-            <rect x="25" y="24" width="330" height="126" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
-            <text x="190" y="50" text-anchor="middle" font-size="14.5" font-weight="900" fill="#312e81">🏛️ 대강당 (운양관) — 3개 동아리 공연·부스</text>
-            <text x="190" y="73" text-anchor="middle" font-size="12" font-weight="800" fill="#4338ca">🎸 밴드부(UY) 라이브 공연  •  💃 러쉬온미 K-POP 댄스</text>
-            <text x="190" y="95" text-anchor="middle" font-size="12" font-weight="800" fill="#1d4ed8">🏋️ 피에스(P.S) : 체대입시부를 이겨라!! (순발력·런닝맨·악력)</text>
-            <text x="190" y="117" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">👆 터치하면 3개 동아리 상세 정보를 볼 수 있습니다</text>
+            <rect x="25" y="22" width="330" height="134" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
+            <image href="assets/mascot_bunny.png" x="28" y="30" width="54" height="54" />
+            <image href="assets/mascot_bear.png" x="298" y="30" width="54" height="54" />
+            <text x="190" y="48" text-anchor="middle" font-size="14" font-weight="900" fill="#312e81">🏛️ 대강당 (운양관)</text>
+            <text x="190" y="68" text-anchor="middle" font-size="11.5" font-weight="800" fill="#4f46e5">3개 동아리 특별 무대·부스</text>
+            <text x="190" y="96" text-anchor="middle" font-size="11.5" font-weight="800" fill="#4338ca">🎸 밴드부(UY) 라이브  •  💃 러쉬온미 댄스</text>
+            <text x="190" y="116" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1d4ed8">🏋️ 피에스(P.S) : 체대입시부를 이겨라!!</text>
+            <text x="190" y="140" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">👆 터치하면 3개 동아리 상세 정보를 볼 수 있습니다</text>
           </g>
 
-          <rect x="145" y="156" width="90" height="24" rx="6" fill="#e2e8f0"/>
-          <text x="190" y="172" text-anchor="middle" font-size="11" font-weight="800" fill="#475569">2층 중앙복도</text>
+          <rect x="145" y="164" width="90" height="24" rx="6" fill="#e2e8f0"/>
+          <text x="190" y="180" text-anchor="middle" font-size="11" font-weight="800" fill="#475569">2층 중앙복도</text>
 
           <!-- 중단 좌측: 기술가정실 (베이킹 메이킹 id: 5) -->
           <g class="svg-room booth" id="svg-booth-5" onclick="openBoothById(5)">
-            <rect x="25" y="190" width="158" height="92" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="104" y="220" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🍫 기술가정실(기가실)</text>
-            <text x="104" y="243" text-anchor="middle" font-size="12.5" font-weight="900" fill="#b45309">베이킹 메이킹</text>
-            <text x="104" y="263" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d97706">달콤 코코아밤 만들기</text>
+            <rect x="25" y="196" width="158" height="96" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+            <image href="assets/mascot_puppy.png" x="29" y="204" width="44" height="44" />
+            <text x="122" y="222" text-anchor="middle" font-size="12" font-weight="900" fill="#92400e">🍫 기술가정실</text>
+            <text x="122" y="243" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">베이킹 메이킹</text>
+            <text x="104" y="274" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d97706">달콤 코코아밤 만들기</text>
           </g>
 
           <!-- 중단 우측: 청운관 & 방과후교실 -->
           <g class="svg-room facility" onclick="openFacilityModal('청운관 (자기주도학습실)', '2층 청운관 및 방과후교실 구역')">
-            <rect x="197" y="190" width="158" height="92" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-            <text x="276" y="228" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">📖 청운관</text>
-            <text x="276" y="250" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748b">자기주도학습실 / 방과후교실</text>
+            <rect x="197" y="196" width="158" height="96" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="276" y="236" text-anchor="middle" font-size="13" font-weight="800" fill="#334155">📖 청운관</text>
+            <text x="276" y="258" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748b">자기주도학습실 / 방과후교실</text>
           </g>
 
           <!-- 하단 좌측: 컴퓨터실/정보실 (알고리즘 id: 6) -->
           <g class="svg-room booth" id="svg-booth-6" onclick="openBoothById(6)">
-            <rect x="25" y="294" width="158" height="95" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
-            <text x="104" y="326" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">💻 정보실 (컴퓨터실)</text>
-            <text x="104" y="349" text-anchor="middle" font-size="12.5" font-weight="900" fill="#2563eb">알고리즘</text>
-            <text x="104" y="369" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3b82f6">디지털 방탈출 &amp; 폴라로이드</text>
+            <rect x="25" y="302" width="158" height="96" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+            <image href="assets/mascot_tiger.png" x="29" y="310" width="42" height="42" />
+            <text x="120" y="328" text-anchor="middle" font-size="12" font-weight="900" fill="#1e3a8a">💻 정보실</text>
+            <text x="120" y="349" text-anchor="middle" font-size="12.5" font-weight="900" fill="#2563eb">알고리즘</text>
+            <text x="104" y="378" text-anchor="middle" font-size="10" font-weight="700" fill="#3b82f6">디지털 방탈출 · 코딩게임</text>
           </g>
 
           <!-- 하단 우측: 방송실 (소나기 id: 7) -->
           <g class="svg-room booth" id="svg-booth-7" onclick="openBoothById(7)">
-            <rect x="197" y="294" width="158" height="95" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="276" y="326" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🧿 2층 방송실</text>
-            <text x="276" y="349" text-anchor="middle" font-size="12.5" font-weight="900" fill="#db2777">소나기 (방송부)</text>
-            <text x="276" y="369" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e11d48">부적 찾기 호러 방탈출</text>
+            <rect x="197" y="302" width="158" height="96" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
+            <image href="assets/mascot_cat.png" x="201" y="310" width="42" height="42" />
+            <text x="294" y="328" text-anchor="middle" font-size="12" font-weight="900" fill="#831843">🧿 2층 방송실</text>
+            <text x="294" y="349" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">소나기 (방송부)</text>
+            <text x="276" y="378" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">3분 스피드 부적 방탈출</text>
           </g>
 
           <!-- 최하단 좌측: 도서관 모둠학습실 (도서관 사람들 id: 8) -->
           <g class="svg-room booth" id="svg-booth-8" onclick="openBoothById(8)">
-            <rect x="25" y="400" width="205" height="86" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="127" y="430" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🌹 도서관 (모둠학습실)</text>
-            <text x="127" y="452" text-anchor="middle" font-size="12.5" font-weight="900" fill="#db2777">도서관 사람들 〈북카페〉</text>
-            <text x="127" y="471" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">운세 장미조화 · 편지 · 슈링클 키링</text>
+            <rect x="25" y="408" width="205" height="90" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
+            <image href="assets/mascot_panda.png" x="29" y="420" width="54" height="54" />
+            <text x="148" y="436" text-anchor="middle" font-size="12.5" font-weight="900" fill="#831843">🌹 도서관 모둠학습실</text>
+            <text x="148" y="458" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">도서관 사람들 〈북카페〉</text>
+            <text x="148" y="478" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e11d48">책 운세 · 편지 · 슈링클 키링</text>
           </g>
 
           <!-- 최하단 우측: 교무센터/미래정보부 -->
           <g class="svg-room facility" onclick="openFacilityModal('교무센터 &amp; 미래정보부', '2층 메인 교무센터, 전산실 및 미래정보부')">
-            <rect x="240" y="400" width="115" height="86" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-            <text x="297" y="438" text-anchor="middle" font-size="12" font-weight="800" fill="#334155">교무센터</text>
-            <text x="297" y="458" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">미래정보부</text>
+            <rect x="240" y="408" width="115" height="90" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="297" y="446" text-anchor="middle" font-size="12" font-weight="800" fill="#334155">교무센터</text>
+            <text x="297" y="466" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">미래정보부</text>
           </g>
 
-          <rect x="25" y="498" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
-          <text x="190" y="516" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 2층 남/여 화장실  •  🪜 중앙/서측 계단 &amp; E/V</text>
+          <rect x="25" y="508" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+          <text x="190" y="526" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 2층 남/여 화장실  •  🪜 중앙/서측 계단 &amp; E/V</text>
         </svg>`,
       3: `<svg viewBox="0 0 380 560" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="360" height="540" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
-          <!-- 상단: 1학년 동편 복도 구역 헤더 -->
           <rect x="25" y="22" width="330" height="26" rx="6" fill="#fce7f3"/>
           <text x="190" y="39" text-anchor="middle" font-size="11.5" font-weight="800" fill="#9d174d">📍 3층 1학년(1-6~1-9) &amp; 3-10 테마 부스 구역</text>
 
           <!-- 1-6 마케팅 허브 (id: 9) -->
           <g class="svg-room booth" id="svg-booth-9" onclick="openBoothById(9)">
             <rect x="25" y="58" width="158" height="96" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="104" y="88" text-anchor="middle" font-size="13.5" font-weight="900" fill="#831843">🕸️ 1-6 교실</text>
-            <text x="104" y="112" text-anchor="middle" font-size="12.5" font-weight="900" fill="#db2777">마케팅 허브</text>
-            <text x="104" y="132" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e11d48">스릴 트랩 &amp; 포토존</text>
+            <image href="assets/mascot_cat.png" x="29" y="66" width="42" height="42" />
+            <text x="122" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🕸️ 1-6 교실</text>
+            <text x="122" y="110" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">마케팅 허브</text>
+            <text x="104" y="136" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e11d48">스릴 트랩 &amp; 포토존</text>
           </g>
 
           <!-- 1-9 아트시그널 (id: 11) -->
           <g class="svg-room booth" id="svg-booth-11" onclick="openBoothById(11)">
             <rect x="197" y="58" width="158" height="96" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="276" y="88" text-anchor="middle" font-size="13.5" font-weight="900" fill="#92400e">🎅 1-9 교실</text>
-            <text x="276" y="112" text-anchor="middle" font-size="12.5" font-weight="900" fill="#b45309">아트시그널</text>
-            <text x="276" y="132" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">크리스마스 DIY 카페</text>
-            <text x="276" y="146" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">(슬라임·말랑이·캐리커쳐)</text>
+            <image href="assets/mascot_puppy.png" x="201" y="66" width="42" height="42" />
+            <text x="294" y="88" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🎅 1-9 교실</text>
+            <text x="294" y="110" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">아트시그널</text>
+            <text x="276" y="136" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">크리스마스 DIY 카페</text>
           </g>
 
           <!-- 1-7 · 1-8 다각도 (id: 10) 통합 대형 부스 -->
           <g class="svg-room booth" id="svg-booth-10" onclick="openBoothById(10)">
             <rect x="25" y="166" width="330" height="92" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="190" y="196" text-anchor="middle" font-size="14.5" font-weight="900" fill="#831843">🔐 1-7 · 1-8 교실 통합 — 다각도</text>
-            <text x="190" y="220" text-anchor="middle" font-size="12.5" font-weight="900" fill="#db2777">〈폐교 배경 학교폭력 추리 방탈출〉</text>
-            <text x="190" y="241" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e11d48">사건 단서 수집 · 진실 추리 · 최종 자물쇠 암호 해독</text>
+            <image href="assets/mascot_cat.png" x="32" y="182" width="60" height="60" />
+            <text x="212" y="196" text-anchor="middle" font-size="14" font-weight="900" fill="#831843">🔐 1-7 · 1-8 통합 — 다각도</text>
+            <text x="212" y="218" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">〈폐교 배경 학교폭력 추리 방탈출〉</text>
+            <text x="212" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">단서 수집 · 진실 추리 · 자물쇠 해독</text>
           </g>
 
           <!-- 3-10 유아트 (id: 12) -->
           <g class="svg-room booth" id="svg-booth-12" onclick="openBoothById(12)">
             <rect x="25" y="270" width="330" height="92" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="190" y="300" text-anchor="middle" font-size="14.5" font-weight="900" fill="#831843">👻 3-10 교실 — 유아트 (미술동아리)</text>
-            <text x="190" y="324" text-anchor="middle" font-size="12.5" font-weight="900" fill="#db2777">〈오싹오싹 귀신까페 &amp; 실종자 찾기 미션〉</text>
-            <text x="190" y="345" text-anchor="middle" font-size="10.5" font-weight="700" fill="#e11d48">귀신 마스코트 소통 · 데코 간식 · 최고 마스코트 투표</text>
+            <image href="assets/mascot_panda.png" x="32" y="286" width="60" height="60" />
+            <text x="212" y="300" text-anchor="middle" font-size="14" font-weight="900" fill="#831843">👻 3-10 교실 — 유아트</text>
+            <text x="212" y="322" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">〈오싹오싹 귀신까페 &amp; 실종자 미션〉</text>
+            <text x="212" y="344" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">귀신 마스코트 · 데코 간식 · 미션 체험</text>
           </g>
 
           <!-- 하단: 일반 교실 및 교무 구역 -->
@@ -1984,57 +2180,57 @@
       4: `<svg viewBox="0 0 380 560" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="360" height="540" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
-          <!-- 상단: 북측 과학실험실 (화학실 & 생물실) -->
           <rect x="25" y="22" width="330" height="26" rx="6" fill="#d1fae5"/>
-          <text x="190" y="39" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46">🧪 4층 북측 과학실험실 (화학실 · 생물실)</text>
+          <text x="190" y="39" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46">🧪 4층 과학실 클러스터 (햄스터 박사와 신나는 실험!)</text>
 
           <!-- 화학실: 아스클 (id: 13) -->
           <g class="svg-room booth" id="svg-booth-13" onclick="openBoothById(13)">
             <rect x="25" y="56" width="158" height="96" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="104" y="84" text-anchor="middle" font-size="13.5" font-weight="900" fill="#064e3b">🧬 화학실</text>
-            <text x="104" y="106" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">아스클</text>
-            <text x="104" y="125" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">손가락 화석·DNA 키링</text>
-            <text x="104" y="140" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">&amp; 온도변화 탱탱볼</text>
+            <image href="assets/mascot_hamster.png" x="29" y="64" width="42" height="42" />
+            <text x="122" y="84" text-anchor="middle" font-size="13" font-weight="900" fill="#064e3b">🧬 화학실</text>
+            <text x="122" y="106" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">아스클</text>
+            <text x="104" y="133" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">화석·DNA키링·탱탱볼</text>
           </g>
 
           <!-- 생물실(생명실): 화생방 (id: 14) -->
           <g class="svg-room booth" id="svg-booth-14" onclick="openBoothById(14)">
             <rect x="197" y="56" width="158" height="96" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="276" y="84" text-anchor="middle" font-size="13.5" font-weight="900" fill="#064e3b">🧼 생물실 (생명실)</text>
-            <text x="276" y="106" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">화생방</text>
-            <text x="276" y="125" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">수제 비누 제작 체험</text>
-            <text x="276" y="140" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">&amp; 호호바 천연 립밤</text>
+            <image href="assets/mascot_hamster.png" x="201" y="64" width="42" height="42" />
+            <text x="294" y="84" text-anchor="middle" font-size="12.5" font-weight="900" fill="#064e3b">🧼 생물·생명실</text>
+            <text x="294" y="106" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">화생방</text>
+            <text x="276" y="133" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">천연 수제 비누 · 립밤</text>
           </g>
 
-          <!-- 중단: 동측 실험실 & 1-3 교실 -->
           <rect x="25" y="162" width="330" height="26" rx="6" fill="#dbeafe"/>
           <text x="190" y="179" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1e40af">⚡ 4층 동측 실험실 (물리실 · 지구과학실) &amp; 1-3</text>
 
           <!-- 물리실: 스파크 (id: 15) -->
           <g class="svg-room booth" id="svg-booth-15" onclick="openBoothById(15)">
             <rect x="25" y="196" width="158" height="92" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="104" y="226" text-anchor="middle" font-size="13.5" font-weight="900" fill="#064e3b">⚡ 물리실</text>
-            <text x="104" y="248" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">스파크</text>
-            <text x="104" y="268" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">물리를 이용한 롤러코스터</text>
+            <image href="assets/mascot_hamster.png" x="29" y="204" width="40" height="40" />
+            <text x="122" y="226" text-anchor="middle" font-size="13" font-weight="900" fill="#064e3b">⚡ 물리실</text>
+            <text x="122" y="248" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">스파크</text>
+            <text x="104" y="272" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">물리 롤러코스터 체험</text>
           </g>
 
           <!-- 지구과학실: 멘날바 (id: 16) -->
           <g class="svg-room booth" id="svg-booth-16" onclick="openBoothById(16)">
             <rect x="197" y="196" width="158" height="92" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="276" y="226" text-anchor="middle" font-size="13.5" font-weight="900" fill="#064e3b">🦖 지구과학실</text>
-            <text x="276" y="248" text-anchor="middle" font-size="12.5" font-weight="900" fill="#047857">멘날바 〈쥬라기 월드〉</text>
-            <text x="276" y="268" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">공룡알 왁스볼·화석·향수</text>
+            <image href="assets/mascot_hamster.png" x="201" y="204" width="40" height="40" />
+            <text x="294" y="226" text-anchor="middle" font-size="12.5" font-weight="900" fill="#064e3b">🦖 지구과학실</text>
+            <text x="294" y="248" text-anchor="middle" font-size="12" font-weight="900" fill="#047857">멘날바 〈쥬라기〉</text>
+            <text x="276" y="272" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">공룡알 왁스볼·화석·향수</text>
           </g>
 
           <!-- 1-3 교실: 소비의 정석 (id: 17) -->
           <g class="svg-room booth" id="svg-booth-17" onclick="openBoothById(17)">
             <rect x="25" y="298" width="330" height="80" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="190" y="326" text-anchor="middle" font-size="14" font-weight="900" fill="#92400e">🫧 1-3 교실 — 소비의 정석</text>
-            <text x="190" y="348" text-anchor="middle" font-size="12.5" font-weight="900" fill="#b45309">〈나만의 취향저격 슬라임 만들기〉</text>
-            <text x="190" y="366" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d97706">5종 향료 · 스팽글 · 파츠 맞춤형 슬라임 공방</text>
+            <image href="assets/mascot_puppy.png" x="34" y="308" width="58" height="58" />
+            <text x="212" y="326" text-anchor="middle" font-size="14" font-weight="900" fill="#92400e">🫧 1-3 교실 — 소비의 정석</text>
+            <text x="212" y="348" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">〈나만의 슬라임 만들기〉</text>
+            <text x="212" y="366" text-anchor="middle" font-size="10" font-weight="700" fill="#d97706">취향저격 향료 · 파츠 커스텀 공방</text>
           </g>
 
-          <!-- 하단: 3학년 교실 및 학생자치부 -->
           <rect x="25" y="388" width="330" height="22" rx="6" fill="#f1f5f9"/>
           <text x="190" y="403" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🏫 4층 교무실 및 3학년 일반교실</text>
 
@@ -2056,16 +2252,16 @@
       5: `<svg viewBox="0 0 380 650" class="floor-svg" xmlns="http://www.w3.org/2000/svg">
           <rect x="10" y="10" width="360" height="630" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
           
-          <!-- 상단: 5층 북측 1-1·1-2 & 미술실 -->
           <rect x="25" y="20" width="330" height="24" rx="6" fill="#fce7f3"/>
           <text x="190" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#9d174d">🎄 5층 북측 (1-1 · 1-2 경제·경영 위키 &amp; 미술실)</text>
 
           <!-- 1-1 · 1-2 경제·경영 위키 (id: 18) -->
           <g class="svg-room booth" id="svg-booth-18" onclick="openBoothById(18)">
             <rect x="25" y="52" width="210" height="82" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="130" y="78" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">🎄 1-1 · 1-2 교실 (경제·경영 위키)</text>
-            <text x="130" y="99" text-anchor="middle" font-size="11.5" font-weight="900" fill="#db2777">경제 팝업카페 &amp; 크리스마스 포토카페</text>
-            <text x="130" y="117" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e11d48">게임 쿠폰 디저트 교환 · 포토존 · 카드제작</text>
+            <image href="assets/mascot_panda.png" x="28" y="64" width="46" height="46" />
+            <text x="150" y="78" text-anchor="middle" font-size="12" font-weight="900" fill="#831843">🎄 1-1·1-2 (경제·경영위키)</text>
+            <text x="150" y="99" text-anchor="middle" font-size="11" font-weight="900" fill="#db2777">경제 팝업 &amp; 포토카페</text>
+            <text x="150" y="117" text-anchor="middle" font-size="9" font-weight="700" fill="#e11d48">퀴즈 포인트 디저트 · 포토존</text>
           </g>
 
           <!-- 미술실 & wee클래스 -->
@@ -2075,71 +2271,74 @@
             <text x="300" y="108" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">wee클래스</text>
           </g>
 
-          <!-- 중단1: 2학년 서편 2-1~2-3 애그부 & 2-4 소프라테스 & 2-5 프리즘 -->
           <rect x="25" y="144" width="330" height="24" rx="6" fill="#fef3c7"/>
           <text x="190" y="160" text-anchor="middle" font-size="11.5" font-weight="800" fill="#92400e">🍪 5층 2학년 1반 ~ 5반 구역 (애그부 · 소프라테스 · 프리즘)</text>
 
           <!-- 2-1 · 2-2 · 2-3 애그부 (id: 19) -->
           <g class="svg-room booth" id="svg-booth-19" onclick="openBoothById(19)">
             <rect x="25" y="176" width="330" height="76" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="190" y="202" text-anchor="middle" font-size="13.5" font-weight="900" fill="#92400e">🍪 2-1 · 2-2 · 2-3 교실 통합 — 애그부</text>
-            <text x="190" y="223" text-anchor="middle" font-size="11.5" font-weight="900" fill="#b45309">[2-1] 일러스트 전시  •  [2-2] 캐릭터 쿠키  •  [2-3] 캐리커쳐 카페</text>
-            <text x="190" y="241" text-anchor="middle" font-size="9.5" font-weight="700" fill="#d97706">3개 교실 연속 테마파크 운영!</text>
+            <image href="assets/mascot_puppy.png" x="30" y="186" width="54" height="54" />
+            <text x="210" y="202" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🍪 2-1 · 2-2 · 2-3 통합 — 애그부</text>
+            <text x="210" y="222" text-anchor="middle" font-size="10.5" font-weight="900" fill="#b45309">[2-1] 전시회 • [2-2] 캐릭터 쿠키 • [2-3] 캐리커쳐</text>
+            <text x="210" y="240" text-anchor="middle" font-size="9.5" font-weight="700" fill="#d97706">애니·게임·만화 3개 교실 테마파크!</text>
           </g>
 
           <!-- 2-4 소프라테스 (id: 20) -->
           <g class="svg-room booth" id="svg-booth-20" onclick="openBoothById(20)">
             <rect x="25" y="262" width="158" height="82" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
-            <text x="104" y="288" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🎯 2-4 교실</text>
-            <text x="104" y="309" text-anchor="middle" font-size="12" font-weight="900" fill="#2563eb">소프라테스</text>
-            <text x="104" y="327" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3b82f6">세계국기·플스레이싱·사격</text>
+            <image href="assets/mascot_tiger.png" x="28" y="270" width="38" height="38" />
+            <text x="120" y="288" text-anchor="middle" font-size="12.5" font-weight="900" fill="#1e3a8a">🎯 2-4 교실</text>
+            <text x="120" y="309" text-anchor="middle" font-size="12" font-weight="900" fill="#2563eb">소프라테스</text>
+            <text x="104" y="330" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3b82f6">세계국기·레이싱·사격</text>
           </g>
 
           <!-- 2-5 프리즘 (id: 21) -->
           <g class="svg-room booth" id="svg-booth-21" onclick="openBoothById(21)">
             <rect x="197" y="262" width="158" height="82" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="276" y="288" text-anchor="middle" font-size="13" font-weight="900" fill="#064e3b">🔮 2-5 교실</text>
-            <text x="276" y="309" text-anchor="middle" font-size="12" font-weight="900" fill="#047857">프리즘</text>
-            <text x="276" y="327" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">탱탱볼·쿠키·슬라임·자외선팔찌</text>
+            <image href="assets/mascot_hamster.png" x="200" y="270" width="38" height="38" />
+            <text x="294" y="288" text-anchor="middle" font-size="12.5" font-weight="900" fill="#064e3b">🔮 2-5 교실</text>
+            <text x="294" y="309" text-anchor="middle" font-size="12" font-weight="900" fill="#047857">프리즘</text>
+            <text x="276" y="330" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">탱탱볼·자외선팔찌</text>
           </g>
 
-          <!-- 중단2: 2학년 동편 2-6 ~ 2-10 구역 -->
           <rect x="25" y="354" width="330" height="24" rx="6" fill="#dbeafe"/>
           <text x="190" y="370" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1e40af">🎢 5층 2학년 6반 ~ 10반 구역 (포토 · 롤러코스터 · 퀴즈 · 슬라임)</text>
 
           <!-- 2-6 또래상담부 (id: 22) -->
           <g class="svg-room booth" id="svg-booth-22" onclick="openBoothById(22)">
             <rect x="25" y="386" width="158" height="82" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2.5"/>
-            <text x="104" y="412" text-anchor="middle" font-size="13" font-weight="900" fill="#831843">📸 2-6 교실</text>
-            <text x="104" y="433" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">또래상담부</text>
-            <text x="104" y="451" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e11d48">크리스마스 포토 &amp; 소원트리</text>
+            <image href="assets/mascot_panda.png" x="28" y="394" width="38" height="38" />
+            <text x="120" y="412" text-anchor="middle" font-size="12.5" font-weight="900" fill="#831843">📸 2-6 교실</text>
+            <text x="120" y="433" text-anchor="middle" font-size="12" font-weight="900" fill="#db2777">또래상담부</text>
+            <text x="104" y="454" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e11d48">크리스마스 포토 &amp; 소원트리</text>
           </g>
 
           <!-- 2-7 스카이 (id: 23) -->
           <g class="svg-room booth" id="svg-booth-23" onclick="openBoothById(23)">
             <rect x="197" y="386" width="158" height="82" rx="10" fill="#d1fae5" stroke="#10b981" stroke-width="2.5"/>
-            <text x="276" y="412" text-anchor="middle" font-size="13" font-weight="900" fill="#064e3b">🎢 2-7 교실</text>
-            <text x="276" y="433" text-anchor="middle" font-size="12" font-weight="900" fill="#047857">스카이</text>
-            <text x="276" y="451" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">물리역학 롤러코스터 체험</text>
+            <image href="assets/mascot_hamster.png" x="200" y="394" width="38" height="38" />
+            <text x="294" y="412" text-anchor="middle" font-size="12.5" font-weight="900" fill="#064e3b">🎢 2-7 교실</text>
+            <text x="294" y="433" text-anchor="middle" font-size="12" font-weight="900" fill="#047857">스카이</text>
+            <text x="276" y="454" text-anchor="middle" font-size="9.5" font-weight="700" fill="#059669">물리역학 롤러코스터</text>
           </g>
 
           <!-- 2-8 · 2-9 교집합 (id: 24) -->
           <g class="svg-room booth" id="svg-booth-24" onclick="openBoothById(24)">
             <rect x="25" y="478" width="195" height="86" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
-            <text x="122" y="505" text-anchor="middle" font-size="13" font-weight="900" fill="#1e3a8a">🏆 2-8 · 2-9 교실 (교집합)</text>
-            <text x="122" y="526" text-anchor="middle" font-size="12" font-weight="900" fill="#2563eb">〈도전! 교집합 퀴즈쇼〉</text>
-            <text x="122" y="545" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3b82f6">1등 스탠리 텀블러 · 상식/노래/OX퀴즈</text>
+            <image href="assets/mascot_tiger.png" x="28" y="492" width="46" height="46" />
+            <text x="142" y="505" text-anchor="middle" font-size="12" font-weight="900" fill="#1e3a8a">🏆 2-8·2-9 (교집합)</text>
+            <text x="142" y="526" text-anchor="middle" font-size="11.5" font-weight="900" fill="#2563eb">〈도전! 교집합 퀴즈쇼〉</text>
+            <text x="142" y="545" text-anchor="middle" font-size="9" font-weight="700" fill="#3b82f6">1등 스탠리 텀블러 · 퀴즈 배틀</text>
           </g>
 
           <!-- 2-10 아뜰리에 (id: 25) -->
           <g class="svg-room booth" id="svg-booth-25" onclick="openBoothById(25)">
             <rect x="230" y="478" width="125" height="86" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="292" y="505" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e">🎨 2-10 교실</text>
-            <text x="292" y="526" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">아뜰리에</text>
-            <text x="292" y="545" text-anchor="middle" font-size="9.5" font-weight="700" fill="#d97706">컬러 슬라임 카페</text>
+            <text x="292" y="504" text-anchor="middle" font-size="12" font-weight="900" fill="#92400e">🎨 2-10</text>
+            <text x="292" y="524" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">아뜰리에</text>
+            <text x="292" y="545" text-anchor="middle" font-size="9.5" font-weight="700" fill="#d97706">컬러 슬라임</text>
           </g>
 
-          <!-- 계단 및 화장실 바 -->
           <rect x="25" y="576" width="330" height="28" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
           <text x="190" y="594" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">🚻 5층 남/여 화장실  •  🏫 2학년 교무실 / 교육과정부</text>
         </svg>`
@@ -2177,6 +2376,7 @@
       if (navId === 'map') {
         renderFloorView(currentFloor);
       } else if (navId === 'genres') {
+        renderThemeSpotlight(activeThemeId);
         renderThemeCard();
       }
     }
@@ -2337,7 +2537,7 @@
       else if (name.includes('보건')) icon = '🏥';
       else if (name.includes('청운관') || name.includes('학습')) icon = '📖';
       else if (name.includes('교무')) icon = '🚪';
-      document.getElementById('facilityEmoji').innerText = icon;
+      document.getElementById('facilityEmoji').innerHTML = `<img src="assets/mascot_tiger.png" alt="운양이" style="width:68px;height:68px;object-fit:contain;vertical-align:middle;"> <span style="font-size:36px;">${icon}</span>`;
 
       openModal('facilityModal');
     }
@@ -2383,9 +2583,34 @@
         document.getElementById('deckThemePill').style.background = cat ? cat.color : '#6366f1';
       }
 
+      renderThemeSpotlight(themeId);
       currentThemeIndex = 0;
       renderThemeCard('next');
       blastCardConfetti();
+    }
+
+    function renderThemeSpotlight(themeId) {
+      const box = document.getElementById('themeSpotlightBanner');
+      if (!box) return;
+      const meta = {
+        all: { img: 'assets/mascot_tiger.png', bg: 'linear-gradient(135deg,#eef2ff,#fef3c7)', border: '#a5b4fc', title: '🐯 운양이와 함께 25개 부스 완주!', desc: '공연, 호러 방탈출, 달콤 공방, 과학 실험까지 카드를 좌우로 넘겨보세요.' },
+        horror: { img: 'assets/mascot_cat.png', bg: 'linear-gradient(135deg,#fff1f2,#ffe4e6)', border: '#fda4af', title: '🔍 셜록 탐정냥이의 호러·방탈출 수사대', desc: '방송실 부적 찾기부터 다각도 폐교 추리, 유아트 귀신까페, 트랩까지 4개 스릴 부스!' },
+        food: { img: 'assets/mascot_puppy.png', bg: 'linear-gradient(135deg,#fffbeb,#fef3c7)', border: '#fcd34d', title: '🍪 베이킹 셰프멍이의 달콤·DIY 공방', desc: '코코아밤 베이킹, 캐릭터 쿠키, 눈꽃·컬러 슬라임까지 금손 체험 5개 부스!' },
+        romance: { img: 'assets/mascot_panda.png', bg: 'linear-gradient(135deg,#fdf2f8,#fce7f3)', border: '#f9a8d4', title: '🎨 감성 레서판다의 포토·북카페 힐링존', desc: '크리스마스 포토부스, 소원트리, 경제 팝업카페, 감성 북카페까지 3개 힐링 부스!' },
+        science: { img: 'assets/mascot_hamster.png', bg: 'linear-gradient(135deg,#ecfdf5,#d1fae5)', border: '#6ee7b7', title: '🧪 천재 햄스터 박사의 무지개 과학 연구소', desc: '화석·DNA키링, 천연비누·립밤, 롤러코스터, 공룡알 왁스볼까지 과학 6개 부스!' },
+        game: { img: 'assets/mascot_tiger.png', bg: 'linear-gradient(135deg,#eff6ff,#dbeafe)', border: '#93c5fd', title: '🏆 아기 호랑이 운양이의 게임·배틀 아레나', desc: '체대입시부 런닝맨, 스탠리 텀블러 퀴즈쇼, 세계국기 사격, 코딩게임까지 4개 배틀존!' },
+        stage: { img: 'assets/mascot_bunny.png', bg: 'linear-gradient(135deg,#f5f3ff,#fae8ff)', border: '#c4b5fd', title: '🎸 락토끼 & 댄스곰의 청운제 라이브 스테이지', desc: '2층 대강당 밴드부(UY)·러쉬온미 댄스 콘서트와 1층 시청각실 시퀀스 연극 무대!' }
+      };
+      const m = meta[themeId] || meta.all;
+      box.innerHTML = `
+        <div class="theme-spotlight-card" style="background:${m.bg}; border-color:${m.border};">
+          <img src="${m.img}" alt="테마 마스코트" class="theme-spotlight-img">
+          <div class="theme-spotlight-text">
+            <h4>${m.title}</h4>
+            <p>${m.desc}</p>
+          </div>
+        </div>
+      `;
     }
 
     function nextCard() {
@@ -2427,15 +2652,18 @@
     // ==========================================
     function generateCardHtml(booth, animClass, showMapJump) {
       const isBookmarked = bookmarks.has(booth.id);
+      const mascot = getMascotMeta(booth);
       return `
-        <div class="super-booth-card ${animClass}">
+        <div class="super-booth-card theme-${booth.cat_id || 'stage'} ${animClass}">
           <div class="card-header-row">
-            <div class="card-avatar-box">${booth.emoji}</div>
+            <div class="card-avatar-box">
+              <img src="${mascot.img}" alt="${mascot.title}" class="card-avatar-mascot-img">
+              <span class="card-avatar-mini-emoji">${booth.emoji}</span>
+            </div>
             <div class="card-badge-right">
               <span class="card-floor-badge">📍 ${booth.floor}층 ${booth.room}</span>
               <span class="card-category-badge">${booth.cat}</span>
             </div>
-            <img src="${getMascotMeta(booth).img}" alt="마스코트" style="width:38px; height:38px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15)); margin-left:auto;">
           </div>
 
           <div class="card-club-name">
@@ -2517,15 +2745,36 @@
       if (pop) pop.classList.toggle('active');
     }
 
+    function jumpFromMascot(who) {
+      blastCardConfetti();
+      if (who === 'bunny') { openBoothById(2); return; }
+      if (who === 'bear') { openBoothById(3); return; }
+      const themeMap = {
+        panda: 'romance',
+        cat: 'horror',
+        puppy: 'food',
+        hamster: 'science',
+        tiger: 'game'
+      };
+      switchNav('genres');
+      selectTheme(themeMap[who] || 'all');
+    }
+
     function getMascotMeta(booth) {
       if (booth.id === 2) {
-        return { img: 'assets/mascot_bunny.png', title: '🎸 락스타 토끼 (밴드부 UY 마스코트)', desc: '화려한 일렉기타와 드럼 비트로 대강당을 뒤흔드는 열정 락스타!' };
+        return { img: 'assets/mascot_bunny.png', title: '🎸 락스타 토끼 (밴드부 UY 마스코트)', desc: '화려한 일렉기타와 드럼 비트로 대강당 무대를 뒤흔드는 열정 락스타!' };
       } else if (booth.id === 3) {
         return { img: 'assets/mascot_bear.png', title: '💃 K-POP 댄스 곰돌이 (러쉬온미 마스코트)', desc: '빛나는 LED 헤드폰과 트렌디한 댄스 무브로 시선을 사로잡는 댄스 크루!' };
-      } else if (booth.cat_id === 'science' || [13, 14, 15, 16, 21, 23].includes(booth.id)) {
-        return { img: 'assets/mascot_hamster.png', title: '🧪 천재 햄스터 박사 (과학실험 마스코트)', desc: '무지개 물약과 안전 고글로 신기방기한 과학 원리를 선물하는 연구원!' };
+      } else if (booth.cat_id === 'horror') {
+        return { img: 'assets/mascot_cat.png', title: '🔍 셜록 탐정 고양이 (방탈출·추리 마스코트)', desc: '반짝이는 돋보기로 단서와 숨겨진 비밀 부적을 추적하는 명탐정 냥이!' };
+      } else if (booth.cat_id === 'food') {
+        return { img: 'assets/mascot_puppy.png', title: '🍪 베이킹 셰프 강아지 (쿠키·슬라임 공방)', desc: '셰프 모자를 쓰고 달콤한 쿠키와 촉감 슬라임을 만드는 금손 파티시에!' };
+      } else if (booth.cat_id === 'romance' || booth.id === 1) {
+        return { img: 'assets/mascot_panda.png', title: '🎨 감성 아티스트 판다 (연극·포토·북카페)', desc: '즉석카메라와 붓을 들고 청운제의 따뜻한 추억을 그려주는 예술가 판다!' };
+      } else if (booth.cat_id === 'science') {
+        return { img: 'assets/mascot_hamster.png', title: '🧪 천재 햄스터 박사 (과학·융합실험 마스코트)', desc: '무지개 물약과 안전 고글로 신기방기한 과학 원리를 선물하는 연구원!' };
       } else {
-        return { img: 'assets/mascot_tiger.png', title: '🐯 아기 호랑이 운양이 (축제 공식 마스코트)', desc: '2026 청운제 축제를 즐기는 학생 여러분을 열렬히 환영합니다!' };
+        return { img: 'assets/mascot_tiger.png', title: '🐯 아기 호랑이 운양이 (축제 공식 마스코트)', desc: '2026 청운제를 즐기는 운양고 학생 여러분을 열렬히 응원합니다!' };
       }
     }
 
