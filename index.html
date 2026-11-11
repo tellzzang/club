@@ -712,6 +712,352 @@
       color: #cbd5e1;
       line-height: 1.5;
     }
+  
+    /* ============================================================
+       CUTE ANIMAL FESTIVAL MASCOTS & ANIMATION STYLES
+       ============================================================ */
+    @keyframes mascotFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(1.5deg); }
+    }
+    @keyframes mascotPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes speechBubbleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Welcome Mascot Hero Card */
+    .mascot-hero-card {
+      background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 50%, #fef3c7 100%);
+      border: 2px solid #a5b4fc;
+      border-radius: 20px;
+      padding: 16px 18px;
+      margin: 12px 14px 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 24px -6px rgba(99, 102, 241, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .mascot-hero-card::after {
+      content: '🎈';
+      position: absolute;
+      top: -5px;
+      right: 12px;
+      font-size: 26px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .mascot-hero-avatar-wrap {
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mascot-hero-avatar {
+      width: 86px;
+      height: 86px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(99, 102, 241, 0.3));
+      animation: mascotFloat 3.5s ease-in-out infinite;
+    }
+    .mascot-speech-bubble {
+      background: #ffffff;
+      border: 1.5px solid #818cf8;
+      border-radius: 12px;
+      padding: 4px 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #312e81;
+      white-space: nowrap;
+      margin-top: -6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      animation: speechBubbleBounce 2.8s ease-in-out infinite;
+      z-index: 2;
+    }
+    .mascot-hero-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .mascot-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #4f46e5;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 12px;
+      margin-bottom: 5px;
+    }
+    .mascot-hero-headline {
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+    .mascot-hero-sub {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .mascot-quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .mascot-btn {
+      border: none;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .mascot-btn.primary {
+      background: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    }
+    .mascot-btn.primary:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+    }
+    .mascot-btn.secondary {
+      background: #ffffff;
+      color: #4338ca;
+      border: 1.5px solid #c7d2fe;
+    }
+    .mascot-btn.secondary:hover {
+      background: #eef2ff;
+    }
+
+    /* Timetable Stage Mascots Row */
+    .stage-mascots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 480px) {
+      .stage-mascots-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .stage-mascot-card {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .stage-mascot-card.band {
+      border-color: #818cf8;
+      background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+    }
+    .stage-mascot-card.band:hover {
+      border-color: #4f46e5;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(99, 102, 241, 0.25);
+    }
+    .stage-mascot-card.dance {
+      border-color: #f472b6;
+      background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+    }
+    .stage-mascot-card.dance:hover {
+      border-color: #db2777;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(236, 72, 153, 0.25);
+    }
+    .stage-mascot-img-box {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .stage-mascot-img-box img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      animation: mascotFloat 4s ease-in-out infinite;
+    }
+    .stage-mascot-details {
+      flex: 1;
+      min-width: 0;
+    }
+    .stage-tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 8px;
+      margin-bottom: 3px;
+    }
+    .stage-tag.band {
+      background: #ede9fe;
+      color: #4f46e5;
+    }
+    .stage-tag.dance {
+      background: #fce7f3;
+      color: #be185d;
+    }
+    .stage-mascot-details h4 {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 2px 0;
+    }
+    .stage-mascot-details .time {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #4f46e5;
+      margin: 0;
+    }
+    .stage-mascot-details .sub {
+      font-size: 10.5px;
+      color: #64748b;
+      margin: 2px 0 0 0;
+    }
+
+    /* Floating Interactive Mascot Widget */
+    .floating-mascot-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2.5px solid #ffffff;
+    }
+    .floating-mascot-btn:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .floating-mascot-img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      animation: mascotFloat 3s ease-in-out infinite;
+    }
+    .mascot-ping-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      background: #ef4444;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      animation: mascotPulse 1.8s ease-in-out infinite;
+    }
+    .mascot-popover {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 270px;
+      background: #ffffff;
+      border: 2px solid #a5b4fc;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 16px 36px -4px rgba(99, 102, 241, 0.3);
+      z-index: 1000;
+      animation: speechBubbleBounce 0.3s ease;
+    }
+    .mascot-popover.active {
+      display: block;
+    }
+    .mascot-popover-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #312e81;
+      margin-bottom: 8px;
+    }
+    .popover-action-btn {
+      width: 100%;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+      color: #334155;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .popover-action-btn:hover {
+      background: #eef2ff;
+      border-color: #818cf8;
+      color: #4338ca;
+    }
+
+    /* Modal Mascot Avatar Header */
+    .modal-mascot-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
+      border: 1.5px solid #c7d2fe;
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+    .modal-mascot-img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.25));
+      animation: mascotFloat 3s ease-in-out infinite;
+    }
+    .modal-mascot-text h5 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 900;
+      color: #312e81;
+    }
+    .modal-mascot-text p {
+      margin: 2px 0 0 0;
+      font-size: 11.5px;
+      color: #6366f1;
+      font-weight: 700;
+    }
+
   </style>
 </head>
 <body>
@@ -740,6 +1086,24 @@
     </div>
 
     <!-- Main Content Area -->
+    
+    <!-- Welcome Mascot Hero Card -->
+    <div class="mascot-hero-card">
+      <div class="mascot-hero-avatar-wrap">
+        <img src="assets/mascot_tiger.png" alt="운양이" class="mascot-hero-avatar">
+        <div class="mascot-speech-bubble">어서와! 축제는 처음이지? 🐯✨</div>
+      </div>
+      <div class="mascot-hero-body">
+        <div class="mascot-badge-pill">🎉 2026 운양고 청운제 라이브 가이드</div>
+        <h2 class="mascot-hero-headline">25개 부스 &amp; 대강당 라이브 콘서트</h2>
+        <p class="mascot-hero-sub">도면을 터치하거나 카드를 넘기며 오늘의 축제를 만끽하세요! 🎸</p>
+        <div class="mascot-quick-actions">
+          <button class="mascot-btn primary" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">🏛️ 2층 대강당 공연 보기</button>
+          <button class="mascot-btn secondary" onclick="switchNav('schedule')">⏰ 공연 타임테이블</button>
+        </div>
+      </div>
+    </div>
+
     <main>
       <!-- ============================================================
            1. 🏢 층별로 보기 (FLOOR MAP & ROOM CLICK POPUP)
@@ -841,6 +1205,31 @@
               • <strong>A팀 부원</strong> : 1층~5층 타 동아리 부스 자유 관람 및 체험 참여!<br>
               • <strong>B팀 부원</strong> : 본 동아리 부스 운영 및 방문 학생 안내·체험 진행<br>
               • <strong>특별 무대 공연</strong> : 1층 시청각실(시퀀스 연극), 2층 대강당(러쉬온미 댄스 · 피에스 체육 · 밴드부 UY 라이브)
+            </div>
+            <!-- Stage Mascots Row -->
+            <div class="stage-mascots-grid">
+              <div class="stage-mascot-card band" onclick="openBoothById(2)">
+                <div class="stage-mascot-img-box">
+                  <img src="assets/mascot_bunny.png" alt="밴드부 토끼">
+                </div>
+                <div class="stage-mascot-details">
+                  <span class="stage-tag band">🎸 2층 대강당</span>
+                  <h4>밴드부 (UY) 라이브 콘서트</h4>
+                  <p class="time">1부 10:45~11:30 · 2부 11:45~12:10</p>
+                  <p class="sub">일렉기타 &amp; 드럼 폭풍 사운드 라이브!</p>
+                </div>
+              </div>
+              <div class="stage-mascot-card dance" onclick="openBoothById(3)">
+                <div class="stage-mascot-img-box">
+                  <img src="assets/mascot_bear.png" alt="댄스부 곰돌이">
+                </div>
+                <div class="stage-mascot-details">
+                  <span class="stage-tag dance">💃 2층 대강당</span>
+                  <h4>러쉬온미 K-POP 댄스 공연</h4>
+                  <p class="time">1부 10:10~10:35 · 2부 11:45~12:05</p>
+                  <p class="sub">최신 힙합 &amp; K-POP 리믹스 퍼포먼스!</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -954,19 +1343,19 @@
   {
     "id": 2,
     "name": "밴드부 (UY)",
-    "topic": "청운제 밴드(UY) 라이브 콘서트",
+    "topic": "청운제 UY 공연",
     "official_type": "공연형",
     "cat": "🎸 무대찢는 공연·시네마",
     "cat_id": "stage",
-    "emoji": "🥁",
-    "room": "대강당 · 음악실",
+    "emoji": "🎸",
+    "room": "대강당 (운양관)",
     "floor": 2,
-    "teacher": "안효주",
+    "teacher": "안효주, 안태일",
     "leader": "부장 정소연(20128) · 차장 심제우(11013)",
-    "members": "14명",
+    "members": "11명",
     "status": "확정",
-    "desc": "가슴을 울리는 드럼 비트와 화려한 기타 사운드! 운양고 대표 락밴드 UY의 폭발적인 라이브 공연 [대강당 무대] & 어쿠스틱 버스킹 [음악실].",
-    "timetable": "• 대강당 라이브 본공연: 11:00 ~ 11:45 (45분, 대강당)<br>• 1층 음악실 버스킹 & 악기 체험: 상시 운영"
+    "desc": "가슴을 울리는 드럼 비트와 화려한 일렉기타 사운드! 운양고 대표 락밴드 UY의 폭발적인 대강당 라이브 콘서트. (청운제 라이브 공연 및 버스킹 스테이지)",
+    "timetable": "• 1부 라이브 본공연: 10:45 ~ 11:30 (45분, 대강당 무대)<br>• 2부 앵콜 라이브: 11:45 ~ 12:10 (25분, 대강당 무대)"
   },
   {
     "id": 3,
@@ -1439,13 +1828,11 @@
             <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">각색 연극 공연 (30분)</text>
           </g>
 
-          <!-- 좌측 하단: 음악실 (밴드부 id: 2) -->
-          <g class="svg-room booth" id="svg-booth-2" onclick="openBoothById(2)">
-            <rect x="25" y="302" width="155" height="150" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="2.5"/>
-            <text x="102" y="350" text-anchor="middle" font-size="14" font-weight="900" fill="#312e81">🎸 음악실</text>
-            <text x="102" y="375" text-anchor="middle" font-size="13" font-weight="900" fill="#4f46e5">밴드부</text>
-            <text x="102" y="397" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">청운제 라이브 밴드</text>
-            <text x="102" y="415" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6366f1">락 &amp; 사운드 콘서트</text>
+          <!-- 좌측 하단: 음악실 (비운영 공간) -->
+          <g class="svg-room facility" onclick="openFacilityModal('음악실', '음악 수업 교실 (동아리 발표회 부스 미운영 교실)')">
+            <rect x="25" y="302" width="155" height="150" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="102" y="365" text-anchor="middle" font-size="14" font-weight="800" fill="#475569">🎵 음악실</text>
+            <text x="102" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#94a3b8">(발표회 미운영 공간)</text>
           </g>
 
           <!-- 우측 날개 (편의 & 행정 구역) -->
@@ -1811,11 +2198,11 @@
 
     function renderFloorView(floorNum) {
       const floorSummaries = {
-        1: { title: "📍 1층 배치도", desc: "🎬 시청각실(시퀀스 연극) · 1층 음악실(밴드부 버스킹) · 매점 · 보건실", count: 2 },
-        2: { title: "📍 2층 배치도", desc: "🏛️ 대강당 운양관(러쉬온미 · 피에스 · 밴드부) · 도서관 · 기가실 · 컴퓨터실 · 방송실", count: 7 },
+        1: { title: "📍 1층 배치도", desc: "🎬 시청각실(시퀀스 연극 공연) · 매점 · 급식실 · 보건실", count: 1 },
+        2: { title: "📍 2층 배치도", desc: "🏛️ 대강당 운양관(밴드부 UY · 러쉬온미 댄스 · 피에스) · 도서관 · 기가실 · 컴퓨터실 · 방송실", count: 7 },
         3: { title: "📍 3층 배치도", desc: "👻 1-6~9반 & 3-10반 (다각도·유아트·마케팅허브 방탈출 & 아트시그널 DIY)", count: 4 },
-        4: { title: "📍 4층 배치도", desc: "🧪 물리실·화학실·생물실·지구과학실 과학 클러스터 (스파크·아스클·화생방·멘날바) & 1-3반", count: 5 },
-        5: { title: "📍 5층 배치도", desc: "🎪 2학년 교실 전관 & 1-1, 1-2반 (경제위키·애그부·소프라테스·교집합·스카이·프리즘 등)", count: 7 }
+        4: { title: "📍 4층 배치도", desc: "🧪 물리실·화학실·생물실·지구과학실 과학 클러스터 (스파크·아스클·화생방·멘날바) & 1-3반(소비의정석)", count: 5 },
+        5: { title: "📍 5층 배치도", desc: "🎪 2학년 교실 전관 & 1-1, 1-2반 (경제위키·애그부·소프라테스·교집합·스카이·프리즘·또래상담·아뜰리에)", count: 8 }
       };
 
       const info = floorSummaries[floorNum] || { title: `📍 ${floorNum}층 배치도`, desc: "", count: 0 };
@@ -1898,6 +2285,23 @@
       const container = document.getElementById('multiBoothListContainer');
       container.innerHTML = '';
       document.getElementById('multiModalTitle').innerText = `🏛️ ${roomName} (${idList.length}개 동아리)`;
+
+      if (roomName.includes('대강당')) {
+        const stageHero = document.createElement('div');
+        stageHero.className = 'modal-mascot-badge';
+        stageHero.style.background = 'linear-gradient(135deg, #ede9fe 0%, #fce7f3 100%)';
+        stageHero.innerHTML = `
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="assets/mascot_bunny.png" alt="토끼" style="width:46px; height:46px; object-fit:contain;">
+            <img src="assets/mascot_bear.png" alt="곰돌이" style="width:46px; height:46px; object-fit:contain;">
+          </div>
+          <div class="modal-mascot-text">
+            <h5>🏛️ 2층 대강당(운양관) 특별 무대</h5>
+            <p>밴드부 라이브 콘서트 · K-POP 댄스 · 체대입시 피지컬 챌린지</p>
+          </div>
+        `;
+        container.appendChild(stageHero);
+      }
 
       idList.forEach(id => {
         const b = BOOTHS.find(x => x.id === id);
@@ -2031,6 +2435,7 @@
               <span class="card-floor-badge">📍 ${booth.floor}층 ${booth.room}</span>
               <span class="card-category-badge">${booth.cat}</span>
             </div>
+            <img src="${getMascotMeta(booth).img}" alt="마스코트" style="width:38px; height:38px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15)); margin-left:auto;">
           </div>
 
           <div class="card-club-name">
@@ -2105,14 +2510,44 @@
     // ==========================================
     // MODAL DIALOG CONTROLLER
     // ==========================================
+
+    // Mascot Popover Toggle
+    function toggleFloatingMascotPopover() {
+      const pop = document.getElementById('mascotPopover');
+      if (pop) pop.classList.toggle('active');
+    }
+
+    function getMascotMeta(booth) {
+      if (booth.id === 2) {
+        return { img: 'assets/mascot_bunny.png', title: '🎸 락스타 토끼 (밴드부 UY 마스코트)', desc: '화려한 일렉기타와 드럼 비트로 대강당을 뒤흔드는 열정 락스타!' };
+      } else if (booth.id === 3) {
+        return { img: 'assets/mascot_bear.png', title: '💃 K-POP 댄스 곰돌이 (러쉬온미 마스코트)', desc: '빛나는 LED 헤드폰과 트렌디한 댄스 무브로 시선을 사로잡는 댄스 크루!' };
+      } else if (booth.cat_id === 'science' || [13, 14, 15, 16, 21, 23].includes(booth.id)) {
+        return { img: 'assets/mascot_hamster.png', title: '🧪 천재 햄스터 박사 (과학실험 마스코트)', desc: '무지개 물약과 안전 고글로 신기방기한 과학 원리를 선물하는 연구원!' };
+      } else {
+        return { img: 'assets/mascot_tiger.png', title: '🐯 아기 호랑이 운양이 (축제 공식 마스코트)', desc: '2026 청운제 축제를 즐기는 학생 여러분을 열렬히 환영합니다!' };
+      }
+    }
+
     function showBoothDetailModal(b) {
       currentModalBoothId = b.id;
+      const mascot = getMascotMeta(b);
+      const mascotBadgeHtml = `
+        <div class="modal-mascot-badge">
+          <img src="${mascot.img}" alt="마스코트" class="modal-mascot-img">
+          <div class="modal-mascot-text">
+            <h5>${mascot.title}</h5>
+            <p>${mascot.desc}</p>
+          </div>
+        </div>
+      `;
       document.getElementById('modalEmoji').innerText = b.emoji;
       document.getElementById('modalName').innerText = b.name;
       document.getElementById('modalFloor').innerText = `📍 ${b.floor}층 ${b.room}`;
       document.getElementById('modalCat').innerHTML = `${b.cat} &nbsp;<span style="display:inline-block; font-size:11px; font-weight:800; background:#e0e7ff; color:#4338ca; padding:2px 8px; border-radius:12px; vertical-align:middle;">🏷️ ${b.official_type || '체험형'}</span>`;
       document.getElementById('modalDesc').innerHTML = `
         <div style="width:100%;">
+          ${mascotBadgeHtml}
           <div style="font-size:15.5px; font-weight:900; color:#4f46e5; margin-bottom:8px;">✨ ${b.topic || ''}</div>
           <div style="margin-bottom:12px; line-height:1.6; font-size:14px; color:#1e293b;">${b.desc}</div>
           ${b.timetable ? `
@@ -2236,5 +2671,26 @@
       switchNav('map');
     });
   </script>
+
+  <!-- Floating Mascot Widget -->
+  <div class="floating-mascot-btn" onclick="toggleFloatingMascotPopover()" title="운양이에게 물어보기!">
+    <img src="assets/mascot_tiger.png" alt="운양이" class="floating-mascot-img">
+    <span class="mascot-ping-badge"></span>
+  </div>
+  <div id="mascotPopover" class="mascot-popover">
+    <div class="mascot-popover-header">
+      <span>🐯 <strong>운양이의 축제 꿀팁!</strong></span>
+      <span onclick="toggleFloatingMascotPopover()" style="cursor:pointer; font-size:16px;">✕</span>
+    </div>
+    <p style="font-size:12.5px; color:#334155; margin-bottom:10px; line-height:1.45;">
+      "2층 대강당에서 <strong>밴드부(UY)</strong>와 <strong>러쉬온미</strong>의 공연이 펼쳐지고 있어요! 🎸 놓치지 마세요!"
+    </p>
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <button class="popover-action-btn" onclick="openMultiBooths([2,3,4], '대강당 (운양관)'); toggleFloatingMascotPopover();">🏛️ 2층 대강당 공연 바로가기</button>
+      <button class="popover-action-btn" onclick="switchNav('schedule'); toggleFloatingMascotPopover();">⏰ 축제 시간표 확인하기</button>
+      <button class="popover-action-btn" onclick="blastFestiveConfetti();">🎉 폭죽 팡팡 터뜨리기!</button>
+    </div>
+  </div>
+
 </body>
 </html>
