@@ -1158,6 +1158,219 @@
     .modal-mascot-text h5 { margin: 0; font-size: 13px; font-weight: 900; color: #312e81; }
     .modal-mascot-text p { margin: 2px 0 0 0; font-size: 11.5px; color: #6366f1; font-weight: 700; }
 
+  
+    /* ============================================================
+       KINETIC TYPOGRAPHY & MOTION GRAPHICS ENHANCEMENTS
+       ============================================================ */
+    
+    /* 1. Kinetic Text Shimmer Animation */
+    @keyframes kineticTextShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .kinetic-shimmer-title {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 25%, #db2777 50%, #ea580c 75%, #4338ca 100%);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: kineticTextShimmer 6s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    /* 2. Infinite Continuous Kinetic Marquee Ticker */
+    .kinetic-ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(90deg, #1e1b4b, #312e81, #4338ca);
+      border-top: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding: 7px 0;
+      position: relative;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .kinetic-ticker-wrap::before, .kinetic-ticker-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 30px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .kinetic-ticker-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, #1e1b4b, transparent);
+    }
+    .kinetic-ticker-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, #4338ca, transparent);
+    }
+    .kinetic-ticker-track {
+      display: flex;
+      width: max-content;
+      animation: kineticMarquee 28s linear infinite;
+    }
+    .kinetic-ticker-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes kineticMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px;
+      color: #e0e7ff;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    .ticker-pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .tp-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+    .tp-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .tp-amber { background: linear-gradient(135deg, #f59e0b, #b45309); }
+    .tp-emerald { background: linear-gradient(135deg, #10b981, #047857); }
+    .tp-cyan { background: linear-gradient(135deg, #06b6d4, #0e7490); }
+
+    /* 3. Alive Mascot Wobble & Bounce Physics */
+    @keyframes mascotAliveBounce {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translateY(-8px) rotate(-3.5deg) scale(1.03);
+      }
+      50% {
+        transform: translateY(-2px) rotate(1deg) scale(0.99);
+      }
+      75% {
+        transform: translateY(-6px) rotate(3deg) scale(1.02);
+      }
+    }
+    .mascot-hero-avatar {
+      animation: mascotAliveBounce 3.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite !important;
+      transform-origin: bottom center;
+      transition: filter 0.3s;
+      cursor: pointer;
+    }
+    .mascot-hero-avatar:hover {
+      filter: drop-shadow(0 10px 18px rgba(236, 72, 153, 0.5)) !important;
+    }
+
+    @keyframes speechBubbleKinetic {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.06) translateY(-3px); }
+    }
+    .mascot-speech-bubble {
+      animation: speechBubbleKinetic 2.4s ease-in-out infinite !important;
+      cursor: pointer;
+    }
+
+    /* 4. Kinetic Metric Stat Cards in Hero */
+    .kinetic-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin: 10px 0 2px 0;
+    }
+    .kinetic-stat-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(165, 180, 252, 0.5);
+      border-radius: 12px;
+      padding: 6px 4px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .kinetic-stat-card:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 14px rgba(99, 102, 241, 0.2);
+      border-color: #6366f1;
+    }
+    .kstat-num {
+      font-size: 14px;
+      font-weight: 900;
+      color: #312e81;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .kstat-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748b;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    /* 5. 3D Card Hover Depth & Micro-Transitions */
+    .booth-card, .theme-card, .parade-chip {
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease !important;
+    }
+    .parade-chip:hover {
+      transform: translateY(-5px) scale(1.08) !important;
+      box-shadow: 0 8px 18px rgba(99, 102, 241, 0.25) !important;
+    }
+
+    /* 6. Glowing Radar Pulse Effect on Floor Maps */
+    @keyframes roomGlowPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(236, 72, 153, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+      }
+    }
+    .special-event rect {
+      animation: svgPulseAnim 2.2s infinite;
+    }
+    @keyframes svgPulseAnim {
+      0%, 100% { stroke-width: 2.5; stroke: #ec4899; }
+      50% { stroke-width: 4.5; stroke: #f43f5e; }
+    }
+
+    /* 7. Floating Festive Particle Sparkles in Background */
+    .motion-ambient-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .m-sparkle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.6;
+      animation: floatDrift 8s infinite linear;
+    }
+    @keyframes floatDrift {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.6);
+        opacity: 0;
+      }
+      20% { opacity: 0.7; }
+      80% { opacity: 0.7; }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1192,11 +1405,11 @@
       <div class="mascot-hero-top">
         <div class="mascot-hero-avatar-wrap">
           <img src="assets/mascot_chiikawa_main.png" alt="치이카와" class="mascot-hero-avatar">
-          <div class="mascot-speech-bubble">축제는 200% 즐겨야지! 🐯✨</div>
+          <div class="mascot-speech-bubble">치이카와와 청운제 200% 즐기자! 🤍✨</div>
         </div>
         <div class="mascot-hero-body">
           <div class="mascot-badge-pill">🎉 2026 운양고 청운제 공식 가이드</div>
-          <h2 class="mascot-hero-headline">25개 부스 &amp; 대강당 라이브 콘서트</h2>
+          <h2 class="mascot-hero-headline kinetic-shimmer-title">25개 부스 &amp; 대강당 라이브 콘서트</h2>
           <p class="mascot-hero-sub">귀여운 동물 친구들을 터치하면 부스·공연으로 바로 안내해 드려요!</p>
           <div class="mascot-quick-actions">
             <button class="mascot-btn primary" onclick="openMultiBooths([2, 3, 4], '대강당 (운양관)')">🏛️ 2층 대강당 무대</button>
@@ -2938,14 +3151,39 @@
       }
     }
 
+    // Kinetic Dual-Cannon Multi-Burst Confetti Physics
     function blastFestiveConfetti() {
-      if (typeof confetti === 'function') {
+      if (typeof confetti !== 'function') return;
+      
+      // Center burst
+      confetti({
+        particleCount: 80,
+        spread: 90,
+        origin: { x: 0.5, y: 0.35 },
+        colors: ['#4f46e5', '#ec4899', '#f59e0b', '#10b981', '#38bdf8']
+      });
+
+      // Left cannon
+      setTimeout(() => {
         confetti({
-          particleCount: 120,
-          spread: 100,
-          origin: { x: 0.5, y: 0.3 }
+          particleCount: 60,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0.05, y: 0.65 },
+          colors: ['#f43f5e', '#8b5cf6', '#fbbf24']
         });
-      }
+      }, 150);
+
+      // Right cannon
+      setTimeout(() => {
+        confetti({
+          particleCount: 60,
+          angle: 120,
+          spread: 70,
+          origin: { x: 0.95, y: 0.65 },
+          colors: ['#10b981', '#6366f1', '#f472b6']
+        });
+      }, 300);
     }
 
     // Touch Swipe on Mobile
