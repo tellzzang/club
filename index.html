@@ -1371,6 +1371,403 @@
       }
     }
 
+  
+    /* ==========================================
+       ROLE LOGIN GATE & HYBRID VOTING SYSTEM
+       ========================================== */
+    .role-login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(49, 46, 129, 0.92));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow-y: auto;
+    }
+    .role-login-overlay.active {
+      display: flex;
+      animation: gateFadeIn 0.35s ease forwards;
+    }
+    @keyframes gateFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .role-login-card {
+      width: 100%;
+      max-width: 440px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.38);
+      position: relative;
+      overflow: hidden;
+      animation: gateCardPop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes gateCardPop {
+      from { opacity: 0; transform: translateY(28px) scale(0.94); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .role-login-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .role-login-mascot {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      margin: 0 auto 8px;
+      display: block;
+      animation: mascotBounce 2.6s ease-in-out infinite;
+    }
+    @keyframes mascotBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .role-login-badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4f46e5;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .role-login-title {
+      font-size: 21px;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 6px;
+      letter-spacing: -0.4px;
+    }
+    .role-login-sub {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.45;
+    }
+    .role-choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .role-choice-btn {
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 18px 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .role-choice-btn:hover {
+      transform: translateY(-3px);
+      border-color: #818cf8;
+      background: #eef2ff;
+    }
+    .role-choice-btn.selected {
+      border-color: #4f46e5;
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.18);
+      transform: scale(1.02);
+    }
+    .role-choice-emoji {
+      font-size: 32px;
+      line-height: 1;
+    }
+    .role-choice-label {
+      font-size: 15px;
+      font-weight: 900;
+      color: #1e293b;
+    }
+    .role-choice-desc {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .motion-panel {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(-10px) scale(0.98);
+      transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.35s ease,
+                  transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  margin 0.35s ease;
+    }
+    .motion-panel.open {
+      max-height: 460px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      margin-top: 10px;
+    }
+    .motion-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .gate-input-group {
+      margin-bottom: 12px;
+    }
+    .gate-input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+    .gate-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gate-input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+    .gate-submit-btn {
+      width: 100%;
+      padding: 13px 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gate-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(79, 70, 229, 0.35);
+    }
+    .teacher-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .teacher-sub-btn {
+      border: 1.5px solid #cbd5e1;
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+    .teacher-sub-btn:hover, .teacher-sub-btn.selected {
+      border-color: #4f46e5;
+      background: #eef2ff;
+      transform: translateY(-2px);
+    }
+    .gate-error-msg {
+      color: #e11d48;
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 6px;
+      min-height: 16px;
+    }
+    .shake-anim {
+      animation: shakeX 0.38s ease;
+    }
+    @keyframes shakeX {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-7px); }
+      40% { transform: translateX(7px); }
+      60% { transform: translateX(-5px); }
+      80% { transform: translateX(5px); }
+    }
+
+    /* Session Status Bar */
+    .user-session-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: linear-gradient(90deg, #eef2ff, #f5f3ff);
+      border: 1.5px solid #c7d2fe;
+      border-radius: 14px;
+      padding: 8px 14px;
+      margin: 8px 14px 4px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #312e81;
+    }
+    .user-session-bar.judge-mode {
+      background: linear-gradient(90deg, #fef3c7, #fffbeb);
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .session-switch-btn {
+      border: 1px solid currentColor;
+      background: rgba(255,255,255,0.75);
+      color: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Student 5-Club Floating Vote Bar */
+    .student-vote-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 540px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      border-radius: 20px;
+      padding: 12px 14px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.36);
+      z-index: 950;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .student-vote-bar.visible {
+      display: flex;
+      animation: gateCardPop 0.35s ease;
+    }
+    .vote-bar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+    .vote-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .vote-chip {
+      background: rgba(99, 102, 241, 0.28);
+      border: 1px solid rgba(165, 180, 252, 0.5);
+      color: #e0e7ff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .vote-submit-cta {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 900;
+      cursor: pointer;
+      background: #475569;
+      color: #cbd5e1;
+      transition: all 0.25s ease;
+    }
+    .vote-submit-cta.ready {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+      animation: pulseReady 1.8s infinite;
+    }
+    @keyframes pulseReady {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+    }
+
+    /* Judge Scoring Modal */
+    .judge-score-row {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+    .judge-score-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    .judge-score-val {
+      color: #4f46e5;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .judge-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .judge-step-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .judge-range {
+      flex: 1;
+      accent-color: #4f46e5;
+    }
+
+    /* Toast */
+    .club-toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .club-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    body.has-vote-bar #app-container {
+      padding-bottom: 130px;
+    }
+
   </style>
 </head>
 <body>
@@ -1387,7 +1784,13 @@
         </div>
       </div>
       <button class="confetti-trigger-btn" onclick="blastFestiveConfetti()" title="축제 폭죽 팡팡!">🎉</button>
-    </header>
+        </header>
+
+    <!-- User Role Session Status Bar -->
+    <div id="userSessionBar" class="user-session-bar" style="display:none;">
+      <span id="userSessionText">🎓 로그인 확인 중...</span>
+      <button class="session-switch-btn" onclick="openRoleLoginGate(true)">역할/정보 변경</button>
+    </div>
 
     <!-- Top Sticky 3-Tab Bar -->
     <div class="top-nav-bar">
@@ -2956,9 +3359,7 @@
           </div>
 
           <div class="card-bottom-actions">
-            <button class="card-action-btn bookmark ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleCardBookmark(${booth.id})">
-              <span>${isBookmarked ? '★' : '☆'}</span> ${isBookmarked ? '즐겨찾기됨' : '즐겨찾기'}
-            </button>
+            ${getCardPrimaryActionBtnHtml(booth)}
             ${showMapJump ? `
               <button class="card-action-btn map-jump" onclick="jumpToFloorMap(${booth.floor}, ${booth.id})">
                 <span>🏢</span> 배치도에서 위치보기
@@ -3212,9 +3613,369 @@
       }
     }
 
-    // Init App: Default to 'map' (층별로 보기) as requested!
+
+    // ==========================================
+    // HYBRID GOOGLE FORMS & ROLE LOGIN SYSTEM
+    // ==========================================
+    const FORM_CONFIG = {
+      studentFormUrl: "", // Google Apps Script 실행 후 생성된 학생용 폼 URL 입력
+      studentEntries: {
+        studentId: "",
+        studentName: "",
+        clubs: ""
+      },
+      judgeFormUrl: "", // Google Apps Script 실행 후 생성된 심사위원용 폼 URL 입력
+      judgeEntries: {
+        judgeName: "",
+        clubName: "",
+        relevance: "",
+        completeness: "",
+        participation: "",
+        sustainability: "",
+        responsiveness: "",
+        memo: ""
+      }
+    };
+
+    const JUDGE_PIN = "3249";
+    let userSession = JSON.parse(localStorage.getItem('uny_user_session_v1') || 'null');
+    let studentVotes = new Set(JSON.parse(localStorage.getItem('uny_student_votes_v1') || '[]'));
+    let judgeScoredMap = JSON.parse(localStorage.getItem('uny_judge_scored_v1') || '{}');
+    let currentJudgeTargetBooth = null;
+    let judgeCurrentScores = { relevance: 16, completeness: 16, participation: 16, sustainability: 16, responsiveness: 16 };
+
+    function showClubToast(msg) {
+      const t = document.getElementById('clubToast');
+      if (!t) return;
+      t.innerText = msg;
+      t.classList.add('show');
+      clearTimeout(window._clubToastTimer);
+      window._clubToastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    function openRoleLoginGate(allowClose) {
+      const overlay = document.getElementById('roleLoginOverlay');
+      if (!overlay) return;
+      overlay.classList.add('active');
+    }
+
+    function selectLoginMainRole(role) {
+      const btnS = document.getElementById('btnChooseStudent');
+      const btnT = document.getElementById('btnChooseTeacher');
+      const panelS = document.getElementById('studentLoginPanel');
+      const panelT = document.getElementById('teacherChoicePanel');
+      const panelJ = document.getElementById('judgeAuthPanel');
+
+      if (role === 'student') {
+        btnS.classList.add('selected');
+        btnT.classList.remove('selected');
+        panelT.classList.remove('open');
+        panelJ.classList.remove('open');
+        panelS.classList.add('open');
+        setTimeout(() => document.getElementById('loginStudentId')?.focus(), 260);
+      } else {
+        btnT.classList.add('selected');
+        btnS.classList.remove('selected');
+        panelS.classList.remove('open');
+        panelT.classList.add('open');
+      }
+    }
+
+    function selectTeacherJudge() {
+      document.getElementById('btnSubJudge')?.classList.add('selected');
+      document.getElementById('btnSubGeneralTeacher')?.classList.remove('selected');
+      document.getElementById('judgeAuthPanel')?.classList.add('open');
+      setTimeout(() => document.getElementById('loginJudgeName')?.focus(), 250);
+    }
+
+    function submitStudentLogin() {
+      const sid = (document.getElementById('loginStudentId')?.value || '').trim();
+      const sname = (document.getElementById('loginStudentName')?.value || '').trim();
+      const errEl = document.getElementById('studentLoginError');
+
+      if (!/^[1-3][0-1][0-9][0-3][0-9]$/.test(sid)) {
+        errEl.innerText = '5자리 학번을 정확히 입력해 주세요. (예: 20101)';
+        triggerGateShake();
+        return;
+      }
+      if (sname.length < 2) {
+        errEl.innerText = '이름을 2글자 이상 입력해 주세요.';
+        triggerGateShake();
+        return;
+      }
+      errEl.innerText = '';
+      userSession = { role: 'student', studentId: sid, name: sname };
+      localStorage.setItem('uny_user_session_v1', JSON.stringify(userSession));
+      finishLoginGate();
+      blastFestiveConfetti();
+      showClubToast(`🎓 ${sid} ${sname}님 환영합니다! 부스 5개를 담아 투표해 주세요.`);
+    }
+
+    function enterAsGeneralTeacher() {
+      userSession = { role: 'teacher', name: '선생님' };
+      localStorage.setItem('uny_user_session_v1', JSON.stringify(userSession));
+      finishLoginGate();
+      showClubToast('👀 일반 선생님 참관 모드로 입장했습니다.');
+    }
+
+    function submitJudgeLogin() {
+      const jname = (document.getElementById('loginJudgeName')?.value || '').trim();
+      const pin = (document.getElementById('loginJudgePin')?.value || '').trim();
+      const errEl = document.getElementById('judgeLoginError');
+
+      if (jname.length < 2) {
+        errEl.innerText = '심사위원 성함을 입력해 주세요.';
+        triggerGateShake();
+        return;
+      }
+      if (pin !== JUDGE_PIN) {
+        errEl.innerText = '심사위원 비밀번호가 올바르지 않습니다.';
+        triggerGateShake();
+        return;
+      }
+      errEl.innerText = '';
+      userSession = { role: 'judge', name: jname };
+      localStorage.setItem('uny_user_session_v1', JSON.stringify(userSession));
+      finishLoginGate();
+      blastCardConfetti();
+      showClubToast(`⚖️ ${jname} 심사위원님 환영합니다!`);
+    }
+
+    function triggerGateShake() {
+      const card = document.getElementById('roleLoginCard');
+      if (!card) return;
+      card.classList.remove('shake-anim');
+      void card.offsetWidth;
+      card.classList.add('shake-anim');
+    }
+
+    function finishLoginGate() {
+      document.getElementById('roleLoginOverlay')?.classList.remove('active');
+      applySessionUI();
+      if (currentNav === 'genres') renderThemeCard();
+      else if (currentNav === 'map') renderFloorCard();
+    }
+
+    function applySessionUI() {
+      const bar = document.getElementById('userSessionBar');
+      const txt = document.getElementById('userSessionText');
+      const voteBar = document.getElementById('studentVoteBar');
+      if (!userSession) return;
+
+      bar.style.display = 'flex';
+      bar.classList.remove('judge-mode');
+
+      if (userSession.role === 'student') {
+        txt.innerText = `🎓 ${userSession.studentId} ${userSession.name}님 (우수동아리 5개 투표)`;
+        document.body.classList.add('has-vote-bar');
+        voteBar.classList.add('visible');
+        renderStudentVoteBar();
+      } else if (userSession.role === 'judge') {
+        bar.classList.add('judge-mode');
+        const cnt = Object.keys(judgeScoredMap).length;
+        txt.innerText = `⚖️ 심사위원 ${userSession.name} 선생님 (현장 채점: ${cnt}/25개)`;
+        document.body.classList.remove('has-vote-bar');
+        voteBar.classList.remove('visible');
+      } else {
+        txt.innerText = `👀 일반 선생님 참관 모드`;
+        document.body.classList.remove('has-vote-bar');
+        voteBar.classList.remove('visible');
+      }
+    }
+
+    function getCardPrimaryActionBtnHtml(booth) {
+      if (userSession && userSession.role === 'student') {
+        const voted = studentVotes.has(booth.id);
+        return `
+          <button class="card-action-btn bookmark ${voted ? 'bookmarked' : ''}" onclick="toggleStudentVote(${booth.id})">
+            <span>${voted ? '✅' : '🗳️'}</span> ${voted ? '투표함 담김' : '투표 담기'}
+          </button>
+        `;
+      }
+      if (userSession && userSession.role === 'judge') {
+        const sc = judgeScoredMap[booth.id];
+        return `
+          <button class="card-action-btn bookmark ${sc ? 'bookmarked' : ''}" onclick="openJudgeScoreModal(${booth.id})">
+            <span>${sc ? '✅' : '⚖️'}</span> ${sc ? `채점완료 (${sc}점)` : '현장 심사 채점'}
+          </button>
+        `;
+      }
+      const isBookmarked = bookmarks.has(booth.id);
+      return `
+        <button class="card-action-btn bookmark ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleCardBookmark(${booth.id})">
+          <span>${isBookmarked ? '★' : '☆'}</span> ${isBookmarked ? '즐겨찾기됨' : '즐겨찾기'}
+        </button>
+      `;
+    }
+
+    function toggleStudentVote(id) {
+      if (studentVotes.has(id)) {
+        studentVotes.delete(id);
+      } else {
+        if (studentVotes.size >= 5) {
+          showClubToast('⚠️ 최대 5개 동아리까지만 선택할 수 있습니다!');
+          return;
+        }
+        studentVotes.add(id);
+        blastCardConfetti();
+      }
+      localStorage.setItem('uny_student_votes_v1', JSON.stringify([...studentVotes]));
+      renderStudentVoteBar();
+      if (currentNav === 'genres') renderThemeCard();
+      else if (currentNav === 'map') renderFloorCard();
+    }
+
+    function renderStudentVoteBar() {
+      const cnt = studentVotes.size;
+      document.getElementById('voteCountLabel').innerText = cnt;
+      if (userSession && userSession.studentId) {
+        document.getElementById('voteBarUserLabel').innerText = `${userSession.studentId} ${userSession.name}`;
+      }
+      const chipsRow = document.getElementById('voteChipsRow');
+      chipsRow.innerHTML = '';
+      studentVotes.forEach(id => {
+        const b = BOOTHS.find(x => x.id === id);
+        if (!b) return;
+        const chip = document.createElement('span');
+        chip.className = 'vote-chip';
+        chip.innerHTML = `${b.name} <span>✕</span>`;
+        chip.onclick = () => toggleStudentVote(id);
+        chipsRow.appendChild(chip);
+      });
+
+      const cta = document.getElementById('voteSubmitBtn');
+      if (cnt === 5) {
+        cta.classList.add('ready');
+        cta.innerText = '🚀 5개 동아리 구글 폼으로 최종 투표하기';
+      } else {
+        cta.classList.remove('ready');
+        cta.innerText = `동아리 5개를 모두 담아주세요 (${cnt}/5)`;
+      }
+    }
+
+    function submitStudentVoteToForm() {
+      if (studentVotes.size !== 5) {
+        showClubToast(`현재 ${studentVotes.size}개 선택됨 — 정확히 5개를 선택해 주세요!`);
+        return;
+      }
+      if (!FORM_CONFIG.studentFormUrl) {
+        showClubToast('⏳ 구글 폼 링크 연결 대기 중입니다. (스크립트 실행 후 연결 완료됩니다)');
+        return;
+      }
+      const params = new URLSearchParams();
+      params.set('usp', 'pp_url');
+      if (FORM_CONFIG.studentEntries.studentId) {
+        params.set(FORM_CONFIG.studentEntries.studentId, userSession.studentId);
+      }
+      if (FORM_CONFIG.studentEntries.studentName) {
+        params.set(FORM_CONFIG.studentEntries.studentName, userSession.name);
+      }
+      studentVotes.forEach(id => {
+        const b = BOOTHS.find(x => x.id === id);
+        if (b && FORM_CONFIG.studentEntries.clubs) {
+          params.append(FORM_CONFIG.studentEntries.clubs, b.name);
+        }
+      });
+      const base = FORM_CONFIG.studentFormUrl.split('?')[0];
+      window.open(`${base}?${params.toString()}`, '_blank');
+    }
+
+    // Judge Scoring Modal
+    const JUDGE_CRITERIA = [
+      { key: 'relevance', label: '1. 관련성 (주제 적합성)' },
+      { key: 'completeness', label: '2. 완성도 (준비·구성)' },
+      { key: 'participation', label: '3. 참여도 (부원 협력)' },
+      { key: 'sustainability', label: '4. 지속성 (활동 연계)' },
+      { key: 'responsiveness', label: '5. 호응도 (관람객 반응)' }
+    ];
+
+    function openJudgeScoreModal(boothId) {
+      const b = BOOTHS.find(x => x.id === boothId);
+      if (!b) return;
+      currentJudgeTargetBooth = b;
+      document.getElementById('judgeModalClubName').innerText = `${b.emoji} ${b.name}`;
+      document.getElementById('judgeMemoInput').value = '';
+      renderJudgeSliders();
+      openModal('judgeScoreModal');
+    }
+
+    function renderJudgeSliders() {
+      const wrap = document.getElementById('judgeSlidersContainer');
+      wrap.innerHTML = JUDGE_CRITERIA.map(c => `
+        <div class="judge-score-row">
+          <div class="judge-score-head">
+            <span>${c.label}</span>
+            <span class="judge-score-val" id="jval-${c.key}">${judgeCurrentScores[c.key]} / 20</span>
+          </div>
+          <div class="judge-slider-wrap">
+            <button type="button" class="judge-step-btn" onclick="stepJudgeScore('${c.key}', -1)">-</button>
+            <input type="range" min="0" max="20" value="${judgeCurrentScores[c.key]}" class="judge-range"
+              oninput="setJudgeScore('${c.key}', this.value)">
+            <button type="button" class="judge-step-btn" onclick="stepJudgeScore('${c.key}', 1)">+</button>
+          </div>
+        </div>
+      `).join('');
+      updateJudgeTotalDisplay();
+    }
+
+    function setJudgeScore(key, val) {
+      judgeCurrentScores[key] = Math.max(0, Math.min(20, parseInt(val, 10) || 0));
+      const el = document.getElementById(`jval-${key}`);
+      if (el) el.innerText = `${judgeCurrentScores[key]} / 20`;
+      updateJudgeTotalDisplay();
+    }
+
+    function stepJudgeScore(key, delta) {
+      setJudgeScore(key, judgeCurrentScores[key] + delta);
+      renderJudgeSliders();
+    }
+
+    function updateJudgeTotalDisplay() {
+      const total = Object.values(judgeCurrentScores).reduce((a, b) => a + b, 0);
+      document.getElementById('judgeTotalScoreDisplay').innerText = `${total}점`;
+    }
+
+    function submitJudgeScoreToForm() {
+      if (!currentJudgeTargetBooth) return;
+      const total = Object.values(judgeCurrentScores).reduce((a, b) => a + b, 0);
+      judgeScoredMap[currentJudgeTargetBooth.id] = total;
+      localStorage.setItem('uny_judge_scored_v1', JSON.stringify(judgeScoredMap));
+      applySessionUI();
+      if (currentNav === 'genres') renderThemeCard();
+      else if (currentNav === 'map') renderFloorCard();
+
+      if (!FORM_CONFIG.judgeFormUrl) {
+        closeModal('judgeScoreModal');
+        showClubToast(`✅ ${currentJudgeTargetBooth.name} (${total}점) 임시 저장됨 — 구글 폼 연결 대기 중`);
+        return;
+      }
+
+      const params = new URLSearchParams();
+      params.set('usp', 'pp_url');
+      const je = FORM_CONFIG.judgeEntries;
+      if (je.judgeName) params.set(je.judgeName, userSession.name);
+      if (je.clubName) params.set(je.clubName, currentJudgeTargetBooth.name);
+      if (je.relevance) params.set(je.relevance, String(judgeCurrentScores.relevance));
+      if (je.completeness) params.set(je.completeness, String(judgeCurrentScores.completeness));
+      if (je.participation) params.set(je.participation, String(judgeCurrentScores.participation));
+      if (je.sustainability) params.set(je.sustainability, String(judgeCurrentScores.sustainability));
+      if (je.responsiveness) params.set(je.responsiveness, String(judgeCurrentScores.responsiveness));
+      const memo = (document.getElementById('judgeMemoInput')?.value || '').trim();
+      if (je.memo && memo) params.set(je.memo, memo);
+
+      const base = FORM_CONFIG.judgeFormUrl.split('?')[0];
+      closeModal('judgeScoreModal');
+      window.open(`${base}?${params.toString()}`, '_blank');
+    }
+
+    // Init App: Default to 'map' (층별로 보기) + Check Role Login Session
     window.addEventListener('DOMContentLoaded', () => {
       switchNav('map');
+      if (!userSession) {
+        openRoleLoginGate(false);
+      } else {
+        applySessionUI();
+      }
     });
   </script>
 
@@ -3365,6 +4126,133 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Role Login Gate Overlay -->
+  <div id="roleLoginOverlay" class="role-login-overlay">
+    <div class="role-login-card" id="roleLoginCard">
+      <div class="role-login-header">
+        <img src="assets/mascot_chiikawa_main.png" alt="치이카와" class="role-login-mascot">
+        <div class="role-login-badge">2026 운양고등학교 청운제 공식 시스템</div>
+        <h2 class="role-login-title">어떻게 오셨나요?</h2>
+        <p class="role-login-sub">부스 안내 및 우수 동아리 평가 참여를 위해<br>본인의 구분을 선택해 주세요.</p>
+      </div>
+
+      <!-- Step 1: Student vs Teacher -->
+      <div class="role-choice-grid">
+        <button type="button" class="role-choice-btn" id="btnChooseStudent" onclick="selectLoginMainRole('student')">
+          <span class="role-choice-emoji">🎓</span>
+          <span class="role-choice-label">학생입니다</span>
+          <span class="role-choice-desc">부스 관람 &amp; 5개 투표</span>
+        </button>
+        <button type="button" class="role-choice-btn" id="btnChooseTeacher" onclick="selectLoginMainRole('teacher')">
+          <span class="role-choice-emoji">👨‍🏫</span>
+          <span class="role-choice-label">교사입니다</span>
+          <span class="role-choice-desc">참관 / 심사위원 평가</span>
+        </button>
+      </div>
+
+      <!-- Student Motion Input Panel -->
+      <div id="studentLoginPanel" class="motion-panel">
+        <div class="motion-box">
+          <div style="font-size:13px; font-weight:900; color:#4f46e5; margin-bottom:10px;">
+            ✨ 학번과 이름을 입력하면 1회 로그인 후 바로 투표할 수 있어요!
+          </div>
+          <div class="gate-input-group">
+            <label for="loginStudentId">학번 (5자리 숫자)</label>
+            <input type="tel" id="loginStudentId" class="gate-input" maxlength="5" placeholder="예: 20101" inputmode="numeric">
+          </div>
+          <div class="gate-input-group">
+            <label for="loginStudentName">이름</label>
+            <input type="text" id="loginStudentName" class="gate-input" maxlength="12" placeholder="예: 홍길동">
+          </div>
+          <div id="studentLoginError" class="gate-error-msg"></div>
+          <button type="button" class="gate-submit-btn" onclick="submitStudentLogin()">🚀 청운제 입장 &amp; 투표 시작</button>
+        </div>
+      </div>
+
+      <!-- Teacher Sub-choice Motion Panel -->
+      <div id="teacherChoicePanel" class="motion-panel">
+        <div class="motion-box">
+          <div style="font-size:13px; font-weight:900; color:#1e293b; margin-bottom:10px;">
+            선생님 구분을 선택해 주세요
+          </div>
+          <div class="teacher-sub-grid">
+            <button type="button" class="teacher-sub-btn" id="btnSubGeneralTeacher" onclick="enterAsGeneralTeacher()">
+              <div style="font-size:24px; margin-bottom:4px;">👀</div>
+              <div style="font-size:13.5px; font-weight:900; color:#0f172a;">일반 선생님</div>
+              <div style="font-size:11px; color:#64748b; margin-top:2px;">일반 안내 화면 입장</div>
+            </button>
+            <button type="button" class="teacher-sub-btn" id="btnSubJudge" onclick="selectTeacherJudge()">
+              <div style="font-size:24px; margin-bottom:4px;">⚖️</div>
+              <div style="font-size:13.5px; font-weight:900; color:#b45309;">심사위원</div>
+              <div style="font-size:11px; color:#64748b; margin-top:2px;">2차 현장 평가 채점</div>
+            </button>
+          </div>
+
+          <!-- Judge Password Motion Panel -->
+          <div id="judgeAuthPanel" class="motion-panel">
+            <div style="border-top:1px dashed #cbd5e1; margin-top:12px; padding-top:12px;">
+              <div class="gate-input-group">
+                <label for="loginJudgeName">심사위원 성함</label>
+                <input type="text" id="loginJudgeName" class="gate-input" maxlength="12" placeholder="예: 김운양">
+              </div>
+              <div class="gate-input-group">
+                <label for="loginJudgePin">심사위원 비밀번호 (4자리)</label>
+                <input type="password" id="loginJudgePin" class="gate-input" maxlength="6" placeholder="비밀번호 입력" inputmode="numeric">
+              </div>
+              <div id="judgeLoginError" class="gate-error-msg"></div>
+              <button type="button" class="gate-submit-btn" style="background:linear-gradient(135deg,#d97706,#b45309);" onclick="submitJudgeLogin()">⚖️ 심사위원 모드로 입장</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student 5-Club Floating Vote Bar -->
+  <div id="studentVoteBar" class="student-vote-bar">
+    <div class="vote-bar-top">
+      <span>🗳️ <span id="voteBarUserLabel">내 투표함</span> (<strong id="voteCountLabel">0</strong> / 5개 선택)</span>
+      <span style="font-size:11px; color:#94a3b8;">5개 선택 후 제출</span>
+    </div>
+    <div id="voteChipsRow" class="vote-chips-row"></div>
+    <button id="voteSubmitBtn" class="vote-submit-cta" onclick="submitStudentVoteToForm()">
+      동아리 5개를 모두 담아주세요 (0/5)
+    </button>
+  </div>
+
+  <!-- Judge Scoring Modal -->
+  <div class="modal-overlay" id="judgeScoreModal" onclick="if(event.target===this)closeModal('judgeScoreModal')">
+    <div class="modal-card" style="max-width:460px; width:94%; max-height:90vh; overflow-y:auto; border-radius:22px; padding:22px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <div style="font-size:11.5px; font-weight:800; color:#b45309;">⚖️ 2차 미담당교사 현장 평가</div>
+          <h3 id="judgeModalClubName" style="margin:2px 0 0; font-size:19px; font-weight:900; color:#0f172a;">동아리명</h3>
+        </div>
+        <button onclick="closeModal('judgeScoreModal')" style="border:none; background:#f1f5f9; width:34px; height:34px; border-radius:50%; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <div id="judgeSlidersContainer"></div>
+
+      <div style="background:#eef2ff; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin:12px 0;">
+        <span style="font-size:14px; font-weight:800; color:#312e81;">총점 합계 (100점 만점)</span>
+        <span id="judgeTotalScoreDisplay" style="font-size:22px; font-weight:900; color:#4f46e5;">80점</span>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:12px; font-weight:800; color:#475569; margin-bottom:4px;">심사 의견 (선택)</label>
+        <input type="text" id="judgeMemoInput" class="gate-input" style="font-size:13px; padding:10px 12px;" placeholder="간단한 현장 심사평 (비워두셔도 됩니다)">
+      </div>
+
+      <button type="button" class="gate-submit-btn" style="background:linear-gradient(135deg,#d97706,#b45309);" onclick="submitJudgeScoreToForm()">
+        📤 구글 폼으로 심사 점수 제출하기
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="clubToast" class="club-toast"></div>
 
 </body>
 </html>
